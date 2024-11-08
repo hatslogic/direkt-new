@@ -1,0 +1,122 @@
+{# {% block element_dk_custom_tab_product_slider %}
+
+	{% set sliderConfig = element.fieldConfig.elements %}
+    
+	{% set titleTag = sliderConfig.titleTag.value ?? 'h2' %}
+    {% if element.data.tabMenus is not empty %}
+            {% set productSliderOptions = {
+                            gutter: 20,
+                            autoplayButtonOutput: false,
+                            controls: true,
+                            autoplay: true,
+                            loop: true,
+                            items: 5,
+                            speed: 400,
+                            slideBy: 1,
+                            nav: false,
+                            responsive: {
+                                1680: {
+                                    items: 5
+                                },
+                                1421: {
+                                    items: 4
+                                },
+                                1251: {
+                                    items: 4
+                                },
+                                992: {
+                                    items: 3
+                                },
+                                866: {
+                                    items: 3
+                                },
+                                767: {
+                                    items: 2
+                                }
+                            }
+                    } %}
+
+            <div class="cms-element-{{ element.type }} {{ listingColumns }}">
+                {% block element_dk_custom_tab_product_slider_menu_title %}
+                    {% if sliderConfig.title.value %}
+                        <div class="cms-element-title">
+                            <div class="title dk-new-title">
+                                <{{ titleTag }}>{{ sliderConfig.title.value|raw }}</{{ titleTag }}>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block element_dk_custom_tab_product_slider_menu %}
+                    <ul class="nav nav-tabs product-slider-tab-navigation product-slider-tab-navigation-list" role="tablist">
+                        {% for tab in element.data.tabMenus %}
+                            {% set uniqueTabId = 'dk-custom-tab-product-slider-' ~ element.id ~ loop.index %}
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link {% if loop.first %}active{% endif %} product-slider-tab-navigation-link " id="tab-{{ uniqueTabId }}" href="#{{ uniqueTabId }}" data-bs-toggle="tab" role="tab" aria-controls="{{ uniqueTabId }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+                                    {{ tab.tabMenu }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+
+                <div class="product-slider-tabs-content card-body">
+                    <div class="tab-content">
+                        {% for tab in element.data.tabMenus %}
+                            {% if loop.first %}
+                                {% set hideSrc = false %}
+                            {% else %}
+                                {% set hideSrc = true %}
+                            {% endif %}
+                            {% set uniqueSliderId = 'dk-custom-tab-product-slider-' ~ element.id ~ loop.index %}
+                            {% block element_dk_custom_tab_product_slider_slider %}
+                                {% if tab.source == 'best_sellers' %}
+                                    {% set sliderProducts = tab.tabProducts %}
+                                {% else %}
+                                    {% set sliderProducts = tab.tabProducts.elements %}
+                                {% endif %}
+                                <div class="tab-pane dk-five-col-slider fade {% if loop.first %}show active{% endif %}" id="{{ uniqueSliderId }}" role="tabpanel" aria-labelledby="tab-{{ uniqueSliderId }}">
+                                    
+                                    <div class="dk-product-slider {% if sliderConfig.navigation.value %}has-nav{% endif %}" data-dk-custom-tab-product-slider="true" data-dk-custom-tab-product-slider-options="{{ productSliderOptions|json_encode }}">
+                                        {% block element_dk_custom_tab_product_slider_element %}
+                                            <div class="dk-product-slider-container" data-dk-custom-tab-product-slider-container="true">
+                                                {% for product in sliderProducts %}
+                                                    {% block element_dk_custom_tab_product_slider_inner_item %}
+                                                        {% set layoutType = product.customFields.dk_is_banner ? 'banner' : 'standard' %}
+                                                        <div class="product-slider-item" data-product-number="{{ product.productNumber }}">
+                                                            {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                                                                        'layout': layoutType,
+                                                                        'displayMode': 'standard',
+                                                                        'hideSrc': hideSrc
+                                                                    } %}
+                                                        </div>
+                                                    {% endblock %}
+                                                {% endfor %}
+                                            </div>
+                                        {% endblock %}
+
+                                        {% block element_dk_custom_tab_product_slider_controls %}
+                                            <div class="dk-custom-tab-product-slider-controls-container">
+                                                <div class="dk-base-slider-controls" data-dk-custom-tab-product-slider-controls="true">
+                                                    {% block element_dk_custom_tab_product_slider_controls_items %}
+                                                        <button class="base-slider-controls-prev custom-tab-product-slider-controls-prev">
+                                                            <span class="sw-arrow-head-left-icon dk-icon icon-dk-sw-arrow-head-left"></span>
+                                                        </button>
+                                                        <button class="base-slider-controls-next custom-tab-product-slider-controls-next">
+                                                            <span class="sw-arrow-head-right-icon dk-icon icon-dk-sw-arrow-head-right"></span>
+                                                        </button>
+                                                    {% endblock %}
+                                                </div>
+                                            </div>
+                                        {% endblock %}
+
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+    {% endif %}
+{% endblock %} #}

@@ -1,0 +1,29 @@
+
+{% block layout_footer_copyright %}
+	<div class="row dkt-copyright justify-content-between">
+		<div class="col-sm-6 col-lg-6 dkt-copyright-logo d-flex align-items-center">
+            <img src="{{ theme_config('sw-logo-favicon')|sw_encode_url }}"
+     alt="{{ 'header.logoLink'|trans|striptags }}"
+     class="img-fluid header-logo-main-img" width="40" height="40">   
+            <span>
+               {{ 'footer.copyrightInfo'|trans|raw }}
+            </span>
+		</div>
+		<div class="col-sm-6 dkt-copyright-social">
+			<ul class="social-navs">
+                <li>
+                   {{ 'footer.social.instagram'|trans|raw }}
+                </li>
+                <li>
+                   {{ 'footer.social.facebook'|trans|raw }}
+                </li>
+                 <li>
+                   {{ 'footer.social.twitter'|trans|raw }}
+                </li>
+                 <li>
+                   {{ 'footer.social.mail'|trans|raw }}
+                </li>
+            </ul>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+.dk-about-us{
+    padding: rem(80) 0 0;
+    .cms-element-cmsbundle-image .cms-image{
+        height: 100%;
+        max-height: unset;
+        object-fit: cover;
+        @include media-breakpoint-down(lg){
+            margin-bottom: rem(24);
+            height: auto;
+        }
+    }
+}

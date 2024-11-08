@@ -1,0 +1,12 @@
+.modal {
+    .modal-header.only-close{
+        padding: rem(24) rem(24) 0;
+    }
+    .modal-body {
+        padding: 0 rem(24) rem(24);
+    }
+    h2{
+        margin-bottom: rem(16);
+        font-size: rem(20);
+    }
+}

@@ -1,0 +1,56 @@
+.is-ctl-accountprofile,.is-ctl-address,.is-ctl-accountpayment,.is-ctl-accountorder,.is-act-orderoverview {
+    margin: rem(40) 0 0;
+    .account-aside{
+        padding: rem(30);
+        background-color: $input-color;
+        .card-header{
+            font-weight: 600;
+            font-size: rem(22);
+            margin-bottom: rem(8);
+        }
+        .list-group-item{
+            background-color: transparent;
+            padding-left: 0;
+        }
+        .list-group{
+            margin-bottom: rem(16);
+        }
+        .account-aside-item.is-active{
+            font-weight: 600;
+        }
+    }
+    .account-welcome{
+        margin-bottom: rem(32);
+        padding-top: 0;
+    }
+    .account-profile-mail-label{
+        margin-right: rem(8);
+    }
+    .card-title{
+        font-size: rem(20);
+        font-weight: 600;
+        margin-bottom: rem(24);
+    }
+    .address-action-create{
+        .btn{
+            .icon{
+                margin-right: rem(8);
+                svg{
+                    top: 0;
+                }
+            }
+            &:hover{
+                .icon{
+                    svg{
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+    .payment-method-description{
+        strong{
+            font-weight: 600;
+        }
+    }
+}

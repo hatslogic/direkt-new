@@ -1,0 +1,128 @@
+.product-minimal-image-wrapper {
+    height: rem(140);
+}
+
+.product-box {
+    &.box-minimal {
+        text-align: center;
+        border: 0;
+        transition: all .15s ease-in-out;
+        border-radius: .3125rem;
+
+        .product-minimal-image-wrapper {
+            transition: all .15s ease-in-out;
+            transform-origin: bottom center;
+            .product-image.is-standard {
+                object-fit: contain;
+            }
+        }
+
+        .card-body{
+            --bs-card-spacer-y: 30px;
+            --bs-card-spacer-x: 30px;
+            min-height: rem(260);
+        }
+
+        @include media-breakpoint-up(md) {
+            &:hover {
+                box-shadow: 0px 0px rem(15) 0px rgba(130, 128, 128, 0.7);
+
+                .product-minimal-image-wrapper {
+                    transform: translateY(-5px);
+                }
+            }
+        }
+    }
+
+    .product-info {
+        margin-top: rem(5);
+
+        a:hover {
+            color: $primary-color;
+        }
+    }
+
+    .product-price-info {
+        margin-top: 0;
+    }
+
+    .product-description,
+    .product-price-unit {
+        margin: 0;
+        height: auto;
+        font-size: .75rem;
+        color: #828080;
+        margin-bottom: .3125rem;
+        line-height: 1.25;
+        white-space: nowrap;
+    }
+
+    .product-name {
+        font-size: .875rem;
+        font-weight: 400;
+        white-space: normal;
+        line-height: 1.125rem;
+        height: auto;
+        margin-bottom: rem(5);
+        text-transform: uppercase;
+        color: $text-color;
+    }
+
+    .product-price-wrapper {
+        font-weight: 400;
+        font-size: .875rem;
+
+        .product-price {
+            font-weight: inherit;
+            font-size: inherit;
+            color: $text-color;
+        }
+    }
+
+    &.box-standard {
+        border: 0;
+        transition: all .15s ease-in-out;
+
+        .product-image-wrapper {
+            position: relative;
+
+            .product-action {
+                width: 100%;
+                transition: all .15s ease-in-out;
+                transform-origin: bottom center;
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+                bottom: 0;
+            }
+        }
+
+        .product-info{
+            text-align: center;
+        }
+
+        .card-body {
+            --bs-card-spacer-y: 30px;
+            --bs-card-spacer-x: 30px;
+            min-height: rem(290);
+            border-radius: rem(5);
+            overflow: hidden;
+
+            &:hover {
+                .product-action {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        &:hover{
+            .card-body{
+                box-shadow: 0px 0px 15px 0px rgba(130, 128, 128, 0.7);   
+            }
+            .product-name{
+                font-weight: 500;
+            }
+        }
+    }
+}

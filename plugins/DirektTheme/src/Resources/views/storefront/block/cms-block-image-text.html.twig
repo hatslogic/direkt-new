@@ -1,0 +1,31 @@
+{% sw_extends '@Storefront/storefront/block/cms-block-image-text.html.twig' %}
+
+{% block block_image_text %}
+  {% set columns = 2 %}
+
+  {% block block_image_text_left %}
+    {% set element = block.slots.getSlot('left') %}
+
+    {% if element.data.media is not empty %}
+        <div class="col-md-4 dk-listing-mainsec-inner" data-cms-element-id="{{ element.id }}">
+          {% block block_image_text_left_inner %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+          {% endblock %}
+        </div>
+    {% endif %}
+  {% endblock %}
+
+  {% block block_image_text_right %}
+    {% set element = block.slots.getSlot('right') %}
+
+    {% if element.data.content is not empty %}
+      <div class="col-md-8 dk-listing-mainsec-inner" data-cms-element-id="{{ element.id }}">
+        {% if element.data.content is defined and element.data.content | trim %}
+          {% block block_image_text_right_inner %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+          {% endblock %}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endblock %}
+{% endblock %}

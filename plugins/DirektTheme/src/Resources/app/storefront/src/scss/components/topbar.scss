@@ -1,0 +1,51 @@
+.top-bar{
+    background-color: var(--topbar-bg);
+
+    .language-flag{
+        border: 0;
+    }
+    &-list-label{
+        display: flex;
+        align-items: center;
+        .language-flag{
+            margin-right: rem(8);
+        }
+    }
+    &-language{
+        justify-content: flex-end;
+    }
+    &-nav-item{
+        margin: 0;
+    }
+    &-nav-text {
+        display: none;
+    }
+    &-list-icon{
+        margin-right: 0;
+    }
+    &-list{
+        z-index: 5;
+        @include media-breakpoint-down(xl){
+            left: 50% ;
+            transform: translate(-50%, 36px);
+        }
+    }
+
+    &.sticky{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 5;
+        animation: HeaderSlideDown 0.35s ease-in;
+    }
+}
+
+// slide down
+@keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+}

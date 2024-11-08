@@ -1,0 +1,80 @@
+.offcanvas{
+    @include media-breakpoint-down(md){
+        &.navigation-offcanvas{
+            width: calc(75% - 0px);
+            .offcanvas-header{
+                .btn{
+                    font-size: 0;
+                    width: auto;
+                    margin-left: auto;
+                    background: transparent;
+                    border: 0;
+                }
+            }
+
+        }
+    }
+    &-body{
+        display: flex;
+        flex-direction: column;
+        .navigation-offcanvas-headline{
+            display: none;
+        }
+        .navigation-offcanvas-list{
+            border-top: 1px solid $border-color;
+        }
+        .navigation-offcanvas-list-item{
+            margin: 0 rem(16);
+            border-color: var(--black-color);
+            &:first-child{
+                border-top: 0;
+            }
+            .navigation-offcanvas-link{
+                padding: rem(14) 0;
+            }
+        }
+        .navigation-offcanvas-link {
+            // padding: rem(14) 0;
+            // font-size: rem(14);
+            font-weight: 300;
+            // text-transform: uppercase;
+        }
+        .navigation-offcanvas-actions{
+            order: 3;
+        }
+    }
+    .top-bar-nav-item{
+        justify-content: center;
+    }
+    &-button-outer{
+        margin: 0 rem(16);
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &-btn{
+        border: rem(1) solid $border-color;
+        text-align: center;
+        padding: rem(8);
+        border-radius: rem(10);
+        margin-bottom: rem(16);
+        font-size: rem(14);
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    .btn-light.offcanvas-close{
+        margin-top: 0;
+    }
+    @include media-breakpoint-down(xl){
+        &-btn{
+            width: calc(50% - 16px);
+            margin: 0 rem(8);
+        }
+    }
+    @include media-breakpoint-down(sm){
+        &-btn{
+            width: calc(100% - 16px);
+            margin: 0 rem(8) rem(16);
+        }
+    }
+}

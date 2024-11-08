@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-select-salutation.html.twig' %}
+
+{% block cms_form_select_salutation_content_select %}
+    <select name="salutationId"
+            id="form-Salutation"
+            {% if required %}required="required"{% endif %}
+            class="form-select contact-select{% if formViolations.getViolations('/salutationId') %} is-invalid{% endif %}">
+        {% if not data.get('salutationId') %}
+            <option disabled="disabled" selected="selected" value="">
+                {{ 'account.personalSalutationPlaceholder'|trans }}
+            </option>
+        {% endif %}
+
+        {% for salutation in element.data %}
+            <option value="{{ salutation.id }}">
+                {{ salutation.translated.displayName }}
+            </option>
+        {% endfor %}
+    </select>
+    <span class="icon icon-down-arrow"></span>
+    {% if formViolations.getViolations('/salutationId') is not empty %}
+        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig'
+            with { violationPath: '/salutationId' }
+        %}
+    {% endif %}
+{% endblock %}

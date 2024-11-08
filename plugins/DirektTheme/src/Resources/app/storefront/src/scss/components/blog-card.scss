@@ -1,0 +1,52 @@
+.category-box {
+    &.blog{
+        border-radius: rem(5);
+        overflow: hidden;
+        background-color: $primary-background-color;
+        height: 100%;
+        .product-image-wrapper{
+            background-color: var(--white-color);
+            margin: 0;
+            height: rem(160);
+            .product-image.is-standard{
+                object-fit: cover;
+            }
+        }
+        .blog-info{
+            h3{
+                font-size: rem(22);
+            }
+            p{
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* number of lines to show */
+                        line-clamp: 3; 
+                -webkit-box-orient: vertical;
+
+                font-size: .875rem;
+                line-height: 1.25rem;
+                height: auto;
+                max-height: 60%;
+            }
+        }
+        .card-body{
+            position: relative;
+            .blog-read-more{
+                text-decoration: underline;
+                display: block;
+                color: var(--primary-color);
+                position: absolute;
+                bottom: rem(16);
+                right: rem(16);
+            }
+        }
+    }
+}
+
+.blog-list{
+    &.cms-block-sub-category-list{
+        .row{
+            --bs-gutter-x: 10px;
+        }
+    }
+}

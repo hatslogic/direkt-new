@@ -1,0 +1,12 @@
+.dk-sorting{
+    display: flex;
+    align-items: center;
+    span{
+        margin-right: rem(16);
+        font-size: rem(18);
+        @include media-breakpoint-down(md) {
+            margin-bottom: rem(8);
+            display: block;
+        }
+    }
+}

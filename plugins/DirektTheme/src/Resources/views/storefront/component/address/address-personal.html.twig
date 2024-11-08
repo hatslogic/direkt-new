@@ -1,0 +1,17 @@
+{% sw_extends '@Storefront/storefront/component/address/address-personal.html.twig' %}
+
+{% block component_address_form_salutation_select %}
+    <select id="{{ idPrefix ~ prefix }}personalSalutation"
+            class="form-select{% if formViolations.getViolations('/salutationId') is not empty %} is-invalid{% endif %}"
+            name="{% if prefix %}{{ prefix }}[salutationId]{% else %}salutationId{% endif %}">
+        {% for salutation in page.salutations %}
+            <option {% if salutation.id == data.get('salutationId') %}
+                selected="selected"
+            {% endif %}
+                    value="{{ salutation.id }}">
+                {{ salutation.translated.displayName }}
+            </option>
+        {% endfor %}
+    </select>
+    <span class="icon icon-down-arrow"></span>
+{% endblock %}

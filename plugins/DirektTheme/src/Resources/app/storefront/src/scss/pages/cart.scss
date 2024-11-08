@@ -1,0 +1,27 @@
+.is-ctl-checkout.is-act-cartpage{
+    margin: rem(60) 0 0;
+    @include media-breakpoint-down(md){
+        margin: rem(16) 0 0;
+    }
+    h1{
+        font-size: rem(30);
+    }
+    h2{
+        font-size: rem(25);
+    }
+    .card-title,.line-item-label{
+        font-weight: 600;
+    }
+   .checkout-aside-summary{
+        padding: rem(30);
+        @include media-breakpoint-down(md){
+            padding: rem(16);
+        }
+   }
+   .checkout-aside {
+        @include media-breakpoint-down(lg){
+            width: 100%;
+            margin-left: 0;
+        }
+   }
+}

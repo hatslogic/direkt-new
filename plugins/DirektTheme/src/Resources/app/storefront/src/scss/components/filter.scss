@@ -1,0 +1,50 @@
+.cms-element-sidebar-filter{
+    @include media-breakpoint-down(md){
+        margin-bottom: rem(16);
+    }
+    .filter-panel-wrapper{
+        top: 0;
+        width: 100%;
+        background-color: $white-color;
+        padding: rem(0);
+        transition: 0.35s;
+        height: 0;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        &.active{
+            height: max-content;
+            opacity: 1;
+            visibility: visible;
+        }
+        @include media-breakpoint-down(md){
+            display: none;
+            &.active{
+                display: none;
+            }
+        }
+    }
+    .filter-panel-offcanvas-header{
+        display: flex;
+        padding: 0;
+        height: auto;
+        margin-bottom: rem(16);
+    }
+    .filter-panel-offcanvas-only {
+        display: block;
+    }
+    .filter-panel-offcanvas-title{
+        font-weight: 500;
+        line-height: 1;
+    }
+}
+.offcanvas-filter{
+    display: none;
+    @include media-breakpoint-down(md){
+        display: block;
+    }
+    .filter-panel-offcanvas-title{
+        font-weight: 500;
+        line-height: 1;
+    }
+}

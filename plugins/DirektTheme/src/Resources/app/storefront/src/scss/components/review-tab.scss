@@ -1,0 +1,135 @@
+.dk-toggle-column{
+    .product-detail-tab-navigation{
+        padding-left: 0;
+        &-list{
+            flex-direction: column;
+            padding: 0;
+            border: 0;
+            li{
+                border-top: rem(1) solid $border-color;
+                &:last-child{
+                    border-bottom: rem(1) solid $border-color;
+                }
+            }
+        }
+        &-link{
+            padding: rem(20) 0;
+            border: 0;
+            position: relative;
+            background-color: $white-color;  
+            overflow: hidden;
+            margin-bottom: 0;
+            &::after{
+                content: "\e913";
+                position: absolute;
+                top: 50%;
+                right: rem(16);
+                transform: translateY(-50%);
+                height: rem(22);
+                font-family: icomoon;
+                transition: 0.35s;
+            }
+            &:hover{
+                background-color: $white-color;    
+            }
+            &[aria-expanded="true"]{
+                &::after{
+                    transform: translateY(-50%) rotate(-180deg) origin(50% 0%);
+                }
+            }
+        }
+    }
+    .offcanvas-body{
+        overflow: hidden;
+    }
+    .product-detail-description{
+        background-color: $white-color;
+        &-title{
+            font-weight: 500;
+            font-size: rem(22);
+        }
+        &-text{
+            display: unset;
+        }
+    }
+    .dk-product-detail-links{
+        .icon{
+            transform: rotate(-90deg);
+            justify-content: flex-end;
+            &::before{
+                font-size: rem(15);
+            }
+        }
+    }
+    .accordion-body{
+        padding-bottom: rem(16);
+        background-color: $white-color;
+    }
+    .offcanvas-close{
+        display: none;
+    }
+    .product-detail-review-content{
+        flex-direction: column;
+        .login-form-description{
+            margin-bottom: rem(16);
+        }
+        .login-submit{
+            .btn{
+                margin-top: 0;
+            }
+        }
+        .login-cancel{
+            .btn{
+                color: $primary-color;
+                border-color: $primary-color;
+                margin-left: rem(8);
+                &:hover{
+                    color: $white-color;
+                    background-color: $primary-color;
+                }
+            }
+        }
+        .product-detail-review-form-actions{
+            .btn-review-submit{
+                margin-top: 0;
+            }
+            .product-detail-review-cancel{
+                color: $primary-color;
+                border-color: $primary-color;
+                margin-right: rem(8);
+                &:hover{
+                    color: $white-color;
+                    background-color: $primary-color;
+                }
+            }
+        }
+        .product-review-point{
+            width: rem(20);
+            height: rem(20);
+            .point-container{
+                width: 100%;
+                height: 100%;
+            }
+            .point-rating{
+                display: flex;
+                width: 100%;
+                height: 100%;
+                .icon{
+                    position: unset;
+                }
+            }
+        }
+        .product-detail-review-form-rating-text{
+            margin-bottom: 0;
+        }
+        .product-detail-review-info{
+            margin-bottom: rem(16);
+        }
+        .product-detail-review-list-content{
+            padding-top: rem(8);
+        }
+        .product-detail-review-item-content{
+            padding-bottom: rem(16);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.header-minimal{
+    &-row{
+        align-items: center;
+        padding: rem(24) 0;
+        @include media-breakpoint-down(md){
+            padding: rem(16) 0;
+        }
+    }
+    &-contact{
+        text-align: center;
+        strong{
+            font-weight: 600;
+        }
+        @include media-breakpoint-down(lg){
+            display: none;
+        }
+    }
+    .header-minimal-back-to-shop{
+        @include media-breakpoint-down(md){
+            width: auto;
+        }
+    }
+}

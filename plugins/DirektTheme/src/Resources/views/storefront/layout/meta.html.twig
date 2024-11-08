@@ -1,0 +1,154 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+    {{ parent() }}
+    
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+
+    <style>
+    @font-face {
+    font-family: 'Open Sans';
+    src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.eot');
+    src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.woff2') format('woff2'),
+        url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.woff') format('woff'),
+        url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.eot');
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Light.ttf') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.eot');
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.eot');
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-ExtraBold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.eot');
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.eot');
+        src: url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+    font-family: 'Montserrat';
+    src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.eot');
+    src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.eot?#iefix') format('embedded-opentype'),
+        url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.woff2') format('woff2'),
+        url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.woff') format('woff'),
+        url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.eot');
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-ExtraBold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.eot');
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.eot');
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-SemiBold.ttf') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.eot');
+        src: url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.woff2') format('woff2'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.woff') format('woff'),
+            url('/bundles/direkttheme/assets/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    </style>
+{% endblock %}

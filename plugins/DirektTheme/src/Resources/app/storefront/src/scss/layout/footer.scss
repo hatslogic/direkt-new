@@ -1,0 +1,192 @@
+.footer {
+    &-columns{
+        max-width: 60%;
+        margin: 0 auto;
+        padding-bottom: rem(24);
+        @include desktop-md(){
+            max-width: 75%;
+        }
+        @include media-breakpoint-down(xxl){
+            max-width: 75%;
+        }
+        @include media-breakpoint-down(xl){
+            max-width: 85%;
+        }
+        @include media-breakpoint-down(lg){
+            max-width: 100%;
+        }
+    }
+    &-column{
+        text-transform: uppercase;
+        border-left: rem(1) solid $black-color;
+        .row{
+            margin: 0 rem(-4);
+        }
+        &-headline{
+            a{
+                color: $headline-color;
+            }
+        }
+        @include media-breakpoint-down(md){
+            width: calc(100%);
+            border-left: 0;
+            border-bottom: rem(1) solid $black-color;
+            padding: 0;
+        }
+    }
+    &-main{
+        border: none;
+    }
+    &-logo{
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: rem(56) 0;
+        @include media-breakpoint-down(md){
+            padding: rem(32) 0;
+        }
+        &-inner{
+            max-width: rem(175);
+            img{
+                width: 100%;
+            }
+            @include media-breakpoint-down(md){
+                max-width: rem(150);
+                img{
+                    height: auto;
+                }
+            }
+        }
+        &-image{
+            @include media-breakpoint-down(xxl){
+                max-width: rem(52);
+            }
+            @include media-breakpoint-down(xl){
+                max-width: rem(42);
+            }
+        }
+    }
+    &-headline{
+        font-size: rem(14);
+        font-weight: 600;
+        padding-top: 0;
+        padding-bottom: rem(16);
+        @include media-breakpoint-down(md){
+            align-items: center;
+            padding: rem(14) rem(4) rem(14) 0;
+        }
+    }
+    &-link,&-contact-form{
+        font-size: rem(13);
+        font-weight: 300;
+    }
+    &-link{
+        transition: 0.3s;
+        &:hover{
+            // border-bottom: rem(1) solid var(--black-color);
+            text-decoration: underline;
+        }
+        &-item{
+            line-height: 1;
+            margin-bottom: rem(8);
+            padding: 0;
+            @include media-breakpoint-down(md){
+                margin-bottom: rem(12);
+            }
+        }
+    }
+    &-contact-hotline{
+        font-size: rem(13);
+        font-weight: 300;
+        a{
+            margin: rem(8) 0;
+        }
+    }
+    &-column-content-inner{
+        padding-bottom: 0;
+        margin-bottom: rem(8);
+    }
+    &-vat{
+        display: none;
+    }
+    &-logos{
+        max-width: 60%;
+        margin: 0 auto;
+        padding: 0;
+        padding-bottom: rem(48);
+        .footer-logo{
+            width: auto;
+            display: block;
+            padding: 0 rem(4) rem(4);
+        }
+        @include desktop-md(){
+            max-width: 75%;
+        }
+        @include media-breakpoint-down(xxl){
+            max-width: 75%;
+        }
+        @include media-breakpoint-down(xl){
+            max-width: 85%;
+        }
+        @include media-breakpoint-down(lg){
+            max-width: 100%;
+        }
+        @include media-breakpoint-down(md){
+            .footer-column{
+                width: calc(50%);
+                border: none;
+                .footer-headline{
+                    justify-content: center;
+                }
+                .row{
+                    justify-content: center;
+                }
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .footer-column{
+                width: calc(100%);
+                border: none;
+                .footer-headline{
+                    justify-content: flex-start;
+                }
+                .row{
+                    justify-content: flex-start;
+                }
+            }
+        }
+    }
+    &-bottom{
+        padding: 0;
+        background-color: var(--topbar-bg);
+        .container{
+            padding-right: rem(30);
+            padding-left: rem(30);
+        }
+
+    }
+    &-column-toggle{
+        .icon{
+            width: 12px;
+            height: 12px;        
+            border-left: rem(1) solid $black-color;
+            border-top: rem(1) solid $black-color;
+            display: block;
+            transform-origin: center;
+            svg{
+                display: none;
+            }
+        }
+        .icon-plus{
+            transform: rotate(-135deg);
+        }
+        .icon-minus{
+            transform: rotate(45deg);
+        }
+    }
+    @include media-breakpoint-down(md){
+        &-column-content{
+            padding-bottom: rem(16);
+        }
+    }
+}

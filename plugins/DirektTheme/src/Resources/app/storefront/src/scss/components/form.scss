@@ -1,0 +1,96 @@
+input,
+textarea {
+    @include input-placeholder {
+        color: var(--placeholder-color);
+        opacity: 1;
+    }
+}
+
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="tel"] {
+    border-radius: 3px;
+    line-height: 1;
+    font-size: .875rem;
+    border: 1px solid $border-color;
+    height: rem(40);
+}
+
+input{
+    border: rem(1) solid $border-color;
+    border-radius: rem(4);
+    &:focus{
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.form-control {
+    background-color: var(--form-control-bg);
+    border: 1px solid $border-color;
+
+    &:focus {
+        background-color: var(--form-control-bg);
+        box-shadow: none ;
+        outline: none ;
+    }
+}
+
+select.form-select {
+    padding: rem(10) rem(15);
+    position: relative;
+    &:focus {
+        box-shadow: none;
+        outline: none ;
+        border-color: $border-color;
+    }
+}
+
+.input-group.quantity-selector-group{
+    border: rem(1) solid $border-color;
+    border-radius: rem(10);
+    overflow: hidden;
+    .btn-outline-light{
+        border: 0;
+    }
+    .btn-minus{
+        padding-left: rem(24);
+    }
+    .btn-plus{
+        padding-right: rem(24);
+    }
+    .form-control{
+        border: 0;
+        background-color: transparent;
+    }
+}
+
+.form-group{
+    position: relative;
+    .form-select{
+        background:none
+    }
+    input.form-control{
+        border-radius: 0;
+        background-color: transparent;
+    }
+    .icon{
+        position: absolute;
+        right: rem(14);
+        bottom: rem(8);
+        pointer-events: none;
+        &::before{
+            font-size: rem(14);
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.form-check-input:focus{
+    box-shadow: none;
+}

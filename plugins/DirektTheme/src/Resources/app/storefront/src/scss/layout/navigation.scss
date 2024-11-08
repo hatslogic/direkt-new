@@ -1,0 +1,105 @@
+.navigation{
+    &-flyout{
+        transition: 0.3s;
+        &-category-link{
+            font-weight: 400;
+            font-size: rem(12);
+        }
+        &-categories{
+            &:not(.is-level-0){
+                margin: 0;
+            }
+            &.is-level-0{
+                display: flex;
+                // grid-auto-columns: minmax(0, 1fr);
+                // grid-auto-flow: column;
+                &>.navigation-flyout-col{
+                    width: calc(14.28%);
+                    &:last-child{
+                        padding-right: 0;
+                    }
+                    &::before{
+                        content: none;
+                    }
+                }
+            }
+        }
+        &-link{
+            font-size: rem(14);
+            margin: 0;
+            overflow: hidden;
+            &.is-level-0{
+                font-weight: 400;
+                .navigation-flyout-linkpointer{
+                    display: none;
+                }
+            }
+            img{
+                transition: 0.35s;
+            }
+            &:hover{
+                color: $secondary-color;
+                padding-left: 0;
+            }
+        }
+        &-bar{
+            border-top: rem(1) solid $border-color;
+            display: none;
+        }
+        &-col{
+            width: auto;
+            padding-left: 0;
+        }
+        // &.is-open{
+        //     // max-height: 100%;
+        //     // overflow: hidden;
+        //     animation: slideDown 0.35s ease-in;
+        // }
+        &-content{
+            padding: rem(24) rem(30) rem(32);
+            .col{
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+    &-imgmenu{
+        img{
+            width: 100%;
+            height: rem(250);
+            @include desktop-md() {
+                height: rem(180);
+                min-height: unset;
+            }
+        }
+        span{
+            padding-top: rem(16);
+            text-align: left;
+            font-size: rem(15);
+            font-weight: 500;
+            color: $text-color;
+            transition: 0.3s;
+        }
+        &:hover{
+            span{
+                color: $secondary-color;
+            }
+        }
+    }
+    &-flyouts{
+        // min-height: 400px;
+        left: 0;
+        top: rem(62);
+    }
+    // slide down
+    @keyframes slideDown {
+        from {
+            transform: translateY(20%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+}

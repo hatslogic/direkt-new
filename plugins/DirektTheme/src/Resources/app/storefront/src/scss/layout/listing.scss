@@ -1,0 +1,32 @@
+.cms-element-product-listing .cms-listing-row{
+    --bs-gutter-x: 75px;
+    margin-right: calc(-.5* var(--bs-gutter-x));
+    margin-left: calc(-.5* var(--bs-gutter-x));
+    & > *{
+        padding-right: calc(var(--bs-gutter-x)* .5);
+        padding-left: calc(var(--bs-gutter-x)* .5);
+    }
+}
+
+.cms-block-image-text{
+    .cms-element-image{
+        position: relative;
+        border-radius: rem(5);
+        overflow: hidden;
+        .cms-image{
+            width: 100%;
+        }
+        .cms-image-media-title{
+            position: absolute;
+            z-index: 1;
+            h1{
+                color: var(--white-color);
+                text-shadow: 0 0 rem(10) #000;
+                font-weight: bold;
+                margin: 0;
+                text-transform: uppercase;
+                font-size: rem(48);
+            }
+        }
+    }
+}

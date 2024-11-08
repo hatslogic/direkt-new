@@ -1,0 +1,87 @@
+.dk-five-block-video{
+    padding: 0 0 rem(80);
+    &--inv{
+        padding: 0 0 rem(40);
+        .dk-newsletter-wrap{
+            flex-direction: row-reverse;
+            @include media-breakpoint-down(lg){
+                flex-direction: column-reverse;
+            }
+            // @include media-breakpoint-down(md){
+            //     flex-direction: row-reverse;
+            // }
+            @include media-breakpoint-down(sm){
+                flex-direction: row-reverse;
+            }
+        }
+        .cms-element-youtube-video {
+            @include media-breakpoint-down(lg){
+                margin-bottom: rem(24);
+            }
+        }
+    }
+    @include media-breakpoint-down(md){
+        padding: 0 0 rem(50);
+    }
+    .order-1 .cms-element-cmsbundle-cta{
+        .cta-wrapper__inner{
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 100%;
+            width: 100%;
+            @include media-breakpoint-down(lg){
+               margin-bottom: rem(24);
+            }
+        }
+        .cta-slider__video{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            // width: 75%;
+            height: 100%;
+        }
+    }
+    .title{
+        padding-left: 0;
+    }
+    .cta-block-wrapper{
+        @include media-breakpoint-down(md){
+            padding: 0 rem(20);
+        }
+    }
+    .cta-element__foreground .cta-element__background.dk-video-thumbnail{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 9;
+    }
+    .cta-element__foreground .cta-element__background.dk-video-wrap{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 8;
+        left: rem(1);
+    }
+    .dk-video-thumbnail{
+        position: relative;
+        &::after{
+            content: "\e90c";
+            position: absolute;
+            font-family: icomoon;
+            color: $grey-color;
+            font-size: rem(80);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            cursor: pointer;
+        }
+    }
+    .order-2{
+        @include media-breakpoint-down(md){
+           margin-top: rem(16);
+        }
+    }
+}

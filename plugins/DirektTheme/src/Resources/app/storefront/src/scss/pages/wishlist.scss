@@ -1,0 +1,35 @@
+.is-ctl-wishlist {
+    margin: rem(60) 0 0;
+    @include media-breakpoint-down(md){
+        margin: rem(16) 0 0;
+        .cms-element-product-listing-actions{
+            display: none;
+        }
+    }
+    .wishlist-headline{
+        height: unset;
+        margin-bottom: rem(32);
+    }
+    .product-wishlist-info-item{
+        display: none;
+    }
+    .product-price-info{
+        margin-top: 0;
+    }
+    .cms-listing-col{
+        @include media-breakpoint-down(md){
+            width: 50%;
+            padding: 0 rem(7);
+        }
+    }
+    .product-image-wrapper{
+        @include media-breakpoint-down(md){
+            min-height: rem(200);
+        }
+    }
+    .cms-listing-row{
+        @include media-breakpoint-down(md) {
+            margin: 0 rem(-7);
+        }
+    }
+}

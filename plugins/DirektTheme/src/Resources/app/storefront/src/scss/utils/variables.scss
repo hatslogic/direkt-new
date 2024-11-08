@@ -1,0 +1,82 @@
+// Bootstrap variables
+:root {
+    --bs-breakpoint-xs: 0;
+    --bs-breakpoint-sm: 576px;
+    --bs-breakpoint-md: 768px;
+    --bs-breakpoint-lg: 992px;
+    --bs-breakpoint-xl: 1200px;
+    --bs-breakpoint-xxl: 1380px;
+    --bs-body-font-size: 1rem;
+    --dark-grey: #807e7c;
+    --placeholder-color: #999999;
+    --form-control-bg: #f8f8fa;
+    --white-color: #fff;
+    --black-color: #000;
+    --primary-color: #0c0c0c;
+    --secondary-color: #4bb041;
+    --text-color: #323332;
+    --topbar-bg:#F5F5F5;
+    --font-open-sans: 'Open Sans', sans-serif;
+    --header-height: 3.930625rem;
+    @include media-breakpoint-down(xl) {
+        --header-height: 3.930625rem;
+    }
+    @include media-breakpoint-down(sm) {
+        --header-height: 3.875rem;
+    }
+}
+
+$desktop-lg: 1919px; // 1919 - Wide Desktop Screens (Like Above 1680 - Large Screens)
+$desktop-md: 1679px; // 1679 - Medium Desktop Screens (Like 1480 - Macbook & Macbook Pro)
+$desktop-sm: 1420px; // 1420 - Small Desktop Screens
+$desktop-xs: 1360px; // 1360 - Small Desktop Screens
+
+$tablet-lg: 1250px; // 1250 Landscape Tablet
+$tablet-md: 991px; // 991 Portrait Medium Tablet
+$tablet-sm: 865px; // 865 Portrait Tablet
+
+$mobile-lg: 767px; // 767 Mobile Landscape
+$mobile-md: 576px; // 576 Mobile Medium Portrait
+$mobile-sm: 540px; // 540 Mobile Portrait
+
+// Theme colours
+$primary-color: $sw-color-brand-primary; //#0c0c0c
+$secondary-color: $sw-color-brand-secondary; //#4bb041
+$border-color: $sw-border-color; //#eee
+$primary-background-color: $sw-primary-background-color; //#fafafa
+$background-color: $sw-background-color; //#fafafa
+$primary-button-color: $sw-primary-button-color; //#4bb041
+
+// Typography
+$text-color: $sw-text-color; //#323332
+$headline-color: $sw-headline-color; //#0c0c0c
+
+// Other colors
+$white-color: $sw-white-color; // #ffffff
+$black-color: $sw-black-color; // #000000
+$grey-color: $sw-grey-color; // #999999
+$dark-grey-color: $sw-dark-grey-color; // #1C1D1A
+$placeholder-color: $sw-placeholder-color; // #cccccc
+$input-color: $sw-input-color; // #f5f5f5
+$topbar-color: $sw-topbar-color; // #f5f5f5
+$footer-background-color: $sw-footer-background-color; // #F5F5F5
+$footer-text-color: $sw-footer-text-color; // #323332
+$footer-link-color: $sw-footer-link-color; // #323332
+$product-image-background-color: $sw-product-image-background-color; // #ffffff
+$slider-arrow-color: $sw-slider-arrow-color; // #ffffff
+$slider-dot-color: $sw-slider-dot-color; // #acacac
+$review-star: $sw-review-star; // #FABF46
+$review-star-blank: $sw-review-star-blank; // #BFBFBF
+
+// fonts
+// $fonttype-text: $sw-font-family-base; // 'Open Sans', sans-serif
+// $fonttype-headline: $sw-font-family-headline; // 'Montserrat', serif
+$font-family-base: $sw-font-family-base; // 'Open Sans', sans-serif
+$font-family-headline: $sw-font-family-headline;  // 'Montserrat', serif
+
+/*
+* Paths
+*/
+$direkt-assets-path: '/bundles/direkttheme/assets';
+$direkt-font-path: '/bundles/direkttheme/assets/fonts';
+

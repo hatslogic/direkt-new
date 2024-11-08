@@ -1,0 +1,76 @@
+
+{% sw_extends '@Storefront/storefront/element/cms-element-cmsbundle-category-slider.html.twig' %}
+
+{% block element_product_slider_alignment %}
+    {% if config.verticalAlign.value %}
+        <div class="cms-element-alignment{% if sliderConfig.verticalAlign.value == " center" %} align-self-center{% elseif sliderConfig.verticalAlign.value == " flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+        {% endif %}
+
+        {% set categorySliderOptions = {
+                slider: {
+                    gutter: 30,
+                    autoplayButtonOutput: false,
+                    nav: sliderConfig.dots.value,
+                    slideBy: 2,
+                    items: sliderConfig.countDesktop.value,
+                    mouseDrag: true,
+                    controls: sliderConfig.controlls.value ? true : false,
+                    autoplay: sliderConfig.autoPlay.value ? true : false,
+                    speed: sliderConfig.speed.value,
+                    loop: sliderConfig.loop.value,
+                    prevButton: '.category-slider__controls_prev',
+                    nextButton: '.category-slider__controls_next',
+                    navPosition: 'bottom',
+                    preventScrollOnTouch: 'auto',
+                    responsive: {
+                        md: {
+                            items: sliderConfig.countTablet.value
+                        },
+                        sm: {
+                            items: sliderConfig.countTablet.value,
+                            gutter: 10,
+                            nav: false,
+                            controls: false,
+                            disable: true
+                        },
+                        xs: {
+                            items: sliderConfig.countMobile.value,
+                            gutter: 10,
+                            nav: false,
+                            controls: false,
+                            disable: true
+                        }
+                    }
+                }
+            } 
+        %}
+        {% block element_category_slider_slider %}
+           {{ parent() }}
+        {% endblock %}
+        {% if config.verticalAlign.value %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block element_category_slider_controls %}
+    {% if sliderConfig.controlls.value %}
+        <div class="category-slider-controls-container">
+            <div class="base-slider-controls" data-base-slider-controls="true" aria-label="slider controls">
+                {% block element_category_slider_controls_items %}
+                    <button class="base-slider-controls-prev category-slider__controls_prev{% if sliderConfig.border.value %} has-border{% endif %} start-0" aria-label="previous button">
+                        {% block element_category_slider_controls_items_prev_icon %}
+                            {# {% sw_icon 'arrow-head-left' %} #}
+                            <span class="icon icon-arrow"></span>
+                        {% endblock %}
+                    </button>
+                    <button class="base-slider-controls-next category-slider__controls_next{% if sliderConfig.border.value %} has-border{% endif %} end-0" aria-label="next button">
+                        {% block element_category_slider_controls_items_next_icon %}
+                            {# {% sw_icon 'arrow-head-right' %} #}
+                            <span class="icon icon-arrow"></span>
+                        {% endblock %}
+                    </button>
+                {% endblock %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
+
+{% block element_product_listing_pagination_nav_top %}
+    <button class="btn btn-outline-primary filter-panel-wrapper-toggle">
+        {% block element_product_listing_filter_button_icon %}
+            {% sw_icon 'sliders-horizontal' %}
+        {% endblock %}
+        {{ "listing.filterTitleText"|trans }}
+    </button>
+{% endblock %}
+
+{% block element_product_listing_sorting %}
+    <div class="dk-sorting">
+        <span>{{ "general.sortingLabel"|trans }}:</span>
+        {% sw_include '@Storefront/storefront/component/sorting.html.twig' with {
+            current: searchResult.sorting,
+            sortings: searchResult.availableSortings
+        } %}
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+
+.card {
+    .product-rating,.product-price-unit,.product-cheapest-price{
+        height: unset;
+        min-height: unset;
+    }
+
+    .product-name{
+        display: inline-block;
+        transition: 0.3s;
+        min-height: rem(44);
+        &:hover {
+            color: $secondary-color;
+        }
+        @include media-breakpoint-down(md) {
+            font-size: rem(16);
+            display: -webkit-box;
+            min-height: rem(32);
+        }
+    }
+    .product-cheapest-price{
+        display: none;
+    }
+    .product-wishlist-action-circle{
+        top: rem(8);
+        transition: 0.35s;
+        .icon:before{
+            transition: 0.35s;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+        &:hover{
+            background-color: $secondary-color;
+            transform: scale(1.1);
+            .icon:before{
+                color: $white-color;
+            }
+        }
+    }
+    .product-wishlist-btn-remove{
+        border-radius: 50%;
+        transition: 0.35s;
+        right: rem(16);
+        top: rem(16);
+        .icon svg{
+            transition: 0.35s;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+        &:hover{
+            background-color: $secondary-color;
+            transform: scale(1.1);
+            .icon svg{
+                color: $white-color;
+            }
+        }
+    }
+    .product-wishlist-added{
+        color: $secondary-color;
+        .icon::before{
+            color: $secondary-color;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{# @deprecated tag:v6.7.0 - File will be removed as it is no longer loaded by default. #}
+{# Extend `src/Storefront/Resources/views/storefront/component/product/description.html.twig` instead #}
+
+{% sw_extends '@Storefront/storefront/page/product-detail/description.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    {% block page_product_detail_description_container %}
+        <div class="product-detail-description tab-pane-container">
+            {% block page_product_detail_description_title %}
+                <div class="h3 product-detail-description-title">
+                    {{ 'detail.descriptionTitle'|trans|sw_sanitize }} "{{ page.product.translated.name }}"
+                </div>
+            {% endblock %}
+
+            {% block page_product_detail_description_content %}
+                {% block page_product_detail_description_content_text %}
+                    <div class="product-detail-description-text"
+                         itemprop="description">
+                        {{ page.product.translated.description|raw }}
+                    </div>
+                {% endblock %}
+
+                {% block page_product_detail_description_content_properties %}
+                    {% if page.product.sortedProperties|length > 0 %}
+                        {% sw_include '@Storefront/storefront/page/product-detail/properties.html.twig' %}
+                    {% endif %}
+                {% endblock %}
+            {% endblock %}
+
+            {% block component_product_desc_links %}
+                <div class="my-4 dk-product-detail-links">
+                    <div class="h3 product-detail-description-title">
+                    {{ 'detail.descriptionLink'|trans|sw_sanitize }} "{{ product.translated.name }}"
+                    </div>
+                    {% set customurl = url('frontend.home.page') %}
+                    {# {% set customurl = app.request.get('sw-storefront-url') %} #}
+                    <a class="product-enquiry d-block" href="{{customurl}}product-enquiry?product={{ page.product.id }}" target="_blank">
+                        <span class="icon icon-down-arrow"></span>
+                        <span class="product-enquiry-link">
+                            {{"product-enquiry.product-detail.link"|trans}}
+                        </span>
+                    </a>
+                    {# url change as per sales channel id #}
+                    {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+                    {% if salesChannelId == '019074f16e0172079638d5b52531ca0c' %}
+                        <a class="product-enquiry  d-block" href="{{customurl}}Kunststoffe-Direkt">
+                            <span class="icon icon-down-arrow"></span>
+                            <span class="product-enquiry-link">
+                                {{ "product-enquiry.product-detail.article"|trans }}
+                            </span>
+                        </a>
+                    {% elseif salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+                        <a class="product-enquiry  d-block" href="{{customurl}}Mb-seal">
+                            <span class="icon icon-down-arrow"></span>
+                            <span class="product-enquiry-link">
+                                {{ "product-enquiry.product-detail.article"|trans }}
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endblock %}
+            {% block component_product_download_links %}
+                <div class="my-4 dk-product-detail-links">
+                    <div class="h3 product-detail-description-title">
+                    {{ 'detail.downloadLink'|trans|sw_sanitize }}
+                    </div>
+                    <a class="product-enquiry d-block" href="/product-enquiry?product={{ page.product.id }}" target="_blank">
+                        <span class="icon icon-down-arrow"></span>
+                        <span class="product-enquiry-link">
+                            {{"product-enquiry.product-detail.link"|trans}}
+                        </span>
+                    </a>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

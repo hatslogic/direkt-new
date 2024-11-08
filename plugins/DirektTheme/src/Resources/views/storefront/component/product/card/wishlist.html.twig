@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/component/product/card/wishlist.html.twig' %}
+
+{% block component_product_wishlist_icon %}
+    <span class="icon icon-fav-fill wishlist icon-wishlist-added"></span>
+    <span class="icon icon-fav wishlist icon-wishlist-not-added"></span>
+
+    {% if showText %}
+        <span class="product-wishlist-btn-content product-wishlist-btn-content-{{ size }}">
+            {{ 'listing.addToWishlist'|trans|sw_sanitize }}
+        </span>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% sw_extends '@ShopwareBundlePlugin/storefront/block/cms-block-cmsbundle-category-list.html.twig' %}
+
+{% block block_cmsbundle_category_list_categories %}
+    {% set element = block.slots.getSlot('category') %}
+    <div class="py-2">
+        <div class="row">
+            <div class="col-md-12">
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing  %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block block_cmsbundle_list_title %}
+    {% set element = block.slots.getSlot('title') %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing  %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block block_cmsbundle_category_list_button %}
+    {% set element = block.slots.getSlot('button') %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing  %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

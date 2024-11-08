@@ -1,0 +1,74 @@
+.dk-contact{
+    .cta-element__foreground {
+        align-items: flex-start;
+    }
+    .title{
+        padding: 0;
+        margin-bottom: rem(32);
+        @include media-breakpoint-down(lg){
+            margin-bottom: rem(16);
+        }
+        h2{
+            margin-bottom: 0;
+        }
+    }
+    p{
+        margin-bottom: rem(16);
+    }
+    &-main{
+        .cms-image-container{
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        @include media-breakpoint-down(lg){
+            .dk-newsletter-wrap{
+                flex-direction: unset;
+                .cms-image-container{
+                    margin-bottom: rem(32);
+                }
+            }
+        }
+        @include media-breakpoint-down(md){
+            .dk-newsletter-wrap{
+                flex-direction: unset;
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .dk-newsletter-wrap{
+                flex-direction: column-reverse;
+            }
+        }
+    }
+    .dk-newsletter-wrap{
+        margin: 0 rem(-16);
+        @include media-breakpoint-down(lg){
+            max-width:unset;
+            margin: 0 rem(-16);
+            .cms-element-cmsbundle-cta{
+                margin-bottom: rem(32);
+            }
+        }
+    }
+    &--invert{
+        @include media-breakpoint-down(lg){
+            .dk-newsletter-wrap{
+                flex-direction: unset;
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .dk-newsletter-wrap{
+                flex-direction: column-reverse;
+            }
+        }
+    }
+    .card-title{
+        font-weight: 600;
+    }
+    .cta-wrapper__inner.text-start{
+        strong{
+            font-weight: 600;
+        }
+    }
+}

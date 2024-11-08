@@ -1,0 +1,48 @@
+.btn-primary {
+    border-radius: rem(8);
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(8) rem(16);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: rem(12);
+    line-height: 1;
+    background-color: $primary-button-color;
+    color: $white-color;
+    border: rem(1) solid $primary-button-color;
+    transition: 0.3s;
+    &:hover {
+        background-color: $white-color;
+        color: $black-color;
+    }
+    &.btn-buy{
+        border-color: $secondary-color;
+    }
+}
+.btn{
+    border-radius: rem(8);
+    &.btn-link{
+        border-radius: 0;
+    }
+    &.btn-light{
+        margin-top: rem(8);
+    }
+}
+.scroll-up-button .btn-primary{
+    border-radius: 50%;
+    padding: rem(14);
+    svg{
+        top: 0;
+    }
+    &:hover{
+        .icon{
+            color: $primary-color;
+        }
+    }
+}
+a{
+    color: $secondary-color;
+}

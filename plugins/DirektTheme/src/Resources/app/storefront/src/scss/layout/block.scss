@@ -1,0 +1,34 @@
+.cms-block-container{
+    padding: 0 !important;
+}
+
+.cms-block-product-listing{
+    overflow: visible !important;
+}
+
+.block{
+    &.indent{
+        padding: 0 rem(170);
+        @include media-breakpoint-down(md) {
+            padding: 0;
+        }
+
+        .cms-block-image-text{
+            .cms-row > :first-child{
+                @include media-breakpoint-down(md) {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .cms-element-text{
+            p{
+                margin-bottom: 0;
+            }
+            ol, ul{
+                margin-left: rem(18);
+                padding: 0;
+            }
+        }
+    }
+}

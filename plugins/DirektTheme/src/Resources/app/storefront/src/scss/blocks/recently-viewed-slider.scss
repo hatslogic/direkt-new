@@ -1,0 +1,100 @@
+.dk-recently-viewed{
+    padding: rem(60) 0 0;
+    .title {
+        margin: 0 0 rem(32);
+    }
+    .product-heading-name-container{
+        margin: rem(24) 0 0;
+        .product-detail-name{
+            margin-bottom: rem(24);
+        }
+        @include media-breakpoint-down(lg){
+            margin: 0;
+            .product-detail-name{
+                margin-bottom: 0;
+            }
+        }
+    }
+    .product-heading-manufacturer-logo-container{
+        display: none;
+    }
+    .recent-view-slider-item{
+        .product-name{
+            margin-bottom: 0;
+        }
+        .btn-primary{
+            display: none;
+        }
+        .product-image-wrapper{
+            min-height: rem(300);
+            .product-image{
+                object-fit: contain;
+            }
+            @include media-breakpoint-down(lg){
+                min-height: rem(300);
+            }
+            @include media-breakpoint-down(md){
+                min-height: rem(200);
+            }
+        }
+    }
+    .recently-viewed-product-slider__foreground{
+        .container{
+            padding: 0;
+        }
+    }
+    .cms-block-cmsbundle-recently-viewed-product-slider{
+        overflow: visible;
+        margin: rem(40) 0 rem(32);
+        .base-slider{
+            position: unset;
+            margin: 0;
+            @include media-breakpoint-down(md){
+                padding: 0;
+                .category-slider-container  {
+                    overflow-x: scroll;
+                    display: flex;
+                    // margin: 0 rem(-15);
+                    padding: 0 rem(10);
+                    scroll-snap-type: x mandatory;
+                    scrollbar-width: none; /* Firefox */
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+                .category-slider-item{
+                   scroll-snap-align: center;
+                   min-width: rem(300);
+                   padding: 0 rem(10);
+                }
+            }
+            .base-slider-controls-prev ,.base-slider-controls-next {
+                @include media-breakpoint-down(lg){
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+                @include media-breakpoint-down(md){
+                    display: none;
+                }
+            }
+        }
+    }
+    .tns-nav{
+        display: none;
+        @include media-breakpoint-down(md){
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+            bottom: rem(-45);
+            width: 80%;
+            button{
+                height: rem(4);
+                width: rem(24);
+                border-radius: 0;
+                padding: rem(2);
+                margin-bottom: rem(8);
+            }
+        }
+    }
+}

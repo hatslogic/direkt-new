@@ -1,0 +1,68 @@
+.is-act-checkoutregisterpage,.is-act-confirmpage,.is-act-finishpage{
+    padding-top: 0;
+    strong{
+        font-weight: 600;
+    }
+    .address-main-header{
+        font-size: rem(30);
+    }
+    .checkout-aside-summary-header,.checkout-aside-product-header{
+        font-size: rem(25);
+    }
+    .line-item-label{
+        display: block;
+        margin-bottom: rem(16);
+    }
+    .card-title{
+        font-size: rem(20);
+        font-weight: 600;
+        margin-bottom: rem(24);
+    }
+    .register-shipping {
+        margin-top: rem(40);
+    }
+    .login-form-description{
+        margin-bottom: rem(16);
+    }
+    .login-card{
+        margin-bottom: rem(24);
+    }
+    .login-collapse-toggle{
+        color: $primary-color;
+    }
+    .confirm-main-header{
+        font-size: rem(30);
+    }
+    .revocation-notice{
+        margin-bottom: rem(4);
+    }
+    .container-main{
+        border-top: rem(1) solid $border-color;
+    }
+    .header-row{
+        margin: 0 rem(-18);
+    }
+    .line-item-remove-button{
+        margin-top: 0;
+    }
+    .btn-primary{
+        margin-bottom: rem(16);
+    }
+    .checkout{
+        @include media-breakpoint-down(lg){
+            padding-top: rem(40);
+        }
+        .checkout-aside {
+            @include media-breakpoint-down(lg){
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    }
+    .checkout-aside-summary{
+        padding: rem(30);
+        @include media-breakpoint-down(md){
+            padding: rem(16);
+        }
+   }
+}

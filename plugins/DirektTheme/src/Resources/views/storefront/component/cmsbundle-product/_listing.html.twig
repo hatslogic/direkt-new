@@ -1,0 +1,20 @@
+{# {% sw_extends '@ShopwareBundlePlugin/storefront/component/cmsbundle-product/listing.html.twig' %}
+
+{% block element_product_listing_pagination_nav_actions %}
+    <div class="cms-element-product-listing-actions row justify-content-between">
+        <div class="col-md-auto">
+            {% sw_include '@Storefront/storefront/component/product/listing.html.twig' with {
+                listing: listing,
+                sidebar: sidebar
+            } %}
+        </div>
+        <div class="col-md-auto">
+            {% block element_product_listing_sorting %}
+                {% sw_include '@Storefront/storefront/component/sorting.html.twig' with {
+                    current: searchResult.sorting,
+                    sortings: searchResult.availableSortings
+                } %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %} #}

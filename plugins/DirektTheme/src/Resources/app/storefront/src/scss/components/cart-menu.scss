@@ -1,0 +1,228 @@
+.cart-offcanvas{
+    min-width: rem(448);
+    bottom: unset;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 0 rem(30) rem(24);
+    @include media-breakpoint-down(md){
+        bottom: 0;
+        min-width: unset;
+        padding: 0 rem(20) rem(24);
+    }
+    @include media-breakpoint-down(sm){
+        width: 100%  ;
+    }
+    .offcanvas-header{
+        padding: 0;
+        padding-bottom: rem(12);
+        background-color: transparent;
+        .btn{
+            text-align: center;
+            position: relative;
+            border: 0;
+            font-size: rem(18);
+            color: $primary-color;
+            padding: 0;
+            margin: rem(12) 0;
+            background-color: transparent;
+            &:hover{
+                border: 0;
+            }
+        }
+        .icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .offcanvas-body{
+        padding: 0;
+        overflow-x: hidden;
+        padding-right: rem(2);
+
+        &::-webkit-scrollbar {
+            width: rem(4);
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary-color;
+        }
+        @include media-breakpoint-down(md){
+            padding-right: rem(16);
+        }
+    }
+    .offcanvas-cart{
+        @include media-breakpoint-down(md){
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+    .offcanvas-backdrop{
+        display: none;
+    }
+    .offcanvas-cart-header{
+        margin-bottom: 0;
+        &>.col{
+            display: none;
+        }
+        &-count{
+            font-size: rem(12);
+        }
+    }
+    .alert-info{
+        background-color: transparent;
+        margin: 0;
+        .icon-info{
+            display: none;
+        }
+        .alert-content-container{
+            font-size: rem(16);
+            padding: 0;
+            background-color: transparent;
+            color: $primary-color;
+            text-align: center;
+            position: relative;
+            padding-bottom: rem(114);
+            &::after{
+                display: flex;
+                font-family: icomoon;
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                font-size: rem(50);
+                width: 100%;
+                height: rem(114);
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .offcanvas-cart-actions{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 0 rem(-5);
+        .d-grid{
+            width: calc(50% - 10px);
+            margin: 0 rem(5);
+        }
+        .js-offcanvas-cart-promotion{
+            margin: 0 rem(8);
+            width: 100%;
+            .form-control{
+                border-top-right-radius: 0  ;
+                border-bottom-right-radius: 0  ;
+            }
+            .btn {
+                border-top-right-radius: rem(4);
+                border-bottom-right-radius: rem(4);
+            }
+        }
+        @include media-breakpoint-down(md){
+            flex-direction: column;
+            margin-top: auto;
+            .d-grid{
+                width: 100%;
+                margin: 0 0 rem(8);
+                .btn-primary{
+                    font-size: rem(14);
+                }
+            }
+        }
+    }
+    .offcanvas-cart-items{
+        margin: 0;
+        .line-item{
+            border-color: $primary-color;
+        }
+        .is-offcanvas {
+            .line-item-info{
+                margin: rem(8) 0;
+                .line-item-row{
+                    margin: 0 0 0 rem(-12);
+                }
+            }
+            .line-item-details{
+                width: calc(60% - 10px);
+                margin: 0 rem(5);
+                padding: 0;
+            }
+            .line-item-label{
+                font-size: rem(14);
+                font-weight: 500;
+                margin-bottom: rem(16);
+                display: block
+            }
+            .line-item-total-price{
+                font-size: rem(14);
+                font-weight: 700;
+            }
+            .line-item-remove{
+                span{
+                    font-weight: 300;
+                    text-decoration: underline;
+                }
+            }
+            .line-item-product-number,.line-item-delivery-date{
+                display: none;
+            }
+            .line-item-quantity{
+                padding: 0;
+                margin-bottom: 0;
+                &-row{
+                    margin: 0;
+                }
+                &-label{
+                    font-weight: 500;
+                    font-size: rem(14);
+                    padding: 0;
+                    width: auto;
+                    margin-right: rem(8);
+                    margin-bottom: 0;
+                }
+                &-select-wrapper{
+                    padding: 0 rem(7);
+                    width: auto;
+                    .js-btn-minus,.js-btn-plus{
+                        margin-left: 0  ;
+                        z-index: 0  ;
+                    }
+                }
+            }
+            .line-item-details-characteristics{
+                font-size: rem(13);
+                margin:  rem(4) 0 0;
+            }
+            .product-wishlist{
+                margin: rem(16) 0;
+            }
+            .line-item-row{
+                margin: 0;
+            }
+        }
+        .line-item-info-img{
+            width: calc(40% - 10px);
+            margin: 0 rem(5);
+        }
+        .line-item-img-container{
+            width: auto;
+        }
+        .line-item-img{
+            height: auto  ;
+        }
+    }
+    .offcanvas-summary{
+        .summary-total,.shipping-cost{
+            font-weight: normal;
+            strong{
+                font-weight: normal;
+            }
+        }
+    }
+}
+
+.offcanvas.offcanvas-end{
+    top: var(--header-height);
+    max-height: rem(400);
+}

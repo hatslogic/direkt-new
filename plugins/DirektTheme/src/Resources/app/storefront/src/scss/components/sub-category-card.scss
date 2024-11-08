@@ -1,0 +1,85 @@
+.category-box {
+    &.subCategory {
+        border: 0;
+
+        .category-box {
+            background-color: $primary-background-color;
+        }
+
+        .product-image-wrapper {
+            margin: 0;
+            height: rem(215);
+            overflow: hidden;
+            background-color: var(--white-color);
+            max-height: max-content;
+
+            .product-image, .product-image-placeholder {
+                transition: all .15s ease-in-out;
+                transform: scale(1.05);
+                max-height: fit-content;
+                object-fit: cover;
+            }
+        }
+
+        .product-name {
+            font-size: .875rem;
+            font-family: var(--font-work-sans);
+            font-weight: 400;
+            transition: 0.3s all;
+            color: var(--black-color);
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1;
+            height: auto;
+        }
+
+        .product-info {
+            padding: rem(10) 0;
+            background-color: $primary-background-color;
+        }
+
+        .card-body {
+            border: 0;
+            padding: 0;
+            transition: all .15s ease-in-out;
+            border-radius: rem(5);
+            overflow: hidden;
+
+            &:hover {
+                box-shadow: 0px 0px 15px 0px rgba(130, 128, 128, 0.7);
+
+                .product-image-placeholder{
+                    transform: scale(1.05) translateY(-5px);
+                }
+                .product-image {
+                    &.is-standard {
+                        transform: scale(1.05) translateY(-5px);
+                    }
+                }
+            }
+        }
+
+        .sub-category-box-link {
+
+            &:hover {
+
+                .product-info,
+                .product-name {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.sub-category-list {
+    &.cms-block-sub-category-list {
+        .row {
+            --bs-gutter-x: 30px;
+        }
+    }
+}
+
+.cms-block-sub-category-list{
+    overflow: visible !important;
+}

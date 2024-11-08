@@ -1,0 +1,46 @@
+{% sw_extends '@Storefront/storefront/component/address/address-form.html.twig' %}
+
+{% block component_address_form_country_select %}
+    <select class="country-select form-select{% if violationPath %} is-invalid{% endif %}"
+            id="{{ idPrefix ~ prefix }}AddressCountry"
+            name="{{ prefix }}[countryId]"
+            required="required"
+            data-initial-country-id="{{ initialCountryId }}">
+        {% if not initialCountryId %}
+            <option disabled="disabled"
+                    value=""
+                    selected="selected">
+                {{ 'address.countryPlaceholder'|trans|sw_sanitize }}
+            </option>
+        {% endif %}
+        {% for country in page.countries %}
+            <option {% if country.id == initialCountryId %}
+                    selected="selected"
+                    {% endif %}
+                    value="{{ country.id }}"
+                    data-zipcode-required="{{ country.postalCodeRequired }}"
+                    data-vat-id-required="{{ country.vatIdRequired }}"
+                    data-state-required="{{ country.forceStateInRegistration }}"
+                    {% if not country.shippingAvailable and disableNonShippableCountries %}
+                        disabled="disabled"
+                    {% endif %}>
+                {{ country.translated.name }}{% if showNoShippingPostfix and not country.shippingAvailable %} {{ 'address.countryPostfixNoShipping'|trans|sw_sanitize }}{% endif %}
+            </option>
+        {% endfor %}
+    </select>
+    <span class="icon icon-down-arrow"></span>
+{% endblock %}
+
+{% block component_address_form_country_state_select %}
+    <select class="country-state-select form-select{% if violationPath %} is-invalid{% endif %}"
+            id="{{ idPrefix ~ prefix }}AddressCountryState"
+            name="{{ prefix }}[countryStateId]"
+            data-initial-country-state-id="{{ data.get('countryStateId') }}">
+        <option value=""
+                selected="selected"
+                data-placeholder-option="true">
+            {{ 'address.countryStatePlaceholder'|trans|sw_sanitize }}
+        </option>
+    </select>
+    <span class="icon icon-down-arrow"></span>
+{% endblock %}

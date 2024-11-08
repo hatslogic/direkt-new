@@ -1,0 +1,23 @@
+.account-menu-dropdown{
+    padding: rem(16);
+    .account-menu{
+        margin:0;
+        .account-aside-btn{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            .icon{
+                margin-right: rem(8);
+                svg{
+                    top: 0;
+                }
+            }
+        }
+        &-header{
+            padding: 0 0 rem(8);
+        }
+    }
+    .account-menu-header,.account-aside-item.is-active{
+        font-weight: 600;
+    }
+}

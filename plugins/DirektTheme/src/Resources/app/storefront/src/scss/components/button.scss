@@ -1,0 +1,8 @@
+.btn{
+    display: flex;
+    --bs-btn-font-weight: 400;
+    height: rem(40);
+    &.btn-primary{
+        --bs-btn-color: var(--bs-white);
+    }
+}

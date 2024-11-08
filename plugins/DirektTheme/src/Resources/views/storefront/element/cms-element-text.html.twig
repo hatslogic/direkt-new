@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-text.html.twig' %}
+
+{% block element_text_alignment %}
+    {% if config.verticalAlign.value %}
+        <div class="cms-element-alignment{% if config.verticalAlign.value == "center" %} align-self-center{% elseif config.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+    {% endif %}
+    {% if page.cmsPage.type == 'product_list' and page.metaInformation.metaTitle is defined %}
+        <h1>{{ page.metaInformation.metaTitle }}</h1>
+    {% endif %}
+        {% block element_text_inner %}
+            {% set content = element.data.content %}
+            {# Attempt to remove simple inline styles #}
+            {% set cleaned_content = content|replace({' style=""': ' ', ' style=" ': ' ', ' style="': ' '}) %}
+            {{ cleaned_content|raw }}
+        {% endblock %}
+
+    {% if config.verticalAlign.value %}
+        </div>
+    {% endif %}
+{% endblock %}

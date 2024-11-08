@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/block/cms-block-cmsbundle-content-block.html.twig' %}
+
+{% block block_cmsbundle_content_block_inner_section %}
+    <div class="row m-0">
+        <div class="container {% if isBgImage %} py-0 {% else %} py-4 {% endif %}">
+            <div class="row dk-newsletter-wrap">
+                {% block block_cmsbundle_cta_left %}
+                    {% set element = block.slots.getSlot('left') %}
+                    <div class="col-sm-12 col-md-12 col-lg-6 order-sm-1 order-2">
+                        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing  %}
+                    </div>
+                {% endblock %}
+                {% block block_cmsbundle_cta_right %}
+                    {% set element = block.slots.getSlot('right') %}
+                    <div class="col-sm-12 col-md-12 col-lg-6 order-sm-2 order-1">
+                        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing  %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

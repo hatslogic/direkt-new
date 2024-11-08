@@ -1,0 +1,29 @@
+.hero-slide{
+    .title{
+        font-family: var(--font-work-sans);
+        font-size: rem(36);
+        line-height: 1.2;
+    }
+    .title-wrap{
+        .title-inner{
+            max-width: rem(540);
+            text-align: center;
+        }
+    }
+}
+
+.hero-slider {
+
+    height: 0;
+    padding-bottom: 31.6%;
+    border-radius: rem(5);
+    overflow: hidden;
+
+    .cms-image-container{
+        
+        picture{
+            position: absolute;
+            top: 0;
+        }
+    }
+}

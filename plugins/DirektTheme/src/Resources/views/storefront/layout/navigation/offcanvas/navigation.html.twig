@@ -1,0 +1,61 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/navigation.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    {% block layout_navigation_offcanvas_navigation_actions %}
+        <nav class="nav navigation-offcanvas-actions">
+            {% block layout_navigation_offcanvas_navigation_action_language %}
+                {% sw_include '@Storefront/storefront/layout/header/actions/language-widget.html.twig' with {position: 'offcanvas'} %}
+            {% endblock %}
+
+            {% block layout_navigation_offcanvas_navigation_action_currency %}
+                {% sw_include '@Storefront/storefront/layout/header/actions/currency-widget.html.twig' with {position: 'offcanvas'} %}
+            {% endblock %}
+        </nav>
+    {% endblock %}
+
+    {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/categories.html.twig' with { navigation: navigation } %}
+
+    {% block layout_navigation_offcanvas_buttons %}
+        <div class="offcanvas-button-outer">
+            <div class="offcanvas-btn">
+                <a href="{{ path('frontend.wishlist.page') }}" title="{{ 'header.wishlist'|trans|striptags }}">{{ 'header.wishlist'|trans|striptags }}</a>
+            </div>
+            {# <div class="offcanvas-btn">
+                {% block layout_header_actions_account_widget_dropdown_header %}
+                    {% if not context.customer.guest %}
+                        <div class="dropdown-header account-menu-header">
+                            {{ 'account.myAccount'|trans|sw_sanitize }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block layout_header_actions_account_widget_dropdown_login %}
+                    {% if not context.customer %}
+                        <div class="account-menu-login">
+                            {% block layout_header_actions_account_widget_dropdown_login_login %}
+                                <a href="{{ path('frontend.account.login.page') }}"
+                                title="{{ 'account.loginSubmit'|trans|striptags }}"
+                                class="btn btn-primary account-menu-login-button">
+                                    {{ 'account.loginSubmit'|trans|sw_sanitize }}
+                                </a>
+                            {% endblock %}
+
+                            {% block layout_header_actions_account_widget_dropdown_login_register %}
+                                <div class="account-menu-register">
+                                    {{ 'account.orRegister'|trans|sw_sanitize }} <a href="{{ path('frontend.account.login.page') }}"
+                                                                                    title="{{ 'account.orRegisterLink'|trans|striptags }}">{{ 'account.orRegisterLink'|trans|striptags|lower }}</a>
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block layout_header_actions_account_widget_dropdown_links %}
+                    <div class="account-menu-links">
+                        {% sw_include '@Storefront/storefront/page/account/sidebar.html.twig' with {headerWidget: true} %}
+                    </div>
+                {% endblock %}
+            </div> #}
+        </div>
+    {% endblock %}
+{% endblock %}

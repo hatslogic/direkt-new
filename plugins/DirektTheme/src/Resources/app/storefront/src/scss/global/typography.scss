@@ -1,0 +1,56 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: $font-family-headline;
+    color: $headline-color;
+    font-weight: 600;
+}
+
+h1,.h1 {
+    font-size: rem(40);
+    line-height: 1.5;
+    @include media-breakpoint-down(lg){
+        font-size: rem(35);
+        line-height: 1.3;
+    }
+    @include media-breakpoint-down(md) {
+        font-size: rem(30);
+        line-height: 1.3;
+    }
+}
+
+h2,.h2{
+    font-size: rem(35);
+    line-height: rem(40);
+    margin-bottom: rem(35);
+    @include media-breakpoint-down(md) {
+        font-size: rem(24);
+        line-height: 1.3;
+        margin-bottom: rem(25);
+    }
+}
+
+h4,.h4{
+    font-size: rem(24);
+    line-height: rem(32);
+    @include media-breakpoint-down(md) {
+        font-size: rem(18);
+        line-height: rem(26);
+    }
+}
+
+p{
+    font-size: rem(16);
+    line-height: rem(24);
+    color: $text-color;
+    margin-bottom: 0;
+}

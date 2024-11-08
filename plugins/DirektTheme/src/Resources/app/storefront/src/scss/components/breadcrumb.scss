@@ -1,0 +1,11 @@
+.breadcrumb{
+    --bs-breadcrumb-margin-bottom: 0;
+}
+
+.breadcrumb{
+    margin-top: 0;
+    margin-bottom: rem(16);
+    a.is-active{
+        font-weight: normal;
+    }
+}

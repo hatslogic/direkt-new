@@ -1,0 +1,73 @@
+// Utils
+@import "./utils/variables.scss";
+@import "./utils/mixins.scss";
+
+// Global
+@import "./global/icons.scss";
+@import "./global/typography.scss";
+@import "./global/global.scss";
+@import "./global/button.scss";
+
+
+// blocks
+@import "./blocks/listing-category-slider.scss";
+@import "./blocks/recently-viewed-slider.scss";
+
+// Elements
+@import "./elements/header-wishlist.scss";
+
+// Components
+@import "./components/title.scss";
+@import "./components/offcanvas.scss";
+@import "./components/topbar.scss";
+@import "./components/newsletter.scss";
+@import "./components/copyright.scss";
+@import "./components/account-menu.scss";
+@import "./components/cart-menu.scss";
+@import "./components/line-item.scss";
+@import "./components/form.scss";
+@import "./components/header-navigation.scss";
+@import "./components/header-search.scss";
+@import "./components/category-card.scss";
+@import "./components/card.scss";
+@import "./components/slider.scss";
+@import "./components/filter.scss";
+@import "./components/sorting.scss";
+@import "./components/product-detail-buy.scss";
+@import "./components/gallery-slider.scss";
+@import "./components/breadcrumb.scss";
+@import "./components/review-tab.scss";
+@import "./components/tab-slider.scss";
+@import "./components/modal.scss";
+// @import "./components/product-card.scss";
+// @import "./components/blog-card.scss";
+// @import "./components/blog-card.scss";
+// @import "./components/sub-category-card.scss";
+
+// Layout
+@import "./layout/header.scss";
+@import "./layout/navigation.scss";
+@import "./layout/footer.scss";
+@import "./layout/hero-slider.scss";
+@import "./layout/category-list.scss";
+@import "./layout/category-slider.scss";
+@import "./layout/five-block-section.scss";
+@import "./layout/five-block-video.scss";
+@import "./layout/product-listing.scss";
+@import "./layout/header/header-minimal.scss";
+@import "./layout/about-us.scss";
+// @import "./layout/banner.scss";
+// @import "./layout/block.scss";
+// @import "./layout/listing.scss";
+
+// Pages
+@import "./pages/home.scss";
+@import "./pages/cart.scss";
+@import "./pages/checkout.scss";
+@import "./pages/forgot-password.scss";
+@import "./pages/register.scss";
+@import "./pages/account.scss";
+@import "./pages/cms-pages.scss";
+@import "./pages/contact.scss";
+@import "./pages/detail.scss";
+@import "./pages/wishlist.scss";

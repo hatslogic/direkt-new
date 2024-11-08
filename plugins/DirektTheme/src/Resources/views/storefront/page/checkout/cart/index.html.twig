@@ -1,0 +1,78 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+{% block page_checkout_cart_shipping_costs_form_group_country %}
+    {% if not context.customer %}
+        <div class="form-group">
+            <label class="mb-1" for="countryId">
+                {{ 'checkout.shippingCountry'|trans|sw_sanitize }}
+            </label>
+            <select class="form-select" type="text" id="countryId" name="countryId">
+                {% for country in page.countries %}
+                    <option value="{{ country.id }}" {{ country.id == context.shippingLocation.country.id ? 'selected="selected"' : '' }}>
+                        {{ country.translated.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="icon icon-down-arrow"></div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block page_checkout_cart_shipping_costs_form_group_payment_method %}
+    <div class="form-group">
+        <label for="paymentMethodId" class="mb-1">
+            {{ 'checkout.paymentMethod'|trans|sw_sanitize }}
+        </label>
+        <select class="form-select" type="text" id="paymentMethodId" name="paymentMethodId">
+            {% if context.paymentMethod.id not in page.paymentMethods.ids %}
+                <option value="{{ context.paymentMethod.id }}" selected="selected" disabled="disabled">
+                    {{ context.paymentMethod.translated.name }}
+                    {{ 'checkout.notAvailableSuffix'|trans|sw_sanitize }}
+                </option>
+            {% endif %}
+            {% for payment in page.paymentMethods %}
+                <option value="{{ payment.id }}" {% if payment.id == context.paymentMethod.id %} selected="selected" {% endif %}>
+                    {{ payment.translated.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <div class="icon icon-down-arrow"></div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_cart_shipping_costs_form_group_shipping_method %}
+    <div class="form-group">
+        <label for="shippingMethodId" class="mb-1">
+            {{ 'checkout.shippingMethod'|trans|sw_sanitize }}
+        </label>
+        <select class="form-select" type="text" id="shippingMethodId" name="shippingMethodId">
+            {% if context.shippingMethod.id not in page.shippingMethods.ids %}
+                <option value="{{ context.shippingMethod.id }}" selected="selected" disabled="disabled">
+                    {{ context.shippingMethod.translated.name }}
+                    {{ 'checkout.notAvailableSuffix'|trans|sw_sanitize }}
+                </option>
+            {% endif %}
+            {% for shipping in page.shippingMethods %}
+                <option value="{{ shipping.id }}" {% if shipping.id == context.shippingMethod.id %} selected="selected" {% endif %}>
+                    {{ shipping.translated.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <div class="icon icon-down-arrow"></div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_container %}
+    {{ parent() }}
+    <div class="m-2justify-content-center">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: 'info',
+            content: 'checkout.cartNote'|trans|sw_sanitize
+        } %}
+        <div class="d-flex flex-column align-items-center">
+            <a href="/product-enquiry?type=cart" class="btn btn-primary btn-lg begin-checkout-btn" title="{{ 'checkout.requestQuote'|trans|striptags }}">
+                {{ 'checkout.requestQuote'|trans|sw_sanitize }}
+            </a>
+        </div>
+    </div>
+{% endblock %}

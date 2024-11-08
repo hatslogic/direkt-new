@@ -1,0 +1,106 @@
+// search
+.header-search{
+    max-width: unset;
+    &-btn{
+        background-color: $white-color;
+        border: 0;
+        padding: 0;
+        margin-right: rem(16);
+        display: flex;
+        @include media-breakpoint-down(lg){
+            margin-right: rem(24);
+        }
+        @include media-breakpoint-down(md){
+            margin-right: rem(16);
+        }
+
+        .header-search-icon{
+            font-size: 1.375rem;
+            vertical-align: middle;
+            color: $secondary-color;
+        }
+    
+        &.btn:disabled{
+            background-color: var(--form-control-bg);
+        }
+    }
+
+    &-input{
+        border-right: 0;
+        display: none;
+        border: 0 ;
+        margin: 0;
+    }
+    input[type="search"].form-control.header-search-input{
+        border: none;
+    }
+
+    @include media-breakpoint-up(sm){
+        max-width: rem(352);
+    }
+    &-module{
+        background-color: $white-color;
+        &.search-active{
+            position: absolute;
+            right: 0;
+            z-index: 9;
+            @include media-breakpoint-down(lg){
+                width: 100%;
+                top:var(--header-height);
+            }
+            .header-search{
+                background-color: transparent;
+                padding: 0 rem(20);
+                @include media-breakpoint-down(lg){
+                    background-color: $primary-background-color;
+                }
+            }
+        }
+    }
+    &-col{
+        .header-search.active{
+            @include media-breakpoint-down(lg){
+                margin: 0;
+            }
+        }
+    }
+    &.active{
+        width: 100%;
+        max-width: unset;
+        .header-search-input{
+            display: block;
+            box-shadow: none;
+            background-color: $white-color;
+            &::placeholder{
+                color: $primary-color;
+
+            }
+            @include media-breakpoint-down(lg){
+                min-height: rem(40);
+                background-color: $primary-background-color;
+            }
+        }
+        .header-search-close{
+            display: block;
+        }
+        form{
+            border-bottom: rem(1) solid $border-color;
+            @include media-breakpoint-down(lg){
+                border: none;
+            }
+        }
+        .header-search-btn{
+            margin-right: 0;
+        }
+    }
+    .input-group{
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    &-close{
+        cursor: pointer;
+        display: none;
+        margin-left: rem(8);
+    }
+}

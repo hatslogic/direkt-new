@@ -1,0 +1,114 @@
+.dk-category{
+    background-color: $white-color;
+    padding: rem(80) 0 0;
+    &--image-block{
+        padding: rem(20) 0 0;
+        .row-cols-xl-5{
+            .cms-image{
+                object-fit: cover;
+                height: 100%;
+            }
+        }
+        .dk-five-block_item{
+            @include media-breakpoint-down(xl){
+                width: 25%;
+            }
+            @include media-breakpoint-down(lg){
+                width: 50%;
+                margin-bottom: rem(16);
+            }
+        }
+    }
+    @include media-breakpoint-down(md) {
+        padding: rem(50) 0 0;
+    }
+    .product-image-wrapper{
+        min-height: rem(536);
+        @include media-breakpoint-down(lg) {
+            min-height: rem(350);
+        }
+    }
+    .cms-listing-row{
+        margin: 0 rem(-7);
+        @include media-breakpoint-down(md) {
+            margin: 0 rem(-4);
+            padding: 0 rem(20);
+        }
+    }
+    .cms-listing-col{
+        padding: 0 rem(7);
+        @include media-breakpoint-down(md) {
+            padding: 0 rem(4);
+            width: 50%;
+            .product-image-wrapper{
+                height: rem(150);
+                min-height: unset;
+            }
+        }
+    }
+    .cms-listing-col{
+        margin-bottom: rem(60);
+        @include media-breakpoint-down(md) {
+            margin-bottom: rem(30);
+        }
+    }
+    .product-name{
+        display: block;
+        @include media-breakpoint-down(md) {
+            font-size: rem(13);
+            margin-bottom: rem(16);
+            line-height: 1.3;
+            display: -webkit-box;
+        }
+    }
+    .category-description{
+        font-size: rem(14);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        @include media-breakpoint-down(md) {
+            font-size: rem(13);
+            -webkit-line-clamp: 4;
+        }
+    }
+    .btn-primary{
+        font-size: rem(14);
+        @include media-breakpoint-down(md) {
+            font-size: rem(12);
+        }
+    }
+    &--werkstoffe{
+        padding: rem(20) 0 0;
+        .title {
+            padding: 0;
+        }
+        .product-name{
+            @include media-breakpoint-down(md) {
+                min-height: rem(45);
+                @include media-breakpoint-down(md) {
+                    min-height: rem(32);
+                }
+            }
+        }
+        .cms-listing-row{
+            padding: 0;
+        }
+
+        .product-image-wrapper{
+            min-height: unset;
+        }
+        .btn-primary{
+            background-color: transparent;
+            color: $primary-color;
+            padding: 0 rem(4);
+            border: 0;
+            min-height: unset;
+            text-decoration: underline;
+            transition: 0.35s;
+            &:hover{
+                color: $secondary-color;
+            }
+        }
+    }
+}

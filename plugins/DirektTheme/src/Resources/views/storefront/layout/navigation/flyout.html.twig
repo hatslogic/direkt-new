@@ -1,0 +1,73 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/flyout.html.twig' %}
+
+{% block layout_navigation_flyout %}
+    {% set category = navigationTree.category %}
+    {% set name = category.translated.name %}
+
+    {% block layout_navigation_flyout_bar %}
+        <div class="row navigation-flyout-bar">
+            {% block layout_navigation_flyout_bar_category %}
+                <div class="col">
+                    <div class="navigation-flyout-category-link">
+                        {{ parent() }}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block layout_navigation_flyout_bar_close %}
+                <div class="col-auto">
+                    {{ parent() }}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block layout_navigation_flyout_content %}
+        <div class="row navigation-flyout-content">
+            {% block layout_navigation_flyout_categories %}
+                <div class="col">
+                    <div class="navigation-flyout-categories">
+                        {% block layout_navigation_flyout_categories_recoursion %}
+                            {% sw_include '@Storefront/storefront/layout/navigation/categories.html.twig' with {
+                                navigationTree: navigationTree.children,
+                                navigationMedia: category.media,
+                                page: page
+                            } only %}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {# {% block layout_navigation_flyout_teaser %}
+                {% if category.media %}
+                <div class="col-4 col-xl-3">
+                    <div class="navigation-flyout-teaser">
+                        {% block layout_navigation_flyout_teaser_image %}
+                            <a class="navigation-flyout-teaser-image-container"
+                               href="{{ category_url(category) }}"
+                               {% if category_linknewtab(category) %}target="_blank"
+                                   {% if category.linkType == 'external' %}rel="noopener noreferrer"{% endif %}
+                               {% endif %}
+                               title="{{ name }}">
+                                {% sw_thumbnails 'navigation-flyout-teaser-image-thumbnails' with {
+                                    media: category.media,
+                                    sizes: {
+                                        default: '310px'
+                                    },
+                                    attributes: {
+                                        class: 'navigation-flyout-teaser-image',
+                                        alt: (category.media.translated.alt ?: ''),
+                                        title: (category.media.translated.title ?: ''),
+                                        'data-object-fit': 'cover',
+                                        loading: 'lazy'
+                                    }
+                                } %}
+                            </a>
+                        {% endblock %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endblock %} #}
+        </div>
+    {% endblock %}
+{% endblock %}

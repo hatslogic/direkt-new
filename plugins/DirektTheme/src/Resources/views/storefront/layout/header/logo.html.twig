@@ -1,0 +1,95 @@
+{% sw_extends '@Storefront/storefront/layout/header/logo.html.twig' %}
+
+{# {% block layout_header_logo_inner %}
+    <div class="header-logo-main">
+        {{ parent() }}
+    </div>
+{% endblock %} #}
+
+{# {% block layout_header_logo_image_default %}
+    {% if theme_config('sw-logo-desktop') %}
+        <img src="{{ theme_config('sw-logo-desktop')|sw_encode_url }}"
+                alt="{{ 'header.logoLink'|trans|striptags }}"
+                class="img-fluid header-logo-main-img" width="220" height="46">
+    {% endif %}
+{% endblock %} #}
+
+{% block layout_header_logo_inner %}
+    <div class="header-logo-main">
+        {% block layout_header_logo_link %}
+            <a class="header-logo-main-link"
+               href="{{ path('frontend.home.page') }}"
+               title="{{ 'header.logoLink'|trans|striptags }}">
+                {% block layout_header_logo_image %}
+                    <picture class="header-logo-picture">
+                        {% set language = app.request.locale %}
+
+                        {# Tablet Logo with Language Condition #}
+                        {% block layout_header_logo_image_tablet %}
+                            {% if language == 'en-GB' %}
+                                {% if theme_config('sw-logo-tablet-en') and theme_config('sw-logo-tablet-en') != theme_config('sw-logo-desktop-en') %}
+                                    <source srcset="{{ theme_config('sw-logo-tablet-en')|sw_encode_url }}"
+                                            media="(min-width: {{ theme_config('breakpoint.md') }}px) and (max-width: {{ theme_config('breakpoint.lg') - 1 }}px)">
+                                {% endif %}
+                            {% elseif language == 'de-DE' %}
+                                {% if theme_config('sw-logo-tablet-de') and theme_config('sw-logo-tablet-de') != theme_config('sw-logo-desktop-de') %}
+                                    <source srcset="{{ theme_config('sw-logo-tablet-de')|sw_encode_url }}"
+                                            media="(min-width: {{ theme_config('breakpoint.md') }}px) and (max-width: {{ theme_config('breakpoint.lg') - 1 }}px)">
+                                {% endif %}
+                            {% else %}
+                                {% if theme_config('sw-logo-tablet') and theme_config('sw-logo-tablet') != theme_config('sw-logo-desktop') %}
+                                    <source srcset="{{ theme_config('sw-logo-tablet')|sw_encode_url }}"
+                                            media="(min-width: {{ theme_config('breakpoint.md') }}px) and (max-width: {{ theme_config('breakpoint.lg') - 1 }}px)">
+                                {% endif %}
+                            {% endif %}
+                        {% endblock %}
+
+                        {# Mobile Logo with Language Condition #}
+                        {% block layout_header_logo_image_mobile %}
+                            {% if language == 'en-GB' %}
+                                {% if theme_config('sw-logo-mobile-en') and theme_config('sw-logo-mobile-en') != theme_config('sw-logo-desktop-en') %}
+                                    <source srcset="{{ theme_config('sw-logo-mobile-en')|sw_encode_url }}"
+                                            media="(max-width: {{ theme_config('breakpoint.md') - 1 }}px)">
+                                {% endif %}
+                            {% elseif language == 'de-DE' %}
+                                {% if theme_config('sw-logo-mobile-de') and theme_config('sw-logo-mobile-de') != theme_config('sw-logo-desktop-de') %}
+                                    <source srcset="{{ theme_config('sw-logo-mobile-de')|sw_encode_url }}"
+                                            media="(max-width: {{ theme_config('breakpoint.md') - 1 }}px)">
+                                {% endif %}
+                            {% else %}
+                                {% if theme_config('sw-logo-mobile') and theme_config('sw-logo-mobile') != theme_config('sw-logo-desktop') %}
+                                    <source srcset="{{ theme_config('sw-logo-mobile')|sw_encode_url }}"
+                                            media="(max-width: {{ theme_config('breakpoint.md') - 1 }}px)">
+                                {% endif %}
+                            {% endif %}
+                        {% endblock %}
+
+                        {# Default Desktop Logo with Language Condition #}
+                        {% block layout_header_logo_image_default %}
+                            {% if language == 'en-GB' %}
+                                {% if theme_config('sw-logo-desktop-en') %}
+                                    <img src="{{ theme_config('sw-logo-desktop-en')|sw_encode_url }}"
+                                         alt="{{ 'header.logoLink'|trans|striptags }}"
+                                         class="img-fluid header-logo-main-img" width="220" height="46">
+                                {% endif %}
+                            {% elseif language == 'de-DE' %}
+                                {% if theme_config('sw-logo-desktop-de') %}
+                                    <img src="{{ theme_config('sw-logo-desktop-de')|sw_encode_url }}"
+                                         alt="{{ 'header.logoLink'|trans|striptags }}"
+                                         class="img-fluid header-logo-main-img" width="220" height="46">
+                                {% endif %}
+                            {% else %}
+                                {% if theme_config('sw-logo-desktop') %}
+                                    <img src="{{ theme_config('sw-logo-desktop')|sw_encode_url }}"
+                                         alt="{{ 'header.logoLink'|trans|striptags }}"
+                                         class="img-fluid header-logo-main-img" width="220" height="46">
+                                {% endif %}
+                            {% endif %}
+                        {% endblock %}
+                    </picture>
+                {% endblock %}
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,122 @@
+{   
+    "general": {
+        "privacyTitle": "Privacy",
+        "privacyNoticeText": "By selecting continue you confirm that you have read our <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Data protection information\">data protection information</a> and accepted our <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"general terms and conditions\">general terms and conditions</a>."
+    },
+    "checkout":{
+        "cartHeader": "Shopping cart",
+        "continueShopping": "MY BAG",
+        "emptyCart": "Your bag is empty <br> What are you waiting for?",
+        "requestQuote": "Request a quote",
+        "cartNote":"Please request the items directly if you are located outside Germany."
+    },
+
+    "detail":{
+        "tabsCharacteristics":"Characteristics",
+        "tabsDownloads":"Downloads",
+        "requestInfoTitle":"Inquiry",
+        "requestInfoContent":"Unfortunately, this article is not available online. You can request more information using the inquiry form.",
+        "requestFormButton":"To the inquiry form",
+        "crosselling": {
+            "title": "Crosselling"
+        },
+        "articleLabel": "Article no.:",
+        "quality": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-badge'></span><span><strong>Quality:</strong> High-quality range</span></div>",
+        "shipment": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-shipment'></span><span><strong>Shipping:</strong> Throughout Germany one working day</span></div>",
+        "responsible": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-responsible'></span><span><strong>Responsible:</strong> Support 6 days a week</span></div>",
+        "secure": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-secure'></span><span><strong>Secure:</strong> Payment via PayPal & Invoice</span></div>",
+        "descriptionLink": "Further links to",
+        "downloadLink": "Available downloads:"
+    },
+    "product-enquiry": {
+        "description": "Description of the product",
+        "product-detail": {
+            "link": "Questions about the article?",
+            "article": "More articles from Kunststoffe Direkt"
+        },
+        "comment" : "I have the following questions about the product",
+        "cartText": "Please send me an offer for the following items"
+    },
+    "footer": {
+        "titles": {
+            "newsletterTitle": "Register and get a CHF 5.00 discount",
+            "newsletterDescription": "From a minimum order price of CHF 60.00"
+        },
+        "contact": {
+            "address": "Pitec AG Staatsstrasse 51CH 9463 Oberriet",
+            "phone": "+41 71 763 81 11",
+            "phone2": "+41 71 763 81 22",
+            "email": "info@pitec.ch"
+        },
+        "serviceHotlineHeadline": "Service-Hotline",
+        "serviceHotline": "Support and advice at: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00",
+        "paymentheading":"Secure payment",
+        "shipmentheading":"Shipping faster",
+        "securityheading":"Security",
+        "shipment":{
+            "kuhnenagel":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/kuhne-nagel.svg' alt='kuhne-nagel' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "dhl":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/dhl.svg' alt='dhl' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "gls":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/gls.svg' alt='gls' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "dpd":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/dpd.svg' alt='dpd' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>"
+        },
+        "security":{
+            "kaufr":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/kauferschutz.svg' alt='kaufr' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "ssl":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/SSL.svg' alt='SSL' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>"
+        },
+        "copyrightInfo": "* All prices do not include VAT and <a href='/Shop-Service/Versand-und-Zahlungsbedingungen/' aria-label='Versand-und-Zahlungsbedingunge'>shipping costs</a> and, if applicable, cash on delivery fees, unless otherwise stated",
+        "social":{
+            "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
+            "facebook":"<a href='https://www.facebook.com/kunststoffedirekt' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
+            "twitter":"<a href='https://x.com' target='_blank' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
+            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+        }
+    },
+    "newsletter":{
+        "title": "Enter the world of kunststoffedirekt",
+        "desc":"Be the first to hear about our new arrivals, stores, exclusive news and events.",
+        "submit": "Register",
+        "placeholder": "E-Mail"
+    },
+    "block": {
+        "product": {
+            "button": "Shopping now"
+        }
+    },
+    "button":{
+        "moreText": "Learn more",
+        "viewMore": "View More"
+    },
+    "filter": {
+        "filterPanelLabel": "Filter selection:"
+    },
+    "sorting": {
+        "sortingLabel": "Sort by:"
+    },
+    "listing": {
+        "inStockLabel": "In Stock",
+        "allFiltersLabel": "All Filters",
+        "addToWishlist": "Remember"
+    },
+    "inquiryForm": {
+        "personalCompanyLabel": "Enterprise",
+        "personalCompanyPlaceholder": "Enterprise",
+        "success": "We have received your inquiry request and will process it as soon as possible."
+    },
+    "contactForm": {
+        "subjectCheckboxLabels": {
+            "generalRequest": "General Request",
+            "orderDelivery": "Order & Delivery",
+            "paymentInvoice": "Payment & Invoice",
+            "userAccount": "User Account",
+            "other": "Miscellaneous"
+        },
+        "submit": "Send Message",
+        "commentLabel": "Your Message",
+        "commentPlaceholder": "Please enter your message here",
+        "requiredFields": "Required Fields"
+    },
+    "ellipsis": {
+        "expandLabel": "Show more",
+        "shrinkLabel": "Show less"
+    }
+}

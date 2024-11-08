@@ -1,0 +1,9 @@
+.line-item{
+    &-remove-button{
+        padding: 0; 
+        border: 0;
+        &:hover,&:focus{
+            background-color: transparent;
+        }
+    }
+}

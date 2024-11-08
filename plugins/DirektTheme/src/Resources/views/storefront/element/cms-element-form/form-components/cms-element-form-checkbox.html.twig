@@ -1,0 +1,28 @@
+{% block cms_element_form_input %}
+    <div class="form-group {{ additionalClass }}">
+        
+
+        {% block cms_element_form_input_input %}
+
+            <input name="{{ fieldName }}"
+                   type="checkbox"
+                   id="form-{{ fieldName }}"
+                   {% if autocomplete %}autocomplete="{{ autocomplete }}"{% endif %}
+                   value="checked"
+                   {% if required %}required="required"{% endif %}
+                   class="form-check-input {% if formViolations.getViolations( '/' ~ fieldName ) %} is-invalid{% endif %}">
+
+                   {% block cms_element_form_input_label %}
+            <label class="form-label" for="form-{{ fieldName }}">
+                {{- label|trans -}}{% if required %} {{- 'general.required'|trans -}}{% endif %}
+            </label>
+        {% endblock %}
+
+            {% if formViolations.getViolations( '/' ~ fieldName ) is not empty %}
+                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                    violationPath: ('/' ~ fieldName)
+                } %}
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

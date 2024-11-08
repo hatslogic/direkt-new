@@ -1,0 +1,107 @@
+{   "general": {
+        "privacyTitle": "Privatsphäre",
+        "privacyNoticeText": "Mit der Auswahl von Weiter bestätigen Sie, dass Sie unsere <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzinformationen gelesen haben \">Datenschutzinformationen</a> und akzeptierte unsere <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\" Allgemeine Geschäftsbedingungen\">Allgemeine Geschäftsbedingungen</a>."
+    },
+    "checkout":{
+        "emptyCart": "Einkaufswagen.",
+        "continueShopping": "MEINE TASCHE",
+        "emptyCart": "Ihre Tasche ist leer <br> Worauf warten Sie noch?"
+    },
+    "detail":{
+        "tabsCharacteristics":"Eigenschaften",
+        "tabsDownloads":"Downloads",
+        "requestInfoTitle":"Anfrage",
+        "requestInfoContent":"Dieser Artikel ist leider online nicht verfügbar. Sie können weitere Informationen über das Anfrageformular anfordern.",
+        "requestFormButton":"Zum anfrageformular",
+        "crosselling": {
+            "title": "Das könnte Sie auch noch interessieren:"
+        },
+        "articleLabel": "Artikel-Nr.:",
+        "quality": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-badge'></span><span><strong>Qualität:</strong> Hochwertiges Sortiment</span></div>",
+        "shipment": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-shipment'></span><span><strong>Versand:</strong> Deutschlandweit innerhalb eines Werktages</span></div>",
+        "responsible": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-responsible'></span><span><strong>Ansprechbar:</strong> Support an 6 Tagen die Woche</span></div>",
+        "secure": "<div class = 'product-detail-feature d-flex align-items-center'><span class = 'icon icon-secure'></span><span><strong>Sicher:</strong> Zahlung via PayPal & Rechnung</span></div>"
+    },
+    "footer": {
+        "titles": {
+            "newsletterTitle": "Anmelden und CHF 5.00 Rabatt sichern",
+            "newsletterDescription": "From a minimum order price of CHF 60.00"
+        },
+        "contact": {
+            "address": "Pitec AG Staatsstrasse 51CH 9463 Oberriet",
+            "phone": "+41 71 763 81 11",
+            "phone2": "+41 71 763 81 22",
+            "email": "info@pitec.ch"
+        },
+        "serviceHotlineHeadline": "Service-Hotline",
+        "serviceHotline": "Unterstützung und Beratung unter: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00",
+        "paymentheading":"Bezahlung",
+        "shipmentheading":"Schneller Versand",
+        "securityheading":"Sicherheit",
+        "shipment":{
+            "kuhnenagel":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/kuhne-nagel.svg' alt='kuhne-nagel' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "dhl":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/dhl.svg' alt='dhl' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "gls":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/gls.svg' alt='gls' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "dpd":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/dpd.svg' alt='dpd' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>"
+        },
+        "security":{
+            "kaufr":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/kauferschutz.svg' alt='kaufr' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>",
+            "ssl":"<div class='footer-logo is-shipping'><img src='/bundles/direkttheme/assets/images/SSL.svg' alt='SSL' class='img-fluid footer-logo-image' width='54' height='35' loading='lazy'></div>"
+        },
+        "copyrightInfo": "* Alle Preise verstehen sich zzgl. Mehrwertsteuer und <a href='/impressum' aria-label='Impressum'>Versandkosten</a> und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
+        "social":{
+            "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
+            "facebook":"<a href='https://www.facebook.com/kunststoffedirekt' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
+            "twitter":"<a href='https://x.com' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
+            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+        }
+    },
+    "newsletter":{
+        "title": "Betreten Sie die Welt von kunststoffedirekt",
+        "desc":"Erfahren Sie als Erster von unseren Neuankömmlingen, Geschäften, exklusiven Neuigkeiten und Veranstaltungen.",
+        "submit": "Anmelden",
+        "placeholder": "E-Mail"
+    },
+    "block": {
+        "product": {
+            "button": "Jetzt Einkaufen"
+        }
+    },
+    "button":{
+        "moreText": "Mehr erfahren",
+        "viewMore": "Mehr anzeigen"
+    },
+    "filter": {
+        "filterPanelLabel": "Auswahl Filtern:"
+    },
+    "sorting": {
+        "sortingLabel": "Sortieren nach:"
+    },
+    "listing": {
+        "inStockLabel": "lagernd",
+        "allFiltersLabel": "All Filters",
+        "addToWishlist": "Merken"
+    },
+    "inquiryForm": {
+        "personalCompanyLabel": "Unternehmen",
+        "personalCompanyPlaceholder": "Unternehmen",
+        "success": "Wir haben Ihre Anfrage erhalten und werden diese schnellstmöglich bearbeiten."
+    },
+    "contactForm": {
+        "subjectCheckboxLabels": {
+            "generalRequest": "Allgemeine Anfrage",
+            "orderDelivery": "Bestellung & Lieferung",
+            "paymentInvoice": "Bezahlung & Rechnung",
+            "userAccount": "Benutzerkonto",
+            "other": "Sonstiges"
+        },
+        "submit": "Nachricht senden",
+        "commentLabel": "Ihre Nachricht",
+        "commentPlaceholder": "Geben Sie hier bitte Ihre Nachricht ein",
+        "requiredFields": "Pflichtfeld"
+    },
+    "ellipsis": {
+        "expandLabel": "Mehr anzeigen",
+        "shrinkLabel": "Weniger anzeigen"
+    }
+}

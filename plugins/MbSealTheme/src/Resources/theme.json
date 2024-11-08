@@ -1,0 +1,475 @@
+{
+  "name": "MbSealTheme",
+  "author": "Shopware AG",
+  "views": [
+     "@Storefront",
+     "@Plugins",
+     "@DirektTheme",
+     "@MbSealTheme"
+  ],
+  "style": [
+    "app/storefront/src/scss/overrides.scss",
+    "@Storefront",
+    "@DirektTheme",
+    "app/storefront/src/scss/base.scss"
+  ],
+  "script": [
+    "@Storefront",
+    "@DirektTheme",
+    "app/storefront/dist/storefront/js/mb-seal-theme/mb-seal-theme.js"
+  ],
+  "asset": [
+    "@Storefront",
+    "@DirektTheme",
+    "app/storefront/src/assets"
+  ],
+  "config": {
+    "blocks": {
+        "themeColors": {
+            "label": {
+                "en-GB": "Theme Colors",
+                "de-DE": "Themenfarben"
+            }
+        },
+        "typography": {
+            "label": {
+                "en-GB": "Typography",
+                "de-DE": "Typografie"
+            }
+        },
+        "statusColors": {
+            "label": {
+                "en-GB": "Status colors",
+                "de-DE": "Statusfarben"
+            }
+        },
+        "eCommerce": {
+            "label": {
+                "en-GB": "E-Commerce",
+                "de-DE": "E-Commerce"
+            }
+        },
+        "media": {
+            "label": {
+                "en-GB": "Media",
+                "de-DE": "Medien"
+            }
+        },
+        "themeSettings": {
+            "label": {
+                "en-GB": "Theme Settings",
+                "de-DE": "Theme Settings"
+            }
+        }
+    },
+    "fields": {
+        "sw-color-brand-primary": {
+            "label": {
+                "en-GB": "Brand Primary",
+                "de-DE": "Marke primär"
+            },
+            "type": "color",
+            "value": "#0c0c0c",
+            "editable": true,
+            "block": "themeColors",
+            "order": 100
+        },
+        "sw-color-brand-secondary": {
+            "label": {
+                "en-GB": "Brand Secondary",
+                "de-DE": "Marke zweitrangig"
+            },
+            "type": "color",
+            "value": "#4bb041",
+            "editable": true,
+            "block": "themeColors",
+            "order": 200
+        },
+        "sw-border-color": {
+            "label": {
+                "en-GB": "Border Color",
+                "de-DE": "Randfarbe"
+            },
+            "type": "color",
+            "value": "#ddd",
+            "editable": true,
+            "block": "themeColors",
+            "order": 300
+        },
+        "sw-background-color": {
+            "label": {
+                "en-GB": "Background Color",
+                "de-DE": "Hintergrundfarbe"
+            },
+            "type": "color",
+            "value": "#ffffff",
+            "editable": true,
+            "block": "themeColors",
+            "order": 400
+        },
+        "sw-primary-background-color": {
+            "label": {
+                "en-GB": "Background Color",
+                "de-DE": "Hintergrundfarbe"
+            },
+            "type": "color",
+            "value": "#fafafa",
+            "editable": true,
+            "block": "themeColors",
+            "order": 400
+        },
+        "sw-primary-button-color": {
+            "label": {
+                "en-GB": "Primary Button Color",
+                "de-DE": "Farbe der primären Schaltfläche"
+            },
+            "type": "color",
+            "value": "#4bb041",
+            "editable": true,
+            "block": "themeColors",
+            "order": 400
+        },
+        "sw-hover-color": {
+            "label": {
+                "en-GB": "Hover Color",
+                "de-DE": "Hover-Farbe"
+            },
+            "type": "color",
+            "value": "#4bb041",
+            "editable": true,
+            "block": "themeColors",
+            "order": 700
+        },
+        "sw-font-family-base": {
+          "label": {
+            "en-GB": "Base font family",
+            "de-DE": "Basisschriftfamilie"
+          },
+          "type": "fontFamily",
+          "value": "'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "editable": true,
+          "block": "typography",
+          "order": 100
+        },
+        "sw-font-family-headline": {
+            "label": {
+                "en-GB": "Headline font family",
+                "de-DE": "Überschrift-Schriftfamilie"
+            },
+            "type": "fontFamily",
+            "value": "'Montserrat', serif",
+            "editable": true,
+            "block": "typography",
+            "order": 200
+        },
+        "sw-text-color": {
+          "label": {
+              "en-GB": "Text Color",
+              "de-DE": "Textfarbe"
+          },
+          "type": "color",
+          "value": "#323332",
+          "editable": true,
+          "block": "typography",
+          "order": 300
+        },
+        "sw-headline-color": {
+          "label": {
+              "en-GB": "Headline Color",
+              "de-DE": "Überschriftenfarbe"
+          },
+          "type": "color",
+          "value": "#0c0c0c",
+          "editable": true,
+          "block": "typography",
+          "order": 700
+        },
+        "sw-color-price": {
+            "label": {
+                "en-GB": "Price color",
+                "de-DE": "Preis Farbe"
+            },
+            "type": "color",
+            "value": "#4bb041",
+            "editable": true,
+            "block": "eCommerce",
+            "order": 800
+        },
+        "sw-color-buy-button": {
+            "label": {
+                "en-GB": "Buy button color",
+                "de-DE": "Knopffarbe kaufen"
+            },
+            "type": "color",
+            "value": "#4bb041",
+            "editable": true,
+            "block": "eCommerce",
+            "order": 900
+        },
+        "sw-color-buy-button-text": {
+            "label": {
+                "en-GB": "Buy button text color",
+                "de-DE": "Schaltflächentextfarbe kaufen"
+            },
+            "type": "color",
+            "value": "#ffffff",
+            "editable": true,
+            "block": "eCommerce",
+            "order": 1000
+        },
+        "sw-white-color": {
+            "label": {
+                "en-GB": "White color",
+                "de-DE": "weiße Farbe"
+            },
+            "type": "color",
+            "value": "#FFFFFF",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1100
+        },
+        "sw-black-color": {
+            "label": {
+                "en-GB": "Black color",
+                "de-DE": "Schwarze Farbe"
+            },
+            "type": "color",
+            "value": "#000000",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1200
+        },
+        "sw-grey-color": {
+            "label": {
+                "en-GB": "Grey color",
+                "de-DE": "Graue Farbe"
+            },
+            "type": "color",
+            "value": "#999",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1300
+        },
+        "sw-dark-grey-color": {
+          "label": {
+              "en-GB": "Dark grey color",
+              "de-DE": "Dunkelgraue Farbe"
+          },
+          "type": "color",
+          "value": "#1C1D1A",
+          "editable": true,
+          "block": "direktthemeColorsBlock",
+          "order": 1400
+        },
+        "sw-placeholder-color": {
+            "label": {
+                "en-GB": "Placeholder color",
+                "de-DE": "Platzhalterfarbe"
+            },
+            "type": "color",
+            "value": "#ccc",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-input-color": {
+            "label": {
+                "en-GB": "input color",
+                "de-DE": "Eingabefarbe"
+            },
+            "type": "color",
+            "value": "#f5f5f5",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-topbar-color": {
+            "label": {
+                "en-GB": "Topbar color",
+                "de-DE": "Eingabefarbe"
+            },
+            "type": "color",
+            "value": "#f5f5f5",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-slider-dot-color": {
+            "label": {
+                "en-GB": "slider dot color",
+                "de-DE": "Punktfarbe des Schiebereglerse"
+            },
+            "type": "color",
+            "value": "#acacac",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-footer-background-color": {
+            "label": {
+                "en-GB": "Footer background color",
+                "de-DE": "Hintergrundfarbe der Fußzeile"
+            },
+            "type": "color",
+            "value": "#F5F5F5",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-footer-text-color": {
+            "label": {
+                "en-GB": "Footer background color",
+                "de-DE": "Hintergrundfarbe der Fußzeile"
+            },
+            "type": "color",
+            "value": "#323332",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-footer-link-color": {
+            "label": {
+                "en-GB": "Footer background color",
+                "de-DE": "Hintergrundfarbe der Fußzeile"
+            },
+            "type": "color",
+            "value": "#323332",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-product-image-background-color": {
+            "label": {
+                "en-GB": "Product image background color",
+                "de-DE": "Hintergrundfarbe des Produktbildes"
+            },
+            "type": "color",
+            "value": "#fff",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1900
+        },
+        "sw-slider-arrow-color": {
+            "label": {
+                "en-GB": "Slider arrow color",
+                "de-DE": "Pfeilfarbe des Schiebereglers"
+            },
+            "type": "color",
+            "value": "#fff",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 2000
+        },
+        "sw-review-star": {
+            "label": {
+                "en-GB": "Review star",
+                "de-DE": "Bewertungsstern"
+            },
+            "type": "color",
+            "value": "#F8C842",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 2100
+        },
+        "sw-review-star-blank": {
+            "label": {
+                "en-GB": "Review star blank",
+                "de-DE": "Bewertungsstern leer"
+            },
+            "type": "color",
+            "value": "#bfbfbf",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 2100
+        },
+        "sw-logo-favicon": {
+            "label": {
+                "en-GB": "Favicon",
+                "de-DE": "Favicon"
+            },
+            "type": "media",
+            "value": "config/direkt-favicon.jpg",
+            "editable": true,
+            "block": "media",
+            "order": 200
+        },
+        "sw-logo-desktop-en": {
+            "label": {
+              "en-GB": "Desktop logo English",
+              "de-DE": "Desktop-Logo Englisches"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 300
+        },
+        "sw-logo-desktop-de": {
+            "label": {
+              "en-GB": "Desktop logo German",
+              "de-DE": "Desktop-Logo Deutsches"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 300
+        },
+        "sw-logo-tablet-en": {
+            "label": {
+              "en-GB": "Tablet logo English",
+              "de-DE": "Tablet-Logo Englisches"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 400
+        },
+        "sw-logo-tablet-de": {
+            "label": {
+              "en-GB": "Tablet logo German ",
+              "de-DE": "Tablet-Logo Deutsches"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 400
+        },
+        "sw-logo-mobile-en": {
+            "label": {
+              "en-GB": "Mobile logo English",
+              "de-DE": "Mobiles Logo Englisch"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 500
+        },
+        "sw-logo-mobile-de": {
+            "label": {
+              "en-GB": "Mobile logo German",
+              "de-DE": "Mobiles Logo Deutsch"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 500
+        },
+        "sw-logo-share": {
+            "label": {
+              "en-GB": "Share logo",
+              "de-DE": "Share-Logo"
+            },
+            "type": "media",
+            "value": "config/kunststoffedirekt-logo.svg",
+            "editable": true,
+            "block": "media",
+            "order": 800
+        }
+    }
+  }
+}

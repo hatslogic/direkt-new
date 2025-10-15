@@ -31,7 +31,7 @@ class RemoteUpdater
     public function __construct(
         InventoryResource $inventoryResource,
         RemoteCalculator $remoteCalculator,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->inventoryResource = $inventoryResource;
         $this->remoteCalculator = $remoteCalculator;
@@ -68,8 +68,8 @@ class RemoteUpdater
 
         try {
             $status = $this->inventoryResource->changeInventoryBulk($inventoryContext->getPosSalesChannel(), $remoteChanges);
-        } catch (PosApiException $posApiException) {
-            $this->logger->error('Inventory sync error: ' . $posApiException);
+        } catch (PosApiException $e) {
+            $this->logger->error('Inventory sync error: ' . $e->getMessage(), ['error' => $e]);
 
             return $changedProducts;
         }

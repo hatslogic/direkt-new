@@ -37,6 +37,10 @@
     }
     .offcanvas-body{
         padding: 0;
+    }
+    .offcanvas-cart-items{
+        max-height: rem(225);
+        padding: 0;
         overflow-x: hidden;
         padding-right: rem(2);
 
@@ -48,9 +52,11 @@
         }
         @include media-breakpoint-down(md){
             padding-right: rem(16);
+            max-height: rem(400);
         }
     }
     .offcanvas-cart{
+        overflow-x: hidden;
         @include media-breakpoint-down(md){
             display: flex;
             flex-direction: column;
@@ -224,5 +230,6 @@
 
 .offcanvas.offcanvas-end{
     top: var(--header-height);
-    max-height: rem(400);
+    min-height: rem(300);
+    max-height: unset !important;
 }

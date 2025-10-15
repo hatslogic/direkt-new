@@ -1,0 +1,51 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form/form-types/contact-form.html.twig' %}
+
+{% block cms_form_contact_required_fields_info %}
+  <div class="row g-2">
+    {% block cms_form_contact_input_company_name %}
+      {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+        with {
+        required: true,
+        fieldName: 'companyName',
+        additionalClass: 'col-md-6',
+        label: 'contact.companyNameLabel',
+        placeholder: 'contact.companyNamePlaceholder'
+    } %}
+    {% endblock %}
+    {% block cms_form_contact_input_street_address %}
+      {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+        with {
+        required: true,
+        fieldName: 'streetAddress',
+        additionalClass: 'col-md-6',
+        label: 'contact.streetAddressLabel',
+        placeholder: 'contact.streetAddressPlaceholder'
+    } %}
+    {% endblock %}
+  </div>
+  <div class="row g-2">
+
+    {% block cms_form_contact_input_zip_code %}
+      {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+        with {
+        required: true,
+        fieldName: 'zipCode',
+        additionalClass: 'col-md-6',
+        label: 'contact.zipCodeLabel',
+        placeholder: 'contact.zipCodePlaceholder'
+    } %}
+    {% endblock %}
+
+    {% block cms_form_contact_input_city %}
+      {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+        with {
+        required: true,
+        fieldName: 'city',
+        additionalClass: 'col-md-6',
+        label: 'contact.cityLabel',
+        placeholder: 'contact.cityPlaceholder'
+    } %}
+    {% endblock %}
+  </div>
+  {{ parent() }}
+{% endblock %}

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="HatslogicPageOptimisation\Twig\TwigEnvDecorator"
+            decorates="twig"
+        >
+            <argument type="service" id="HatslogicPageOptimisation\Twig\TwigEnvDecorator.inner" />
+            <argument type="service" id="hatslogic.critical_assets.processor.critical_css_processor" />
+        </service>
+
+        <service id="HatslogicPageOptimisation\Twig\OptimizationTwigExtension">
+            <tag name="twig.extension"/> 
+        </service>
+    </services>
+</container>

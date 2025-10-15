@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+
+		<!-- Commands -->
+
+		<service id="Nimbits\NimbitsTracking\Command\UpdateVisitorCounterCommand">
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\VisitorCounterService"/>
+			<tag name="console.command"/>
+		</service>
+
+		<!-- Controllers -->
+
+		<service id="Nimbits\NimbitsTracking\Controller\ApiController" public="true">
+			<argument type="service" id="Doctrine\DBAL\Connection"/>
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\SettingService"/>
+			<argument type="service" id="customer.repository"/>
+			<argument type="service" id="order.repository"/>
+
+			<call method="setContainer">
+				<argument type="service" id="service_container"/>
+			</call>
+		</service>
+
+		<service id="Nimbits\NimbitsTracking\Controller\GoogleDataController" public="true">
+			<argument type="service" id="Doctrine\DBAL\Connection"/>
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\SettingService"/>
+			<argument type="service" id="sales_channel.product.repository"/>
+
+			<call method="setContainer">
+				<argument type="service" id="service_container"/>
+			</call>
+		</service>
+
+		<!-- Providers -->
+
+		<service id="Nimbits\NimbitsTracking\Provider\CustomCookieProvider" decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+			<argument type="service" id="Nimbits\NimbitsTracking\Provider\CustomCookieProvider.inner"/>
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\SettingService"/>
+		</service>
+
+		<!-- Scheduled Tasks -->
+
+		<service id="Nimbits\NimbitsTracking\ScheduledTask\UpdateVisitorCounterTask">
+			<tag name="shopware.scheduled.task"/>
+		</service>
+
+		<service id="Nimbits\NimbitsTracking\ScheduledTask\UpdateVisitorCounterTaskHandler">
+			<argument type="service" id="scheduled_task.repository"/>
+			<argument type="service" id="monolog.logger"/>
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\VisitorCounterService"/>
+			<tag name="messenger.message_handler"/>
+		</service>
+
+		<!-- Services -->
+
+		<service id="Nimbits\NimbitsTracking\Service\SettingService">
+			<argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+		</service>
+
+		<service id="Nimbits\NimbitsTracking\Service\VisitorCounterService">
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\SettingService"/>
+			<argument type="service" id="Doctrine\DBAL\Connection"/>
+		</service>
+
+		<!-- Subscribers -->
+
+		<service id="Nimbits\NimbitsTracking\Subscriber\PartnerSubscriber">
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\VisitorCounterService"/>
+			<argument type="service" id="Nimbits\NimbitsTracking\Service\SettingService"/>
+			<argument type="service" id="customer.repository"/>
+			<argument type="service" id="order.repository"/>
+			<argument type="service" id="request_stack"/>
+			<tag name="kernel.event_subscriber"/>
+		</service>
+
+	</services>
+</container>

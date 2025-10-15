@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="WebLa_ContactFormFileUpload\Storefront\Controller\CustomFormControllerDecorator" decorates="Swag\CmsExtensions\Storefront\Controller\CustomFormController" public="true" decoration-on-invalid="ignore">
+            <argument type="service" id="WebLa_ContactFormFileUpload\Storefront\Controller\CustomFormControllerDecorator.inner" />
+            <argument type="service" id="Shopware\Core\Content\Media\File\FileSaver" />
+            <argument type="service" id="Shopware\Core\Content\Media\File\FileNameProvider" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+        <service id="WebLa_ContactFormFileUpload\Storefront\Controller\FormMailSubscriberDecorator" decorates="Swag\CmsExtensions\Form\Action\FormMailSubscriber" public="true" decoration-on-invalid="ignore">
+            <argument type="service" id="WebLa_ContactFormFileUpload\Storefront\Controller\FormMailSubscriberDecorator.inner" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="WebLa_ContactFormFileUpload\Form\Aggregate\FormGroupField\Upload">
+            <tag name="swag.cms_extensions.form.type"/>
+        </service>
+        <service id="WebLa_ContactFormFileUpload\Form\Component\Handler\UploadComponentHandler">
+            <tag name="swag.cms_extensions.form.component.handler"/>
+        </service>
+        <service id="WebLa_ContactFormFileUpload\Form\Aggregate\FormGroupField\UploadMultiple">
+            <tag name="swag.cms_extensions.form.type"/>
+        </service>
+        <service id="WebLa_ContactFormFileUpload\Form\Component\Handler\UploadMultipleComponentHandler">
+            <tag name="swag.cms_extensions.form.component.handler"/>
+        </service>
+    </services>
+</container>

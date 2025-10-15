@@ -42,6 +42,14 @@
                                     data-bs-parent="#product-detail-accordion">
                                     <div class="accordion-body">
                                         {% sw_include '@Storefront/storefront/page/product-detail/description.html.twig' %}
+                                        <div class="dk-product-downloads">
+                                            {% block page_product_detail_tabs_downloads %}
+                                                {% sw_include '@Storefront/storefront/component/product/downloads-tab-container.html.twig' with {
+                                                    dowloadTabFiles: page.millCloudProductDownloads.elements,
+                                                    product: page.product
+                                                } %}
+                                            {% endblock %}
+                                        </div>
                                     </div>
                                 </div>
                             </li>

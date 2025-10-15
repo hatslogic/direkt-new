@@ -1,0 +1,127 @@
+.cms-element-period-request-form {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .card-title {
+        margin-bottom: 10px !important;
+    }
+
+    .form-datefield-is-align-center {
+        .flatpickr-calendar.inline {
+            margin: 0 auto;
+        }
+    }
+
+    .form-datefield-is-not-highlighted {
+        .form-control {
+            &.is-datefield {
+                background-color: #fff;
+            }
+        }
+    }
+
+    .form-control {
+        &.is-datefield {
+            &[required] {
+                border-color: initial;
+                outline: initial;
+
+                &:focus {
+                    cursor: default;
+                    caret-color: #ffffff;
+                }
+            }
+        }
+    }
+
+    .flatpickr-calendar {
+        &.flatpickr-calendar:before,
+        &.flatpickr-calendar:after {
+            display: none;
+        }
+    }
+
+    .required-fields-info {
+        .mt-4 {
+            margin-top: 0 !important;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    body > .flatpickr-calendar {
+        &.multiMonth {
+            min-width: 308px;
+            max-width: 100%;
+            width: 307.875px !important;
+
+            .flatpickr-months {
+                .flatpickr-month + .flatpickr-month {
+                    display: none;
+                }
+            }
+
+            .flatpickr-innerContainer {
+                display: block;
+
+                .flatpickr-rContainer {
+                    max-width: 100%;
+
+                    .flatpickr-weekdays {
+                        .flatpickr-weekdaycontainer + .flatpickr-weekdaycontainer {
+                            display: none;
+                        }
+                    }
+
+                    .flatpickr-days {
+                        display: block;
+
+                        .dayContainer + .dayContainer {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cms-element-period-request-form {
+        .flatpickr-calendar {
+            &.inline.multiMonth {
+                min-width: 308px;
+                max-width: 100%;
+                width: 307.875px !important;
+
+                .flatpickr-months {
+                    .flatpickr-month + .flatpickr-month {
+                        display: none;
+                    }
+                }
+
+                .flatpickr-innerContainer {
+                    display: block;
+
+                    .flatpickr-rContainer {
+                        max-width: 100%;
+
+                        .flatpickr-weekdays {
+                            .flatpickr-weekdaycontainer + .flatpickr-weekdaycontainer {
+                                display: none;
+                            }
+                        }
+
+                        .flatpickr-days {
+                            display: block;
+
+                            .dayContainer + .dayContainer {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

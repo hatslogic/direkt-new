@@ -28,7 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['api']])]
@@ -51,12 +51,12 @@ class PayPalOrdersController extends AbstractController
         private readonly RefundResource $refundResource,
         private readonly EntityRepository $orderTransactionRepository,
         private readonly PaymentStatusUtilV2 $paymentStatusUtil,
-        private readonly CaptureRefundCreator $captureRefundCreator
+        private readonly CaptureRefundCreator $captureRefundCreator,
     ) {
     }
 
     #[OA\Get(
-        path: '/api/paypal-v2/order/{orderTransactionId}/{paypalOrderId}',
+        path: '/paypal-v2/order/{orderTransactionId}/{paypalOrderId}',
         operationId: 'orderDetails',
         description: 'Loads the order details of the given PayPal order ID',
         tags: ['Admin API', 'PayPal'],
@@ -104,7 +104,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/paypal-v2/authorization/{orderTransactionId}/{authorizationId}',
+        path: '/paypal-v2/authorization/{orderTransactionId}/{authorizationId}',
         operationId: 'authorizationDetails',
         description: 'Loads the authorization details of the given PayPal authorization ID',
         tags: ['Admin API', 'PayPal'],
@@ -144,7 +144,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/paypal-v2/capture/{orderTransactionId}/{captureId}',
+        path: '/paypal-v2/capture/{orderTransactionId}/{captureId}',
         operationId: 'captureDetails',
         description: 'Loads the capture details of the given PayPal capture ID',
         tags: ['Admin API', 'PayPal'],
@@ -184,7 +184,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/paypal-v2/refund/{orderTransactionId}/{refundId}',
+        path: '/paypal-v2/refund/{orderTransactionId}/{refundId}',
         operationId: 'refundDetails',
         description: 'Loads the refund details of the given PayPal refund ID',
         tags: ['Admin API', 'PayPal'],
@@ -224,7 +224,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal-v2/refund-capture/{orderTransactionId}/{captureId}/{paypalOrderId}',
+        path: '/_action/paypal-v2/refund-capture/{orderTransactionId}/{captureId}/{paypalOrderId}',
         operationId: 'refundCapture',
         description: 'Refunds the PayPal capture and sets the state of the Shopware order transaction accordingly',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
@@ -273,7 +273,7 @@ class PayPalOrdersController extends AbstractController
         string $captureId,
         string $paypalOrderId,
         Context $context,
-        Request $request
+        Request $request,
     ): JsonResponse {
         $refund = $this->captureRefundCreator->createRefund($request);
         $salesChannelId = $this->getSalesChannelId($orderTransactionId, $context);
@@ -294,7 +294,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal-v2/capture-authorization/{orderTransactionId}/{authorizationId}',
+        path: '/_action/paypal-v2/capture-authorization/{orderTransactionId}/{authorizationId}',
         operationId: 'captureAuthorization',
         description: 'Captures the PayPal authorization and sets the state of the Shopware order transaction accordingly',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
@@ -335,7 +335,7 @@ class PayPalOrdersController extends AbstractController
         string $orderTransactionId,
         string $authorizationId,
         Context $context,
-        Request $request
+        Request $request,
     ): JsonResponse {
         $capture = $this->captureRefundCreator->createCapture($request);
 
@@ -353,7 +353,7 @@ class PayPalOrdersController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal-v2/void-authorization/{orderTransactionId}/{authorizationId}',
+        path: '/_action/paypal-v2/void-authorization/{orderTransactionId}/{authorizationId}',
         operationId: 'voidAuthorization',
         description: 'Voids the PayPal authorization and sets the state of the Shopware order transaction accordingly',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
@@ -388,7 +388,7 @@ class PayPalOrdersController extends AbstractController
         string $orderTransactionId,
         string $authorizationId,
         Context $context,
-        Request $request
+        Request $request,
     ): Response {
         $this->authorizationResource->void(
             $authorizationId,

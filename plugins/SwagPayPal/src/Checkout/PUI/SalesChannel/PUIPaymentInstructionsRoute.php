@@ -18,7 +18,7 @@ use Shopware\Core\Framework\ShopwareHttpException;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Swag\PayPal\Checkout\PUI\Service\PUIInstructionsFetchService;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -42,7 +42,7 @@ class PUIPaymentInstructionsRoute extends AbstractPUIPaymentInstructionsRoute
      * @throws ShopwareHttpException
      */
     #[OA\Get(
-        path: '/store-api/paypal/pui/payment-instructions/{transactionId}',
+        path: '/paypal/pui/payment-instructions/{transactionId}',
         operationId: 'getPUIPaymentInstructions',
         description: 'Tries to get payment instructions for PUI payments',
         tags: ['Store API', 'PayPal'],

@@ -1,0 +1,14 @@
+{% sw_extends '@Strorefront/storefront/base.html.twig' %}
+
+{% block base_noscript %}
+    {% block optimization_block_after_body_custom_js %}
+        {% set enableGtmOptimization = config('HatslogicPageOptimisation.config.EnableGTMOptimization') %}
+        {% if enableGtmOptimization %}
+            {% set customJsConfig = config('HatslogicPageOptimisation.config.GoogleTagScriptAfterBody') %}
+            {% if customJsConfig %}
+                {% set customJsConfigUpdated = customJsConfig|replace({'<script ': '<script type="text/partytown" '}) %}
+                {{ customJsConfigUpdated|raw }}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -1,5 +1,5 @@
 .newsletter,.dk-newsletter{
-    background-color: var(--topbar-bg);
+    background-color: $newsletter-background-color;
     .container{
         padding: 0;
         max-width: unset;
@@ -53,6 +53,7 @@
     .cms-image{
         height: 100%;
         object-fit: cover;
+        // max-height: unset !important;
     }
     .card-img{
         width: calc(54%);
@@ -119,6 +120,20 @@
         }
         @include media-breakpoint-down(sm){
             flex-direction: unset;
+        }
+    }
+    .confirm-alert{
+        padding: 0;
+        margin-top: rem(16);
+        font-size: rem(14);
+        color: $sw-color-success;
+        .alert{
+            display: none;
+        }
+    }
+    .cms-image-container{
+        picture{
+            height: 100%;
         }
     }
 }

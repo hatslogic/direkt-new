@@ -15,7 +15,7 @@
 
     h1, .h1, h2, .h2, h3, .h3{
         font-size: rem(22);
-        line-height: 1.5;
+        line-height: 1.25;
         font-weight: bold;
         span{
             color: $text-color;
@@ -23,6 +23,7 @@
     }
     h2, .h2{
         font-size: rem(35);
+        margin-bottom: rem(28);
         @include desktop-md(){
             margin-bottom: rem(24);
         }
@@ -33,7 +34,7 @@
     }
     p{
         font-size: rem(18);
-        line-height: 1.3;
+        line-height: 1.5;
         @include media-breakpoint-down(lg){
             font-size: rem(14);
         }
@@ -70,7 +71,7 @@
             &::after{
                 content: '';
                 position: absolute;
-                bottom: rem(4);
+                bottom: rem(0);
                 left: 0;
                 width: 100%;
                 height: rem(30);

@@ -5,7 +5,9 @@
   "views": [
      "@Storefront",
      "@Plugins",
-     "@DirektTheme"
+     "@DirektTheme",
+     "@Smartsupp",
+     "@MillProductDownloadsTab"
   ],
   "style": [
     "app/storefront/src/scss/overrides.scss",
@@ -302,13 +304,24 @@
             "block": "direktthemeColorsBlock",
             "order": 1700
         },
+        "sw-newsletter-background-color": {
+            "label": {
+                "en-GB": "newsletter background color",
+                "de-DE": "Hintergrundfarbe des Newsletters"
+            },
+            "type": "color",
+            "value": "#F9F9F9",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
         "sw-footer-background-color": {
             "label": {
                 "en-GB": "Footer background color",
                 "de-DE": "Hintergrundfarbe der Fußzeile"
             },
             "type": "color",
-            "value": "#F5F5F5",
+            "value": "#F1F1F1",
             "editable": true,
             "block": "direktthemeColorsBlock",
             "order": 1700
@@ -331,6 +344,17 @@
             },
             "type": "color",
             "value": "#323332",
+            "editable": true,
+            "block": "direktthemeColorsBlock",
+            "order": 1700
+        },
+        "sw-footer-copyright-color": {
+            "label": {
+                "en-GB": "Footer background color",
+                "de-DE": "Hintergrundfarbe der Fußzeile"
+            },
+            "type": "color",
+            "value": "#e1e1e1",
             "editable": true,
             "block": "direktthemeColorsBlock",
             "order": 1700

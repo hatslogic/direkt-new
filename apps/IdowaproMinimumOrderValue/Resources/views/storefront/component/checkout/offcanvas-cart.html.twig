@@ -1,0 +1,47 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% set is_minimum_order_active = config('IdowaproMinimumOrderValue.config.isActive') %}
+{% set minimum_order_value = config('IdowaproMinimumOrderValue.config.minimalOrderValue') * context.currency.factor %}
+{% set minimum_order_value_formatted = minimum_order_value | format_currency(context.currency.isoCode) %}
+
+{% set is_minimum_order_value_reached = page.cart.price.positionPrice >= minimum_order_value %}
+{% set not_reached_snippet = "idowapro.minimumOrderValue.notReached"|trans({'%minimumOrderValue%': minimum_order_value_formatted})|sw_sanitize %}
+{% if config('IdowaproMinimumOrderValue.config.isValueWithShippingCost') %}
+    {% set is_minimum_order_value_reached = page.cart.price.totalPrice >= minimum_order_value %}
+    {% set not_reached_snippet = "idowapro.minimumOrderValue.notReachedWithShippingCost"|trans({'%minimumOrderValue%': minimum_order_value_formatted})|sw_sanitize %}
+{% endif %}
+
+{% block component_offcanvas_cart_flashbags %}
+    {% if is_minimum_order_active %}
+        <div class="flashbags">
+            {% for type, messages in app.flashes %}
+                {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                    type: type,
+                    list: messages
+                } %}
+            {% endfor %}
+            {% if not is_minimum_order_value_reached %}
+                {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                    type: "warning",
+                    content: not_reached_snippet
+                } %}
+            {% endif %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_offcanvas_cart_actions_checkout %}
+    {% if is_minimum_order_active %}
+        <div class="d-grid">
+            <a href="{{ path('frontend.checkout.confirm.page') }}"
+               class="btn begin-checkout-btn{% if isCartNotEmpty %} btn-primary{% else %} btn-light disabled{% endif %}{% if not is_minimum_order_value_reached %} disabled{% endif %}"
+               title="{{ "checkout.proceedToCheckout"|trans|striptags }}">
+                {{ "checkout.proceedToCheckout"|trans|sw_sanitize }}
+            </a>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

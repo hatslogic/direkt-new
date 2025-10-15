@@ -26,16 +26,16 @@
 
         <service id="Swag\PayPal\Util\LocaleCodeProvider">
             <argument type="service" id="language.repository"/>
+            <argument type="service" id="monolog.logger.paypal"/>
 
             <tag name="kernel.reset" method="reset"/>
         </service>
 
-        <service id="monolog.processor.paypal.introspection" class="Monolog\Processor\IntrospectionProcessor">
+        <service id="monolog.processor.paypal.introspection" class="Swag\PayPal\Util\IntrospectionProcessor">
             <tag name="monolog.processor" channel="paypal" />
         </service>
 
-        <service id="monolog.processor.paypal.web" class="Monolog\Processor\WebProcessor">
-            <argument>null</argument>
+        <service id="monolog.processor.paypal.web" class="Symfony\Bridge\Monolog\Processor\WebProcessor">
             <argument type="collection">
                 <argument key="url">REQUEST_URI</argument>
                 <argument key="http_method">REQUEST_METHOD</argument>
@@ -123,10 +123,6 @@
                  parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">
             <tag name="swag.paypal.payment.method.data"/>
         </service>
-        <service id="Swag\PayPal\Util\Lifecycle\Method\GiropayMethodData"
-                 parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">
-            <tag name="swag.paypal.payment.method.data"/>
-        </service>
         <service id="Swag\PayPal\Util\Lifecycle\Method\IdealMethodData"
                  parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">
             <tag name="swag.paypal.payment.method.data"/>
@@ -146,9 +142,6 @@
         <service id="Swag\PayPal\Util\Lifecycle\Method\P24MethodData"
                  parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">
             <tag name="swag.paypal.payment.method.data"/>
-        </service>
-        <service id="Swag\PayPal\Util\Lifecycle\Method\SofortMethodData"
-                 parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">
         </service>
         <service id="Swag\PayPal\Util\Lifecycle\Method\TrustlyMethodData"
                  parent="Swag\PayPal\Util\Lifecycle\Method\AbstractMethodData">

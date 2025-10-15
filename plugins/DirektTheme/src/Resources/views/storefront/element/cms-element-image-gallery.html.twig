@@ -1,0 +1,232 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
+
+{# @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES #}
+{% block element_image_gallery_inner_item_spatial %}
+    {% if image.isSpatialObject() %}
+        <span class="badge bg-secondary m-3 position-absolute top-0 end-0 d-md-none">3D</span>
+        <div class="spatial-canvas-spinner position-absolute top-50 start-50 bg-white flex justify-content-center align-items-center" style="--bs-bg-opacity: .8;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="gallery-slider-spatial-canvas-wrapper position-absolute start-0 end-0 top-0 bottom-0">
+            {% set spatialGalleryViewerOptions = {
+                modelUrl: image.url,
+                lightIntensity: config('core.media.defaultLightIntensity'),
+                sliderPosition: loop.index0,
+            } %}
+            <canvas
+                data-spatial-gallery-slider-viewer
+                data-spatial-gallery-slider-viewer-options='{{spatialGalleryViewerOptions|json_encode}}'
+            ></canvas>
+            <span
+                class="spatial-canvas-note spatial-slider-movement-note position-absolute start-50 text-center badge mx-0 py-1 px-3 translate-middle-x"
+                data-spatial-movement-note
+                data-spatial-movement-note-touch-text="{{ 'component.cms.imageGallery.touchMove'|trans|striptags }}"
+            >
+                {{ 'component.cms.imageGallery.clickMove'|trans|striptags }}
+            </span>
+            {% if image.config.spatial.arReady ?? defaultEnableAugmentedReality %}
+                <div class="ar-button button position-absolute d-inline-flex justify-content-center align-items-center text-center py-0 px-2 w-auto"
+                        data-spatial-ar-viewer
+                        data-spatial-ar-viewer-options='{ "spatialArId": "{{ image.id }}", "modelUrl": "{{ image.url }}" }'>
+
+                        {% sw_icon 'augmented' style {
+                            'size': 'fluid'
+                        } %}
+                        <span>{{ 'spatial.openArView'|trans|striptags }}</span>
+
+                </div>
+                {% sw_include '@Storefront/storefront/utilities/ar-overlay.html.twig' %}
+            {% endif %}
+        </div>
+
+        {# @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES #}
+        {% block element_image_gallery_qr_code_modal %}
+            {% sw_include '@Storefront/storefront/utilities/qr-code-modal.html.twig'
+                with {
+                    "qrCodeOptions": {
+                        "params": {
+                            "autostartAr": image.id
+                        }
+                    }
+                }
+            %}
+        {% endblock %}
+    {% elseif image.getMediaType().getName() === 'VIDEO' %}
+        {% set attributes = attributes|merge({ controls: true }) %}
+
+        {% if isProduct %}
+            {% set attributes = attributes|merge({ itemprop: 'video' }) %}
+        {% endif %}
+
+        {% sw_include '@Storefront/storefront/utilities/video.html.twig' with {
+            media: image,
+            attributes: attributes
+        } %}
+    {% else %}
+        {% set attributes = attributes|merge({
+            class: attributes.class ~ ' magnifier-image js-magnifier-image',
+            alt: (image.translated.alt ?: fallbackImageTitle),
+            'data-full-image': image.url,
+            'tabindex': '0',
+            width: image.media.width ?:'430',
+            height: image.media.height ?:'430'
+        }) %}
+
+        {% if displayMode == 'cover' or displayMode == 'contain' %}
+            {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+        {% endif %}
+
+        {% if isProduct %}
+            {% set attributes = attributes|merge({ itemprop: 'image' }) %}
+        {% endif %}
+
+        {% if loop.first %}
+            {% set attributes = attributes|merge({ fetchpriority: 'high' }) %}
+        {% endif %}
+
+        {% sw_thumbnails 'gallery-slider-image-thumbnails' with {
+            media: image,
+            attributes: attributes
+        } %}
+    {% endif %}
+{% endblock %}
+
+{# @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES #}
+{% block element_image_gallery_inner_single_spatial %}
+    {% for image in mediaItems %}
+        {% if image.isSpatialObject() %}
+            <span class="badge bg-secondary m-3 position-absolute top-0 end-0 d-md-none">3D</span>
+            <div class="spatial-canvas-spinner position-absolute top-50 start-50 bg-white flex justify-content-center align-items-center" style="--bs-bg-opacity: .8;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="gallery-slider-spatial-canvas-wrapper position-absolute start-0 end-0 top-0 bottom-0">
+                {% set spatialGalleryViewerOptions = {
+                    modelUrl: image.url,
+                    lightIntensity: config('core.media.defaultLightIntensity'),
+                    sliderPosition: loop.index0,
+                } %}
+                <canvas
+                        data-spatial-gallery-slider-viewer
+                        data-spatial-gallery-slider-viewer-options='{{spatialGalleryViewerOptions|json_encode}}'
+                ></canvas>
+                <span
+                        class="spatial-canvas-note spatial-slider-movement-note position-absolute start-50 text-center badge mx-0 py-1 px-3 translate-middle-x"
+                        data-spatial-movement-note
+                        data-spatial-movement-note-touch-text="{{ 'component.cms.imageGallery.touchMove'|trans|striptags }}"
+                >
+                {{ 'component.cms.imageGallery.clickMove'|trans|striptags }}
+                </span>
+                {% if image.config.spatial.arReady ?? defaultEnableAugmentedReality %}
+                    <div class="ar-button button position-absolute d-inline-flex justify-content-center align-items-center text-center py-0 px-2 w-auto"
+                            data-spatial-ar-viewer
+                            data-spatial-ar-viewer-options='{ "spatialArId": "{{ image.id }}", "modelUrl": "{{ image.url }}" }'>
+
+                            {% sw_icon 'augmented' style {
+                                'size': 'fluid'
+                            } %}
+                            <span>{{ 'spatial.openArView'|trans|striptags }}</span>
+
+                    </div>
+                    {% sw_include '@Storefront/storefront/utilities/ar-overlay.html.twig' %}
+                {% endif %}
+            </div>
+            {# @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES #}
+            {% block element_image_gallery_qr_code_modal_single %}
+                {% sw_include '@Storefront/storefront/utilities/qr-code-modal.html.twig'
+                    with {
+                    "qrCodeOptions": {
+                        "params": {
+                            "autostartAr": image.id
+                        }
+                    }
+                }
+                %}
+            {% endblock %}
+        {% elseif mediaItems|first.getMediaType().getName() === 'VIDEO' %}
+            {% set attributes = attributes|merge({ controls: true }) %}
+
+            {% if isProduct %}
+                {% set attributes = attributes|merge({ itemprop: 'video' }) %}
+            {% endif %}
+
+            {% sw_include '@Storefront/storefront/utilities/video.html.twig' with {
+                media: mediaItems|first,
+                attributes: attributes
+            } %}
+        {% else %}
+            {% set attributes = attributes|merge({
+                class: attributes.class ~ ' magnifier-image js-magnifier-image',
+                alt: (mediaItems|first.translated.alt ?: fallbackImageTitle),
+                'data-full-image': mediaItems|first.url,
+                'tabindex': "0",
+                width: image.media.width ?:'430',
+                height: image.media.height ?:'430'
+            }) %}
+
+            {% if displayMode == 'cover' or displayMode == 'contain' %}
+                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+            {% endif %}
+
+            {% if isProduct %}
+                {% set attributes = attributes|merge({ itemprop: 'image' }) %}
+            {% endif %}
+
+            {% sw_thumbnails 'gallery-slider-image-thumbnails' with {
+                media: mediaItems|first,
+                attributes: attributes
+            } %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block element_image_gallery_inner_thumbnails_item_inner %}
+    <div class="gallery-slider-thumbnails-item-inner">
+        {% set attributes = {
+            class: 'gallery-slider-thumbnails-image',
+            title: (image.translated.title ?: fallbackImageTitle),
+            width: '55',
+            height: '80'
+        } %}
+
+        {# @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES #}
+        {% block element_image_gallery_inner_thumbnails_item_inner_spatial %}
+            {% if image.isSpatialObject() %}
+                {% sw_icon '3d-placeholder' style {
+                    'size': 'fluid'
+                } %}
+                <span class="badge bg-secondary m-1 position-absolute bottom-0 end-0">3D</span>
+            {% elseif image.getMediaType().getName() === 'VIDEO' %}
+                {% if isProduct %}
+                    {% set attributes = attributes|merge({ itemprop: 'video' }) %}
+                {% endif %}
+
+                {% sw_include '@Storefront/storefront/utilities/video.html.twig' with {
+                    media: image,
+                    attributes: attributes
+                } %}
+
+                    <div class="gallery-slider-thumbnails-play-button"></div>
+            {% else %}
+                {% set attributes = attributes|merge({
+                    alt: (image.translated.alt ?: fallbackImageTitle)
+                }) %}
+
+                {% if isProduct %}
+                    {% set attributes = attributes|merge({ itemprop: 'image' }) %}
+                {% endif %}
+
+                {% sw_thumbnails 'gallery-slider-thumbnails-image-thumbnails' with {
+                    media: image,
+                    sizes: {
+                        default: '200px'
+                    },
+                    attributes: attributes
+                } %}
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

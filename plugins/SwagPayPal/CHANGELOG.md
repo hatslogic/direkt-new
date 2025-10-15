@@ -1,3 +1,109 @@
+# 9.8.2
+- Fixes an issue, where Apple Pay could not handle unsupported characters (shopware/SwagPayPal#331)
+
+# 9.8.1
+- Fixes an issue, where the PayLater button is not displayed on the OffCanvas and the cart (shopware/SwagPayPal#304)
+
+# 9.8.0
+- Added necessary payment means for e-invoice generation (shopware/SwagPayPal#255)
+
+# 9.7.7
+- Fixes an issue, requests to PayPal could wait indefinitly. Requests are now limited to 30 seconds (shopware/SwagPayPal#262)
+- Fixes an issue, where the spacing between Express Checkout button and PayLater banner was too small (shopware/SwagPayPal#245)
+
+# 9.7.6
+- Fixes an issue, where the Express Checkout was not displayed correctly on certain pages (shopware/SwagPayPal#234)
+
+# 9.7.5
+- Fixes an issue, where the PayLater button is not displayed on a product Page when the cart is empty (shopware/shopware#8356)
+- Fixes an issue, where vaulted payments could not be processed in the after order payment process in certain situations
+- Fixes a problem where the Venmo Express button was not shown
+- Fixes an issue, where duplicate orders could be created in certain edge cases (shopware/shopware#8359)
+- Added a quick link for reporting issues to the context menu of the extension list
+
+# 9.7.4
+- Fixes an issue, where input fields of the refund modal could be missing
+
+# 9.7.3
+- Fixes an issue, where card fields were not displayed in the after order payment process (shopware/shopware#7643)
+
+# 9.7.2
+- Fixes an issue, where guest checkout was not possible (shopware/SwagPayPal#165)
+
+# 9.7.1
+- Fixes an issue, where payments could not be refunded (shopware/shopware#7644)
+
+# 9.7.0
+- PPI-1000 - Fixes an issue, where PayLater is shown in cases where it should not be available
+- PPI-1044 - Improved compatibility of Vaulting with Store API usage and Headless setups
+- PPI-1073 - Changed logging behaviour of errors happening during checkout
+- PPI-1076 - Improved information passing in Express Checkout API calls
+- PPI-1077 - Improved the availability for Google Pay and Apple Pay
+- PPI-1082 - Fixes an issue, where timezone discrepancies can lead to authentication issues
+- PPI-1083 - Fixes an issue, where Express Checkout was not possible with double opt-in enabled
+
+# 9.6.5
+- PPI-1025 - Improves the performance of the installment banner in the Storefront
+- PPI-1043 - Fixes an issue, where a payment method is toggled twice in the Administration
+- PPI-1045 - Fixes an issue, where a payment was not refundable in some cases
+
+# 9.6.4
+- PPI-930 - Fixes a issue, where with a selected sales channel the inherited configuration was not working correctly
+- PPI-1013 - Improves the reliability of syncing products to Zettle
+- PPI-1014 - Fixes an issue, where images with special characters could not be synced to Zettle
+- PPI-1016 - Fixes an issue, where shipping tracking codes were not synced with to long product names
+- PPI-1024 - Fixes an issue, where card payments could fail if 3DS is not active for a given card
+
+# 9.6.3
+- PPI-1015 - Fixes an issue, where PayPal settings could not be saved in the Administration
+
+# 9.6.2
+- PPI-971 - Fixes an issue, where umlauts in the brand name were causing Apple Pay payments to be cancelled
+- PPI-999 - Fixes an issue, where admin component overrides would block settings from being saved
+- PPI-1002 - Fixes an issue, where the Apple Pay domain hint was not shown
+- PPI-1008 - Fixes an issue, where payment status polling kept retrying with non-existent transactions
+- PPI-1009 - Fixes an issue, where PayPal Plus was not shown in the Checkout
+- PPI-1010 - Fixes an issue, where the compiled CSS could be broken in combination with other extensions
+
+# 9.6.1
+- PPI-942 - Fixes an issue, where cookies from Google Pay were displayed in the cookie banner despite being deactivated
+- PPI-957 - Added quick links to the extension context menu and PayPal settings
+- PPI-991 - Fixes an issue, where Trustly was erroneously offered
+- PPI-995 - Fixes an issue, where the Zettle set up wizard could get stuck
+- PPI-996 - Fixes an issue, where PayPal buttons could disappear during checkout with certain themes
+
+# 9.6.0
+- PPI-922 - Improved visibility of Apple Pay on browsers and devices that are not supported
+- PPI-978 - Enabled Trustly for more compatible countries and currencies
+- PPI-979 - Fixes an issue, where PUI wouldn't work for customers without a birthdate in after order process
+- PPI-981 - Fixes an issue, where the payment status was sometimes not correctly set to failed if communication with PayPal failed
+- PPI-987 - Fixes an issue, where creating Zettle Sales Channels or changing Zettle credentials failed
+- PPI-988 - Fixes an issue, where SEPA, cards and Venmo may have been missing in the Checkout
+
+# 9.5.0
+- PPI-958 - Fixes an issue, where the credentials validation erroneously succeeded with invalid Merchant Payer IDs
+- PPI-960 - Express checkout buttons are now available with enabled Double-Opt-In, a warning will be displayed in the settings
+- PPI-961 - Fixes an issue, where the setting of the 'Pay Later' banner on the login page was not saved
+- PPI-965 - Fixes an issue, where an error in the checkout could lead to an infinite reload loop if SwagCommercial was installed
+
+# 9.4.0
+- PPI-807 - Improved script loading performance in the Storefront
+- PPI-924 - Added more explicit error messages for errors happening during express checkout
+- PPI-929 - Added onboarding notice for Apple and Google Pay payment methods
+- PPI-950 - Changed the shipment carrier field to a dropdown in the Administration
+- PPI-951 - Fixes an issue, where only generic error messages were displayed during checkout without Smart Payment Buttons
+- PPI-953 - Fixes an issue, where shipping tracking codes were not synced with an invalid carrier
+- PPI-956 - Improved logging and error handling for merchant configurations
+
+# 9.3.1
+- PPI-944 - Fixes an issue, where payment status polling kept retrying with invalid transactions
+- PPI-945 - Fixes an issue, where excluded products were not correctly shown in the Administration
+- PPI-947 - Fixes an issue, where Smart Payment Buttons may have not been configurable
+- PPI-948 - Removed the no longer supported Giropay payment method
+
+# 9.3.0
+- PPI-934 - Moved shipping tracking transmission to new PayPal API endpoints
+
 # 9.2.0
 - PPI-666 - Added information on invoices for Pay Upon Invoice payments
 - PPI-924 - Added more explicit error messages for errors happening while checkout (e.g. postal code is missing)
@@ -163,12 +269,12 @@
 - PPI-670 - Improved display of onboarding status in Administration
 
 # 5.1.1
-- PPI-657 - Cleaned up template `buy-widget-form` 
+- PPI-657 - Cleaned up template `buy-widget-form`
 
 # 5.1.0
 - PPI-611 - Added possibility to exclude products and dynamic product groups from PayPal & Express Checkout
 - PPI-617 - Fix issue where payment method authorizations were not correctly shown for Sales Channel specific settings
-- PPI-620 - Fix issue showing an incorrect webhook error message on saving settings without credentials 
+- PPI-620 - Fix issue showing an incorrect webhook error message on saving settings without credentials
 - PPI-634 - Fix issue with shipping tax calculation for net customer groups
 - PPI-635 - Fix issue with incorrect Pay Upon Invoice data display in invoices
 - PPI-639 - The Sales Channel selection in the PayPal settings can now display more than 25 Sales Channels

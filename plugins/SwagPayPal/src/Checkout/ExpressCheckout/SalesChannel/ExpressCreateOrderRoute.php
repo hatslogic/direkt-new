@@ -23,7 +23,7 @@ use Swag\PayPal\RestApi\V2\Api\Order\ApplicationContext;
 use Swag\PayPal\RestApi\V2\Resource\OrderResource;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -47,7 +47,7 @@ class ExpressCreateOrderRoute extends AbstractExpressCreateOrderRoute
     }
 
     #[OA\Post(
-        path: '/store-api/paypal/express/create-order',
+        path: '/paypal/express/create-order',
         operationId: 'createPayPalExpressOrder',
         description: 'Creates a PayPal order from the existing cart',
         tags: ['Store API', 'PayPal'],

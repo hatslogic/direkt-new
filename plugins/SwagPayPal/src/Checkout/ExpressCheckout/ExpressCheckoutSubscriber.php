@@ -8,9 +8,12 @@
 namespace Swag\PayPal\Checkout\ExpressCheckout;
 
 use Psr\Log\LoggerInterface;
+use Shopware\Core\Checkout\Customer\CustomerCollection;
 use Shopware\Core\Checkout\Customer\CustomerEvents;
 use Shopware\Core\Content\Cms\Events\CmsPageLoadedEvent;
 use Shopware\Core\Content\Product\ProductCollection;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityWrittenEvent;
 use Shopware\Core\Framework\Event\DataMappingEvent;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\Framework\Struct\ArrayStruct;
@@ -31,8 +34,8 @@ use Shopware\Storefront\Pagelet\PageletLoadedEvent;
 use Shopware\Storefront\Pagelet\Wishlist\GuestWishlistPageletLoadedEvent;
 use Swag\CmsExtensions\Storefront\Pagelet\Quickview\QuickviewPageletLoadedEvent;
 use Swag\PayPal\Checkout\Cart\Service\ExcludedProductValidator;
-use Swag\PayPal\Checkout\ExpressCheckout\Service\ExpressCheckoutDataServiceInterface;
 use Swag\PayPal\Checkout\ExpressCheckout\Service\ExpressCustomerService;
+use Swag\PayPal\Checkout\ExpressCheckout\Service\PayPalExpressCheckoutDataService;
 use Swag\PayPal\Checkout\Payment\PayPalPaymentHandler;
 use Swag\PayPal\Setting\Exception\PayPalSettingsInvalidException;
 use Swag\PayPal\Setting\Service\SettingsValidationServiceInterface;
@@ -47,33 +50,21 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class ExpressCheckoutSubscriber implements EventSubscriberInterface
 {
     public const PAYPAL_EXPRESS_CHECKOUT_BUTTON_DATA_EXTENSION_ID = 'payPalEcsButtonData';
+    public const PAYPAL_PAYLATER_PRODUCT = 'payPaylPayLaterProduct';
+    public const PAYPAL_EXPRESS_CHECKOUT_EVENT_NAME = 'payPalEcsEventName';
 
-    private ExpressCheckoutDataServiceInterface $expressCheckoutDataService;
-
-    private SettingsValidationServiceInterface $settingsValidationService;
-
-    private SystemConfigService $systemConfigService;
-
-    private PaymentMethodUtil $paymentMethodUtil;
-
-    private ExcludedProductValidator $excludedProductValidator;
-
-    private LoggerInterface $logger;
-
+    /**
+     * @param EntityRepository<CustomerCollection> $customerRepository
+     */
     public function __construct(
-        ExpressCheckoutDataServiceInterface $service,
-        SettingsValidationServiceInterface $settingsValidationService,
-        SystemConfigService $systemConfigService,
-        PaymentMethodUtil $paymentMethodUtil,
-        ExcludedProductValidator $excludedProductValidator,
-        LoggerInterface $logger
+        private readonly PayPalExpressCheckoutDataService $expressCheckoutDataService,
+        private readonly SettingsValidationServiceInterface $settingsValidationService,
+        private readonly SystemConfigService $systemConfigService,
+        private readonly PaymentMethodUtil $paymentMethodUtil,
+        private readonly ExcludedProductValidator $excludedProductValidator,
+        private readonly EntityRepository $customerRepository,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->expressCheckoutDataService = $service;
-        $this->settingsValidationService = $settingsValidationService;
-        $this->systemConfigService = $systemConfigService;
-        $this->paymentMethodUtil = $paymentMethodUtil;
-        $this->excludedProductValidator = $excludedProductValidator;
-        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents(): array
@@ -99,6 +90,7 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
             CheckoutConfirmPageLoadedEvent::class => 'onCheckoutConfirmLoaded',
 
             CustomerEvents::MAPPING_REGISTER_CUSTOMER => 'addPayerIdToCustomer',
+            CustomerEvents::CUSTOMER_WRITTEN_EVENT => 'onCustomerWritten',
         ];
     }
 
@@ -111,7 +103,16 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
             || $event instanceof NavigationPageLoadedEvent
             || $event instanceof SearchPageLoadedEvent;
 
+        if ($event instanceof ProductPageLoadedEvent) {
+            $event->getSalesChannelContext()->addExtension(
+                self::PAYPAL_PAYLATER_PRODUCT,
+                $event->getPage()->getProduct(),
+            );
+        }
+
         $expressCheckoutButtonData = $this->getExpressCheckoutButtonData($event->getSalesChannelContext(), $event::class, $addProductToCart);
+
+        $event->getSalesChannelContext()->removeExtension(self::PAYPAL_PAYLATER_PRODUCT);
 
         if ($expressCheckoutButtonData === null) {
             return;
@@ -168,6 +169,9 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param SalesChannelEntitySearchResultLoadedEvent<ProductCollection> $event
+     */
     public function addExcludedProductsToSearchResult(SalesChannelEntitySearchResultLoadedEvent $event): void
     {
         if (!$this->checkSettings($event->getSalesChannelContext(), $event::class)) {
@@ -175,7 +179,6 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
         }
 
         $productIds = [];
-        /** @var ProductCollection $products */
         $products = $event->getResult()->getEntities();
         foreach ($products as $product) {
             $productIds[] = $product->getId();
@@ -198,8 +201,8 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
         }
 
         $event->getDefinition()->set('additionalAddressLine1')
-                               ->set('additionalAddressLine2')
-                               ->set('phoneNumber');
+            ->set('additionalAddressLine2')
+            ->set('phoneNumber');
     }
 
     public function disableCustomerValidation(BuildValidationEvent $event): void
@@ -209,8 +212,8 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
         }
 
         $event->getDefinition()->set('birthdayDay')
-                               ->set('birthdayMonth')
-                               ->set('birthdayYear');
+            ->set('birthdayMonth')
+            ->set('birthdayYear');
     }
 
     public function addPayerIdToCustomer(DataMappingEvent $event): void
@@ -223,6 +226,44 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
         $output = $event->getOutput();
         $output['customFields'][ExpressCustomerService::EXPRESS_PAYER_ID] = $input->get(ExpressCustomerService::EXPRESS_PAYER_ID);
         $event->setOutput($output);
+    }
+
+    /**
+     * If double opt-in is enabled, we need to patch the customer to disable it again.
+     * Otherwise, we will not get a logged-in customer and an email will be sent, requiring confirmation.
+     * We don't need this confirmation as PayPal is our trusted source.
+     */
+    public function onCustomerWritten(EntityWrittenEvent $event): void
+    {
+        if (!$event->getContext()->hasExtension(ExpressCustomerService::EXPRESS_CHECKOUT_ACTIVE)) {
+            return;
+        }
+
+        // as we're in express checkout, there will be only one write result
+        foreach ($event->getWriteResults() as $result) {
+            $id = $result->getProperty('id');
+            $salesChannelId = $result->getProperty('salesChannelId');
+            $expressId = $result->getProperty('customFields')[ExpressCustomerService::EXPRESS_PAYER_ID] ?? null;
+            $guest = (bool) $result->getProperty('guest');
+
+            // double-checking if we should patch
+            if (!$id || !$salesChannelId || !$expressId || !$guest) {
+                continue;
+            }
+
+            if ($this->systemConfigService->getBool('core.loginRegistration.doubleOptInGuestOrder', $salesChannelId)) {
+                // prevent looping on with another written event after patching
+                $event->getContext()->removeExtension(ExpressCustomerService::EXPRESS_CHECKOUT_ACTIVE);
+
+                $this->customerRepository->update([[
+                    'id' => $id,
+                    'doubleOptInRegistration' => false,
+                    'doubleOptInEmailSentDate' => null,
+                ]], $event->getContext());
+
+                $event->getContext()->addExtension(ExpressCustomerService::EXPRESS_CHECKOUT_ACTIVE, new ArrayStruct());
+            }
+        }
     }
 
     public function onCheckoutConfirmLoaded(CheckoutConfirmPageLoadedEvent $event): void
@@ -250,7 +291,7 @@ class ExpressCheckoutSubscriber implements EventSubscriberInterface
     private function getExpressCheckoutButtonData(
         SalesChannelContext $salesChannelContext,
         string $eventName,
-        bool $addProductToCart = false
+        bool $addProductToCart = false,
     ): ?ExpressCheckoutButtonData {
         if (!$this->checkSettings($salesChannelContext, $eventName)) {
             return null;

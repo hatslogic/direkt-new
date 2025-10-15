@@ -92,12 +92,12 @@ final class Settings
         self::ECS_LOGIN_ENABLED => true,
         self::ECS_LISTING_ENABLED => false,
         self::ECS_BUTTON_COLOR => 'gold',
-        self::ECS_BUTTON_SHAPE => 'rect',
+        self::ECS_BUTTON_SHAPE => 'sharp',
         self::ECS_SHOW_PAY_LATER => true,
         self::SPB_CHECKOUT_ENABLED => true,
         self::SPB_ALTERNATIVE_PAYMENT_METHODS_ENABLED => false,
         self::SPB_BUTTON_COLOR => 'gold',
-        self::SPB_BUTTON_SHAPE => 'rect',
+        self::SPB_BUTTON_SHAPE => 'sharp',
         self::SPB_SHOW_PAY_LATER => false,
         self::PLUS_CHECKOUT_ENABLED => false,
         self::INSTALLMENT_BANNER_DETAIL_PAGE_ENABLED => true,
@@ -132,6 +132,23 @@ final class Settings
     public const VALID_MERCHANT_LOCATIONS = [
         self::MERCHANT_LOCATION_GERMANY,
         self::MERCHANT_LOCATION_OTHER,
+    ];
+
+    public const LIVE_CREDENTIAL_KEYS = [
+        Settings::CLIENT_ID,
+        Settings::CLIENT_SECRET,
+        Settings::MERCHANT_PAYER_ID,
+    ];
+
+    public const SANDBOX_CREDENTIAL_KEYS = [
+        Settings::CLIENT_ID_SANDBOX,
+        Settings::CLIENT_SECRET_SANDBOX,
+        Settings::MERCHANT_PAYER_ID_SANDBOX,
+    ];
+
+    public const CREDENTIAL_KEYS = [
+        ...self::LIVE_CREDENTIAL_KEYS,
+        ...self::SANDBOX_CREDENTIAL_KEYS,
     ];
 
     private function __construct()

@@ -1,0 +1,40 @@
+{
+    "name": "tmms/cms-element-period-request-form",
+    "description": "a extension which adds a request form to the CMS",
+    "version": "1.2.6",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Deutsche Telekom MMS GmbH",
+            "role": "Manufacturer"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0",
+        "shopware/storefront": "~6.6.0",
+        "shopware/administration": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Tmms\\CmsElementPeriodRequestForm\\TmmsCmsElementPeriodRequestForm",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "copyright": "Deutsche Telekom MMS GmbH",
+        "label": {
+            "de-DE": "Formular für Anfragen für die Erlebniswelten",
+            "en-GB": "form for requests for the shopping experiences"
+        },
+        "description": {
+            "de-DE": "Die Erweiterung fügt ein Anfrageformular zu den Erlebniswelten hinzu, welches über den eigenen gleichnamigen CMS-Block oder das eigene gleichnamige CMS-Element in einer Erlebniswelt platzieren werden kann. Beim Formular können folgende Felder angezeigt und bei Bedarf als Pflichtfeld markiert werden: Anrede, Vorname, Nachname, Straße, Postleitzahl, Ort, Land, E-Mail-Adresse, Telefonnummer, Kommentar, ein Datumsfeld und ein Auswahl-, Eingabe- oder mehrzeiliges Eingabefeld für bis zu 10 freie Eingaben. Beim Datumsfeld kann man zusätzlich ein Start- und Enddatum festlegen sowie Daten eingeben, die nicht auswählbar sein sollen. Des weiteren kann der Kalender auch dauerhaft geöffnet angezeigt werden oder mann kann sich 2 Monate nebeneinander anzeigen lassen. Das Kommentarfeld, das Datumsfeld und die freien Eingaben können bei Bedarf auch oberhalb des Formulars angezeigt werden. Beim Formular können unter anderem der Titel, ein einleitender Text und ein Bestätigungstext festgelegt werden. Das Formular kann entweder per E-Mail an eine E-Mail-Adresse versendet und / oder dessen eingegebene Daten in der Datenbank gespeichert werden. Über den neuen Menüpunkt Anfragen unter Kunden kann man die eingegangenen Anfragen verwalten und auf diese Weise eine Zeitraumsanfrage eines Kunden freigeben, sodass das angefragte Datum dann auch nicht mehr im Datumsfeld auf der jeweiligen Seite, also bei der Kategorie, der Landingpage oder dem Produkt, wo das Formular platziert wurde, auswählbar ist. Man kann aber auch innerhalb der Erweiterungskonfiguration festlegen, dass der Freigabestatus der Anfragen ignoriert werden soll, sodass die angefragten Daten bereits automatisch deaktiviert sind. Es können auch manuell über das Administrationsmodul Anfragen hinzugefügt werden. Durch das beliebige Ausblenden der Felder kann man das Formular aber auch nur für allgemeine Anfragen nutzen, also beispielsweise ohne Datumsauswahl, sodass es als normales Kontaktformular genutzt werden kann.",
+            "en-GB": "The extension adds a request form to the CMS, which can be placed in a Shopping Experience using the own CMS block of the same name or the own CMS element of the same name. The following fields can be displayed in the form and, if necessary, marked as required fields: salutation, first name, last name, street address, postal code, city, country, email, phone number, comment, a date field and a selection, input or textarea field for up to 10 free inputs. At the date field, you can also specify a start and end date and enter dates that should not be selectable. Furthermore, the calendar can also be displayed permanently open or you can display 2 months side by side. The comment, the date field and the free inputs can also be displayed above the form if necessary. Among other things, the title, an introductory text and a confirmation text can be specified for the form. Furthermore the form can either be sent by email to an email address and / or the data entered can be saved in the database. Via the new menu item requests under customer you can manage the incoming requests and confirm a period request from a customer so that the requested date can not be longer selected in the date field on the respective page, i.e. in the category, on the landing page or at the product where the form was placed. You can also specify within the extension configuration that the confirmed status of the requests should be ignored so that the requested data is already automatically deactivated. Requests can also be added manually via the administration module. By hiding selected fields, the form can also only be used for general requests, for example without a date selection, so that it can be used as a normal contact form."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.telekom-mms.com",
+            "en-GB": "https://www.telekom-mms.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Tmms\\CmsElementPeriodRequestForm\\": "src/"
+        }
+    }
+}

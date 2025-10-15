@@ -8,6 +8,7 @@
 namespace Swag\PayPal\Webhook\Registration;
 
 use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\Feature;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\System\SystemConfig\Api\SystemConfigController;
 use Shopware\Core\System\SystemConfig\Service\ConfigurationService;
@@ -15,8 +16,11 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Core\System\SystemConfig\Validation\SystemConfigValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * @deprecated tag:v10.0.0 - Will be removed. Use {@see SettingsController::saveSettings} instead
+ */
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['api']])]
 class WebhookSystemConfigController extends SystemConfigController
@@ -32,7 +36,7 @@ class WebhookSystemConfigController extends SystemConfigController
         ConfigurationService $configurationService,
         SystemConfigService $systemConfig,
         WebhookSystemConfigHelper $webhookSystemConfigHelper,
-        SystemConfigValidator $systemConfigValidator
+        SystemConfigValidator $systemConfigValidator,
     ) {
         parent::__construct($configurationService, $systemConfig, $systemConfigValidator);
         $this->webhookSystemConfigHelper = $webhookSystemConfigHelper;
@@ -40,6 +44,10 @@ class WebhookSystemConfigController extends SystemConfigController
 
     public function saveConfiguration(Request $request): JsonResponse
     {
+        if (Feature::isActive('PAYPAL_SETTINGS_TWEAKS')) {
+            return parent::saveConfiguration($request);
+        }
+
         $salesChannelId = $request->query->get('salesChannelId');
         if (!\is_string($salesChannelId) || $salesChannelId === '') {
             $salesChannelId = 'null';
@@ -63,6 +71,10 @@ class WebhookSystemConfigController extends SystemConfigController
 
     public function batchSaveConfiguration(Request $request, Context $context): JsonResponse
     {
+        if (Feature::isActive('PAYPAL_SETTINGS_TWEAKS')) {
+            return parent::batchSaveConfiguration($request, $context);
+        }
+
         /** @var array<string, array<string, mixed>> $data */
         $data = $request->request->all();
         $errors = $this->webhookSystemConfigHelper->checkWebhookBefore($data);

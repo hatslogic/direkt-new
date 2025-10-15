@@ -14,7 +14,8 @@
         {% block component_product_box_image_link %}
             <a href="{{ seoUrl('frontend.detail.page', { productId: id }) }}"
                 title="{{ name }}"
-                class="product-image-link is-{{ displayMode }}">
+                class="product-image-link is-{{ displayMode }}"
+                aria-label="View details for {{ name }}">
                 {% block component_product_box_image_link_inner %}
                     {% if cover.url and cover.isSpatialObject() == false %}
                         {% set attributes = {
@@ -52,7 +53,6 @@
                             {% block component_product_box_image_thumbnail %}
                                 {% sw_thumbnails 'product-image-thumbnails' with {
                                     media: cover,
-                                    sizes: sizes,
                                     attributes: attributes
                                 } %}
                             {% endblock %}
@@ -83,30 +83,34 @@
 
 {% block component_product_box_info %}
     <div class="product-info">
-        {% block component_product_box_rating %}
-            {{ parent() }}
-        {% endblock %}
+        <div class="product-info-contents">
+            {% block component_product_box_rating %}
+                {{ parent() }}
+            {% endblock %}
 
-        {% block component_product_box_name %}
-            {{ parent() }}
-        {% endblock %}
+            {% block component_product_box_name %}
+                {{ parent() }}
+            {% endblock %}
 
-        {% block component_product_box_variant_characteristics %}
-            {{ parent() }}
-        {% endblock %}
+            {% block component_product_box_variant_characteristics %}
+                {{ parent() }}
+            {% endblock %}
 
-        {% block component_product_box_description_custom %}
-            <div class="product-description">
-                {{ product.translated.description|striptags|raw }}
-            </div>
-        {% endblock %}
+            {% block component_product_box_description_custom %}
+                <div class="product-description">
+                    {{ product.translated.description|striptags|raw }}
+                </div>
+            {% endblock %}
+        </div>
+    
+        <div class="product-info-price">
+            {% block component_product_box_price %}
+                {% sw_include '@Storefront/storefront/component/product/card/price-unit.html.twig' %}
+            {% endblock %}
 
-        {% block component_product_box_price %}
-            {% sw_include '@Storefront/storefront/component/product/card/price-unit.html.twig' %}
-        {% endblock %}
-
-        {% block component_product_box_action %}
-            {# {% sw_include '@Storefront/storefront/component/product/card/action.html.twig' %} #}
-        {% endblock %}
+            {% block component_product_box_action %}
+                {# {% sw_include '@Storefront/storefront/component/product/card/action.html.twig' %} #}
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}

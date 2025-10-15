@@ -1,0 +1,41 @@
+{# Gleiche Struktur, letzter Eventname #}
+{% set configValue = services.config.app('priceNetDataLayer') %}
+{% set salesChannelContext = hook.salesChannelContext %}
+{% set page = hook.page %}
+{% set cart = page.cart %}
+{% set productLineItems = cart.lineItems.filterFlatByType(constant('Shopware\\Core\\Checkout\\Cart\\LineItem\\LineItem::PRODUCT_LINE_ITEM_TYPE')) %}
+
+{% set formattedProducts = [] %}
+{% for item in productLineItems %}
+    {% set basePrice = item.price.unitPrice %}
+    {% if configValue == true and salesChannelContext and salesChannelContext.taxState == 'gross' and item.price.calculatedTaxes|length > 0 %}
+        {% set totalTaxRate = item.price.calculatedTaxes|first.taxRate %}
+        {% set basePrice = (basePrice / (1 + (totalTaxRate / 100)))|round(2) %}
+    {% endif %}
+    {% set formattedProducts = formattedProducts|merge([{
+        id: item.referencedId,
+        number: item.payload.productNumber,
+        name: item.label,
+        price: basePrice,
+        quantity: item.quantity,
+        currency: salesChannelContext.currency.isoCode
+    }]) %}
+{% endfor %}
+
+{% if formattedProducts|length > 0 %}
+    {% do page.addArrayExtension('acrisTagManagerAppData', {
+        event: 'checkout-offcanvas-widget-loaded',
+        data: {
+        context: {
+            currency: salesChannelContext.currency.isoCode,
+        },
+        cart: {
+        totalPrice: cart.price.totalPrice,
+        netPrice: cart.price.netPrice,
+        currency: salesChannelContext.currency.isoCode,
+        tax: cart.transactions|reduce((acc, transaction) => transaction.amount.calculatedTaxes|reduce((acc2, tax) => acc2 + tax.tax, 0), 0),
+        products: formattedProducts
+    }
+        }
+        }) %}
+{% endif %}

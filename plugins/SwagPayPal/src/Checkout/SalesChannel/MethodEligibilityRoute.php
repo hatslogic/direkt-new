@@ -15,12 +15,13 @@ use Shopware\Core\Framework\Plugin\Exception\DecorationPatternException;
 use Shopware\Core\Framework\Routing\RoutingException;
 use Shopware\Core\System\SalesChannel\NoContentResponse;
 use Swag\PayPal\Checkout\Payment\Method\ACDCHandler;
+use Swag\PayPal\Checkout\Payment\Method\ApplePayHandler;
 use Swag\PayPal\Checkout\Payment\Method\PayLaterHandler;
 use Swag\PayPal\Checkout\Payment\Method\SEPAHandler;
 use Swag\PayPal\Checkout\Payment\Method\VenmoHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -31,6 +32,7 @@ class MethodEligibilityRoute extends AbstractMethodEligibilityRoute
         'SEPA' => SEPAHandler::class,
         'VENMO' => VenmoHandler::class,
         'PAYLATER' => PayLaterHandler::class,
+        'APPLEPAY' => ApplePayHandler::class,
     ];
 
     public const SESSION_KEY = 'payPalIneligiblePaymentMethods';
@@ -50,8 +52,11 @@ class MethodEligibilityRoute extends AbstractMethodEligibilityRoute
         throw new DecorationPatternException(self::class);
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     #[OA\Post(
-        path: '/store-api/paypal/payment-method-eligibility',
+        path: '/paypal/payment-method-eligibility',
         operationId: 'setPaymentMethodEligibility',
         description: 'Sets ineligible payment methods to be removed from the session',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [

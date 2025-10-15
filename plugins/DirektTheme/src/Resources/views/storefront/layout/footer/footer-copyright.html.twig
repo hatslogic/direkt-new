@@ -1,16 +1,20 @@
 
 {% block layout_footer_copyright %}
 	<div class="row dkt-copyright justify-content-between">
-		<div class="col-sm-6 col-lg-6 dkt-copyright-logo d-flex align-items-center">
+		<div class="col-sm-6 col-lg-8 dkt-copyright-logo d-flex align-items-center">
             <img src="{{ theme_config('sw-logo-favicon')|sw_encode_url }}"
      alt="{{ 'header.logoLink'|trans|striptags }}"
-     class="img-fluid header-logo-main-img" width="40" height="40">   
+     class="img-fluid header-logo-main-img" width="40" height="40" loading="lazy">   
             <span>
                {{ 'footer.copyrightInfo'|trans|raw }}
             </span>
 		</div>
-		<div class="col-sm-6 dkt-copyright-social">
-			<ul class="social-navs">
+		<div class="col-sm-6 col-lg-4 dkt-copyright-social">
+         {# url change as per sales channel id #}
+         {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+         {# direkt #}
+         {% if salesChannelId == '019074f16e0172079638d5b52531ca0c' %}
+            <ul class="social-navs">
                 <li>
                    {{ 'footer.social.instagram'|trans|raw }}
                 </li>
@@ -20,10 +24,33 @@
                  <li>
                    {{ 'footer.social.twitter'|trans|raw }}
                 </li>
+                <li>
+                   {{ 'footer.social.linkedin'|trans|raw }}
+                </li>
                  <li>
                    {{ 'footer.social.mail'|trans|raw }}
                 </li>
             </ul>
+         {# mbseal #}
+         {% elseif salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+            <ul class="social-navs">
+                <li>
+                   {{ 'footer.social.mbseal.instagram'|trans|raw }}
+                </li>
+                <li>
+                   {{ 'footer.social.mbseal.facebook'|trans|raw }}
+                </li>
+                 <li>
+                   {{ 'footer.social.mbseal.twitter'|trans|raw }}
+                </li>
+                <li>
+                   {{ 'footer.social.mbseal.linkedin'|trans|raw }}
+                </li>
+                 <li>
+                   {{ 'footer.social.mbseal.mail'|trans|raw }}
+                </li>
+            </ul>
+         {% endif %}
 		</div>
 	</div>
 {% endblock %}

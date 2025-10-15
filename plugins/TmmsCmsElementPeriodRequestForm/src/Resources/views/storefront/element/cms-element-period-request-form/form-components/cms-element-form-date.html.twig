@@ -1,0 +1,239 @@
+<div class="form-group {{ additionalClass }}{% if element.config.alignCalendarCentrally.value %} form-datefield-is-align-center{% endif %}{% if config('TmmsCmsElementPeriodRequestForm.config.dateFieldHighlightInColor') %} form-datefield-is-highlighted{% else %} form-datefield-is-not-highlighted{% endif %}">
+    {% set feedbackId = "#{id}-feedback" %}
+    {% set areaDescribedBy = "#{feedbackId}" %}
+    {% set labelDate = element.config.labelDate.value %}
+
+    <label
+        class="form-label"
+        for="{{ id }}"
+        id="{{ id }}-label">
+        {% if labelDate %}{{ 'tmms.periodRequestForm.date.dateLabel'|trans({"%labelDate%": labelDate}) }}{% else %}{{ "tmms.periodRequestForm.date.emptyDateLabel"|trans }}{% endif %}{% if required %}{% if feature('ACCESSIBILITY_TWEAKS') %} <span class="form-required-label" aria-hidden="true">{{ 'general.required'|trans|sw_sanitize }}</span>{% else %} {{ "general.required"|trans }}{% endif %}{% endif %}
+    </label>
+
+    {% if labelDate %}
+        {% set placeholderDate = element.config.labelDate.value %}
+    {% else %}
+        {% set placeholderDate = "tmms.periodRequestForm.date.emptyDateLabel"|trans %}
+    {% endif %}
+
+    {% set dataUrl = path('frontend.periodrequestform.getdisableddates') %}
+    {% set dateFormat = "tmms.periodRequestForm.date.dateFormat"|trans({"%dateformat%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldDateFormat')}) %}
+    {% set dateLocale = app.request.locale %}
+    {% set dateLocaleString = "en-GB" %}
+    {% set defaultDateValue = '' %}
+    {% set inputStartdate = element.config.startdate.value %}
+    {% set inputEnddate = element.config.enddate.value %}
+    {% set inputDisableddates = element.config.disableddates.value %}
+    {% set showPeriodSelection = element.config.showPeriodSelection.value %}
+    {% set showCalendarPermanentlyOpen = element.config.showCalendarPermanentlyOpen.value %}
+    {% set showSelectFieldForMonth = element.config.showSelectFieldForMonth.value %}
+    {% set showTwoMonthsSideBySide = element.config.showTwoMonthsSideBySide.value %}
+
+    {% if dateLocale == "de-DE" %}
+        {% set dateLocaleString = dateLocale %}
+    {% endif %}
+
+    {% if inputStartdate|replace({'[': '', ']': ""}) == "today" %}
+        {% set minDateValue = 'today' %}
+    {% elseif "+" in inputStartdate|replace({'[': '', ']': ""}) %}
+        {% if dateFormat == "Y-m-d" %}
+            {% set minDateValue = 'now'|date_modify(inputStartdate|replace({'[': '', ']': ""}))|date("Y-m-d") %}
+        {% elseif dateFormat == "d.m.Y" %}
+            {% set minDateValue = 'now'|date_modify(inputStartdate|replace({'[': '', ']': ""}))|date("d.m.Y") %}
+        {% endif %}
+    {% elseif ("." in inputStartdate|replace({'[': '', ']': ""})) %}
+        {% set minDateValue = inputStartdate|replace({'[': '', ']': ""}) %}
+    {% else %}
+        {% set minDateValue = '' %}
+    {% endif %}
+
+    {% if config('TmmsProductCustomerInputs.config.customerInputSetStartDateAsDefaultValue') %}
+        {% if(not(tmmsCustomerInputValue)) %}
+            {% set defaultDateValue = minDateValue %}
+        {% endif %}
+    {% endif %}
+
+    {% if inputEnddate|replace({'[': '', ']': ""}) == "today" %}
+        {% set maxDateValue = 'today' %}
+    {% elseif "+" in inputEnddate|replace({'[': '', ']': ""}) %}
+        {% if dateFormat == "Y-m-d" %}
+            {% set maxDateValue = 'now'|date_modify(inputEnddate|replace({'[': '', ']': ""}))|date("Y-m-d") %}
+        {% elseif dateFormat == "d.m.Y" %}
+            {% set maxDateValue = 'now'|date_modify(inputEnddate|replace({'[': '', ']': ""}))|date("d.m.Y") %}
+        {% endif %}
+    {% elseif ("." in inputEnddate|replace({'[': '', ']': ""})) %}
+        {% set maxDateValue = inputEnddate|replace({'[': '', ']': ""}) %}
+    {% else %}
+        {% set maxDateValue = '' %}
+    {% endif %}
+
+    {% if element.config.determineAvailableDatesFromRequests.value == true %}
+        {% if element.config.setOriginOfRequestManually.value == true %}
+            {% set originValue = "" %}
+            {% set originIdValue = "" %}
+
+            {% if element.config.originValue.value %}
+                {% set originValue = element.config.originValue.value %}
+            {% endif %}
+
+            {% if element.config.originIdValue.value %}
+                {% set originIdValue = element.config.originIdValue.value %}
+            {% endif %}
+
+            {% set getDisabledDatesOptions = {
+                dataurl: dataUrl,
+                placeholder: "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": placeholderDate}),
+                origin: originValue,
+                originid: originIdValue,
+                dateisrequired: required,
+                defaultdatevalue: defaultDateValue,
+                mindatevalue: minDateValue,
+                maxdatevalue: maxDateValue,
+                inputdisableddates: inputDisableddates,
+                dateformat: dateFormat,
+                showweeksnumbers: "tmms.periodRequestForm.date.showWeeksNumbers"|trans({"%showweeksnumbers%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldShowWeeksNumbers')}),
+                locale: dateLocaleString,
+                showperiodselection: showPeriodSelection,
+                showcalendarpermanentlyopen: showCalendarPermanentlyOpen,
+                showselectfieldformonth: showSelectFieldForMonth,
+                showtwomonthssidebyside: showTwoMonthsSideBySide,
+                formelementid: element.id
+            } %}
+        {% else %}
+            {% if controllerName|lower == "product" %}
+                {% set getDisabledDatesOptions = {
+                    dataurl: dataUrl,
+                    placeholder: "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": placeholderDate}),
+                    origin: "tmms.periodRequestForm.origin.productLabel"|trans,
+                    originid: page.product.id,
+                    dateisrequired: required,
+                    defaultdatevalue: defaultDateValue,
+                    mindatevalue: minDateValue,
+                    maxdatevalue: maxDateValue,
+                    inputdisableddates: inputDisableddates,
+                    dateformat: dateFormat,
+                    showweeksnumbers: "tmms.periodRequestForm.date.showWeeksNumbers"|trans({"%showweeksnumbers%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldShowWeeksNumbers')}),
+                    locale: dateLocaleString,
+                    showperiodselection: showPeriodSelection,
+                    showcalendarpermanentlyopen: showCalendarPermanentlyOpen,
+                    showselectfieldformonth: showSelectFieldForMonth,
+                    showtwomonthssidebyside: showTwoMonthsSideBySide,
+                    formelementid: element.id
+                } %}
+            {% elseif controllerName|lower == "navigation" %}
+                {% set getDisabledDatesOptions = {
+                    dataurl: dataUrl,
+                    placeholder: "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": placeholderDate}),
+                    origin: "tmms.periodRequestForm.origin.navigationLabel"|trans,
+                    originid: page.header.navigation.active.id,
+                    dateisrequired: required,
+                    defaultdatevalue: defaultDateValue,
+                    mindatevalue: minDateValue,
+                    maxdatevalue: maxDateValue,
+                    inputdisableddates: inputDisableddates,
+                    dateformat: dateFormat,
+                    showweeksnumbers: "tmms.periodRequestForm.date.showWeeksNumbers"|trans({"%showweeksnumbers%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldShowWeeksNumbers')}),
+                    locale: dateLocaleString,
+                    showperiodselection: showPeriodSelection,
+                    showcalendarpermanentlyopen: showCalendarPermanentlyOpen,
+                    showselectfieldformonth: showSelectFieldForMonth,
+                    showtwomonthssidebyside: showTwoMonthsSideBySide,
+                    formelementid: element.id
+                } %}
+            {% elseif controllerName|lower == "landingpage" %}
+                {% set getDisabledDatesOptions = {
+                    dataurl: dataUrl,
+                    placeholder: "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": placeholderDate}),
+                    origin: "tmms.periodRequestForm.origin.landingpageLabel"|trans,
+                    originid: page.navigationId,
+                    dateisrequired: required,
+                    defaultdatevalue: defaultDateValue,
+                    mindatevalue: minDateValue,
+                    maxdatevalue: maxDateValue,
+                    inputdisableddates: inputDisableddates,
+                    dateformat: dateFormat,
+                    showweeksnumbers: "tmms.periodRequestForm.date.showWeeksNumbers"|trans({"%showweeksnumbers%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldShowWeeksNumbers')}),
+                    locale: dateLocaleString,
+                    showperiodselection: showPeriodSelection,
+                    showcalendarpermanentlyopen: showCalendarPermanentlyOpen,
+                    showselectfieldformonth: showSelectFieldForMonth,
+                    showtwomonthssidebyside: showTwoMonthsSideBySide,
+                    formelementid: element.id
+                } %}
+            {% endif %}
+        {% endif %}
+
+        <div
+            class="form-datefield-container"
+            data-get-disabled-dates="true"
+            data-get-disabled-dates-options='{{ getDisabledDatesOptions|json_encode }}'>
+            <input
+                id="{{ id }}"
+                name="{{ fieldName }}"
+                {% if feature('ACCESSIBILITY_TWEAKS') %}aria-describedby="{{ areaDescribedBy }}"{% endif %}
+                type="text"
+                value=""
+                placeholder="{{ "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": element.config.labelDate.value}) }}"
+                {% if feature('ACCESSIBILITY_TWEAKS') %}
+                    {% if validationRules is not empty %}data-validation="{{ validationRules }}"{% endif %}
+                    {% if required %}aria-required="true" onkeydown="return false;" autocomplete="off"{% endif %}
+                {% endif %}
+                {% if not feature('ACCESSIBILITY_TWEAKS') %}
+                    {% if required %}required="required" onkeydown="return false;" autocomplete="off"{% endif %}
+                {% endif %}
+                class="form-control is-datefield"/>
+        </div>
+    {% else %}
+        <input
+            id="{{ id }}"
+            name="{{ fieldName }}"
+            {% if feature('ACCESSIBILITY_TWEAKS') %}aria-describedby="{{ areaDescribedBy }}"{% endif %}
+            type="text"
+            value=""
+            placeholder="{{ "tmms.periodRequestForm.date.datePlaceholder"|trans({"%labelDate%": element.config.labelDate.value}) }}"
+            {% if feature('ACCESSIBILITY_TWEAKS') %}
+                {% if validationRules is not empty %}data-validation="{{ validationRules }}"{% endif %}
+                {% if required %}aria-required="true" onkeydown="return false;" autocomplete="off"{% endif %}
+            {% endif %}
+            {% if not feature('ACCESSIBILITY_TWEAKS') %}
+                {% if required %}required="required" onkeydown="return false;" autocomplete="off"{% endif %}
+            {% endif %}
+            class="form-control is-datefield"
+            data-date-picker="true"
+            data-date-picker-options='{
+                "locale": "{{ app.request.locale }}",
+                {% if showCalendarPermanentlyOpen == true %}"inline": "true",{% endif %}
+                {% if showSelectFieldForMonth == false %}"monthSelectorType": "static",{% endif %}
+                {% if showTwoMonthsSideBySide == true %}"showMonths": 2,{% endif %}
+                "dateFormat": "{{ dateFormat }}",
+                "enableTime": "false",
+                "weekNumbers": "{{ "tmms.periodRequestForm.date.showWeeksNumbers"|trans({"%showweeksnumbers%": config('TmmsCmsElementPeriodRequestForm.config.dateFieldShowWeeksNumbers')}) }}",
+                "allowInput": {% if required %}"true"{% else %}"false"{% endif %},
+                {% if (defaultDateValue != "") %}
+                    "defaultDate": "{{ defaultDateValue }}",
+                {% endif %}
+                {% if (minDateValue != "") %}
+                    "minDate": "{{ minDateValue }}",
+                {% endif %}
+                {% if (maxDateValue != "") %}
+                    "maxDate": "{{ maxDateValue }}",
+                {% endif %}
+                {% if (inputDisableddates|replace({'[': '', ']': ""}) != "") %}
+                    "disable": [{{inputDisableddates|replace({'[': '', ']': ""}) }}],
+                {% endif %}
+                "mode": "{% if showPeriodSelection == true %}range{% else %}single{% endif %}",
+                "altInput": "false"
+           }'
+        />
+    {% endif %}
+
+    {% if feature('ACCESSIBILITY_TWEAKS') %}
+        <div
+            id="{{ feedbackId }}"
+            class="form-field-feedback">
+            {% if violationPath is not empty and formViolations.getViolations(violationPath) is not empty %}
+                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

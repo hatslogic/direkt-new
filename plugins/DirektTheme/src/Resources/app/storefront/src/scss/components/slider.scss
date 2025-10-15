@@ -11,7 +11,8 @@
         align-items: center;
         justify-content: center;
         transition: 0.3s;
-        top: 47%;
+        // top: 47%;
+        top: 37%;
         transform: translateY(-100%);
         &:hover{
             background: $secondary-color;

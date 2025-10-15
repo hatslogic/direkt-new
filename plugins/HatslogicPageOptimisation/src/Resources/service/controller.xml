@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="HatslogicPageOptimisation\Core\Controller\CriticalCssGenerationController" public="true">
+            <argument type="service" id="hatslogic.critical_assets.service.critical_css_generation_service" />
+            <argument type="service" id="HatslogicPageOptimisation\Service\NodeFinder" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="HatslogicPageOptimisation\Core\Controller\ImageConvertIntoWebpController" public="true">
+            <argument type="service" id="HatslogicPageOptimisation\Service\ConvertImagesToWebpService" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="HatslogicPageOptimisation\Core\Controller\GtmController" public="true">
+            <argument type="service" id="hatslogic.critical_assets.services.config_service" />
+            <argument type="service" id="HatslogicPageOptimisation\Service\NodeFinder" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        
+    </services>
+</container>

@@ -26,15 +26,30 @@
                             </div>
                         {% else %}
                             {% if subCategories|length == 0 and level == 0 %}
-                                {# Show image only for top-level categories with no subcategories #}
-                                <a class="navigation-imgmenu nav-item nav-link navigation-flyout-link is-level-{{ level }}" title="{{ name }}" href="{{ link }}" itemprop="url">
-                                    {% if treeItem.category.media %}
-                                        <img src="{{ treeItem.category.media.url }}" alt="{{ name }}" loading="lazy">
-                                    {% else %}
-                                        <img src="" alt="{{ name }}">
+                                {% if treeItem.category.customFields.custom_imagehide == "image-remover" %}
+                                    {# Show link and handle subcategories for all other cases #}
+                                    <a class="nav-item nav-link navigation-flyout-link is-level-{{ level }}{% if id == activeId or id in activePath %} active{% endif %}"
+                                    href="{{ link }}"
+                                    itemprop="url"
+                                    {% if category_linknewtab(treeItem.category) %}target="_blank"
+                                        {% if treeItem.category.linkType == 'external' %}rel="noopener noreferrer"{% endif %}
                                     {% endif %}
-                                    <span itemprop="name" class="d-block">{{ name }}</span>
-                                </a>
+                                    title="{{ name }}">
+                                        <span class="navigation-flyout-linkpointer">–</span>
+                                        <span itemprop="name">{{ name }}</span>
+                                    </a>
+                                {% else %}
+                                    {# Show image only for top-level categories with no subcategories #}
+                                    <a class="navigation-imgmenu nav-item nav-link navigation-flyout-link is-level-{{ level }}" title="{{ name }}" href="{{ link }}" itemprop="url">
+                                        {% if treeItem.category.media %}
+                                            <img src="{{ treeItem.category.media.url }}" alt="{{ name }}" title="{{ name }}" loading="lazy">
+                                        {% else %}
+                                            <img src="" alt="{{ name }}" title="{{ name }}">
+                                        {% endif %}
+                                        <span itemprop="name" class="d-block">{{ name }}</span>
+                                    </a>
+                                {% endif %}
+                                
                             {% else %}
                                 {# Show link and handle subcategories for all other cases #}
                                 <a class="nav-item nav-link navigation-flyout-link is-level-{{ level }}{% if id == activeId or id in activePath %} active{% endif %}"

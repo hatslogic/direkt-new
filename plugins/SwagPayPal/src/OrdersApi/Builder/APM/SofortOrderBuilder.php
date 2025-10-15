@@ -15,7 +15,7 @@ use Swag\PayPal\RestApi\V2\Api\Order\PaymentSource;
 use Swag\PayPal\RestApi\V2\Api\Order\PaymentSource\Sofort;
 
 /**
- * @deprecated tag:v10.0.0 - Will be removed.
+ * @deprecated tag:v10.0.0 - will be removed, payment method has been disabled
  */
 #[Package('checkout')]
 class SofortOrderBuilder extends AbstractAPMOrderBuilder
@@ -24,7 +24,7 @@ class SofortOrderBuilder extends AbstractAPMOrderBuilder
         SyncPaymentTransactionStruct $paymentTransaction,
         SalesChannelContext $salesChannelContext,
         RequestDataBag $requestDataBag,
-        PaymentSource $paymentSource
+        PaymentSource $paymentSource,
     ): void {
         $sourceElement = new Sofort();
         $this->fillPaymentSource($paymentTransaction, $salesChannelContext, $sourceElement);

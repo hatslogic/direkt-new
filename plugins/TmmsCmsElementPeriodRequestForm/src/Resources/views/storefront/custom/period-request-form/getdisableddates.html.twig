@@ -1,0 +1,65 @@
+{% set periodrequestformDisableddates = '' %}
+{% if periodrequestformEntries.total > 0 %}
+    {% for periodrequestformEntry in periodrequestformEntries.elements %}
+        {% set periodrequestformEntryDates = periodrequestformEntry.getDate()|replace({' bis': ''})|replace({' to': ''})|split(' ') %}
+        {% if ' bis ' in periodrequestformEntry.getDate() or ' to ' in periodrequestformEntry.getDate() %}
+            {% if locale == "de-DE" %}
+                {% set valueDateFormat = "d.m.Y" %}
+            {% elseif locale == "en-GB" %}
+                {% set valueDateFormat = "Y-m-d" %}
+            {% endif %}
+            {% set periodrequestformEntryDateStart = periodrequestformEntryDates[0]|date(valueDateFormat) %}
+            {% set periodrequestformEntryDateEnd = periodrequestformEntryDates[1]|date(valueDateFormat) %}
+            {% set differenceDaysBetweenDates = date(periodrequestformEntryDateEnd).diff(date(periodrequestformEntryDateStart)) %}
+            {% set differenceDaysBetweenDatesValue = differenceDaysBetweenDates.days %}
+            {% set periodrequestformDisableddates = periodrequestformDisableddates ~ '"' ~ periodrequestformEntryDateStart ~ '",' %}
+            {% for i in 1..differenceDaysBetweenDatesValue %}
+                {% set periodrequestformDisableddatesAdditionalDay = date(periodrequestformEntryDateStart)|date_modify("+" ~ i ~ " days")|date(valueDateFormat) %}
+                {% set periodrequestformDisableddates = periodrequestformDisableddates ~ '"' ~ periodrequestformDisableddatesAdditionalDay ~ '",' %}
+            {% endfor %}
+        {% else %}
+            {% if locale == "de-DE" %}
+                {% set valueDateFormat = "d.m.Y" %}
+            {% elseif locale == "en-GB" %}
+                {% set valueDateFormat = "Y-m-d" %}
+            {% endif %}
+            {% set periodrequestformDisableddates = periodrequestformDisableddates ~ '"' ~ periodrequestformEntry.getDate()|date(valueDateFormat) ~ '",' %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{%  set inputdisableddatesComplete = '' %}
+{% if inputdisableddates %}
+    {% set inputdisableddatesField = inputdisableddates|replace({'[': '', ']': ""}) %}
+    {% if periodrequestformDisableddates != "" %}
+        {% set inputdisableddatesComplete = periodrequestformDisableddates ~ inputdisableddatesField %}
+    {% else %}
+        {% set inputdisableddatesComplete = inputdisableddatesField %}
+    {% endif %}
+{% else %}
+    {% if periodrequestformDisableddates != "" %}
+        {% set inputdisableddatesComplete = periodrequestformDisableddates|slice(0, -1) %}
+    {% endif %}
+{% endif %}{
+    "locale": "{{ locale }}",
+    {% if showcalendarpermanentlyopen == "true" %}"inline": "true",{% endif %}
+    {% if showselectfieldformonth == "false" %}"monthSelectorType": "static",{% endif %}
+    {% if showtwomonthssidebyside == "true" %}"showMonths": 2,{% endif %}
+    "dateFormat": "{{ dateformat }}",
+    "enableTime": "false",
+    "weekNumbers": "{% if showweeksnumbers == 1 %}true{% else %}false{% endif %}",
+    "allowInput": {% if dateisrequired == "true" %}"true"{% else %}"false"{% endif %},
+    {% if (defaultdatevalue != "") %}
+        "defaultDate": "{{ defaultdatevalue }}",
+    {% endif %}
+    {% if (mindatevalue != "") %}
+        "minDate": "{{ mindatevalue }}",
+    {% endif %}
+    {% if (maxdatevalue != "") %}
+        "maxDate": "{{ maxdatevalue }}",
+    {% endif %}
+    {% if inputdisableddatesComplete != "" %}
+        "disable": [{{ inputdisableddatesComplete }}],
+    {% endif %}
+    "mode": "{% if showperiodselection == "true" %}range{% else %}single{% endif %}",
+    "altInput": "false"
+}

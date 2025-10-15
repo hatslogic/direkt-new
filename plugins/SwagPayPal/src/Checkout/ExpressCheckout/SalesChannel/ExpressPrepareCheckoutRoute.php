@@ -23,7 +23,7 @@ use Swag\PayPal\Checkout\Payment\PayPalPaymentHandler;
 use Swag\PayPal\RestApi\V2\Resource\OrderResource;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -39,7 +39,7 @@ class ExpressPrepareCheckoutRoute extends AbstractExpressPrepareCheckoutRoute
         private readonly AbstractSalesChannelContextFactory $salesChannelContextFactory,
         private readonly OrderResource $orderResource,
         private readonly CartService $cartService,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -49,7 +49,7 @@ class ExpressPrepareCheckoutRoute extends AbstractExpressPrepareCheckoutRoute
     }
 
     #[OA\Post(
-        path: '/store-api/paypal/express/prepare-checkout',
+        path: '/paypal/express/prepare-checkout',
         operationId: 'preparePayPalExpressCheckout',
         description: 'Logs in a guest customer, with the data of a paypal order',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [new OA\Property(
@@ -101,7 +101,7 @@ class ExpressPrepareCheckoutRoute extends AbstractExpressPrepareCheckoutRoute
 
             return new ContextTokenResponse($cart->getToken());
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['error' => $e, 'trace' => $e->getTraceAsString()]);
+            $this->logger->error($e->getMessage(), ['error' => $e]);
 
             throw $e;
         }

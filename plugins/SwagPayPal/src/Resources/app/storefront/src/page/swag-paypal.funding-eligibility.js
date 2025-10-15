@@ -1,56 +1,19 @@
 import HttpClient from 'src/service/http-client.service';
 import SwagPaypalAbstractButtons from '../swag-paypal.abstract-buttons';
 
+/**
+ * @deprecated tag:v10.0.0 - will extend SwagPaypalScriptBase instead
+ */
 export default class SwagPayPalFundingEligibility extends SwagPaypalAbstractButtons {
     static fundingSources = [
         'CARD',
         'SEPA',
         'VENMO',
         'PAYLATER',
-    ]
+    ];
 
     static options = {
-        /**
-         * This option holds the client id specified in the settings
-         *
-         * @type string
-         */
-        clientId: '',
-
-        /**
-         * This option holds the merchant id specified in the settings
-         *
-         * @type string
-         */
-        merchantPayerId: '',
-
-        /**
-         * This option specifies the language of the PayPal button
-         *
-         * @type string
-         */
-        languageIso: 'en_GB',
-
-        /**
-         * This options specifies the currency of the PayPal button
-         *
-         * @type string
-         */
-        currency: 'EUR',
-
-        /**
-         * This options defines the payment intent
-         *
-         * @type string
-         */
-        intent: 'capture',
-
-        /**
-         * This option toggles the PayNow/Login text at PayPal
-         *
-         * @type boolean
-         */
-        commit: true,
+        ...super.options,
 
         /**
          * Previously filtered payment methods
@@ -65,6 +28,15 @@ export default class SwagPayPalFundingEligibility extends SwagPaypalAbstractButt
          * @type string
          */
         methodEligibilityUrl: '',
+
+        /*
+         * Streamline options for listing pages, overriding the ones
+         * from swag-paypal.script-loading.js
+         */
+        useAlternativePaymentMethods: true,
+        commit: false,
+        scriptAwaitVisibility: true,
+        partOfDomContentLoading: false,
     };
 
     init() {
@@ -79,6 +51,14 @@ export default class SwagPayPalFundingEligibility extends SwagPaypalAbstractButt
         const unavailable = this.constructor.fundingSources.filter((sourceName) => {
             return !paypal.isFundingEligible(paypal.FUNDING[sourceName]);
         });
+
+        try {
+            if (!window.ApplePaySession?.supportsVersion(4) || !window.ApplePaySession?.canMakePayments()) {
+                unavailable.push('APPLEPAY');
+            }
+        } catch (e) {
+            unavailable.push('APPLEPAY');
+        }
 
         if (unavailable.sort().join(',') === this.options.filteredPaymentMethods.sort().join(',')) {
             return;

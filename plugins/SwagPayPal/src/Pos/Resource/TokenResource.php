@@ -27,7 +27,7 @@ class TokenResource
      */
     public function __construct(
         CacheItemPoolInterface $cache,
-        TokenClientFactory $tokenClientFactory
+        TokenClientFactory $tokenClientFactory,
     ) {
         $this->cache = $cache;
         $this->tokenClientFactory = $tokenClientFactory;
@@ -77,7 +77,7 @@ class TokenResource
 
     private function isTokenValid(Token $token): bool
     {
-        $dateTimeNow = new \DateTime();
+        $dateTimeNow = new \DateTime('now', new \DateTimeZone('UTC'));
         $dateTimeExpire = $token->getExpireDateTime();
         // Decrease expire date by one hour just to make sure, it doesn't run into an unauthorized exception.
         $dateTimeExpire = $dateTimeExpire->sub(new \DateInterval('PT1H'));

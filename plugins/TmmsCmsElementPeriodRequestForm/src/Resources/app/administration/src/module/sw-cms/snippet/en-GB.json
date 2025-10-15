@@ -1,0 +1,388 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "form": {
+                "periodRequestFormElement": {
+                    "label": "request form"
+                }
+            }
+        },
+        "elements": {
+            "periodRequestFormElement": {
+                "label": "request form",
+                "sendLabel": "send"
+            },
+            "componentPeriodRequestForm": {
+                "label": {
+                    "salutation": "salutation",
+                    "firstname": "first name",
+                    "lastname": "last name",
+                    "street": "street address",
+                    "zipcode": "postal code",
+                    "city": "city",
+                    "country": "country",
+                    "email": "email address",
+                    "phone": "phone number",
+                    "comment": "comment",
+                    "date": "period",
+                    "freeInput": "number of adults (13 years and older)",
+                    "freeInput2": "number of children (2 to 12 years)",
+                    "freeInput3": "number of infants (under 2 years)",
+                    "freeInput4": "number of pets",
+                    "freeInput5": "number of bedrooms",
+                    "freeInput6": "number of beds",
+                    "freeInput7": "number of bathrooms",
+                    "freeInput8": "accommodation standard",
+                    "freeInput9": "accommodation type",
+                    "freeInput10": "meals",
+                    "privacy": "data protection *",
+                    "requiredFields": "Fields marked with asterisks (*) are required.",
+                    "send": "send"
+                },
+                "placeholder": {
+                    "salutation": "select salutation ...",
+                    "firstname": "enter first name ...",
+                    "lastname": "enter last name ...",
+                    "street": "enter street address ...",
+                    "zipcode": "enter postal code ...",
+                    "city": "enter city ...",
+                    "country": "select country ...",
+                    "email": "enter email address ...",
+                    "phone": "enter phone number ...",
+                    "comment": "enter comment ...",
+                    "date": "select the period using the date selection ...",
+                    "freeInput": "select number of adults (13 years and older) ...",
+                    "freeInput2": "select number of children (2 to 12 years) ...",
+                    "freeInput3": "select number of infants (under 2 years) ...",
+                    "freeInput4": "select number of pets ...",
+                    "freeInput5": "select number of bedrooms ...",
+                    "freeInput6": "select number of beds ...",
+                    "freeInput7": "select number of bathrooms ...",
+                    "freeInput8": "select accommodation standard ...",
+                    "freeInput9": "select accommodation type ...",
+                    "freeInput10": "select meals ...",
+                    "freeInputText": "enter number of adults (13 years and older) ...",
+                    "freeInput2Text": "enter number of children (2 to 12 years) ...",
+                    "freeInput3Text": "enter number of infants (under 2 years) ...",
+                    "freeInput4Text": "enter number of pets ...",
+                    "freeInput5Text": "enter number of bedrooms ...",
+                    "freeInput6Text": "enter number of beds ...",
+                    "freeInput7Text": "enter number of bathrooms ...",
+                    "freeInput8Text": "enter accommodation standard ...",
+                    "freeInput9Text": "enter accommodation type ...",
+                    "freeInput10Text": "enter meals ...",
+                    "privacy": "By selecting continue you confirm that you have read our data protection information and accepted our general terms and conditions.",
+                    "privacyWithoutTermsOfService": "By selecting continue you confirm that you have read and agree to our data protection information."
+                }
+            },
+            "configPeriodRequestForm": {
+                "tab": {
+                    "content": "form structure",
+                    "freeinputs": "free input for the form",
+                    "settings": {
+                        "mail": "Sending the data by email",
+                        "savedata": "Save the data"
+                    },
+                    "contenttab" : {
+                        "periodRequestFormTitle": {
+                            "label": "title",
+                            "placeholder": "request form"
+                        },
+                        "periodRequestFormText": {
+                            "label": "text"
+                        },
+                        "salutationTitle": "salutation",
+                        "showSalutation": "show",
+                        "salutationIsRequired": "is a required field",
+                        "salutation": {
+                            "label": "available salutations (separated by commas)",
+                            "placeholder": "Mr,Mrs,Not specified"
+                        },
+                        "firstnameTitle": "first name",
+                        "showFirstname": "show",
+                        "firstnameIsRequired": "is a required field",
+                        "lastnameTitle": "last name",
+                        "showLastname": "show",
+                        "lastnameIsRequired": "is a required field",
+                        "streetTitle": "street address",
+                        "showStreet": "show",
+                        "streetIsRequired": "is a required field",
+                        "zipcodeTitle": "postal code",
+                        "showZipcode": "show",
+                        "zipcodeIsRequired": "is a required field",
+                        "cityTitle": "city",
+                        "showCity": "show",
+                        "cityIsRequired": "is a required field",
+                        "countryTitle": "country",
+                        "showCountry": "show",
+                        "countryIsRequired": "is a required field",
+                        "country": {
+                            "label": "available countries (separated by commas)",
+                            "placeholder": "Germany,Austria,Switzerland"
+                        },
+                        "emailTitle": "email address",
+                        "showEmail": "show",
+                        "emailIsRequired": "is a required field",
+                        "phoneTitle": "phone number",
+                        "showPhone": "show",
+                        "phoneIsRequired": "is a required field",
+                        "commentTitle": "comment field",
+                        "showComment": "show",
+                        "commentIsRequired": "is a required field",
+                        "showCommentAboveForm": "show above the form",
+                        "dateTitle": "date or period field",
+                        "showDate": "show",
+                        "dateIsRequired": "is a required field",
+                        "showDateAboveForm": "show above the form",
+                        "showPeriodSelection": "show period selection",
+                        "showSelectFieldForMonth": "show select field for the month in the one-month calendar",
+                        "showCalendarPermanentlyOpen": "show calendar permanently open",
+                        "alignCalendarCentrally": "align the permanently opened calendar centrally",
+                        "showTwoMonthsSideBySide": "show 2 months in the calendar side by side",
+                        "labelDate": {
+                            "label": "label of the field",
+                            "placeholder": "period"
+                        },
+                        "startdate": {
+                            "label": "start date of the field",
+                            "placeholder": "+2 days"
+                        },
+                        "enddate": {
+                            "label": "end date of the field",
+                            "placeholder": ""
+                        },
+                        "disableddates": {
+                            "label": "excluded dates in the field",
+                            "placeholder": "\"2021-04-01\",\"2021-05-01\""
+                        },
+                        "determineAvailableDatesFromRequests": "determine available, selectable data also from the requests",
+                        "privacyNoticeTitle": "data protection information",
+                        "showPrivacyNotice": "show",
+                        "privacyNoticeIsRequired": "is a required field",
+                        "privacyNoticeWithoutTermsOfService": "without terms of service",
+                        "useOwnSnippetForPrivacyNoticeText": "use your own snippet for the text",
+                        "requiredFieldsInfoTitle": "required fields information",
+                        "showRequiredFieldsInfo": "show",
+                        "submitButton": {
+                            "label": "text of the submit button",
+                            "placeholder": "Send"
+                        },
+                        "setOriginOfRequestManually": {
+                            "title": "manually set the origin of the request based on the form",
+                            "label": "yes"
+                        },
+                        "originValue": {
+                            "label": "origin (for example product, category or landingpage)",
+                            "placeholder": "product"
+                        },
+                        "originNameValue": {
+                            "label": "origin value (for example the name of the product, category or landing page)",
+                            "placeholder": "lakeside house | SWDEMO10000"
+                        },
+                        "originIdValue": {
+                            "label": "individual origin id",
+                            "placeholder": "b1cd5a42c3004b21bd691fde048b55d0"
+                        }
+                    },
+                    "freeinputstab" : {
+                        "freeInputsGeneralSettingsTitle": "general settings",
+                        "showFreeInputAboveForm": "show all free inputs above the form",
+                        "freeInputsSideBySide": {
+                            "label": "number of free inputs side by side",
+                            "value1Label": "1",
+                            "value2Label": "2",
+                            "value3Label": "3"
+                        },
+                        "defaultSelectPlaceholder": {
+                            "label": "general placeholder text for all selection fields",
+                            "placeholder": "Select ..."
+                        },
+                        "freeInputTitle": "first free input",
+                        "showFreeInput": "show",
+                        "freeInputIsRequired": "is a required field",
+                        "labelFreeInput": {
+                            "label": "label of the first free input",
+                            "placeholder": "number of adults (13 years and older)"
+                        },
+                        "freeInputType": {
+                            "label": "type of the first free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput": {
+                            "label": "values for the select field of the first free input (separated by commas)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle2": "second free input",
+                        "showFreeInput2": "show",
+                        "freeInput2IsRequired": "is a required field",
+                        "labelFreeInput2": {
+                            "label": "label of the second free input",
+                            "placeholder": "number of children (2 to 12 years)"
+                        },
+                        "freeInput2Type": {
+                            "label": "type of the second free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput2": {
+                            "label": "values for the select field of the second free input (separated by commas)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle3": "third free input",
+                        "showFreeInput3": "show",
+                        "freeInput3IsRequired": "is a required field",
+                        "labelFreeInput3": {
+                            "label": "label of the third free input",
+                            "placeholder": "number of infants (under 2 years)"
+                        },
+                        "freeInput3Type": {
+                            "label": "type of the third free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput3": {
+                            "label": "values for the select field of the third free input (separated by commas)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle4": "fourth free input",
+                        "showFreeInput4": "show",
+                        "freeInput4IsRequired": "is a required field",
+                        "labelFreeInput4": {
+                            "label": "label of the fourth free input",
+                            "placeholder": "number of pets"
+                        },
+                        "freeInput4Type": {
+                            "label": "type of the fourth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput4": {
+                            "label": "values for the select field of the fourth free input (separated by commas)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle5": "fifth free input",
+                        "showFreeInput5": "show",
+                        "freeInput5IsRequired": "is a required field",
+                        "labelFreeInput5": {
+                            "label": "label of the fifth free input",
+                            "placeholder": "number of bedrooms"
+                        },
+                        "freeInput5Type": {
+                            "label": "type of the fifth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput5": {
+                            "label": "values for the select field of the fifth free input (separated by commas)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle6": "sixth free input",
+                        "showFreeInput6": "show",
+                        "freeInput6IsRequired": "is a required field",
+                        "labelFreeInput6": {
+                            "label": "label of the sixth free input",
+                            "placeholder": "number of beds"
+                        },
+                        "freeInput6Type": {
+                            "label": "type of the sixth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput6": {
+                            "label": "values for the select field of the sixth free input (separated by commas)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle7": "seventh free input",
+                        "showFreeInput7": "show",
+                        "freeInput7IsRequired": "is a required field",
+                        "labelFreeInput7": {
+                            "label": "label of the seventh free input",
+                            "placeholder": "number of bathrooms"
+                        },
+                        "freeInput7Type": {
+                            "label": "type of the seventh free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput7": {
+                            "label": "values for the select field of the seventh free input (separated by commas)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle8": "eighth free input",
+                        "showFreeInput8": "show",
+                        "freeInput8IsRequired": "is a required field",
+                        "labelFreeInput8": {
+                            "label": "label of the eighth free input",
+                            "placeholder": "accommodation standard"
+                        },
+                        "freeInput8Type": {
+                            "label": "type of the eighth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput8": {
+                            "label": "values for the select field of the eighth free input (separated by commas)",
+                            "placeholder": "1,2,3,4,5"
+                        },
+                        "freeInputTitle9": "ninth free input",
+                        "showFreeInput9": "show",
+                        "freeInput9IsRequired": "is a required field",
+                        "labelFreeInput9": {
+                            "label": "label of the ninth free input",
+                            "placeholder": "accommodation type"
+                        },
+                        "freeInput9Type": {
+                            "label": "type of the ninth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput9": {
+                            "label": "values for the select field of the ninth free input (separated by commas)",
+                            "placeholder": "Hotel,vacation accommodation,apartment,private holiday home,guesthouse,residence"
+                        },
+                        "freeInputTitle10": "tenth free input",
+                        "showFreeInput10": "show",
+                        "freeInput10IsRequired": "is a required field",
+                        "labelFreeInput10": {
+                            "label": "label of the tenth free input",
+                            "placeholder": "meals"
+                        },
+                        "freeInput10Type": {
+                            "label": "type of the tenth free input",
+                            "selectLabel": "select field",
+                            "inputLabel": "input field",
+                            "textareaLabel": "textarea field"
+                        },
+                        "freeInput10": {
+                            "label": "values for the select field of the tenth free input (separated by commas)",
+                            "placeholder": "breakfast included,lunch included,dinner included,all inclusive"
+                        }
+                    },
+                    "settingstab" : {
+                        "periodRequestFormSendMail": "Sending the data by email to one or more recipients",
+                        "periodRequestFormMailReceiverName": {
+                            "label": "mail receiver names (separated by commas)",
+                            "placeholder": "John Doe,Jane Doe"
+                        },
+                        "periodRequestFormMailReceiverAdresses": {
+                            "label": "mail receivers (separated by commas and with no spaces)",
+                            "placeholder": "{'john@doe.com,jane@doe.com'}"
+                        },
+                        "periodRequestFormSendMailToRequester": "Sending the data by email to the requester",
+                        "periodRequestFormSaveData": "save data in the administration module"
+                    }
+                }
+            }
+        }
+    }
+}

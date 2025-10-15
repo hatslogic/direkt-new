@@ -35,7 +35,7 @@ use Swag\PayPal\RestApi\PartnerAttributionId;
 use Swag\PayPal\RestApi\V2\Api\Order;
 use Swag\PayPal\RestApi\V2\Resource\OrderResource;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -69,7 +69,7 @@ class CreateOrderRoute extends AbstractCreateOrderRoute
      * @throws CustomerNotLoggedInException
      */
     #[OA\Post(
-        path: '/store-api/paypal/create-order',
+        path: '/paypal/create-order',
         operationId: 'createPayPalOrder',
         description: 'Creates a PayPal order from the existing cart or an order',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
@@ -95,12 +95,13 @@ class CreateOrderRoute extends AbstractCreateOrderRoute
             )])
         )]
     )]
-    #[Route(path: '/store-api/paypal/create-order', name: 'store-api.paypal.create_order', methods: ['POST'])]
-    #[Route(path: '/store-api/subscription/paypal/create-order', name: 'store-api.subscription.paypal.create_order', defaults: ['_isSubscriptionCart' => true, '_isSubscriptionContext' => true], methods: ['POST'])]
+    #[Route(path: '/store-api/paypal/create-order', name: 'store-api.paypal.create_order', defaults: [AbstractOrderBuilder::PRELIMINARY_ATTRIBUTE => true], methods: ['POST'])]
+    #[Route(path: '/store-api/subscription/paypal/create-order', name: 'store-api.subscription.paypal.create_order', defaults: ['_subscriptionCart' => true, '_subscriptionContext' => true, AbstractOrderBuilder::PRELIMINARY_ATTRIBUTE => true], methods: ['POST'])]
     public function createPayPalOrder(SalesChannelContext $salesChannelContext, Request $request): TokenResponse
     {
         try {
             $requestDataBag = new RequestDataBag($request->request->all());
+            $requestDataBag->set(AbstractOrderBuilder::PRELIMINARY_ATTRIBUTE, true);
             $this->logger->debug('Started', ['request' => $requestDataBag->all()]);
             $customer = $salesChannelContext->getCustomer();
             if ($customer === null) {

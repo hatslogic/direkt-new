@@ -23,20 +23,24 @@ use Swag\PayPal\Util\LocaleCodeProvider;
 use Symfony\Component\Routing\RouterInterface;
 
 #[Package('checkout')]
-abstract class AbstractCheckoutDataService
+abstract class AbstractCheckoutDataService extends AbstractScriptDataService
 {
     public const PAYPAL_ERROR = 'isPayPalError';
+
+    protected AbstractMethodData $methodData;
 
     /**
      * @internal
      */
     public function __construct(
         private readonly PaymentMethodDataRegistry $paymentMethodDataRegistry,
-        private readonly LocaleCodeProvider $localeCodeProvider,
+        LocaleCodeProvider $localeCodeProvider,
         private readonly RouterInterface $router,
-        protected readonly SystemConfigService $systemConfigService,
-        protected readonly CredentialsUtilInterface $credentialsUtil
+        SystemConfigService $systemConfigService,
+        CredentialsUtilInterface $credentialsUtil,
     ) {
+        parent::__construct($localeCodeProvider, $systemConfigService, $credentialsUtil);
+        $this->methodData = $this->paymentMethodDataRegistry->getPaymentMethod($this->getMethodDataClass());
     }
 
     abstract public function buildCheckoutData(SalesChannelContext $context, ?Cart $cart = null, ?OrderEntity $order = null): ?AbstractCheckoutData;
@@ -48,24 +52,16 @@ abstract class AbstractCheckoutDataService
 
     protected function getBaseData(SalesChannelContext $context, ?OrderEntity $order = null): array
     {
-        $paymentMethodId = $this->paymentMethodDataRegistry->getEntityIdFromData(
-            $this->paymentMethodDataRegistry->getPaymentMethod($this->getMethodDataClass()),
-            $context->getContext()
-        );
-
-        $salesChannelId = $context->getSalesChannelId();
-        $customer = $context->getCustomer();
-
-        if ($customer === null) {
+        if ($context->getCustomer() === null) {
             throw CartException::customerNotLoggedIn();
         }
 
+        $paymentMethodId = $this->paymentMethodDataRegistry->getEntityIdFromData($this->methodData, $context->getContext());
+
+        $salesChannelId = $context->getSalesChannelId();
+
         $data = [
-            'clientId' => $this->credentialsUtil->getClientId($salesChannelId),
-            'merchantPayerId' => $this->credentialsUtil->getMerchantPayerId($salesChannelId),
-            'languageIso' => $this->getButtonLanguage($context),
-            'currency' => $context->getCurrency()->getIsoCode(),
-            'intent' => \mb_strtolower($this->systemConfigService->getString(Settings::INTENT, $salesChannelId)),
+            ...parent::getBaseData($context, $order),
             'buttonShape' => $this->systemConfigService->getString(Settings::SPB_BUTTON_SHAPE, $salesChannelId),
             'paymentMethodId' => $paymentMethodId,
             'createOrderUrl' => $context->hasExtension('subscription')
@@ -102,18 +98,5 @@ abstract class AbstractCheckoutDataService
         }
 
         return $data;
-    }
-
-    private function getButtonLanguage(SalesChannelContext $context): string
-    {
-        if ($settingsLocale = $this->systemConfigService->getString(Settings::SPB_BUTTON_LANGUAGE_ISO, $context->getSalesChannelId())) {
-            return $settingsLocale;
-        }
-
-        return \str_replace(
-            '-',
-            '_',
-            $this->localeCodeProvider->getLocaleCodeFromContext($context->getContext())
-        );
     }
 }

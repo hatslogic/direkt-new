@@ -132,4 +132,21 @@
             padding-bottom: rem(16);
         }
     }
+    .dk-product-downloads{
+        .offcanvas-header{
+            display: none;
+        }
+        .offcanvas-body{
+            ul{
+                padding-left: rem(24);
+            }
+            li{
+                border: 0;
+                margin-bottom: rem(4);
+            }
+            .product-detail-properties-title{
+                display: none;
+            }
+        }
+    }
 }

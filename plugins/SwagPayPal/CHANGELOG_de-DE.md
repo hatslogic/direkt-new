@@ -1,3 +1,109 @@
+# 9.8.2
+- Behebt ein Problem, bei dem Apple Pay aufgrund nicht unterstützte Zeichen im Anzeigenamen abbrechen konnte (shopware/SwagPayPal#331)
+
+# 9.8.1
+- Behebt ein Problem, bei dem der PayLater Button im Warenkorb nicht angezeigt wird (shopware/SwagPayPal#304)
+
+# 9.8.0
+- Fügt notwenige Zahlungsmittelinformationen zu E-Rechnungen hinzu (shopware/SwagPayPal#255)
+
+# 9.7.7
+- Behebt ein Problem, bei dem Anfragen an PayPal unendlich lange warten konnten. Die Anfragen sind jetzt auf 30 Sekunden begrenzt (shopware/SwagPayPal#262)
+- Behebt ein Problem, bei dem der Abstand zwischen Express Checkout Button und "Später bezahlen" Banner zu klein war (shopware/SwagPayPal#245)
+
+# 9.7.6
+- Behebt ein Problem, bei dem der Express Checkout auf bestimmten Seiten nicht korrekt angezeigt wurde (shopware/SwagPayPal#234)
+
+# 9.7.5
+- Behebt ein Problem, bei dem der PayLater Button auf einer Produktseite nicht angezeigt wird, wenn der Warenkorb leer ist (shopware/shopware#8356)
+- Behebt ein Problem, bei dem Vaulting-Zahlungen in bestimmten Fällen im Zahlungsprozess nach einer Bestellung nicht ausgeführt werden konnten
+- Behebt ein Problem, bei dem der Venmo Express-Button nicht angezeigt wurde
+- Behebt ein Problem, bei dem Bestellungen in Randfällen doppelt angelegt werden konnten (shopware/shopware#8359)
+- Fügt einen Link zum Melden von Bugs zu dem Kontextmenü der Erweiterungsliste hinzu
+
+# 9.7.4
+- Behebt ein Problem, bei dem die Eingabefelder des Modals für Rückerstattungen fehlen konnten
+
+# 9.7.3
+- Behebt ein Problem, bei dem Kartenfelder im Zahlungsprozess nach einer Bestellung nicht angezeigt wurden (shopware/shopware#7643)
+
+# 9.7.2
+- Behebt ein Problem, bei dem der Checkout als Gast nicht möglich war (shopware/SwagPayPal#165)
+
+# 9.7.1
+- Behebt ein Problem, bei dem Zahlungen nicht erstattet werden konnten (shopware/shopware#7644)
+
+# 9.7.0
+- PPI-1000 - Behebt ein Problem, bei dem 'Später Bezahlen' in Fällen angezeigt wird, in denen es nicht verfügbar sein sollte
+- PPI-1044 - Verbesserte Kompatibilität von Vaulting mit der Store-API und Headless
+- PPI-1073 - Verändert die Protokollierung von Fehlern während des Bestellvorganges
+- PPI-1076 - Verbesserte Informationsweitergabe in Express Checkout-API-Aufrufen
+- PPI-1077 - Verbesserte Verfügbarkeit von Google Pay und Apple Pay
+- PPI-1082 - Behebt ein Problem, bei dem Zeitzonenabweichungen zu Authentifizierungsproblemen führen konnten
+- PPI-1083 - Behebt ein Problem, bei dem der Express-Checkout mit aktivem Double Opt-In nicht möglich war
+
+# 9.6.5
+- PPI-1025 - Verbessert die Performance des Ratenzahlungsbanners in der Storefront
+- PPI-1043 - Behebt ein Problem, bei dem eine Zahlungsmethode doppelt umgeschalten wurde
+- PPI-1045 - Behebt ein Problem, bei dem in manchen Fällen die Zahlung nicht erstattbar war
+
+# 9.6.4
+- PPI-930 - Behebt ein Problem, bei dem bei einem ausgewähltem Verkaufskanal die vererbte Konfiguration nicht korrekt funktionierte
+- PPI-1013 - Verbessert die Zuverlässigkeit der Produktsynchronisation mit Zettle
+- PPI-1016 - Behebt ein Problem, bei dem Sendungsverfolgungsdaten aufgrund zu langer Produktnamen nicht an PayPal übermittelt wurden
+- PPI-1014 - Behebt ein Problem, bei dem Bilder mit Sonderzeichen nicht zu Zettle synchronisiert werden konnten
+- PPI-1024 - Behebt ein Problem, bei dem Kartenzahlungen aufgrund von inaktivem 3DS einer Karte fehlschlagen konnten
+
+# 9.6.3
+- PPI-1015 - Behebt ein Problem, bei dem PayPal-Einstellungen in der Administration nicht gespeichert werden konnten
+
+# 9.6.2
+- PPI-971 - Behebt ein Problem, bei dem Umlaute im Markennamen dazu führten, dass Apple Pay-Zahlungen abgebrochen wurden
+- PPI-999 - Behebt ein Problem, bei dem Überschreibungen von Administratorkomponenten das Speichern von Einstellungen blockieren konnten
+- PPI-1002 - Behebt ein Problem, bei dem der Apple Pay Domain Hinweis nicht korrekt angezeigt wurde
+- PPI-1008 - Behebt ein Problem, bei dem die Zahlungsstatusabfrage mit nicht existierenden Transaktionen weiterhin wiederholt wurde
+- PPI-1009 - Behebt ein Problem, bei dem PayPal Plus im Checkout nicht angezeigt werden konnte
+- PPI-1010 - Behebt ein Problem, bei dem das kompilierte CSS in Kombination mit anderen Erweiterungen Syntaxfehler enthalten konnte
+
+# 9.6.1
+- PPI-942 - Behebt ein Problem, bei dem Cookies trotz deaktiviertem Google Pay im Cookie-Banner angezeigt wurden
+- PPI-957 - Fügt Schnell-Links zum Kontext-Menü der Erweiterung und der PayPal Einstellungen hinzu
+- PPI-991 - Behebt ein Problem, bei dem Trustly fälschlicherweise zur Auswahl stand
+- PPI-995 - Behebt ein Problem, bei dem der Zettle-Einrichtungsassistent nicht korrekt beendet werden konnte
+- PPI-996 - Behebt ein Problem, bei dem PayPal-Buttons mit bestimmten Themes während des Checkouts verschwinden konnten
+
+# 9.6.0
+- PPI-922 - Verbessert die Sichtbarkeit von Apple Pay für nicht unterstützte Browser und Geräte
+- PPI-978 - Trustly für weitere kompatible Länder & Währungen freigeschaltet
+- PPI-979 - Behebt ein Problem, bei dem PUI für Kunden ohne Geburtsdatum im Zahlartwechsel nach Bestellabschluss nicht funktioniert hat
+- PPI-981 - Behebt ein Problem, bei dem der Zahlungsstatus manchmal nicht korrekt auf Fehlgeschlagen gesetzt wurde, wenn die Kommunikation mit PayPal fehlschlug
+- PPI-987 - Behebt ein Problem, bei dem Zettle Verkaufskanäle nicht erstellt oder deren Zugangsdaten geändert werden konnten
+- PPI-988 - Behebt ein Problem, bei dem SEPA, Karten und Venmo im Checkout nicht erschienen
+
+# 9.5.0
+- PPI-958 - Behebt ein Problem, bei dem die API-Zugangsdaten-Prüfung bei ungültiger Merchant-Payer-ID erfolgreich war
+- PPI-960 - Express-Checkout-Buttons sind nun auch bei aktiviertem Double-Opt-In verfügbar, eine Warnung wird in den Einstellungen angezeigt
+- PPI-961 - Behebt ein Problem, bei dem die Einstellung des 'Später Bezahlen'-Banner auf Loginseite nicht gespeichert wurde
+- PPI-965 - Behebt ein Problem, bei dem ein Fehler im Checkout zu einem dauerhaften Neuladen der Seite führen konnte, wenn SwagCommercial installiert ist
+
+# 9.4.0
+- PPI-807 - Verbessert die Ladezeit der Scripte in der Storefront
+- PPI-924 - Fügt genauere Fehlermeldungen für Fehler während des Express Checkouts hinzu
+- PPI-929 - Fügt Onboarding-Informationen für die Zahlungsarten Apple und Google Pay hinzu
+- PPI-950 - Ändert das Versanddienstleister-Feld in der Administration zu einem Dropdown
+- PPI-951 - Behebt ein Problem, bei dem ohne Smart Payment Buttons nur generische Fehlermeldungen während des Bestellprozesses angezeigt wurden
+- PPI-953 - Behebt ein Problem, bei dem Sendungsverfolgungsdaten bei invaliden Versanddienstleister nicht an PayPal übermittelt wurden
+- PPI-956 - Verbessert das Logging und die Fehlerbehandlung für Händlereinstellungen
+
+# 9.3.1
+- PPI-944 - Behebt ein Problem, bei dem die Abfrage des Zahlungsstatus bei invaliden Transaktionen weiter versucht wurde
+- PPI-945 - Behebt ein Problem, bei dem ausgeschlossene Produkte nicht korrekt in der Administration angezeigt wurden
+- PPI-947 - Behebt ein Problem, bei dem Smart Payment Buttons möglicherweise nicht konfigurierbar waren
+- PPI-948 - Entfernt die nicht mehr unterstützte Giropay-Zahlungsart
+
+# 9.3.0
+- PPI-934 - Übermittlung von Sendungsverfolgungsdaten auf neue PayPal-API-Endpunkte umgezogen
+
 # 9.2.0
 - PPI-666 - Zusätzliche Informationen auf Rechnung für Rechnungskäufe hinzugefügt
 - PPI-924 - Explizitere Fehlermeldungen für Fehler beim Checkout hinzugefügt (z.B. Postleitzahl fehlt)
@@ -30,7 +136,7 @@
 
 # 9.0.0
 - PPI-830 - Kompatibilität mit Shopware 6.6 und Symfony 7 hinzugefügt
-- PPI-857 - Technische Namen für PayPal-Zahlungsarten hinzugefügt 
+- PPI-857 - Technische Namen für PayPal-Zahlungsarten hinzugefügt
 
 # 8.0.0
 - PPI-763 - "Später bezahlen" Banner wird unterhalb des Preises auf der Produktdetailseite angezeigt
@@ -128,7 +234,7 @@
 # 5.4.1
 - PPI-716 - Behebt einen Fehler beim Update, falls Verfügbarkeits-Regel noch in Benutzung sind
 
-# 5.4.0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+# 5.4.0
 - PPI-707 - Behebt ein Problem, bei dem während des Bestellvorgangs mit "Später bezahlen", "SEPA" and "Venmo" ein Fehler auftrat
 - PPI-712 - Handhabung von Zahlungsmethodenverfügbarkeit verbessert, existierende Verfügbarkeitsregeln entfernt
 - PPI-713 - Verwendung von 3D Secure für Kreditkartenzahlungen verbessert
@@ -354,7 +460,7 @@
 - PPI-68, PPI-118, PPI-136 - API-Objekt-Nutzung für Dritt-Erweiterungen verbessert
 - PPI-69 - Der Express-Button wird nun ausgeblendet, wenn die PayPal-Zahlungsmethode deaktiviert ist
 - PPI-97 - Korrigiert Fehler beim Express Checkout, wenn erforderliche Felder nicht von PayPal gesendet werden
-- PPI-124 - Korrigiert Weitergabe von Fehlern während der Kommunikation mit PayPal 
+- PPI-124 - Korrigiert Weitergabe von Fehlern während der Kommunikation mit PayPal
 - PPI-128 - Korrigiert Problem beim Express Checkout bei Änderungen auf der Bestellbestätigungsseite
 - PPI-130 - Neues Event hinzugefügt, welches geworfen wird, wenn der Plus-iFrame geladen ist
 - PT-11048 - iZettle-Integration (Point of Sales) hinzugefügt

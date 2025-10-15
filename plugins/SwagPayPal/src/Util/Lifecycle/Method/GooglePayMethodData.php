@@ -26,6 +26,9 @@ class GooglePayMethodData extends AbstractMethodData implements CheckoutDataMeth
 
     public const PAYPAL_GOOGLE_PAY_FIELD_DATA_EXTENSION_ID = 'payPalGooglePayFieldData';
 
+    /**
+     * @deprecated tag:v10.0.0 - Will be removed, no longer used
+     */
     public const AVAILABLE_COUNTRIES = ['AU', 'AT', 'BE', 'BG', 'CA', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'US', 'GB'];
 
     public const AVAILABLE_CURRENCIES = ['AUD', 'BRL', 'CAD', 'CHF', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HUF', 'ILS', 'JPY', 'MXN', 'NOK', 'NZD', 'PHP', 'PLN', 'SEK', 'SGD', 'THB', 'TWD', 'USD'];
@@ -67,8 +70,7 @@ class GooglePayMethodData extends AbstractMethodData implements CheckoutDataMeth
 
     public function isAvailable(AvailabilityContext $availabilityContext): bool
     {
-        return \in_array($availabilityContext->getCurrencyCode(), self::AVAILABLE_CURRENCIES, true)
-            && \in_array($availabilityContext->getBillingCountryCode(), self::AVAILABLE_COUNTRIES, true);
+        return \in_array($availabilityContext->getCurrencyCode(), self::AVAILABLE_CURRENCIES, true);
     }
 
     public function getInitialState(): bool
@@ -93,7 +95,13 @@ class GooglePayMethodData extends AbstractMethodData implements CheckoutDataMeth
 
     public function validateCapability(MerchantIntegrations $merchantIntegrations): string
     {
-        if ($merchantIntegrations->getSpecificCapability('GOOGLE_PAY')?->getStatus() === Capability::STATUS_ACTIVE) {
+        $capability = $merchantIntegrations->getSpecificCapability('GOOGLE_PAY');
+
+        if ($capability === null) {
+            return self::CAPABILITY_INACTIVE;
+        }
+
+        if ($capability->getStatus() === Capability::STATUS_ACTIVE) {
             return self::CAPABILITY_ACTIVE;
         }
 

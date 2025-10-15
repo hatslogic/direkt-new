@@ -16,7 +16,7 @@ use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Swag\PayPal\DataAbstractionLayer\VaultTokenMapping\VaultTokenMappingCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -38,7 +38,7 @@ class ClearVaultRoute extends AbstractClearVaultRoute
     }
 
     #[OA\Post(
-        path: '/store-api/paypal/vault/clear',
+        path: '/paypal/vault/clear',
         operationId: 'paypalVaultClear',
         description: 'Clears the vault for the current customer',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [

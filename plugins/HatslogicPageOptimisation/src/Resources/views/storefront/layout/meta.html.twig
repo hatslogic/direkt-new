@@ -1,0 +1,49 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+
+    {% set enableTypography = config('HatslogicPageOptimisation.config.EnableTypography') %}
+    {% if enableTypography %}
+        {{ config('HatslogicPageOptimisation.config.TypegraphyCode')|raw }}
+    {% endif %}
+    {% set enableGtmOptimization = config('HatslogicPageOptimisation.config.EnableGTMOptimization') %}
+    {% if enableGtmOptimization %}
+        <script src="/~partytown/partytown.js"></script>
+    {% endif %}
+
+    {% set enableCriticalCss = config('HatslogicPageOptimisation.config.EnableCriticalCss') %}
+    {% if enableCriticalCss %}
+        <!--hatslogic optimization-->
+        <!--criticalcss-->
+        {% if isHMRMode %}
+        {% else %}
+            {% set assets = theme_config('assets.css') %}
+            {% for file in assets %}
+                <link rel="preload" 
+                    href="{{ asset(file, 'theme') }}" 
+                    as="style" 
+                    onload="this.onload=null;this.rel='stylesheet'">
+                <noscript><link rel="stylesheet" href="{{ asset(file, 'theme') }}"></noscript>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+            {% if isHMRMode %}
+            {% else %}
+                {% set assets = theme_config('assets.css') %}
+                {% for file in assets %}
+                    <link rel="stylesheet"
+                      href="{{ asset(file, 'theme') }}">
+                {% endfor %}
+            {% endif %}
+    {% endif %}
+
+    {% block optimization_block_before_body_custom_js %}
+        {% if enableGtmOptimization %}
+            {% set customJsConfig = config('HatslogicPageOptimisation.config.GoogleTagScriptBeforeBody') %}
+            {% if customJsConfig %}
+                {% set customJsConfigUpdated = customJsConfig|replace({'<script ': '<script type="text/partytown" '}) %}
+                {{ customJsConfigUpdated|raw }}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -71,4 +71,40 @@
             font-weight: 600;
         }
     }
+    // 
+    &-banner{
+        margin-bottom: rem(60);
+        @include media-breakpoint-down(md){
+            margin-bottom: rem(40);
+        }
+        .cms-image-container{
+            min-height: rem(400);
+            @include media-breakpoint-down(md){
+                min-height: rem(250);
+            }
+        }
+        .background-wrap{
+            opacity: 0.5;
+        }
+        .cta-element__foreground{
+            justify-content: center;
+            min-height: rem(500);
+            h1{
+                font-size: rem(40);
+                font-weight: 700;
+            }
+            @include media-breakpoint-down(lg){
+                min-height: rem(400);
+                h1{
+                    font-size: rem(30);
+                }
+            }
+            @include media-breakpoint-down(md){
+                min-height: rem(300);
+                h1{
+                    font-size: rem(35);
+                }
+            }
+        }
+    }
 }

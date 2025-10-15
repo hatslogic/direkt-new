@@ -1,0 +1,35 @@
+{# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+{% macro buildPrice(product, configValue) %}
+    {% if configValue === true and product.tax.taxRate and product.tax.taxRate != 0 %}
+        {% set calculatedCheapestPrice = product.calculatedCheapestPrice %}
+        {% if calculatedCheapestPrice is not null %}
+            {% set netPrice = calculatedCheapestPrice.unitPrice / (100 + product.tax.taxRate) * 100 %}
+            {% return netPrice|round(2) %}
+        {% endif %}
+
+        {% set calculatedPrice = product.calculatedPrices.first|default(product.calculatedPrice) %}
+        {% set netPrice = calculatedPrice.unitPrice / (100 + product.tax.taxRate) * 100 %}
+        {% return netPrice|round(2) %}
+    {% else %}
+        {% set calculatedPrice = product.calculatedPrices.first|default(product.calculatedPrice) %}
+        {% return calculatedPrice.unitPrice %}
+    {% endif %}
+{% endmacro %}
+
+{% macro buildLineitemPrice(lineitem, configValue) %}
+    {% if configValue === true %}
+        {% for tax in lineitem.price.taxRules %}
+            {% if tax.taxRate and tax.taxRate != 0 %}
+                {% set price = lineitem.price.unitPrice %}
+                {% set netPrice = price / (100 + tax.taxRate) * 100 %}
+                {% return netPrice|round(2) %}
+            {% else %}
+                {% set price = lineitem.price.unitPrice %}
+                {% return price %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% set price = lineitem.price.unitPrice %}
+        {% return price %}
+    {% endif %}
+{% endmacro %}

@@ -64,15 +64,15 @@
 							{% block element_product_slider_controls %}
 								<div class="product-slider-controls-container">
 									{% if sliderConfig.navigation.value %}
-										<div class="base-slider-controls" data-recently-viewed-slider-controls="true">
+										<div class="base-slider-controls" data-recently-viewed-slider-controls="true"  role="region">
 											{% block element_product_slider_controls_items %}
-												<button class="base-slider-controls-prev recent-view-slider__controls_prev{% if sliderConfig.border.value %} has-border{% endif %} start-0">
+												<button class="base-slider-controls-prev recent-view-slider__controls_prev{% if sliderConfig.border.value %} has-border{% endif %} start-0" aria-label="previous button">
 													{% block element_product_slider_controls_items_prev_icon %}
 														{# {% sw_icon 'arrow-head-left' %} #}
                                                         <span class="icon icon-arrow"></span>
 													{% endblock %}
 												</button>
-												<button class="base-slider-controls-next recent-view-slider__controls_next{% if sliderConfig.border.value %} has-border{% endif %} end-0">
+												<button class="base-slider-controls-next recent-view-slider__controls_next{% if sliderConfig.border.value %} has-border{% endif %} end-0" aria-label="next button">
 													{% block element_product_slider_controls_items_next_icon %}
 														{# {% sw_icon 'arrow-head-right' %} #}
                                                         <span class="icon icon-arrow"></span>

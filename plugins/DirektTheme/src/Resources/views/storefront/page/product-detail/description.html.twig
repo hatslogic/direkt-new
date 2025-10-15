@@ -53,23 +53,17 @@
                         <a class="product-enquiry  d-block" href="{{customurl}}Mb-seal">
                             <span class="icon icon-down-arrow"></span>
                             <span class="product-enquiry-link">
-                                {{ "product-enquiry.product-detail.article"|trans }}
+                                {{ "product-enquiry.product-detail.mbsealArticle"|trans }}
                             </span>
                         </a>
                     {% endif %}
                 </div>
             {% endblock %}
             {% block component_product_download_links %}
-                <div class="my-4 dk-product-detail-links">
+                <div class="mt-4 dk-product-detail-links">
                     <div class="h3 product-detail-description-title">
                     {{ 'detail.downloadLink'|trans|sw_sanitize }}
                     </div>
-                    <a class="product-enquiry d-block" href="/product-enquiry?product={{ page.product.id }}" target="_blank">
-                        <span class="icon icon-down-arrow"></span>
-                        <span class="product-enquiry-link">
-                            {{"product-enquiry.product-detail.link"|trans}}
-                        </span>
-                    </a>
                 </div>
             {% endblock %}
         </div>

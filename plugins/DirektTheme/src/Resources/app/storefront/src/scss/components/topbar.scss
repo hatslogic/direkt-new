@@ -1,5 +1,5 @@
 .top-bar{
-    background-color: var(--topbar-bg);
+    background-color: $topbar-color;
 
     .language-flag{
         border: 0;
@@ -37,6 +37,53 @@
         top: 0;
         z-index: 5;
         animation: HeaderSlideDown 0.35s ease-in;
+    }
+    .top-bar-nav{
+        display: none;
+    }
+    .dk-topbar{
+        &-features{
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 0;
+            li{
+                margin-right: rem(16);
+                font-size: rem(14);
+            }
+            .icon{
+                margin-right: rem(2);
+                &::before{
+                    display: flex;
+                    align-items: center;
+                    font-size: rem(14);
+                }
+            }
+        }
+        &-contact{
+            .icon{
+                margin-right: rem(4);
+                &::before{
+                    display: flex;
+                    align-items: center;
+                    font-size: rem(14);
+                }
+            }
+            .btn{
+                font-weight: 400;
+                transition: 0.35s;
+                &:hover{
+                    text-decoration: none;
+                    color: $primary-button-color;
+                }
+            }
+            .dropdown-item{
+                transition: 0.35s;
+                &:hover{
+                    background-color: transparent;
+                    color: $primary-button-color;
+                }
+            }
+        }
     }
 }
 

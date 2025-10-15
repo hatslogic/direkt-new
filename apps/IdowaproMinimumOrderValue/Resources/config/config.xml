@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Minimum order value for the cart</title>
+        <title lang="de-DE">Mindestbestellwert für den Warenkorb</title>
+        <input-field type="bool">
+            <name>isActive</name>
+            <label>Activate minimum order value for this sales channel</label>
+            <label lang="de-DE">Mindestbestellwert für diesen Verkaufskanal aktivieren</label>
+            <defaultValue>1</defaultValue>
+        </input-field>
+        <input-field type="float">
+            <name>minimalOrderValue</name>
+            <label>Minimum order value in the currency of the sales channel</label>
+            <label lang="de-DE">Mindestbestellwert in der Währung des Verkaufskanals</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>isValueWithShippingCost</name>
+            <label>Minimum order value incl. shipping costs</label>
+            <label lang="de-DE">Mindestbestellwert inkl. Versandkosten</label>
+            <defaultValue>1</defaultValue>
+        </input-field>
+    </card>
+</config>

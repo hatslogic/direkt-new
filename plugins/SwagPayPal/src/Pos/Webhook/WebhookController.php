@@ -17,8 +17,10 @@ use Shopware\Core\System\SalesChannel\SalesChannelEntity;
 use Swag\PayPal\Pos\Api\Webhook\Webhook;
 use Swag\PayPal\Pos\Util\PosSalesChannelTrait;
 use Swag\PayPal\Pos\Webhook\Exception\WebhookException;
+use Swag\PayPal\Pos\Webhook\Exception\WebhookHandlerNotFoundException;
 use Swag\PayPal\Pos\Webhook\Exception\WebhookIdInvalidException;
 use Swag\PayPal\Pos\Webhook\Exception\WebhookNotRegisteredException;
+use Swag\PayPal\RestApi\Exception\PayPalApiException;
 use Swag\PayPal\SwagPayPal;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['api']])]
@@ -40,12 +42,12 @@ class WebhookController extends AbstractController
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly WebhookService $webhookService,
-        private readonly EntityRepository $salesChannelRepository
+        private readonly EntityRepository $salesChannelRepository,
     ) {
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal/pos/webhook/registration/{salesChannelId}',
+        path: '/_action/paypal/pos/webhook/registration/{salesChannelId}',
         operationId: 'registerPosWebhook',
         tags: ['Admin Api', 'SwagPayPalPosWebhook'],
         parameters: [new OA\Parameter(
@@ -65,7 +67,7 @@ class WebhookController extends AbstractController
     }
 
     #[OA\Delete(
-        path: '/api/_action/paypal/pos/webhook/registration/{salesChannelId}',
+        path: '/_action/paypal/pos/webhook/registration/{salesChannelId}',
         operationId: 'deregisterPosWebhook',
         tags: ['Admin Api', 'SwagPayPalPosWebhook'],
         parameters: [new OA\Parameter(
@@ -85,7 +87,7 @@ class WebhookController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal/pos/webhook/execute/{salesChannelId}',
+        path: '/_action/paypal/pos/webhook/execute/{salesChannelId}',
         operationId: 'executePosWebhook',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: Webhook::class)),
         tags: ['Admin Api', 'SwagPayPalPosWebhook'],
@@ -157,23 +159,32 @@ class WebhookController extends AbstractController
 
     /**
      * @throws BadRequestHttpException
+     * @throws PayPalApiException
      */
     private function tryToExecuteWebhook(Webhook $webhook, SalesChannelEntity $salesChannel, Context $context): void
     {
+        $logContext = ['type' => $webhook->getEventName(), 'webhook' => \json_encode($webhook)];
+
         try {
             $this->webhookService->executeWebhook($webhook, $salesChannel, $context);
+            $this->logger->info('[Zettle Webhook] Webhook successfully executed', $logContext);
+        } catch (WebhookHandlerNotFoundException $exception) {
+            $this->logger->info(\sprintf('[Zettle Webhook] %s', $exception->getMessage()), $logContext);
         } catch (WebhookException $webhookException) {
-            $this->logger->error(
-                '[Zettle Webhook] ' . $webhookException->getMessage(),
-                [
-                    'type' => $webhookException->getEventName(),
-                    'webhook' => \json_encode($webhook),
-                ]
-            );
+            $this->logger->error(\sprintf('[Zettle Webhook] %s', $webhookException->getMessage()), $logContext);
 
             throw new BadRequestHttpException('An error occurred during execution of webhook');
         } catch (\Throwable $e) {
-            $this->logger->error('[Zettle Webhook] ' . $e->getMessage());
+            if ($e instanceof PayPalApiException && $e->is(PayPalApiException::ERROR_CODE_RESOURCE_NOT_FOUND)) {
+                $this->logger->warning(\sprintf('[Zettle Webhook] %s', $e->getMessage()), $logContext);
+
+                return;
+            }
+
+            $this->logger->error(
+                \sprintf('[Zettle Webhook] %s', $e->getMessage()),
+                [...$logContext, 'error' => $e],
+            );
 
             throw new BadRequestHttpException('An error occurred during execution of webhook');
         }

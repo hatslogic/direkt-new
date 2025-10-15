@@ -36,7 +36,7 @@ abstract class AbstractSyncHandler
         RunService $runService,
         LoggerInterface $logger,
         MessageDispatcher $messageBus,
-        MessageHydrator $messageHydrator
+        MessageHydrator $messageHydrator,
     ) {
         $this->runService = $runService;
         $this->logger = $logger;
@@ -57,7 +57,7 @@ abstract class AbstractSyncHandler
             $this->messageHydrator->hydrateMessage($message);
             $this->sync($message);
         } catch (\Throwable $e) {
-            $this->logger->critical($e->__toString());
+            $this->logger->critical($e->getMessage(), ['error' => $e]);
             $this->runService->finishRun($runId, $context, PosSalesChannelRunDefinition::STATUS_CANCELLED);
         } finally {
             $this->runService->decrementMessageCount($runId);

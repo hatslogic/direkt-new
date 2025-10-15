@@ -1,0 +1,8 @@
+{
+    "idowapro": {
+        "minimumOrderValue": {
+            "notReached": "The minimum order amount of %minimumOrderValue% was not reached yet. Please add more products to your cart proceed the checkout.",
+            "notReachedWithShippingCost": "The minimum order amount of %minimumOrderValue% was not reached yet. Please add more products to your cart proceed the checkout."
+        }
+    }
+}

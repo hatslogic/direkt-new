@@ -10,8 +10,8 @@ if(searchBtn){
         searchOuter.classList.toggle('active');
         searchOuter.querySelector('.header-search-input').focus();
     })
-    searchClose.addEventListener('click', () => {
-        searchOuter.classList.remove('active');
-        searchWrapper.classList.remove('search-active');
-    })
+    // searchClose.addEventListener('click', () => {
+    //     searchOuter.classList.remove('active');
+    //     searchWrapper.classList.remove('search-active');
+    // })
 }

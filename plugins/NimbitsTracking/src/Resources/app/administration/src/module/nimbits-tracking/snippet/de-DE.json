@@ -1,0 +1,86 @@
+{
+  "nimbits-tracking": {
+    "date": {
+      "format": "j. F Y",
+      "till": "bis"
+    },
+    "module": {
+      "name": "Tracking",
+      "title": "Tracking"
+    },
+    "navigation": {
+      "label": "Tracking",
+      "button": {
+        "reload": "Daten neu laden",
+        "export": "CSV exportieren"
+      }
+    },
+    "general": {
+      "mainMenuItemGeneral": "Tracking",
+      "descriptionTextModule": "Mit diesem Modul können Sie sehen, wie viele Benutzer über Referrer gekommen sind und wie viel Geld sie ausgeben."
+    },
+    "charts": {
+      "registrations": {
+        "options": {
+          "header": "Registrierte Kunden nach Referrer",
+          "tooltip": "Registrierung(en)",
+          "legend": {
+            "content": "Registrierung(en) durch",
+            "empty": "Registrierung(en) ohne Referrer",
+            "total": "Registrierung(en) gesamt"
+          }
+        },
+        "empty": "Keine durch Referrer entstandene Registrierungen im gewählten Zeitraum gefunden"
+      },
+      "orders": {
+        "options": {
+          "header": "Bestellungen nach Referrer",
+          "tooltip": "Bestellung(en)",
+          "legend": {
+            "content": "Bestellung(en) durch",
+            "empty": "Bestellung(en) ohne Referrer",
+            "total": "Bestellung(en) gesamt"
+          }
+        },
+        "empty": "Keine durch Referrer entstandene Bestellungen im gewählten Zeitraum"
+      },
+      "sales": {
+        "options": {
+          "header": "Umsatz nach Referrer"
+        },
+        "series": {
+          "name": "Umsatz"
+        },
+        "empty": "Keine durch Referrer entstandene Umsätze im gewählten Zeitraum",
+        "noreferrer": "Ohne Referrer"
+      },
+      "requests": {
+        "options": {
+          "header": "Anfrage(n) nach Referrer",
+          "tooltip": "Anfrage(n)",
+          "legend": {
+            "content": "Anfrage(n) durch",
+            "empty": "Anfrage(n) ohne Referrer",
+            "total": "Anfrage(n) gesamt"
+          }
+        },
+        "empty": "Keine Anfragen im gewählten Zeitraum"
+      },
+      "visitors": {
+        "options": {
+          "header": "Besucher nach Referrer",
+          "tooltip": "Besucher",
+          "legend": {
+            "content": "Besucher durch",
+            "empty": "Besucher ohne Referrer",
+            "total": "Besucher gesamt"
+          }
+        },
+        "empty": "Keine Besucher im gewählten Zeitraum (Die Daten werden alle 5 Minuten aktualisiert.)"
+      }
+    },
+    "subline": {
+      "fiveMinuteReload": "Die Daten werden alle 5 Minuten aktualisiert"
+    }
+  }
+}

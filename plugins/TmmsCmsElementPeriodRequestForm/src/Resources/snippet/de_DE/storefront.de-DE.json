@@ -1,0 +1,72 @@
+{
+    "tmms": {
+        "periodRequestForm": {
+            "salutation": {
+                "label": "Anrede",
+                "placeholder": "Anrede auswählen ..."
+            },
+            "firstname": {
+                "label": "Vorname",
+                "placeholder": "Vorname eingeben ..."
+            },
+            "lastname": {
+                "label": "Nachname",
+                "placeholder": "Nachname eingeben ..."
+            },
+            "street": {
+                "label": "Straße und Hausnummer",
+                "placeholder": "Straße und Hausnummer eingeben ..."
+            },
+            "zipcode": {
+                "label": "Postleitzahl",
+                "placeholder": "Postleitzahl eingeben ..."
+            },
+            "city": {
+                "label": "Ort",
+                "placeholder": "Ort eingeben ..."
+            },
+            "country": {
+                "label": "Land",
+                "placeholder": "Land auswählen ..."
+            },
+            "email": {
+                "label": "E-Mail-Adresse",
+                "placeholder": "E-Mail-Adresse eingeben ..."
+            },
+            "phone": {
+                "label": "Telefonnummer",
+                "placeholder": "Telefonnummer eingeben ..."
+            },
+            "comment": {
+                "label": "Kommentar",
+                "placeholder": "Kommentar eingeben ..."
+            },
+            "date": {
+                "emptyDateLabel": "Zeitraum",
+                "dateLabel": "%labelDate%",
+                "datePlaceholder": "%labelDate% über die Datumswahl auswählen ...",
+                "dateFormat": "%dateformat%",
+                "showWeeksNumbers": "%showweeksnumbers%"
+            },
+            "freeinput": {
+                "label": "%labelFreeInput%",
+                "placeholder": "%labelFreeInput% %labelFreeInputAction% ...",
+                "placeholderActionInput": "eingeben",
+                "placeholderActionSelect": "auswählen"
+            },
+            "origin": {
+                "productLabel": "Produkt",
+                "navigationLabel": "Kategorie",
+                "landingpageLabel": "Landingpage"
+            },
+            "privacyNoticeText": "Ich habe die <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" data-prev-url=\"%prevUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzbestimmungen\">Datenschutzbestimmungen</a> zur Kenntnis genommen und erkenne diese an.",
+            "submitPlaceholderLabel": "%labelSubmit%",
+            "submitLabel": "Absenden",
+            "inputMaxLength": "255",
+            "textareaMaxLength": "1000",
+            "textareaNumberRows": "5",
+            "confirmationText": "Vielen Dank für Ihre Anfrage. Wir haben Ihre Anfrage erhalten und werden uns so schnell wie möglich mit Ihnen in Verbindung setzen.",
+            "errorText": "Es ist ein Fehler aufgetreten. Bitte überprüfen Sie, ob alle Felder richtig ausgefüllt wurden."
+        }
+    }
+}

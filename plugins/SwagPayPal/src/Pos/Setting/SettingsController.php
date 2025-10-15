@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['api']])]
@@ -37,12 +37,12 @@ class SettingsController extends AbstractController
         private readonly InformationFetchService $informationFetchService,
         private readonly InformationDefaultService $informationDefaultService,
         private readonly ProductVisibilityCloneService $productVisibilityCloneService,
-        private readonly ProductCountService $productCountService
+        private readonly ProductCountService $productCountService,
     ) {
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal/pos/validate-api-credentials',
+        path: '/_action/paypal/pos/validate-api-credentials',
         operationId: 'posValidateApiCredentials',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
             new OA\Property(
@@ -87,7 +87,7 @@ class SettingsController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/paypal/pos/fetch-information',
+        path: '/paypal/pos/fetch-information',
         operationId: 'posFetchInformation',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
             new OA\Property(
@@ -97,9 +97,9 @@ class SettingsController extends AbstractController
         ])),
         tags: ['Admin Api', 'PayPal'],
         responses: [new OA\Response(
-            ref: AdditionalInformation::class,
             response: Response::HTTP_OK,
             description: 'Fetched information',
+            content: new OA\JsonContent(ref: AdditionalInformation::class),
         )]
     )]
     #[Route(path: '/api/paypal/pos/fetch-information', name: 'api.paypal.pos.fetch.information', methods: ['POST'], defaults: ['_acl' => ['sales_channel.viewer']])]
@@ -118,7 +118,7 @@ class SettingsController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/_action/paypal/pos/clone-product-visibility',
+        path: '/_action/paypal/pos/clone-product-visibility',
         operationId: 'posCloneProductVisibility',
         requestBody: new OA\RequestBody(content: new OA\JsonContent(properties: [
             new OA\Property(
@@ -150,7 +150,7 @@ class SettingsController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/paypal/pos/product-count',
+        path: '/paypal/pos/product-count',
         operationId: 'posGetProductCounts',
         tags: ['Admin Api', 'PayPal'],
         parameters: [

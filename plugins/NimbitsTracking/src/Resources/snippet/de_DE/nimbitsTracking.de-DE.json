@@ -1,0 +1,10 @@
+{
+  "nimbits": {
+    "tracking": {
+      "cookie": {
+        "name": "Referrer Tracking",
+        "description": "Erfasst die Herkunft von Benutzern, die über Kampagnen auf die Seite gelangen."
+      }
+    }
+  }
+}

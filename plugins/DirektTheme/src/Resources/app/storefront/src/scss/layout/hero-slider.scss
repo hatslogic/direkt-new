@@ -162,10 +162,55 @@
             padding: rem(3);
             width: rem(40);
             border-radius: rem(10);
-            background-color: rgb(255 255 255 / 53%);;
+            background-color: #616161c2;
+            &.tns-nav-active{
+                background-color: $secondary-color;
+            }
+        }
+        @include media-breakpoint-down(md){
+            width: 65%;
         }
     }
     .base-slider-controls{
-        display: none;
+        display: block;
+    }
+    .base-slider-controls-prev{
+        margin-left: rem(8);
+        top: 50%;
+        background-color: $primary-button-color;
+        border-color: $primary-button-color;
+        transition: 0.5s;
+        svg{
+            color: $white-color;
+            top: 0;
+        }
+        &:hover{
+            border-color: $black-color;
+            background-color: transparent;
+            svg{
+                color: $black-color;
+            }
+        }
+    }
+    .base-slider-controls-next{
+        margin-right: rem(8);
+        top: 50%;
+        background-color: $primary-button-color;
+        border-color: $primary-button-color;
+        transition: 0.5s;
+        .icon{
+            transform: rotate(0deg);
+        }
+        svg{
+            color: $white-color;
+            top: 0;
+        }
+        &:hover{
+            border-color: $black-color;
+            background-color: transparent;
+            svg{
+                color: $black-color;
+            }
+        }
     }
 }

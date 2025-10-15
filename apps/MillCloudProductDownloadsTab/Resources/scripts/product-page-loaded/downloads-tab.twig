@@ -1,0 +1,39 @@
+{% set customFields = hook.page.product.translated.customFields %}
+
+{% set customFieldValues = [
+    customFields.mill_cloud_product_download_1,
+    customFields.mill_cloud_product_download_2,
+    customFields.mill_cloud_product_download_3,
+    customFields.mill_cloud_product_download_4,
+    customFields.mill_cloud_product_download_5,
+    customFields.mill_cloud_product_download_6,
+    customFields.mill_cloud_product_download_7,
+    customFields.mill_cloud_product_download_8,
+    customFields.mill_cloud_product_download_9,
+    customFields.mill_cloud_product_download_10
+] %}
+
+{% set mediaIds = [] %}
+
+{% foreach customFieldValues as customFieldValue %}
+
+    {% if customFieldValue %}
+
+        {% set mediaIds = mediaIds|merge([customFieldValue]) %}
+
+    {% endif %}
+
+{% endforeach %}
+
+{% if mediaIds %}
+
+    {% set mediaCriteria = {
+        'ids': mediaIds
+    } %}
+
+    {% set customFieldMediaFiles = services.repository.search('media', mediaCriteria) %}
+
+    {% do hook.page.assign({'millCloudProductDownloads': customFieldMediaFiles}) %}
+
+{% endif %}
+

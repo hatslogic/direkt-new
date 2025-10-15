@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_noscript %}
+    {% if config('AcrisTagManagerAppCS.config.enableTagManager') and config('AcrisTagManagerAppCS.config.tagManagerId') %}
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('AcrisTagManagerAppCS.config.tagManagerId') }}"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    {% block acris_tag_manager_app_data %}
+        {% if config('AcrisTagManagerAppCS.config.enableEcommerceTracking') %}
+            {% if page is defined %}
+                {% set data = page.getExtension('acrisTagManagerAppData') %}
+                {% if data is not empty %}
+                    <script data-acris-tag-manager-app-data="{{ data.event }}"
+                            type="application/json">
+                        {{- data.data|json_encode|raw -}}
+                    </script>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

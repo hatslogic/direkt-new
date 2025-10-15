@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/review/review-item.html.twig' %}
+
+{% block page_product_detail_review_item_meta_author %}
+    <meta itemprop="author" itemtype="https://schema.org/Organization" content="hidden">
+{% endblock %}
+
+{% block page_product_detail_review_item_content %}
+    <p class="product-detail-review-item-content" itemprop="description">
+        {% if review.extensions.shopvote_review_details.isShopvoteReview and review.extensions.shopvote_review_details.reviewUrl %}
+            {{ review.content }} ({{ "Shopvote.reviewDetails.sourceLabel"|trans }}: <a href='{{ review.extensions.shopvote_review_details.reviewUrl }}' target='_blank'>SHOPVOTE</a>)
+        {% else %}
+            {{ review.content }}
+        {% endif %}
+    </p>
+{% endblock %}

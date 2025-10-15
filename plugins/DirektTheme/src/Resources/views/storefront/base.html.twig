@@ -1,23 +1,8 @@
-{# Set variable to "true" to enable HMR (hot page reloading) mode #}
-{% set isHMRMode = app.request.headers.get('hot-reload-mode') and app.environment == 'dev' %}
-
-{% block base_doctype %}
-<!DOCTYPE html>
-{% endblock %}
-
-{% block base_html %}
-<html lang="{{ page.header.activeLanguage.translationCode.code }}"
-      itemscope="itemscope"
-      itemtype="https://schema.org/WebPage">
-{% endblock %}
-
-{% block base_head %}
-    {% sw_include '@Storefront/storefront/layout/meta.html.twig' %}
-{% endblock %}
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
 
 {% block base_body %}
-    <body class="{% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}">
-
+    {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+    <body class="{% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}{% if salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %} mb-seal{% endif %}">
     {% block base_body_inner %}
         {% block base_noscript %}
             <noscript class="noscript-main">
@@ -32,11 +17,15 @@
         {% block base_header %}
             {% sw_include '@Storefront/storefront/utilities/staging-info.html.twig' %}
             <div class="header">
-                {# {% block layout_top_bar %}
-                <div class="d-none d-xl-block">
-                    {% sw_include '@Storefront/storefront/layout/header/top-bar.html.twig' %}
-                </div>
-                {% endblock %} #}
+                {# topbar show as per sales channel id #}
+                {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+                {% if salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+                    {% block layout_top_bar %}
+                        <div class="d-none d-xl-block">
+                            {% sw_include '@Storefront/storefront/layout/header/top-bar.html.twig' %}
+                        </div>
+                    {% endblock %}
+                {% endif %}
     
                 <header class="header-main">
                     {% block base_header_inner %}
@@ -121,4 +110,3 @@
     {% endblock %}
     </body>
 {% endblock %}
-</html>

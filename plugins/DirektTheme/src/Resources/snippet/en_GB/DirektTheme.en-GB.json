@@ -3,6 +3,16 @@
         "privacyTitle": "Privacy",
         "privacyNoticeText": "By selecting continue you confirm that you have read our <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Data protection information\">data protection information</a> and accepted our <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"general terms and conditions\">general terms and conditions</a>."
     },
+    "header":{
+        "topBarShipping": "Fast Delivery",
+        "topBarPhone": "Phone Support",
+        "topBarQuality": "Top Quality",
+        "topBarDropdown": "Service/Help",
+        "topBarContact": "<a class='dropdown-item' href='/kontakt/'>Contact</a>",
+        "mbseal": {
+            "supportInfo": "<strong>Questions about your order?</strong><br /><strong><a href=\"tel:+4920131974470\">+49 201 31974470</a></strong> <small>Daily from 7:30 AM to 10:00 PM</small>"
+        }
+    },
     "checkout":{
         "cartHeader": "Shopping cart",
         "continueShopping": "MY BAG",
@@ -32,7 +42,8 @@
         "description": "Description of the product",
         "product-detail": {
             "link": "Questions about the article?",
-            "article": "More articles from Kunststoffe Direkt"
+            "article": "More articles from Kunststoffe Direkt",
+	    "mbsealArticle": "More articles from MB-Seal"
         },
         "comment" : "I have the following questions about the product",
         "cartText": "Please send me an offer for the following items"
@@ -50,6 +61,9 @@
         },
         "serviceHotlineHeadline": "Service-Hotline",
         "serviceHotline": "Support and advice at: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00",
+        "mbseal":{
+            "serviceHotline": "Support and advice at: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00"
+        },
         "paymentheading":"Secure payment",
         "shipmentheading":"Shipping faster",
         "securityheading":"Security",
@@ -68,7 +82,15 @@
             "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
             "facebook":"<a href='https://www.facebook.com/kunststoffedirekt' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
             "twitter":"<a href='https://x.com' target='_blank' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
-            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+            "linkedin":"<a href='https://x.com' target='_blank' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-linkedin-icon'></span></a>",
+            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>",
+            "mbseal":{
+                "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
+                "facebook":"<a href='https://www.facebook.com/mbseal/' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
+                "twitter":"<a href='https://twitter.com/MBSeal2016' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
+                "linkedin":"<a href='https://www.linkedin.com/' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-linkedin-icon'></span></a>",
+                "mail":"<a href='mailto:info@mbseal.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+            }
         }
     },
     "newsletter":{
@@ -118,5 +140,15 @@
     "ellipsis": {
         "expandLabel": "Show more",
         "shrinkLabel": "Show less"
+    },
+    "contact" : {
+        "streetAddressLabel" : "Street Address",
+        "streetAddressPlaceholder" : "Enter street address",
+        "cityLabel" : "City",
+        "cityPlaceholder" : "Enter city",
+        "zipCodeLabel" : "Postal Code",
+        "zipCodePlaceholder" : "Enter postal code",
+        "companyNameLabel" : "Company Name",
+        "companyNamePlaceholder" : "Enter company name"
     }
 }

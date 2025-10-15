@@ -1,0 +1,58 @@
+.nb-tracking-dashboard {
+  .hidden {
+    display: none;
+  }
+
+  .topbar-datepicker {
+    margin-bottom: 0;
+  }
+
+  .topbar-text {
+    margin: auto 10px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: stretch;
+
+    ::after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+
+    .col {
+      margin: 20px;
+      min-width: 760px;
+
+      @media (max-width: 768px) {
+        min-width: 100%;
+      }
+    }
+  }
+
+  .sw-card .sw-card__content {
+    text-align: center;
+    height: 100%;
+
+    .empty-chart {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+
+      p {
+        color: #999999;
+        font-size: 15px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .nb-tracking-chart-subline {
+    color: #999;
+    font-size: 12px;
+    text-align: right;
+  }
+}

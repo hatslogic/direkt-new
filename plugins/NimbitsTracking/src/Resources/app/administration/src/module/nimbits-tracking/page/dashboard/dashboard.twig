@@ -1,0 +1,114 @@
+{% block nb_tracking_dashboard %}
+    <sw-page class="nb-tracking-dashboard">
+        <template #smart-bar-actions>
+            <sw-datepicker class="topbar-datepicker" :config="dates.config" v-model="dates.start"
+                           required></sw-datepicker>
+            <span class="topbar-text">{{ $tc('nimbits-tracking.date.till') }}</span>
+            <sw-datepicker class="topbar-datepicker" :config="dates.config" v-model="dates.end"
+                           required></sw-datepicker>
+            <sw-button variant="context" :square="true" @click="getData">
+                <div :title="title.reload">
+                    <sw-icon name="default-arrow-360-right" color="#1a8bbc"></sw-icon>
+                </div>
+            </sw-button>
+            <sw-button variant="context" :square="true" :isLoading="exportCsvRunning" @click="exportCSV">
+                <div :title="title.exportCsv">
+                    <sw-icon name="default-action-circle-download" color="#1abc9c"></sw-icon>
+                </div>
+            </sw-button>
+        </template>
+        <template #content>
+            <sw-card-view>
+                <div class="row">
+                    <div class="col">
+                        <sw-card :isLoading="loading.registrations">
+                            <sw-chart
+                                    v-if="registrationsByPartnerSeries[0].data.length > 0"
+                                    :type="'donut'"
+                                    :series="registrationsByPartnerSeries"
+                                    :options="registrationsByPartnerOptions">
+                            </sw-chart>
+                            <div v-else class="empty-chart">
+                                <p>
+                                    {{ $tc('nimbits-tracking.charts.registrations.empty') }}
+                                </p>
+                            </div>
+                        </sw-card>
+                    </div>
+                    <div class="col">
+                        <sw-card :isLoading="loading.orders">
+                            <sw-chart
+                                    v-if="ordersByPartnerSeries[0].data.length > 0"
+                                    :type="'donut'"
+                                    :series="ordersByPartnerSeries"
+                                    :options="ordersByPartnerOptions">
+                            </sw-chart>
+                            <div v-else class="empty-chart">
+                                <p>
+                                    {{ $tc('nimbits-tracking.charts.orders.empty') }}
+                                </p>
+                            </div>
+                        </sw-card>
+                    </div>
+                    <div class="col">
+                        <sw-card :isLoading="loading.sales">
+                            <sw-chart
+                                    v-if="salesByPartnerSeries[0].data.length > 0"
+                                    :type="'bar'"
+                                    :series="salesByPartnerSeries"
+                                    :options="salesByPartnerOptions">
+                            </sw-chart>
+                            <div v-else class="empty-chart">
+                                <p>
+                                    {{ $tc('nimbits-tracking.charts.sales.empty') }}
+                                </p>
+                            </div>
+                        </sw-card>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <sw-card :isLoading="loading.visitors">
+                            <sw-chart
+                                    v-if="visitorsByPartnerSeries[0].data.length > 0"
+                                    :type="'donut'"
+                                    :series="visitorsByPartnerSeries"
+                                    :options="visitorsByPartnerOptions">
+                            </sw-chart>
+                            <div v-else class="empty-chart">
+                                <p>
+                                    {{ $tc('nimbits-tracking.charts.visitors.empty') }}
+                                </p>
+                            </div>
+                            <div class="nb-tracking-chart-subline" v-if="visitorsByPartnerSeries[0].data.length > 0">
+                                {{ $tc('nimbits-tracking.subline.fiveMinuteReload') }}
+                            </div>
+                        </sw-card>
+                    </div>
+                    <div class="col">
+                        <sw-card :isLoading="loading.requests">
+                            <sw-chart
+                                    v-if="requestsByPartnerSeries[0].data.length > 0"
+                                    :type="'donut'"
+                                    :series="requestsByPartnerSeries"
+                                    :options="requestsByPartnerOptions">
+                            </sw-chart>
+                            <div v-else class="empty-chart">
+                                <p>
+                                    {{ $tc('nimbits-tracking.charts.requests.empty') }}
+                                </p>
+                            </div>
+                            <div class="nb-tracking-chart-subline" v-if="requestsByPartnerSeries[0].data.length > 0">
+                                {{ $tc('nimbits-tracking.subline.fiveMinuteReload') }}
+                            </div>
+                        </sw-card>
+                    </div>
+                </div>
+            </sw-card-view>
+            <div class="hidden">
+                <a id="nb-tracking-download" v-if="download.content" :href="download.content"
+                   :download="download.name"></a>
+            </div>
+        </template>
+    </sw-page>
+{% endblock %}

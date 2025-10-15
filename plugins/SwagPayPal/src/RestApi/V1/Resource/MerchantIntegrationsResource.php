@@ -27,6 +27,15 @@ class MerchantIntegrationsResource implements MerchantIntegrationsResourceInterf
     public function get(string $merchantId, ?string $salesChannelId = null, bool $sandboxActive = true): MerchantIntegrations
     {
         if (!$merchantId) {
+            // throw new PayPalApiException(
+            //     'merchant_id_missing',
+            //     'The merchant id is missing',
+            //     Response::HTTP_UNAUTHORIZED,
+            //     PayPalApiException::ERROR_CODE_INVALID_CREDENTIALS,
+            // );
+            /**
+             * @deprecated tag:v10.0.0 - Will be replaced by a PayPalApiException
+             */
             throw new PayPalInvalidApiCredentialsException();
         }
 

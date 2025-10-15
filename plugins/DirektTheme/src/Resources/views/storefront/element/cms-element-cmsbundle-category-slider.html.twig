@@ -55,7 +55,7 @@
 {% block element_category_slider_controls %}
     {% if sliderConfig.controlls.value %}
         <div class="category-slider-controls-container">
-            <div class="base-slider-controls" data-base-slider-controls="true" aria-label="slider controls">
+            <div class="base-slider-controls" data-base-slider-controls="true" aria-label="slider controls" role="region">
                 {% block element_category_slider_controls_items %}
                     <button class="base-slider-controls-prev category-slider__controls_prev{% if sliderConfig.border.value %} has-border{% endif %} start-0" aria-label="previous button">
                         {% block element_category_slider_controls_items_prev_icon %}

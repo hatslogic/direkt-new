@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field>
+            <name>tagManagerId</name>
+            <copyable>true</copyable>
+            <label>Google Tag Manager ID</label>
+            <label lang="de-DE">Google Tag Manager ID</label>
+            <placeholder>Google Tag Manager ID</placeholder>
+            <placeholder lang="de-DE">Google Tag Manager ID</placeholder>
+            <helpText>Please insert here the Google Tag Manager ID of the corresponding Google Tag Manager container.</helpText>
+            <helpText lang="de-DE">Bitte hier die Google Tag Manager ID des zu verwendenden Google Tag Manager Containers eintragen.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>additionalTagManagerId</name>
+            <copyable>true</copyable>
+            <label>Additional Google Tag Manager ID</label>
+            <label lang="de-DE">Zusätzliche Google Tag Manager ID</label>
+            <placeholder>Google Tag Manager ID</placeholder>
+            <placeholder lang="de-DE">Google Tag Manager ID</placeholder>
+            <helpText>Please insert here the additional Google Tag Manager ID of the corresponding Google Tag Manager container.</helpText>
+            <helpText lang="de-DE">Bitte hier die zusätzliche Google Tag Manager ID des zu verwendenden Google Tag Manager Containers eintragen.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableTagManager</name>
+            <defaultValue>true</defaultValue>
+            <label>Activate Tag Manager</label>
+            <label lang="de-DE">Tag Manager aktivieren</label>
+            <helpText>When active the Tag Manager will be added with the given Tag Manager ID.</helpText>
+            <helpText lang="de-DE">Wenn aktiv wird der Tag Manager mit der oben angegebenen Tag Manager ID eingebunden.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Serverside Tracking</title>
+        <title lang="de-DE">Serverseitiges Tracking</title>
+
+        <input-field>
+            <name>serversideTrackingUrl</name>
+            <copyable>true</copyable>
+            <label>Serverside Tracking Domain</label>
+            <label lang="de-DE">Serverseitige Tracking Domain</label>
+            <placeholder>https://www.meinserver.de</placeholder>
+            <placeholder lang="de-DE">https://www.meinserver.de</placeholder>
+            <helpText>Please insert here the Serverside Google Tag Manager URL. Example: "https://www.meinserver.de"</helpText>
+            <helpText lang="de-DE">Bitte hier die Serverside Google Tag Manager URL eintragen. Bsp.: "https://www.meinserver.de"</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableServersideTracking</name>
+            <defaultValue>false</defaultValue>
+            <label>Activate serverside tracking</label>
+            <label lang="de-DE">Serverseitiges Tracking aktivieren</label>
+            <helpText>When active the Tag Manager will be loaded serverside.</helpText>
+            <helpText lang="de-DE">Wenn aktiv wird der Tag Manager serverseitig geladen.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Cookie Consent Configuration</title>
+        <title lang="de-DE">Cookie Consent Einstellungen</title>
+
+        <input-field type="bool">
+            <name>enableCookieConsentSupport</name>
+            <defaultValue>true</defaultValue>
+            <label>Cookie consent support</label>
+            <label lang="de-DE">Cookie Consent Unterstützung</label>
+            <helpText>When active the tag manager integration is only added if the customer accepted the corresponding cookie.</helpText>
+            <helpText lang="de-DE">Wenn aktiv wird der Tag Manager erst nach Cookie Zustimmung des Kunden eingebunden.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>E-Commerce Tracking Configuration</title>
+        <title lang="de-DE">E-Commerce Tracking Einstellungen</title>
+
+        <input-field type="bool">
+            <name>enableEcommerceTracking</name>
+            <defaultValue>true</defaultValue>
+            <label>Enable E-Commerce tracking</label>
+            <label lang="de-DE">E-Commerce Tracking aktivieren</label>
+            <helpText>When activated the extended data layers for the ecommerce events will be activated.</helpText>
+            <helpText lang="de-DE">Wenn aktiv werden die erweiterten Data Layer für die E-Commerce Events aktiviert.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableEnhancedConversionTracking</name>
+            <defaultValue>false</defaultValue>
+            <label>Enable enhanced conversion tracking</label>
+            <label lang="de-DE">Erweitertes Conversion Tracking aktivieren</label>
+            <helpText>To use the enhanced conversion tracking the "Standard" E-commerce tracking also has to be activated.</helpText>
+            <helpText lang="de-DE">Um das Erweiterte Conversion Tracking nutzen zu können muss auch das "Standard" E-Commerce Tracking aktiviert sein.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>mainEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>main</defaultValue>
+            <label>Main event name</label>
+            <label lang="de-DE">Hauptevent Name</label>
+            <placeholder>Main event name</placeholder>
+            <placeholder lang="de-DE">Hauptevent Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the main home page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Startseite hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>detailEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>view_item</defaultValue>
+            <label>Detail page event name</label>
+            <label lang="de-DE">Detailseite Event Name</label>
+            <placeholder>Detail page event name</placeholder>
+            <placeholder lang="de-DE">Detailseite Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the detail page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Detailseite hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>categoryEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>view_item_list</defaultValue>
+            <label>Category event name</label>
+            <label lang="de-DE">Kategorie Event Name</label>
+            <placeholder>Listing event name</placeholder>
+            <placeholder lang="de-DE">Listing Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the category page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Kategorie Seite hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>searchEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>search</defaultValue>
+            <label>Search event name</label>
+            <label lang="de-DE">Suche Event Name</label>
+            <placeholder>Search event name</placeholder>
+            <placeholder lang="de-DE">Suche Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for search page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Suchseite hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>checkoutCartEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>view_cart</defaultValue>
+            <label>Checkout Cart event name</label>
+            <label lang="de-DE">Checkout Cart Event Name</label>
+            <placeholder>Checkout Cart event name</placeholder>
+            <placeholder lang="de-DE">Checkout Cart Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the cart page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer des Warenkorbs hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>checkoutConfirmEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>begin_checkout</defaultValue>
+            <label>Checkout Confirm event name</label>
+            <label lang="de-DE">Checkout Confirm Event Name</label>
+            <placeholder>Checkout Confirm event name</placeholder>
+            <placeholder lang="de-DE">Checkout Confirm Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the confirm page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Confirm Seite hinzu.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>checkoutFinishEventName</name>
+            <copyable>true</copyable>
+            <defaultValue>purchase</defaultValue>
+            <label>Checkout Finish event name</label>
+            <label lang="de-DE">Checkout Finish Event Name</label>
+            <placeholder>Checkout Finish event name</placeholder>
+            <placeholder lang="de-DE">Checkout Finish Event Name</placeholder>
+            <helpText>Includes the given value into the "event" data field inside the data layer for the finish page.</helpText>
+            <helpText lang="de-DE">Fügt den eingetragenen Wert in das "event" Datenfeld im Data Layer der Finish Seite hinzu.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>priceNetDataLayer</name>
+            <defaultValue>false</defaultValue>
+            <label>Use net prices in the data layer</label>
+            <label lang="de-DE">Netto Preise im Data Layer verwenden</label>
+            <helpText>When active all prices will be given net in the data layer variables. If inactive the Shopware standard with net and gross prices depending on the tax will be given.</helpText>
+            <helpText lang="de-DE">Wenn aktiv werden überall Netto Preise im Data Layer ausgegeben. Wenn inaktiv wird der Shopware Standard ausgegeben (Netto und Brutto Preise, je nach Steuer).</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Google Consent Mode</title>
+        <title lang="de-DE">Google Consent Mode</title>
+
+        <input-field type="single-select">
+            <name>googleConsentMode</name>
+            <label>Google Consent Mode</label>
+            <label lang="de-DE">Google Consent Mode</label>
+            <defaultValue>default</defaultValue>
+            <options>
+                <option>
+                    <id>default</id>
+                    <name>Shopware default: Do not influence Google Consent Mode with the Tag Manager app</name>
+                    <name lang="de-DE">Shopware Standard: Google Consent Mode nicht mit der Tag Manager App beeinflussen</name>
+                </option>
+                <option>
+                    <id>analytics</id>
+                    <name>Analytics: Set Google Analytics active if tag manager cookie is accepted.</name>
+                    <name lang="de-DE">Analytics: Google Analytics im Google Consent Mode aktivieren, wenn das Tag Manager Cookie aktiviert wurde.</name>
+                </option>
+                <option>
+                    <id>ads</id>
+                    <name>Ads: Set Google Ads active if tag manager cookie is accepted.</name>
+                    <name lang="de-DE">Ads: Google Ads im Google Consent Mode aktivieren, wenn das Tag Manager Cookie aktiviert wurde.</name>
+                </option>
+                <option>
+                    <id>analyticsAndAds</id>
+                    <name>Analytics and Ads: Set Google Analytics and Ads active if tag manager cookie is accepted.</name>
+                    <name lang="de-DE">Analytics und Ads: Google Analytics und Ads im Google Consent Mode aktivieren, wenn das Tag Manager Cookie aktiviert wurde.</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableAdditionalGoogleCookieConsentSupport</name>
+            <defaultValue>false</defaultValue>
+            <label>Additional Google Analytics/Ads Cookie consent support</label>
+            <label lang="de-DE">Zusätzliche Google Analytics/Ads Cookie Consent Unterstützung</label>
+
+            <helpText>When active the Google Analytics/Ads consent mode states are only approved if the customer accepted the corresponding cookies. (acris-tag-manager-google-analytics-enabled, acris-tag-manager-google-ads-enabled)</helpText>
+            <helpText lang="de-DE">Die Google Analytics/Ads Consent Modes werden nur dann freigegeben, wenn der Kunde die entsprechenden Cookies akzeptiert hat. (acris-tag-manager-google-analytics-enabled, acris-tag-manager-google-ads-enabled)</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Snippets</title>
+        <title lang="de-DE">Textbausteine</title>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerCookieName</name>
+            <label>Google Tag Manager Cookie Name</label>
+            <label lang="de-DE">Google Tag Manager Cookie Name</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerCookieName</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerCookieGroupName</name>
+            <label>Google Tag Manager Cookie Group</label>
+            <label lang="de-DE">Google Tag Manager Cookie Gruppe</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerCookieGroupName</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerGoogleAnalyticsCookieName</name>
+            <label>Google Tag Manager Google Analytics Cookie Name</label>
+            <label lang="de-DE">Google Tag Manager Google Analytics Cookie Name</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerGoogleAnalyticsCookieName</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerGoogleAnalyticsCookieGroupName</name>
+            <label>Google Tag Manager Google Analytics Cookie Group</label>
+            <label lang="de-DE">Google Tag Manager Google Analytics Cookie Gruppe</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerGoogleAnalyticsCookieGroupName</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerGoogleAdsCookieName</name>
+            <label>Google Tag Manager Google Ads Cookie Name</label>
+            <label lang="de-DE">Google Tag Manager Google Ads Cookie Name</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerGoogleAdsCookieName</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>acrisTagManagerGoogleAdsCookieGroupName</name>
+            <label>Google Tag Manager Google Ads Cookie Group</label>
+            <label lang="de-DE">Google Tag Manager Google Ads Cookie Gruppe</label>
+            <snippet>acrisTagManagerApp.acrisTagManagerGoogleAdsCookieGroupName</snippet>
+        </component>
+    </card>
+</config>

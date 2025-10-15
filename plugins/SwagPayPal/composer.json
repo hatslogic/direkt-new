@@ -1,7 +1,7 @@
 {
     "name": "swag/paypal",
     "description": "PayPal integration for Shopware 6",
-    "version": "9.2.0",
+    "version": "9.8.2",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "authors": [
@@ -11,9 +11,6 @@
     ],
     "require": {
         "shopware/core": "~6.6.0@dev"
-    },
-    "require-dev": {
-        "rector/rector": "^0.18.3"
     },
     "extra": {
         "shopware-plugin-class": "Swag\\PayPal\\SwagPayPal",
@@ -49,14 +46,8 @@
             "@phpstan",
             "@phpunit"
         ],
-        "ecs": [
-            "../../../vendor/bin/ecs check --config=../../../ecs.php src tests",
-            "../../../vendor/bin/ecs check src tests"
-        ],
-        "ecs-fix": [
-            "../../../vendor/bin/ecs check --fix --config=../../../ecs.php src tests",
-            "../../../vendor/bin/ecs check --fix src tests"
-        ],
+        "ecs": "../../../vendor/bin/php-cs-fixer fix --dry-run",
+        "ecs-fix": "../../../vendor/bin/php-cs-fixer fix",
         "init:admin": "npm ci --no-audit --prefer-offline --prefix src/Resources/app/administration",
         "lint:admin": "npm run lint-fix --prefix src/Resources/app/administration",
         "lint:admin:ci": "npm run lint --prefix src/Resources/app/administration",
@@ -73,7 +64,16 @@
             "../../../vendor/bin/phpstan analyze"
         ],
         "rector": "../../../vendor/bin/rector process",
-        "rector-dry": "../../../vendor/bin/rector process --dry-run"
+        "rector-dry": "../../../vendor/bin/rector process --dry-run",
+        "openapi:generate": [
+            "../../../bin/console swag:paypal:openapi:generate",
+            "npm run openapi-types --prefix src/Resources/app/administration"
+        ],
+        "bc-check": [
+            "php ../../../vendor-bin/roave-backward-compatibility-check/bin/verify-version.php",
+            "@putenv TMPDIR=./..",
+            "../../../vendor/bin/roave-backward-compatibility-check"
+        ]
     },
     "autoload": {
         "psr-4": {

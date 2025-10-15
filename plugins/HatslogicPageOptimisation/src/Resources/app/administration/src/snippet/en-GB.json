@@ -1,0 +1,17 @@
+{
+    "hatslogic-critical-assets": {
+        "criticalCssGeneration": {
+            "startedTitle": "Started generation of critical CSS...",
+            "startedMessage": "Please leave this window open until the process has finished.",
+            "successMessage": "Critical CSS successfully generated.",
+            "buttonLabel": "Generate Critical CSS"
+        },
+        "mappingGrid": {
+            "title": "Category - Layout mapping",
+            "intro": "Use below table to tell the critical CSS generator which category should be used as the perfect example page to use for specific CMS layouts. This is useful if the above the fold content varies greatly for each category using the same CMS layout, resulting in missing styles.",
+            "cmsPageLabel": "Template",
+            "categoryLabel": "Category",
+            "buttonAddRow": "Add Row"
+        }
+    }
+}

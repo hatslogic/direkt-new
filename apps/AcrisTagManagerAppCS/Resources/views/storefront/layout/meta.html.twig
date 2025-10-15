@@ -1,0 +1,205 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_javascript_tracking %}
+    {% if config('AcrisTagManagerAppCS.config.enableTagManager') and config('AcrisTagManagerAppCS.config.tagManagerId') %}
+        {# Implementation moved from storefront/component/analytics.html.twig #}
+        {% set acrisTagManagerConsentMode = config('AcrisTagManagerAppCS.config.googleConsentMode') %}
+        {% if acrisTagManagerConsentMode in ['analytics', 'ads', 'analyticsAndAds'] %}
+            {% if config('AcrisTagManagerAppCS.config.enableAdditionalGoogleCookieConsentSupport') %}
+                <script data-acristagmanagercookie="true">
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+
+                    (() => {
+                        let analyticsStorageEnabled = false;
+                        let adsEnabled = false;
+                        {% if acrisTagManagerConsentMode in ['analytics', 'analyticsAndAds'] %}
+                        analyticsStorageEnabled = document.cookie.split(';').some((item) => item.trim().includes('acris-tag-manager-google-analytics-enabled=1'));
+                        {% endif %}
+                        {% if acrisTagManagerConsentMode in ['ads', 'analyticsAndAds'] %}
+                        adsEnabled = document.cookie.split(';').some((item) => item.trim().includes('acris-tag-manager-google-ads-enabled=1'));
+                        {% endif %}
+
+                        // Always set a default consent for consent mode v2
+                        gtag('consent', 'default', {
+                            'ad_user_data': adsEnabled ? 'granted' : 'denied',
+                            'ad_storage': adsEnabled ? 'granted' : 'denied',
+                            'ad_personalization': adsEnabled ? 'granted' : 'denied',
+                            'analytics_storage': analyticsStorageEnabled ? 'granted' : 'denied'
+                        });
+                    })();
+                </script>
+            {% else %}
+                {% if config('AcrisTagManagerAppCS.config.enableCookieConsentSupport') %}
+                    <script data-acristagmanagercookie="true">
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag() { dataLayer.push(arguments); }
+
+                        (() => {
+                            let analyticsStorageEnabled = false;
+                            let adsEnabled = false;
+                            {% if acrisTagManagerConsentMode in ['analytics', 'analyticsAndAds'] %}
+                            analyticsStorageEnabled = document.cookie.split(';').some((item) => item.trim().includes('acris-tag-manager=1'));
+                            {% endif %}
+                            {% if acrisTagManagerConsentMode in ['ads', 'analyticsAndAds'] %}
+                            adsEnabled = document.cookie.split(';').some((item) => item.trim().includes('acris-tag-manager=1'));
+                            {% endif %}
+
+                            // Always set a default consent for consent mode v2
+                            gtag('consent', 'default', {
+                                'ad_user_data': adsEnabled ? 'granted' : 'denied',
+                                'ad_storage': adsEnabled ? 'granted' : 'denied',
+                                'ad_personalization': adsEnabled ? 'granted' : 'denied',
+                                'analytics_storage': analyticsStorageEnabled ? 'granted' : 'denied'
+                            });
+                        })();
+                    </script>
+                {% else %}
+                    <script data-acristagmanagercookie="true">
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag() { dataLayer.push(arguments); }
+
+                        (() => {
+                            let analyticsStorageEnabled = false;
+                            let adsEnabled = false;
+                            {% if acrisTagManagerConsentMode in ['analytics', 'analyticsAndAds'] %}
+                            analyticsStorageEnabled = true;
+                            {% endif %}
+                            {% if acrisTagManagerConsentMode in ['ads', 'analyticsAndAds'] %}
+                            adsEnabled = true;
+                            {% endif %}
+
+                            // Always set a default consent for consent mode v2
+                            gtag('consent', 'default', {
+                                'ad_user_data': adsEnabled ? 'granted' : 'denied',
+                                'ad_storage': adsEnabled ? 'granted' : 'denied',
+                                'ad_personalization': adsEnabled ? 'granted' : 'denied',
+                                'analytics_storage': analyticsStorageEnabled ? 'granted' : 'denied'
+                            });
+                        })();
+                    </script>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {% set options = {
+            'context': {
+                'controllerName': controllerName|lower,
+                'controllerAction': controllerAction|lower,
+                'currency': {
+                    'isoCode': context.currency.isoCode
+                }
+            }
+        } %}
+        {% if config('AcrisTagManagerAppCS.config.enableServersideTracking') %}
+            {% if config('AcrisTagManagerAppCS.config.serversideTrackingUrl') != "" %}
+                {% set tagManagerUrl = config('AcrisTagManagerAppCS.config.serversideTrackingUrl') %}
+            {% else %}
+                {% set tagManagerUrl = "https://www.googletagmanager.com" %}
+            {% endif %}
+        {% else %}
+            {% set tagManagerUrl = "https://www.googletagmanager.com" %}
+        {% endif %}
+        {% if config('AcrisTagManagerAppCS.config.enableCookieConsentSupport') %}
+            {% if config('core.basicInformation.showCookieConsent') %}
+                {# DO NOTHING #}
+            {% else %}
+                <script type="text/javascript">
+                    (() => {
+                        if( typeof CCM === 'undefined' || !CCM) {
+                            {# DO NOTHING #}
+                        }else{
+                            if(CCM.acceptedCookies && CCM.acceptedCookies.includes('acris-tag-manager')) {
+                                document.cookie = "acris-tag-manager=1; path=/; max-age=86400";
+                            }
+                        }
+                    })();
+                </script>
+            {% endif %}
+            {% if app.request.cookies.get('acris-tag-manager') %}
+                <script type="text/javascript"
+                        data-acris-tag-manager-app="true"
+                        data-acris-tag-manager-app-options="{{ options|json_encode }}">
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.tagManagerId') }}');
+                </script>
+                {% if config('AcrisTagManagerAppCS.config.additionalTagManagerId') %}
+                    <script type="text/javascript"
+                            data-acris-tag-manager-app="true"
+                            data-acris-tag-manager-app-options="{{ options|json_encode }}">
+                        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                            '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                        })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.additionalTagManagerId') }}');
+                    </script>
+                {% endif %}
+                {% if config('AcrisTagManagerAppCS.config.enableEcommerceTracking') %}
+                    <script type="text/javascript" data-acris-tag-manager-app-data-layer="true">
+                        {% sw_include '@Storefront/storefront/layout/acris-data-layer.html.twig' %}
+                    </script>
+                {% endif %}
+            {% else %}
+                <script type="text/plain"
+                        data-acris-tag-manager-app="true"
+                        data-acris-tag-manager-app-options="{{ options|json_encode }}"
+                        data-acristagmanagercookie="true">
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.tagManagerId') }}');
+                </script>
+                {% if config('AcrisTagManagerAppCS.config.additionalTagManagerId') %}
+                    <script type="text/plain"
+                            data-acris-tag-manager-app="true"
+                            data-acris-tag-manager-app-options="{{ options|json_encode }}"
+                            data-acristagmanagercookie="true">
+                        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                            '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                        })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.additionalTagManagerId') }}');
+                    </script>
+                {% endif %}
+                {% if config('AcrisTagManagerAppCS.config.enableEcommerceTracking') %}
+                    <script type="text/plain"
+                            data-acris-tag-manager-app-data-layer="true"
+                            data-acristagmanagercookie="true">
+                        {% sw_include '@Storefront/storefront/layout/acris-data-layer.html.twig' %}
+                    </script>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <script type="text/javascript"
+                    data-acris-tag-manager-app="true"
+                    data-acris-tag-manager-app-options="{{ options|json_encode }}">
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.tagManagerId') }}');
+            </script>
+            {% if config('AcrisTagManagerAppCS.config.additionalTagManagerId') %}
+                <script type="text/javascript"
+                        data-acris-tag-manager-app="true"
+                        data-acris-tag-manager-app-options="{{ options|json_encode }}">
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        '{{ tagManagerUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','{{ config('AcrisTagManagerAppCS.config.additionalTagManagerId') }}');
+                </script>
+            {% endif %}
+            {% if config('AcrisTagManagerAppCS.config.enableEcommerceTracking') %}
+                <script type="text/javascript" data-acris-tag-manager-app-data-layer="true">
+                    {% sw_include '@Storefront/storefront/layout/acris-data-layer.html.twig' %}
+                </script>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

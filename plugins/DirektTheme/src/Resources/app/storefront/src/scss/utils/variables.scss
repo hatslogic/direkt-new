@@ -17,12 +17,21 @@
     --text-color: #323332;
     --topbar-bg:#F5F5F5;
     --font-open-sans: 'Open Sans', sans-serif;
-    --header-height: 3.930625rem;
+    --header-height: 3.875rem;
     @include media-breakpoint-down(xl) {
         --header-height: 3.930625rem;
     }
     @include media-breakpoint-down(sm) {
         --header-height: 3.875rem;
+    }
+    .mb-seal{
+        --header-height: 6.375rem;
+        @include media-breakpoint-down(xl) {
+            --header-height: 3.930625rem;
+        }
+        @include media-breakpoint-down(sm) {
+            --header-height: 3.875rem;
+        }
     }
 }
 
@@ -59,10 +68,12 @@ $dark-grey-color: $sw-dark-grey-color; // #1C1D1A
 $placeholder-color: $sw-placeholder-color; // #cccccc
 $input-color: $sw-input-color; // #f5f5f5
 $topbar-color: $sw-topbar-color; // #f5f5f5
-$footer-background-color: $sw-footer-background-color; // #F5F5F5
+$footer-background-color: $sw-footer-background-color; // #F1F1F1
 $footer-text-color: $sw-footer-text-color; // #323332
 $footer-link-color: $sw-footer-link-color; // #323332
-$product-image-background-color: $sw-product-image-background-color; // #ffffff
+$footer-copyright-color: $sw-footer-copyright-color; // #323332
+$product-image-background-color: $sw-product-image-background-color; // #e1e1e1
+$newsletter-background-color: $sw-newsletter-background-color; // #F9F9F9
 $slider-arrow-color: $sw-slider-arrow-color; // #ffffff
 $slider-dot-color: $sw-slider-dot-color; // #acacac
 $review-star: $sw-review-star; // #FABF46

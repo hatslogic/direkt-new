@@ -1,0 +1,10 @@
+{% sw_extends "@Storefront/storefront/component/analytics.html.twig" %}
+
+{% block component_head_analytics_gtag_consent %}
+    {% set acrisTagManagerConsentMode = config('AcrisTagManagerAppCS.config.googleConsentMode') %}
+    {% if acrisTagManagerConsentMode in ['analytics', 'ads', 'analyticsAndAds'] %}
+        {# DO NOTHING - implementation moved to storefront/layout/meta.html.twig #}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

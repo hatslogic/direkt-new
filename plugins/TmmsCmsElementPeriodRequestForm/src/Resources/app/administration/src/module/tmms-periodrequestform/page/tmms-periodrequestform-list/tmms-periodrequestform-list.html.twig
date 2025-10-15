@@ -1,0 +1,94 @@
+{% block periodrequestform_list %}
+    <sw-page class="periodrequestform-list">
+
+        {% block periodrequestform_list_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block periodrequestform_list_smart_bar_header_title %}
+                    <h2>
+                        {% block periodrequestform_list_smart_bar_header_title_text %}
+                            {{ $t('periodrequestform.list.textPeriodrequestformOverview') }}
+                        {% endblock %}
+
+                        {% block periodrequestform_list_smart_bar_header_amount %}
+                            <span
+                                v-if="!isLoading"
+                                class="sw-page__smart-bar-amount"
+                            >
+                                ({{ total }})
+                            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block periodrequestform_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button
+                    class="periodrequestform-list__button-create"
+                    variant="primary"
+                    :disabled="!acl.can('periodrequestform.creator')"
+                    :router-link="{ name: 'tmms.periodrequestform.create' }"
+                >
+                    {{ $t('periodrequestform.list.addButtonText') }}
+                </sw-button>
+            </template>
+        {% endblock %}
+
+        {% block periodrequestform_list_content %}
+            <template #content>
+                {% block periodrequestform_list_content_list %}
+                    <sw-entity-listing
+                        v-if="isLoading || periodrequestform"
+                        class="sw-periodrequestform-list-grid"
+                        detail-route="tmms.periodrequestform.detail"
+                        identifier="sw-periodrequestform-list"
+                        :items="periodrequestform"
+                        :columns="periodrequestformColumns"
+                        :repository="periodrequestformRepository"
+                        :show-selection="acl.can('periodrequestform.deleter')"
+                        :allow-view="acl.can('periodrequestform.viewer')"
+                        :allow-create="acl.can('periodrequestform.creator')"
+                        :allow-inline-edit="acl.can('periodrequestform.editor')"
+                        :allow-edit="acl.can('periodrequestform.editor')"
+                        :allow-delete="acl.can('periodrequestform.deleter')"
+                        :is-loading="isLoading"
+                        @update-records="updateTotal"
+                    >
+
+                        {% block periodrequestform_list_grid_columns %}
+                            {% block periodrequestform_list_grid_columns_created_at %}
+                                <template #column-createdAt="{ item }">
+                                    {{ dateFilter(item.createdAt, { hour: '2-digit', minute: '2-digit', second: '2-digit' }) }}
+                                </template>
+                            {% endblock %}
+                        {% endblock %}
+
+                    </sw-entity-listing>
+                {% endblock %}
+
+                {% block periodrequestform_list_empty_state %}
+                    <sw-empty-state
+                        v-if="!isLoading && !total"
+                        icon="regular-file-text"
+                        :title="$t('periodrequestform.list.listEmpty')"
+                    />
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block periodrequestform_list_sidebar %}
+            <template #sidebar>
+                <sw-sidebar class="periodrequestform-list__sidebar">
+                    {% block periodrequestform_list_sidebar_refresh %}
+                        <sw-sidebar-item
+                            icon="regular-undo"
+                            :title="$t('periodrequestform.list.titleSidebarItemRefresh')"
+                            @click="onRefresh"
+                        />
+                    {% endblock %}
+                </sw-sidebar>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

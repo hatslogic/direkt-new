@@ -1,0 +1,42 @@
+{
+  "name": "shopvote/shopvoteplugin",
+  "description": "Collect customer and product reviews via SHOPVOTE in your Shopware 6 store.",
+  "version": "v1.2.9",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "SHOPVOTE"
+    }
+  ],
+  "require": {
+    "shopware/core": "^6.6",
+    "shopware/storefront": "^6.6"
+  },
+  "minimum-stability": "RC",
+  "extra": {
+    "shopware-plugin-class": "Shopvote\\ShopvotePlugin\\ShopvotePlugin",
+    "plugin-icon": "src/Resources/config/plugin.png",
+    "label": {
+      "de-DE": "SHOPVOTE",
+      "en-GB": "SHOPVOTE"
+    },
+    "description": {
+      "de-DE": "Sammeln Sie automatisch und rechtssicher Shop- und Produktbewertungen über SHOPVOTE mit Ihrem Shopware 6 Shop. Produktbewertungen werden automatisch von SHOPVOTE importiert und in den Artikelseiten angzeigt.",
+      "en-GB": "Collect automatically and legally secure customer and product reviews via SHOPVOTE with your Shopware 6 shop. Product reviews are automatically imported by SHOPVOTE and displayed in the product pages."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://www.shopvote.de/",
+      "en-GB": "https://www.shopvote.de/"
+    },
+    "supportLink": {
+      "de-DE": "https://www.shopvote.de/betreiber/betreiber-login.php",
+      "en-GB": "https://www.shopvote.de/betreiber/betreiber-login.php"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Shopvote\\ShopvotePlugin\\": "src/"
+    }
+  }
+}

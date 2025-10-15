@@ -23,6 +23,7 @@
         }
     }
     .product-image-wrapper{
+        min-height: rem(200);
         @include media-breakpoint-down(md){
             min-height: rem(200);
         }

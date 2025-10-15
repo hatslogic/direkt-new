@@ -1,0 +1,16 @@
+{
+    "swag-cms-extensions": {
+        "sw-cms": {
+            "components": {
+                "form-editor": {
+                    "settings-field": {
+                        "types": {
+                            "upload": "File upload (single)",
+                            "upload-multiple": "File upload (multiple)"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

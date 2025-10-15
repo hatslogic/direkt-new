@@ -1,0 +1,8 @@
+{
+    "form": {
+        "contactFormAttachment": "File attachment",
+        "invalidExtension": "Sorry, file type .%ext% is not supported. Please choose another file.",
+        "tooBig": "The files are too big, please upload only files up to %maxSize% MB.",
+        "orDrag": "or drag and drop files here"
+    }
+}

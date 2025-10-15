@@ -1,0 +1,734 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_element_period_request_form %}
+    <div
+        class="sw-cms-el-period-request-form">
+        <h3
+            v-if="element.config.periodRequestFormTitle.value !== ''"
+            class="sw-cms-el-period-request-form-headline"
+        >
+            {{ element.config.periodRequestFormTitle.value }}
+        </h3>
+
+        <div
+            v-if="element.config.periodRequestFormText.value !== ''"
+            class="sw-cms-el-period-request-form-text"
+        >
+            <span
+                v-html="element.config.periodRequestFormText.value"/>
+        </div>
+
+        <div
+            v-if="element.config.showDateAboveForm.value === true"
+        >
+            <sw-text-field
+                v-if="element.config.showDate.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.date')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.date')"
+                :class="requiredFieldClass(11)"
+            />
+        </div>
+
+        <div
+            class="sw-cms-el-period-request-form-group sw-cms-el-period-request-form-group-flex-wrap"
+            :class="formGroupAdditionalClassThreeColumnsRow3"
+            v-if="element.config.showFreeInputAboveForm.value === true"
+        >
+            <sw-select-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :class="requiredFieldClass(12)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInputText')"
+                :class="requiredFieldClass(12)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInputText')"
+                :class="requiredFieldClass(12)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :class="requiredFieldClass(13)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2Text')"
+                :class="requiredFieldClass(13)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2Text')"
+                :class="requiredFieldClass(13)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :class="requiredFieldClass(14)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3Text')"
+                :class="requiredFieldClass(14)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3Text')"
+                :class="requiredFieldClass(14)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :class="requiredFieldClass(15)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4Text')"
+                :class="requiredFieldClass(15)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4Text')"
+                :class="requiredFieldClass(15)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                    :class="requiredFieldClass(16)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5Text')"
+                :class="requiredFieldClass(16)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5Text')"
+                :class="requiredFieldClass(16)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                    :class="requiredFieldClass(17)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6Text')"
+                :class="requiredFieldClass(17)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6Text')"
+                :class="requiredFieldClass(17)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                    :class="requiredFieldClass(18)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7Text')"
+                :class="requiredFieldClass(18)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7Text')"
+                :class="requiredFieldClass(18)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                    :class="requiredFieldClass(19)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8Text')"
+                :class="requiredFieldClass(19)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8Text')"
+                :class="requiredFieldClass(19)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                    :class="requiredFieldClass(20)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9Text')"
+                :class="requiredFieldClass(20)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9Text')"
+                :class="requiredFieldClass(20)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                    :class="requiredFieldClass(21)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10Text')"
+                :class="requiredFieldClass(21)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10Text')"
+                :class="requiredFieldClass(21)"
+            />
+        </div>
+
+        <div
+            v-if="element.config.showCommentAboveForm.value === true"
+        >
+            <sw-textarea-field
+                v-if="element.config.showComment.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.comment')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.comment')"
+                :class="requiredFieldClass(10)"
+            />
+        </div>
+
+        <div
+            class="sw-cms-el-period-request-form-group"
+            :class="formGroupAdditionalClassThreeColumnsRow1"
+        >
+            <sw-select-field
+                v-if="element.config.showSalutation.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.salutation')"
+                :class="requiredFieldClass(1)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.salutation') }}
+                </option>
+            </sw-select-field>
+
+            <sw-text-field
+                v-if="element.config.showFirstname.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.firstname')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.firstname')"
+                :class="requiredFieldClass(2)"
+            />
+
+            <sw-text-field
+                v-if="element.config.showLastname.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.lastname')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.lastname')"
+                :class="requiredFieldClass(3)"
+            />
+        </div>
+
+        <div
+            class="sw-cms-el-period-request-form-group"
+            :class="formGroupAdditionalClassThreeColumnsRow2"
+        >
+            <sw-text-field
+                v-if="element.config.showStreet.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.street')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.street')"
+                :class="requiredFieldClass(4)"
+            />
+
+            <sw-text-field
+                v-if="element.config.showZipcode.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.zipcode')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.zipcode')"
+                :class="requiredFieldClass(5)"
+            />
+
+            <sw-text-field
+                v-if="element.config.showCity.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.city')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.city')"
+                :class="requiredFieldClass(6)"
+            />
+        </div>
+
+        <sw-select-field
+            v-if="element.config.showCountry.value === true"
+            :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.country')"
+            :class="requiredFieldClass(7)"
+        >
+            <option
+                value=""
+                disabled
+                selected
+            >
+                {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.country') }}
+            </option>
+        </sw-select-field>
+
+        <div
+            class="sw-cms-el-period-request-form-group"
+            :class="formGroupAdditionalClassTwoColumns"
+        >
+            <sw-text-field
+                v-if="element.config.showEmail.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.email')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.email')"
+                :class="requiredFieldClass(8)"
+            />
+
+            <sw-text-field
+                v-if="element.config.showPhone.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.phone')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.phone')"
+                :class="requiredFieldClass(9)"
+            />
+        </div>
+
+        <div
+            v-if="element.config.showCommentAboveForm.value === false"
+        >
+            <sw-textarea-field
+                v-if="element.config.showComment.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.comment')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.comment')"
+                :class="requiredFieldClass(10)"
+            />
+        </div>
+
+        <div
+            v-if="element.config.showDateAboveForm.value === false"
+        >
+            <sw-text-field
+                v-if="element.config.showDate.value === true"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.date')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.date')"
+                :class="requiredFieldClass(11)"
+            />
+        </div>
+
+        <div
+            class="sw-cms-el-period-request-form-group sw-cms-el-period-request-form-group-flex-wrap"
+            :class="formGroupAdditionalClassThreeColumnsRow3"
+            v-if="element.config.showFreeInputAboveForm.value === false"
+        >
+            <sw-select-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :class="requiredFieldClass(12)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInputText')"
+                :class="requiredFieldClass(12)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput.value === true && element.config.freeInputType.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInputText')"
+                :class="requiredFieldClass(12)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :class="requiredFieldClass(13)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2Text')"
+                :class="requiredFieldClass(13)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput2.value === true && element.config.freeInput2Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput2')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput2Text')"
+                :class="requiredFieldClass(13)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :class="requiredFieldClass(14)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3Text')"
+                :class="requiredFieldClass(14)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput3.value === true && element.config.freeInput3Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput3')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput3Text')"
+                :class="requiredFieldClass(14)"
+            />
+
+            <sw-select-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'select'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :class="requiredFieldClass(15)"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4Text')"
+                :class="requiredFieldClass(15)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput4.value === true && element.config.freeInput4Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput4')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput4Text')"
+                :class="requiredFieldClass(15)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                    :class="requiredFieldClass(16)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5Text')"
+                :class="requiredFieldClass(16)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput5.value === true && element.config.freeInput5Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput5')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput5Text')"
+                :class="requiredFieldClass(16)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                    :class="requiredFieldClass(17)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6Text')"
+                :class="requiredFieldClass(17)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput6.value === true && element.config.freeInput6Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput6')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput6Text')"
+                :class="requiredFieldClass(17)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                    :class="requiredFieldClass(18)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7Text')"
+                :class="requiredFieldClass(18)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput7.value === true && element.config.freeInput7Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput7')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput7Text')"
+                :class="requiredFieldClass(18)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                    :class="requiredFieldClass(19)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8Text')"
+                :class="requiredFieldClass(19)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput8.value === true && element.config.freeInput8Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput8')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput8Text')"
+                :class="requiredFieldClass(19)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                    :class="requiredFieldClass(20)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9Text')"
+                :class="requiredFieldClass(20)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput9.value === true && element.config.freeInput9Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput9')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput9Text')"
+                :class="requiredFieldClass(20)"
+            />
+
+            <sw-select-field
+                    v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'select'"
+                    :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                    :class="requiredFieldClass(21)"
+            >
+                <option
+                        value=""
+                        disabled
+                        selected
+                >
+                    {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10') }}
+                </option>
+            </sw-select-field>
+            <sw-text-field
+                v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'input'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10Text')"
+                :class="requiredFieldClass(21)"
+            />
+            <sw-textarea-field
+                v-if="element.config.showFreeInput10.value === true && element.config.freeInput10Type.value === 'textarea'"
+                :label="$tc('sw-cms.elements.componentPeriodRequestForm.label.freeInput10')"
+                :value="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.freeInput10Text')"
+                :class="requiredFieldClass(21)"
+            />
+        </div>
+
+        <h4
+            v-if="element.config.showPrivacyNotice.value === true"
+        >{{ $tc('sw-cms.elements.componentPeriodRequestForm.label.privacy') }}</h4>
+
+        <sw-checkbox-field
+            v-if="element.config.showPrivacyNotice.value === true && element.config.privacyNoticeIsRequired.value === true && element.config.privacyNoticeWithoutTermsOfService.value === false"
+            :label="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.privacy')" />
+
+        <sw-checkbox-field
+            v-if="element.config.showPrivacyNotice.value === true && element.config.privacyNoticeIsRequired.value === true && element.config.privacyNoticeWithoutTermsOfService.value === true"
+            :label="$tc('sw-cms.elements.componentPeriodRequestForm.placeholder.privacyWithoutTermsOfService')" />
+
+        <p
+            v-if="element.config.showPrivacyNotice.value === true && element.config.privacyNoticeIsRequired.value === false && element.config.privacyNoticeWithoutTermsOfService.value === false"
+            class="sw-cms-el-period-request-form-note"
+        >
+            {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.privacy') }}
+        </p>
+
+        <p
+            v-if="element.config.showPrivacyNotice.value === true && element.config.privacyNoticeIsRequired.value === false && element.config.privacyNoticeWithoutTermsOfService.value === true"
+            class="sw-cms-el-period-request-form-note"
+        >
+            {{ $tc('sw-cms.elements.componentPeriodRequestForm.placeholder.privacyWithoutTermsOfService') }}
+        </p>
+
+        <p
+            v-if="element.config.showRequiredFieldsInfo.value === true"
+            class="sw-cms-el-period-request-form-note"
+        >
+            {{ $tc('sw-cms.elements.componentPeriodRequestForm.label.requiredFields') }}
+        </p>
+
+        <div
+            v-if="element.config.submitButton.value !== ''"
+            class="sw-cms-el-period-request-form__action"
+        >
+            {{ element.config.submitButton.value }}
+        </div>
+        <div
+            v-if="element.config.submitButton.value === ''"
+            class="sw-cms-el-period-request-form__action"
+        >
+            {{ $tc('sw-cms.elements.componentPeriodRequestForm.label.send') }}
+        </div>
+    </div>
+{% endblock %}

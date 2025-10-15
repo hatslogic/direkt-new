@@ -1,0 +1,57 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+
+    {% block mill_component_product_downloads_container %}
+
+        <div class="tab-pane-container">
+
+            {% block mill_component_product_downloads_title %}
+
+                {% if config('MillCloudProductDownloadsTab.config.showTitle') %}
+
+                    <div class="h3 product-detail-properties-title">
+                        {{ "millCloudProductDownloadsTab.detail.title"|trans }} "{{ product.translated.name }}"
+                    </div>
+
+                {% endif %}
+
+            {% endblock %}
+
+            {% block mill_component_product_downloads_content %}
+
+                <ul>
+
+                    {% for mediaFile in dowloadTabFiles  %}
+
+                        {% block mill_component_product_downloads_content_file %}
+
+                            {% set fileName = mediaFile.translated.title ? mediaFile.translated.title : mediaFile.fileName %}
+
+                            <li>
+                                <a href="{{ mediaFile.url }}" target="_blank"
+                                   title="{% if config('MillCloudProductDownloadsTab.config.showDownloadTitlePrefix') %}{{ "millCloudProductDownloadsTab.detail.prefix"|trans }}{% endif %}{{fileName }}"
+                                   {% if config('MillCloudProductDownloadsTab.config.forceLinkDownload') %}download{% endif %}>
+
+                                    {% block mill_component_product_downloads_content_name %}
+
+                                        {% if config('MillCloudProductDownloadsTab.config.showDownloadTitlePrefix') %}{{ "millCloudProductDownloadsTab.detail.prefix"|trans }}{% endif %}{{ fileName }}
+
+                                    {% endblock %}
+
+                                </a>
+                            </li>
+
+                        {% endblock %}
+
+                    {% endfor %}
+
+                </ul>
+
+            {% endblock %}
+
+        </div>
+
+    {% endblock %}
+
+{% endblock %}

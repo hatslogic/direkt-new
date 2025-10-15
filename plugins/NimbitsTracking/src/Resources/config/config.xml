@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+    <title>Google Analytics 4 (GA4) Settings</title>
+    <title lang="de-DE">Google Analytics 4 (GA4) Einstellungen</title>
+        <!-- Google Analytics 4 Mess-ID -->
+
+        <input-field type="text">
+            <name>ga4id</name>
+            <label>Google Analytics 4 ID</label>
+            <label lang="de-DE">Mess-ID</label>
+            <helpText>Insert the GA4 ID from the Google panel to authenticacte your shop.</helpText>
+            <helpText lang="de-DE">Tragen Sie die MESS-ID aus Ihrem Google Analytics 4 Panel ein um Ihren Shop mit Google zu verknüpfen.</helpText>
+            <defaultValue></defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Referrer System</title>
+        <title lang="de-DE">Referrer System</title>
+
+        <!-- Parameter Name -->
+
+        <input-field type="text">
+            <name>parameterName</name>
+            <label>Name of the URL-parameter</label>
+            <label lang="de-DE">Name des URL-Parameters</label>
+			<helpText>Specifies what the parameter must be in the URL. Usage example with the parameter "referrer": example.com/?referrer=test</helpText>
+            <helpText lang="de-DE">Gibt an, wie der Parameter in der URL lauten muss. Verwendungsbeispiel mit dem Parameter "referrer": example.com/?referrer=test</helpText>
+            <defaultValue>referrer</defaultValue>
+        </input-field>
+		
+		<!-- Override Partners -->
+
+        <input-field type="checkbox">
+            <name>overrideSession</name>
+            <label>Override existing Referrer</label>
+            <label lang="de-DE">Überschreibe bei Kunden vorhandene Referrer</label>
+			<helpText>The plugin writes in the orders and customers which referrer they used to get to the shop. If active, an already recorded origin of a customer will be overwritten if he comes to the shop via a different referrer for a further order.</helpText>
+            <helpText lang="de-DE">Das Plugin schreibt in die Bestellungen und Kunden, über welchen Referrer sie auf den Shop gelangt sind. Wenn aktiv, wird eine bereits erfasste Herkunft eines Kundens überschrieben, wenn er bei einer weiteren Bestellung über einen anderen Referrer auf den Shop gelangt.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Visitor Counter</title>
+        <title lang="de-DE">Besuchszähler</title>
+
+        <!-- Enable Visitor Counter -->
+
+        <input-field type="checkbox">
+            <name>enableVisitorCounter</name>
+            <label>Enable counting visitors</label>
+            <label lang="de-DE">Aktiviere den Besuchszähler</label>
+            <helpText>The plugin counts every request and counts different IPs as unique users.</helpText>
+            <helpText lang="de-DE">Das Plugin zählt jeden Seitenaufruf und zählt unterschiedliche IPs als einzigartige Nutzer.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <!-- Ignore IPs -->
+
+        <input-field type="textarea">
+            <name>visitorCounterIpBlacklist</name>
+            <label>IP Blacklist</label>
+            <label lang="de-DE">IP Blacklist</label>
+            <helpText>The plugin does not count requests for IPs in this list. This can be used to ignore requests from your employees. (One IP per line)</helpText>
+            <helpText lang="de-DE">Das Plugin zählt die Anfragen von IPs auf dieser Liste nicht. Dies kann genutzt werden, damit die Anfragen der eigenen Mitarbeiter nicht mitgezählt werden. (Eine IP pro Zeile)</helpText>
+            <defaultValue>127.0.0.1</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Tracking Cookie</title>
+        <title lang="de-DE">Tracking Cookie</title>
+
+        <!-- Cookie Enabled -->
+
+        <input-field type="checkbox">
+            <name>enableCookie</name>
+            <label>Enable Tracking-Cookie usage</label>
+            <label lang="de-DE">Aktiviere die Nutzung eines Tracking-Cookies</label>
+			<helpText>The plugin tracks the origin via the browser session. If the option is active, a cookie is set in addition to session tracking. This means that a purchase / registration can also be recorded if the user leaves the site in the meantime.</helpText>
+            <helpText lang="de-DE">Das Plugin trackt die Herkunft über die Browser-Session. Wenn die Option aktiv ist, wird neben dem Session-Tracking auch ein Cookie gesetzt. Dadurch kann auch ein Kauf/eine Registrierung erfasst werden, wenn der Nutzer in der Zwischenzeit die Seite verlässt.</helpText>
+			<defaultValue>true</defaultValue>
+        </input-field>
+
+        <!-- Cookie Name -->
+
+        <input-field type="text">
+            <name>cookieName</name>
+            <label>Name of the Cookie</label>
+            <label lang="de-DE">Name des Cookies</label>
+            <defaultValue>nb_referrer</defaultValue>
+        </input-field>
+
+        <!-- Cookie Group -->
+
+        <input-field type="single-select">
+            <name>cookieType</name>
+            <label>Register Cookie as...</label>
+            <label lang="de-DE">Registriere Cookie als...</label>
+            <defaultValue>cookie.groupStatistical</defaultValue>
+            <options>
+                <option>
+                    <id>cookie.groupRequired</id>
+                    <name>Technically required</name>
+                    <name lang="de-DE">Technisch notwendiges Cookie</name>
+                </option>
+                <option>
+                    <id>cookie.groupStatistical</id>
+                    <name>Statistics</name>
+                    <name lang="de-DE">Statistiken</name>
+                </option>
+            </options>
+        </input-field>
+
+        <!-- Cookie Lifetime -->
+
+        <input-field type="single-select">
+            <name>cookieDuration</name>
+            <label>Keep Cookie for...</label>
+            <label lang="de-DE">Speichere Cookie für...</label>
+            <defaultValue>s2592000</defaultValue>
+            <options>
+                <option>
+                    <id>s86400</id>
+                    <name>1 day</name>
+                    <name lang="de-DE">1 Tag</name>
+                </option>
+                <option>
+                    <id>s259200</id>
+                    <name>3 days</name>
+                    <name lang="de-DE">3 Tage</name>
+                </option>
+                <option>
+                    <id>s604800</id>
+                    <name>1 week</name>
+                    <name lang="de-DE">1 Woche</name>
+                </option>
+                <option>
+                    <id>s1209600</id>
+                    <name>2 weeks</name>
+                    <name lang="de-DE">2 Wochen</name>
+                </option>
+                <option>
+                    <id>s2592000</id>
+                    <name>1 month</name>
+                    <name lang="de-DE">1 Monat</name>
+                </option>
+                <option>
+                    <id>s7776000</id>
+                    <name>3 months</name>
+                    <name lang="de-DE">3 Monate</name>
+                </option>
+                <option>
+                    <id>s15552000</id>
+                    <name>6 months</name>
+                    <name lang="de-DE">6 Monate</name>
+                </option>
+                <option>
+                    <id>s31536000</id>
+                    <name>1 year</name>
+                    <name lang="de-DE">1 Jahr</name>
+                </option>
+                <option>
+                    <!-- 100 years are kind of permanently... At least it's an eternity -->
+                    <id>s3153600000</id>
+                    <name>permanent</name>
+                    <name lang="de-DE">dauerhaft</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Dashboard</title>
+        <title lang="de-DE">Dashboard</title>
+
+        <input-field type="checkbox">
+            <name>emptyReferrer</name>
+            <label>Show data for empty referrer</label>
+            <label lang="de-DE">Zeige Daten für leere Referrer</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>useTotal</name>
+            <label>Amount used for sales</label>
+            <label lang="de-DE">Betrag für den Umsatz</label>
+            <defaultValue>total</defaultValue>
+            <options>
+                <option>
+                    <id>total</id>
+                    <name>Total</name>
+                    <name lang="de-DE">Brutto</name>
+                </option>
+                <option>
+                    <id>net</id>
+                    <name>Net</name>
+                    <name lang="de-DE">Netto</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+
+</config>

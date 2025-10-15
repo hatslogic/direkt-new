@@ -18,7 +18,7 @@
 
                 {% if buttonText1 %}
                 <div class="d-flex align-items-center">
-                    <a href="{{ url1 }}" class="btn btn-{{ buttonType1 }} text-white" {% if newTab1 %} target="_blank" {% endif %}>{{ buttonText1 }}
+                    <a href="{{ url1 }}" class="btn btn-{{ buttonType1 }} text-white" {% if newTab1 %} target="_blank" {% endif %} aria-hidden="false">{{ buttonText1 }}
                     <span class="icon icon-right-arrow"></span></a>
                 </div>
                 {% endif %}
@@ -84,6 +84,7 @@
         'class': 'cms-image w-100 h-auto',
         'alt': (element.data.mediaDesktop.translated.alt ?: ''),
         'title': (element.data.mediaDesktop.translated.title ?: ''),
+        'fetchpriority': 'high'
     } %}
         {% set desktopBackgroundMedia = element.data.backgroundDesktop %}
         {% set tabletBackgroundMedia = element.data.backgroundTablet %}

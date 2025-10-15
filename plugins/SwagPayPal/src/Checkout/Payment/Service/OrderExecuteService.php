@@ -39,7 +39,7 @@ class OrderExecuteService
         OrderResource $orderResource,
         OrderTransactionStateHandler $orderTransactionStateHandler,
         OrderNumberPatchBuilder $orderNumberPatchBuilder,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->orderResource = $orderResource;
         $this->orderTransactionStateHandler = $orderTransactionStateHandler;
@@ -55,7 +55,7 @@ class OrderExecuteService
         PayPalOrder $paypalOrder,
         string $salesChannelId,
         Context $context,
-        string $partnerAttributionId
+        string $partnerAttributionId,
     ): PayPalOrder {
         $this->logger->debug('Started');
 
@@ -63,7 +63,7 @@ class OrderExecuteService
             return $this->doPayPalRequest($paypalOrder, $salesChannelId, $partnerAttributionId, $transactionId, $context);
         } catch (PayPalApiException $e) {
             if ($e->getStatusCode() !== Response::HTTP_UNPROCESSABLE_ENTITY
-                || ($e->getIssue() !== PayPalApiException::ERROR_CODE_DUPLICATE_INVOICE_ID)) {
+                || !$e->is(PayPalApiException::ISSUE_DUPLICATE_INVOICE_ID)) {
                 throw $e;
             }
 

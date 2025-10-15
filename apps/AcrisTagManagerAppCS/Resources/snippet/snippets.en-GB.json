@@ -1,0 +1,13 @@
+{
+    "acrisTagManagerApp": {
+        "acrisTagManagerCookieGroupName": "Google Tag Manager",
+        "acrisTagManagerCookieName": "Google Tag Manager",
+        "acrisTagManagerCookieDescription": "Necessary for the integration of the Google Tag Manager.",
+        "acrisTagManagerGoogleAnalyticsCookieGroupName": "Google Analytics",
+        "acrisTagManagerGoogleAnalyticsCookieName": "Google Analytics",
+        "acrisTagManagerGoogleAnalyticsCookieDescription": "Necessary for the integration of Google Analytics.",
+        "acrisTagManagerGoogleAdsCookieGroupName": "Google Ads",
+        "acrisTagManagerGoogleAdsCookieName": "Google Ads",
+        "acrisTagManagerGoogleAdsCookieDescription": "Necessary for the integration of Google Ads."
+    }
+}

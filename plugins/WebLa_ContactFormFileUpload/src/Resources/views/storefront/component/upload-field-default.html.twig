@@ -1,0 +1,30 @@
+{% block upload_component %}
+  {% if multiple is not defined %}
+    {% set multiple = false %}
+  {% endif %}
+
+  {% set multipleUploadActive = multiple ? 'multiple' : '' %}
+
+  {% set fieldName = 'attachement[]' %}
+
+  {% set errorClass = formViolations.getViolations('/' ~ fieldName) ? 'is-invalid' : '' %}
+
+  <div class="drop-zone-wrapper" data-file-upload>
+    <div class="drop-zone">
+      <div class="drop-zone-inner">
+        <svg stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div class="drop-zone-upload form-group">
+          <label>{{ 'form.contactFormAttachment'|trans }}</label>
+          <label for="images"><input id="images" name="{{ fieldName }}" {{ multipleUploadActive }} value="{{ data.get(fieldName) }}" type="file" class="form-control drop-zone__input {{ errorClass }}" /></label>
+          <label>{{ 'form.orDrag'|trans }}</label>
+        </div>
+      </div>
+      {% if formViolations.getViolations('/' ~ fieldName) is not empty %}
+        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with { violationPath: '/' ~ fieldName } %}
+      {% endif %}
+      <div class="upload-preview"></div>
+    </div>
+  </div>
+{% endblock %}

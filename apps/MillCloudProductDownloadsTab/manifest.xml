@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+
+    <meta>
+        <name>MillCloudProductDownloadsTab</name>
+        <label>Downloads Tab</label>
+        <label lang="de-DE">Downloads Tab</label>
+        <description>Plugin to display product downloads as a tab</description>
+        <description lang="de-DE">Plugin für die Anzeige von Produktdownloads als Tab</description>
+        <author>MILLENWORLD</author>
+        <copyright>(c) by MILLENWORLD</copyright>
+        <version>1.1.0</version>
+        <icon>Resources/config/plugin.png</icon>
+        <license>proprietary</license>
+    </meta>
+
+    <permissions>
+        <read>media</read>
+        <create>media</create>
+    </permissions>
+
+    <custom-fields>
+        <custom-field-set>
+            <name>mill_cloud_product_downloads</name>
+            <label>Downloads</label>
+            <label lang="de-DE">Downloads</label>
+            <related-entities>
+                <product/>
+            </related-entities>
+            <fields>
+                <media-selection name="mill_cloud_product_download_1">
+                    <position>1</position>
+                    <label>Download 1</label>
+                    <label lang="de-DE">Download 1</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_2">
+                    <position>2</position>
+                    <label>Download 2</label>
+                    <label lang="de-DE">Download 2</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_3">
+                    <position>3</position>
+                    <label>Download 3</label>
+                    <label lang="de-DE">Download 3</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_4">
+                    <position>4</position>
+                    <label>Download 4</label>
+                    <label lang="de-DE">Download 4</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_5">
+                    <position>5</position>
+                    <label>Download 5</label>
+                    <label lang="de-DE">Download 5</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_6">
+                    <position>6</position>
+                    <label>Download 6</label>
+                    <label lang="de-DE">Download 6</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_7">
+                    <position>7</position>
+                    <label>Download 7</label>
+                    <label lang="de-DE">Download 7</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_8">
+                    <position>8</position>
+                    <label>Download 8</label>
+                    <label lang="de-DE">Download 8</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_9">
+                    <position>9</position>
+                    <label>Download 9</label>
+                    <label lang="de-DE">Download 9</label>
+                </media-selection>
+                <media-selection name="mill_cloud_product_download_10">
+                    <position>10</position>
+                    <label>Download 10</label>
+                    <label lang="de-DE">Download 10</label>
+                </media-selection>
+            </fields>
+        </custom-field-set>
+    </custom-fields>
+
+</manifest>

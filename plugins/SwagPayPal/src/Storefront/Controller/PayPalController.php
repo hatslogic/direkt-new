@@ -7,6 +7,7 @@
 
 namespace Swag\PayPal\Storefront\Controller;
 
+use Monolog\Level;
 use OpenApi\Attributes as OA;
 use Psr\Log\LoggerInterface;
 use Shopware\Core\Checkout\Cart\SalesChannel\AbstractCartDeleteRoute;
@@ -29,10 +30,11 @@ use Swag\PayPal\Checkout\SalesChannel\AbstractClearVaultRoute;
 use Swag\PayPal\Checkout\SalesChannel\AbstractCreateOrderRoute;
 use Swag\PayPal\Checkout\SalesChannel\AbstractMethodEligibilityRoute;
 use Swag\PayPal\Checkout\TokenResponse;
+use Swag\PayPal\OrdersApi\Builder\AbstractOrderBuilder;
 use Swag\PayPal\RestApi\Exception\PayPalApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @internal
@@ -55,12 +57,12 @@ class PayPalController extends StorefrontController
         private readonly AbstractContextSwitchRoute $contextSwitchRoute,
         private readonly AbstractCartDeleteRoute $cartDeleteRoute,
         private readonly AbstractClearVaultRoute $clearVaultRoute,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 
-    #[Route(path: '/paypal/create-order', name: 'frontend.paypal.create_order', methods: ['POST'], defaults: ['XmlHttpRequest' => true, 'csrf_protected' => false])]
-    #[Route(path: '/subscription/paypal/create-order/{subscriptionToken}', name: 'frontend.subscription.paypal.create_order', methods: ['POST'], defaults: ['XmlHttpRequest' => true, 'csrf_protected' => false, '_subscriptionCart' => true, '_subscriptionContext' => true])]
+    #[Route(path: '/paypal/create-order', name: 'frontend.paypal.create_order', methods: ['POST'], defaults: ['XmlHttpRequest' => true, 'csrf_protected' => false, AbstractOrderBuilder::PRELIMINARY_ATTRIBUTE => true])]
+    #[Route(path: '/subscription/paypal/create-order/{subscriptionToken}', name: 'frontend.subscription.paypal.create_order', methods: ['POST'], defaults: ['XmlHttpRequest' => true, 'csrf_protected' => false, '_subscriptionCart' => true, '_subscriptionContext' => true, AbstractOrderBuilder::PRELIMINARY_ATTRIBUTE => true])]
     public function createOrder(SalesChannelContext $salesChannelContext, Request $request): Response
     {
         try {
@@ -201,13 +203,17 @@ class PayPalController extends StorefrontController
             $request->getSession()->set(self::PAYMENT_METHOD_FATAL_ERROR, $context->getPaymentMethod()->getId());
         }
 
-        $this->logger->notice('Storefront checkout error', [
-            'error' => $request->request->get('error'),
-            'code' => $code,
-            'fatal' => $fatal,
-            'paymentMethodId' => $context->getPaymentMethod()->getId(),
-            'paymentMethodName' => $context->getPaymentMethod()->getName(),
-        ]);
+        $this->logger->log(
+            \in_array($code, ['SWAG_PAYPAL__SCRIPT_ERROR', 'SWAG_PAYPAL__SCRIPT_NOT_LOADED'], true) ? Level::Error : Level::Warning,
+            'Storefront checkout error',
+            [
+                'error' => $request->request->get('error'),
+                'code' => $code,
+                'fatal' => $fatal,
+                'paymentMethodId' => $context->getPaymentMethod()->getId(),
+                'paymentMethodName' => $context->getPaymentMethod()->getName(),
+            ],
+        );
 
         return new NoContentResponse();
     }

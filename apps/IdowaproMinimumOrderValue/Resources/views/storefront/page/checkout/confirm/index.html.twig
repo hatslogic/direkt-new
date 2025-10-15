@@ -1,0 +1,37 @@
+{% sw_extends '@Storefront/storefront/page/checkout/confirm/index.html.twig' %}
+
+{% set is_minimum_order_active = config('IdowaproMinimumOrderValue.config.isActive') %}
+{% set minimum_order_value = config('IdowaproMinimumOrderValue.config.minimalOrderValue') * context.currency.factor %}
+{% set minimum_order_value_formatted = minimum_order_value | format_currency(context.currency.isoCode) %}
+
+{% set is_minimum_order_value_reached = page.cart.price.positionPrice >= minimum_order_value %}
+{% set not_reached_snippet = "idowapro.minimumOrderValue.notReached"|trans({'%minimumOrderValue%': minimum_order_value_formatted})|sw_sanitize %}
+{% if config('IdowaproMinimumOrderValue.config.isValueWithShippingCost') %}
+    {% set is_minimum_order_value_reached = page.cart.price.totalPrice >= minimum_order_value %}
+    {% set not_reached_snippet = "idowapro.minimumOrderValue.notReachedWithShippingCost"|trans({'%minimumOrderValue%': minimum_order_value_formatted})|sw_sanitize %}
+{% endif %}
+
+{% block page_checkout_aside_actions %}
+    {% if is_minimum_order_active %}
+        <div class="checkout-aside-action">
+            {% if is_minimum_order_value_reached %}
+                {{ parent() }}
+            {% else %}
+                {% block page_checkout_confirm_form_submit_minimum_not_reached %}
+                    <div class="d-grid">
+                        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                            type: "warning",
+                            content: not_reached_snippet
+                        } %}
+                        <button class="btn btn-primary btn-lg" disabled>
+                            {{ "checkout.confirmSubmit"|trans|sw_sanitize }}
+                        </button>
+                    </div>
+                {% endblock %}
+            {% endif %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+

@@ -9,12 +9,17 @@ namespace Swag\PayPal\Webhook\Registration;
 
 use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityDeletedEvent;
+use Shopware\Core\Framework\Feature;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\System\SalesChannel\SalesChannelEvents;
+use Shopware\Core\System\SystemConfig\Event\BeforeSystemConfigMultipleChangedEvent;
+use Shopware\Core\System\SystemConfig\Event\SystemConfigMultipleChangedEvent;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
+use Swag\PayPal\Setting\Service\SettingsSaver;
 use Swag\PayPal\Setting\Settings;
 use Swag\PayPal\Webhook\WebhookServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
@@ -22,26 +27,21 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 #[Package('checkout')]
 class WebhookSubscriber implements EventSubscriberInterface
 {
-    private LoggerInterface $logger;
-
-    private SystemConfigService $systemConfigService;
-
-    private WebhookServiceInterface $webhookService;
-
     public function __construct(
-        LoggerInterface $logger,
-        SystemConfigService $systemConfigService,
-        WebhookServiceInterface $webhookService
+        private readonly LoggerInterface $logger,
+        private readonly SystemConfigService $systemConfigService,
+        private readonly WebhookServiceInterface $webhookService,
+        private readonly WebhookSystemConfigHelper $webhookSystemConfigHelper,
+        private readonly RequestStack $requestStack,
     ) {
-        $this->logger = $logger;
-        $this->systemConfigService = $systemConfigService;
-        $this->webhookService = $webhookService;
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
             SalesChannelEvents::SALES_CHANNEL_DELETED => 'removeSalesChannelWebhookConfiguration',
+            BeforeSystemConfigMultipleChangedEvent::class => 'checkWebhookBefore',
+            SystemConfigMultipleChangedEvent::class => 'checkWebhookAfter',
         ];
     }
 
@@ -59,5 +59,51 @@ class WebhookSubscriber implements EventSubscriberInterface
                 $this->logger->error($e->getMessage(), ['error' => $e]);
             }
         }
+    }
+
+    /**
+     * system-config should be written by {@see SettingsSaver} only, which checks the webhook on its own.
+     * Just in case new/changed credentials will be saved via the normal system config.
+     */
+    public function checkWebhookBefore(BeforeSystemConfigMultipleChangedEvent $event): void
+    {
+        if (!Feature::isActive('PAYPAL_SETTINGS_TWEAKS')) {
+            return;
+        }
+
+        if ($config = $this->getConfigToCheck($event)) {
+            $this->webhookSystemConfigHelper->checkWebhookBefore([$event->getSalesChannelId() => $config]);
+        }
+    }
+
+    /**
+     * system-config should be written by {@see SettingsSaver} only, which checks the webhook on its own.
+     * Just in case new/changed credentials will be saved via the normal system config.
+     */
+    public function checkWebhookAfter(SystemConfigMultipleChangedEvent $event): void
+    {
+        if (!Feature::isActive('PAYPAL_SETTINGS_TWEAKS')) {
+            return;
+        }
+
+        if ($this->getConfigToCheck($event)) {
+            $this->webhookSystemConfigHelper->checkWebhookAfter([$event->getSalesChannelId()]);
+        }
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function getConfigToCheck(BeforeSystemConfigMultipleChangedEvent|SystemConfigMultipleChangedEvent $event): ?array
+    {
+        /** @var array<string, mixed> $config */
+        $config = $event->getConfig();
+        $routeName = (string) $this->requestStack->getMainRequest()?->attributes->getString('_route');
+
+        if (\str_contains($routeName, 'api.action.paypal.settings.save') || !$this->webhookSystemConfigHelper->needsCheck($config)) {
+            return null;
+        }
+
+        return $config;
     }
 }

@@ -1,0 +1,322 @@
+{% block periodrequestform_detail %}
+    <sw-page class="periodrequestform-detail">
+        {% block periodrequestform_detail_actions %}
+            <template #smart-bar-actions>
+                {% block periodrequestform_detail_actions_cancel %}
+                    <sw-button
+                        v-tooltip.bottom="tooltipCancel"
+                        @click="onCancel">
+                            {{ $t('periodrequestform.detail.cancelButtonText') }}
+                    </sw-button>
+                {% endblock %}
+
+                {% block periodrequestform_detail_actions_save %}
+                    <sw-button-process
+                        v-tooltip.bottom="tooltipSave"
+                        class="periodrequestform-detail__save-action"
+                        :is-loading="isLoading"
+                        :process-success="processSuccess"
+                        :disabled="isLoading || !acl.can('periodrequestform.editor')"
+                        variant="primary"
+                        @update:process-success="onSaveFinish"
+                        @click="onSave">
+                            {{ $t('periodrequestform.detail.saveButtonText') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block sw_settings_user_detail_content %}
+            <template #content>
+                <sw-card-view>
+                    <template v-if="isLoading">
+                        <sw-skeleton />
+                        <sw-skeleton />
+                    </template>
+
+                    <template v-else>
+                        <sw-card
+                            v-if="periodrequestform"
+                            position-identifier="periodrequestform-detail"
+                            :is-loading="isLoading"
+                        >
+                            <div
+                                v-if="periodrequestform"
+                                class="periodrequestform-detail__grid"
+                            >
+                                <sw-text-field
+                                    v-model:value="periodrequestform.salutation"
+                                    name="sw-field--periodrequestform-salutation"
+                                    class="periodrequestform-detail__grid-salutation"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.salutationLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.firstname"
+                                    name="sw-field--periodrequestform-firstname"
+                                    class="periodrequestform-detail__grid-firstname"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.firstnameLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.lastname"
+                                    name="sw-field--periodrequestform-lastname"
+                                    class="periodrequestform-detail__grid-lastname"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.lastnameLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.street"
+                                    name="sw-field--periodrequestform-street"
+                                    class="periodrequestform-detail__grid-street"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.streetLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.zipcode"
+                                    name="sw-field--periodrequestform-zipcode"
+                                    class="periodrequestform-detail__grid-zipcode"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.zipcodeLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.city"
+                                    name="sw-field--periodrequestform-city"
+                                    class="periodrequestform-detail__grid-city"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.cityLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.country"
+                                    name="sw-field--periodrequestform-country"
+                                    class="periodrequestform-detail__grid-country"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.countryLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.email"
+                                    name="sw-field--periodrequestform-email"
+                                    class="periodrequestform-detail__grid-email"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.emailLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.phone"
+                                    name="sw-field--periodrequestform-phone"
+                                    class="periodrequestform-detail__grid-phone"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.phoneLabel')"/>
+
+                                <sw-textarea-field
+                                    v-model:value="periodrequestform.comment"
+                                    name="sw-field--periodrequestform-comment"
+                                    class="periodrequestform-detail__grid-comment"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.commentLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.date"
+                                    name="sw-field--periodrequestform-date"
+                                    class="periodrequestform-detail__grid-date"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.dateLabel')"/>
+
+                                <dd
+                                    class="periodrequestform-detail-info">
+                                    {{ $t('periodrequestform.detail.dateInfoLabel') }}
+                                </dd>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.freeinputlabel"
+                                    name="sw-field--periodrequestform-freeinputlabel"
+                                    class="periodrequestform-detail__grid-freeinputlabel"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinputlabelLabel')"/>
+
+                                <sw-textarea-field
+                                    v-model:value="periodrequestform.freeinput"
+                                    name="sw-field--periodrequestform-freeinput"
+                                    class="periodrequestform-detail__grid-freeinput"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinputLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.freeinput2label"
+                                    name="sw-field--periodrequestform-freeinput2label"
+                                    class="periodrequestform-detail__grid-freeinput2label"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput2labelLabel')"/>
+
+                                <sw-textarea-field
+                                    v-model:value="periodrequestform.freeinput2"
+                                    name="sw-field--periodrequestform-freeinput2"
+                                    class="periodrequestform-detail__grid-freeinput2"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput2Label')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.freeinput3label"
+                                    name="sw-field--periodrequestform-freeinput3label"
+                                    class="periodrequestform-detail__grid-freeinput3label"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput3labelLabel')"/>
+
+                                <sw-textarea-field
+                                    v-model:value="periodrequestform.freeinput3"
+                                    name="sw-field--periodrequestform-freeinput3"
+                                    class="periodrequestform-detail__grid-freeinput3"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput3Label')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.freeinput4label"
+                                    name="sw-field--periodrequestform-freeinput4label"
+                                    class="periodrequestform-detail__grid-freeinput4label"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput4labelLabel')"/>
+
+                                <sw-textarea-field
+                                    v-model:value="periodrequestform.freeinput4"
+                                    name="sw-field--periodrequestform-freeinput4"
+                                    class="periodrequestform-detail__grid-freeinput4"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.freeinput4Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput5label"
+                                        name="sw-field--periodrequestform-freeinput5label"
+                                        class="periodrequestform-detail__grid-freeinput5label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput5labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput5"
+                                        name="sw-field--periodrequestform-freeinput5"
+                                        class="periodrequestform-detail__grid-freeinput5"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput5Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput6label"
+                                        name="sw-field--periodrequestform-freeinput6label"
+                                        class="periodrequestform-detail__grid-freeinput6label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput6labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput6"
+                                        name="sw-field--periodrequestform-freeinput6"
+                                        class="periodrequestform-detail__grid-freeinput6"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput6Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput7label"
+                                        name="sw-field--periodrequestform-freeinput7label"
+                                        class="periodrequestform-detail__grid-freeinput7label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput7labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput7"
+                                        name="sw-field--periodrequestform-freeinput7"
+                                        class="periodrequestform-detail__grid-freeinput7"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput7Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput8label"
+                                        name="sw-field--periodrequestform-freeinput8label"
+                                        class="periodrequestform-detail__grid-freeinput8label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput8labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput8"
+                                        name="sw-field--periodrequestform-freeinput8"
+                                        class="periodrequestform-detail__grid-freeinput8"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput8Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput9label"
+                                        name="sw-field--periodrequestform-freeinput9label"
+                                        class="periodrequestform-detail__grid-freeinput9label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput9labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput9"
+                                        name="sw-field--periodrequestform-freeinput9"
+                                        class="periodrequestform-detail__grid-freeinput9"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput9Label')"/>
+
+                                <sw-text-field
+                                        v-model:value="periodrequestform.freeinput10label"
+                                        name="sw-field--periodrequestform-freeinput10label"
+                                        class="periodrequestform-detail__grid-freeinput10label"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput10labelLabel')"/>
+
+                                <sw-textarea-field
+                                        v-model:value="periodrequestform.freeinput10"
+                                        name="sw-field--periodrequestform-freeinput10"
+                                        class="periodrequestform-detail__grid-freeinput10"
+                                        :disabled="!acl.can('periodrequestform.editor')"
+                                        :label="$t('periodrequestform.detail.freeinput10Label')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.origin"
+                                    name="sw-field--periodrequestform-origin"
+                                    class="periodrequestform-detail__grid-origin"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.originLabel')"/>
+
+                                <dd
+                                    class="periodrequestform-detail-info">
+                                    {{ $t('periodrequestform.detail.originInfoLabel') }}
+                                </dd>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.originname"
+                                    name="sw-field--periodrequestform-originname"
+                                    class="periodrequestform-detail__grid-originname"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.originnameLabel')"/>
+
+                                <sw-text-field
+                                    v-model:value="periodrequestform.originid"
+                                    name="sw-field--periodrequestform-originid"
+                                    class="periodrequestform-detail__grid-originid"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.originidLabel')"/>
+
+                                <dd
+                                    class="periodrequestform-detail-info padding-bottom-0">
+                                    {{ $t('periodrequestform.detail.originidInfoLabel') }}
+                                </dd>
+
+                                <sw-switch-field
+                                    v-model:value="periodrequestform.confirmed"
+                                    name="sw-field--periodrequestform-confirmed"
+                                    class="periodrequestform-detail__grid-confirmed"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.confirmedLabel')"
+                                />
+
+                                <sw-switch-field
+                                    v-model:value="periodrequestform.answered"
+                                    name="sw-field--periodrequestform-answered"
+                                    class="periodrequestform-detail__grid-answered"
+                                    :disabled="!acl.can('periodrequestform.editor')"
+                                    :label="$t('periodrequestform.detail.answeredLabel')"
+                                />
+                            </div>
+                        </sw-card>
+                    </template>
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

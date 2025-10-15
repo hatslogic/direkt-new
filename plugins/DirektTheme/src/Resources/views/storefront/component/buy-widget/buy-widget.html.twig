@@ -2,6 +2,14 @@
 
 {% block buy_widget %}
     <div class="product-detail-buy{% if elementId %}-{{ elementId }}{% endif %} js-magnifier-zoom-image-container">
+    	<div class="d-none">
+            {% block page_product_detail_name %}
+                <span itemprop="name"> {{ page.product.translated.name }} </span>
+            {% endblock %}
+            <meta itemprop="productID" content="{{ product.id }}">
+            <span class="d-none" itemprop="sku"></span>
+        </div>
+        
         {% block buy_widget_rich_snippets %}
             {% block buy_widget_rich_snippets_brand %}
                 {% if product.manufacturer %}
@@ -113,7 +121,7 @@
                         <div class="product-detail-price-container d-flex align-items-baseline">
                             {% sw_include '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
                             {% block buy_widget_tax %}
-                                <div class="product-detail-tax-container ms-3">
+                                <div class="product-detail-tax-container">
                                     {% if context.taxState == 'gross' %}
                                         {% set taxText = 'general.grossTaxInformation'|trans|sw_sanitize %}
                                     {% else %}
@@ -200,10 +208,7 @@
                             {% endblock %}
 
                             {% block buy_widget_ordernumber %}
-                                <meta itemprop="productID"
-                                    content="{{ product.id }}">
-                                <span class="product-detail-ordernumber"
-                                    itemprop="sku">
+                                <span class="product-detail-ordernumber">
                                     {{ product.productNumber }}
                                 </span>
                             {% endblock %}
@@ -255,20 +260,42 @@
         {% endblock %}
         
         {% block product_detail_social_icons %}
-            <ul class="d-flex justify-content-center justify-content-md-start align-items-center px-0 mt-5 product-social-icons">
-                <li class="me-5 list-unstyled">
-                    {{ 'footer.social.instagram'|trans|raw }}
-                </li>
-                <li class="me-5 list-unstyled">
-                    {{ 'footer.social.facebook'|trans|raw }}
-                </li>
-                <li class="me-5 list-unstyled">
-                    {{ 'footer.social.twitter'|trans|raw }}
-                </li>
-                <li class="list-unstyled">
-                    {{ 'footer.social.mail'|trans|raw }}
-                </li>
-            </ul>
+            {# url change as per sales channel id #}
+            {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+            {# direkt #}
+            {% if salesChannelId == '019074f16e0172079638d5b52531ca0c' %}
+                <ul class="d-flex justify-content-center justify-content-md-start align-items-center px-0 mt-5 product-social-icons">
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.instagram'|trans|raw }}
+                    </li>
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.facebook'|trans|raw }}
+                    </li>
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.twitter'|trans|raw }}
+                    </li>
+                    <li class="list-unstyled">
+                        {{ 'footer.social.mail'|trans|raw }}
+                    </li>
+                </ul>
+            {# mbseal #}
+            {% elseif salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+                <ul class="d-flex justify-content-center justify-content-md-start align-items-center px-0 mt-5 product-social-icons">
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.mbseal.instagram'|trans|raw }}
+                    </li>
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.mbseal.facebook'|trans|raw }}
+                    </li>
+                    <li class="me-5 list-unstyled">
+                        {{ 'footer.social.mbseal.twitter'|trans|raw }}
+                    </li>
+                    <li class="list-unstyled">
+                        {{ 'footer.social.mbseal.mail'|trans|raw }}
+                    </li>
+                </ul>
+            {% endif %}
+            
         {% endblock %}
     </div>
 {% endblock %}

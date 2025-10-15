@@ -1,0 +1,39 @@
+{
+    "name": "webla_contactformfileupload/webla_contactformfileupload",
+    "description": "Add file upload to contact form",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "version": "3.0.2",
+    "authors": [
+        {
+            "name": "Web Labels Webdesign GmbH"
+        }
+    ],
+    "extra": {
+        "shopware-plugin-class": "WebLa_ContactFormFileUpload\\WebLa_ContactFormFileUpload",
+        "author": "Web Labels Webdesign GmbH",
+        "label": {
+            "de-DE": "Kontaktformular - Datei-Upload",
+            "en-GB": "Contact form - File upload"
+        },
+        "description": {
+            "de-DE": "Datei-Upload zum Kontaktformular hinzufügen",
+            "en-GB": "Add file upload to contact form"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://store.shopware.com/web-labels-webdesign-gmbh.html",
+            "en-GB": "https://store.shopware.com/web-labels-webdesign-gmbh.html"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "WebLa_ContactFormFileUpload\\": "src/"
+        }
+    },
+    "require": {
+        "shopware/core": ">= 6.6.0"
+    },
+    "require-dev": {
+        "shopware/storefront": "*"
+    }
+}

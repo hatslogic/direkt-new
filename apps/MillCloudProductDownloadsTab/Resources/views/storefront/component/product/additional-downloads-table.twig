@@ -1,0 +1,53 @@
+{% block mill_cloud_product_downloads_additional_table_container %}
+
+    {% if productDownloads %}
+
+        <div class="mill-cloud-product-downloads-additional-table card {% if isBottom %}is-bottom{% endif %}">
+
+            <div class="card-body">
+
+                <ul class="list-group">
+
+                    {% block mill_cloud_product_downloads_additional_table_container_headline %}
+
+                        {% if config('MillCloudProductDownloadsTab.config.showAdditionalTableTitle') %}
+
+                            <li class="mill-cloud-product-downloads-additional-table-headline list-group-item bg-light text-dark">
+                                {{ "millCloudProductDownloadsTab.additionalTable.headline"|trans }}
+                            </li>
+
+                        {% endif %}
+
+                    {% endblock %}
+
+                    {% block mill_cloud_product_downloads_additional_table_container_items %}
+
+                        {% for mediaFile in productDownloads %}
+
+                            {% set fileName = mediaFile.translated.title ? mediaFile.translated.title : mediaFile.fileName %}
+
+                            <li class="mill-cloud-product-downloads-additional-table-item list-group-item align-items-center">
+
+                                <a href="{{ mediaFile.url }}" target="_blank"
+                                   title="{% if config('MillCloudProductDownloadsTab.config.showDownloadTitlePrefix') %}{{ "millCloudProductDownloadsTab.detail.prefix"|trans }}{% endif %}{{fileName }}"
+                                   {% if config('MillCloudProductDownloadsTab.config.forceLinkDownload') %}download{% endif %}>
+
+                                    {% if config('MillCloudProductDownloadsTab.config.showAdditionalTableDownloadIcon') %}{% sw_include "@Storefront/storefront/utilities/icon.html.twig" with { 'name': 'circle-download', 'size': 'sm'} %}{% endif %}{% if config('MillCloudProductDownloadsTab.config.showDownloadTitlePrefix') %}{{ "millCloudProductDownloadsTab.detail.prefix"|trans }}{% endif %}{{ fileName }}
+
+                                </a>
+
+                            </li>
+
+                        {% endfor %}
+
+                    {% endblock %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

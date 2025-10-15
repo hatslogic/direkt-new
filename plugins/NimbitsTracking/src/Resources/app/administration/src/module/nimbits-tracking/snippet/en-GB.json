@@ -1,0 +1,86 @@
+{
+  "nimbits-tracking": {
+    "date": {
+      "format": "F j, Y",
+      "till": "till"
+    },
+    "module": {
+      "name": "Tracking",
+      "title": "Tracking"
+    },
+    "navigation": {
+      "label": "Tracking",
+      "button": {
+        "reload": "Reload data",
+        "export": "Export CSV"
+      }
+    },
+    "general": {
+      "mainMenuItemGeneral": "Tracking",
+      "descriptionTextModule": "This module allows you to see how many users came through referrers and how much money they spend."
+    },
+    "charts": {
+      "registrations": {
+        "options": {
+          "header": "Registrations by referrers",
+          "tooltip": "registration(s)",
+          "legend": {
+            "content": "registration(s) through",
+            "empty": "registration(s) without referrer",
+            "total": "Total registration(s)"
+          }
+        },
+        "empty": "No partnered registrations found in the selected period"
+      },
+      "orders": {
+        "options": {
+          "header": "Orders by referrers",
+          "tooltip": "order(s)",
+          "legend": {
+            "content": "order(s) through",
+            "empty": "order(s) without referrer",
+            "total": "Total order(s)"
+          }
+        },
+        "empty": "No partnered orders found in the selected period"
+      },
+      "sales": {
+        "options": {
+          "header": "Sales by referrers"
+        },
+        "series": {
+          "name": "Sales"
+        },
+        "empty": "No partnered sales found in the selected period",
+        "noreferrer": "No referrer"
+      },
+      "requests": {
+        "options": {
+          "header": "Requests by referrer",
+          "tooltip": "request(s)",
+          "legend": {
+            "content": "request(s) through",
+            "empty": "request(s) without referrer",
+            "total": "Total request(s)"
+          }
+        },
+        "empty": "No requests found in the selected period"
+      },
+      "visitors": {
+        "options": {
+          "header": "Visitors by referrer",
+          "tooltip": "visitor(s)",
+          "legend": {
+            "content": "visitor(s) through",
+            "empty": "visitor(s) without referrer",
+            "total": "Total visitor(s)"
+          }
+        },
+        "empty": "No visitors found in the selected period (Data is updated every 5 minutes.)"
+      }
+    },
+    "subline": {
+      "fiveMinuteReload": "Data is updated every 5 minutes"
+    }
+  }
+}

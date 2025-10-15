@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="../service/command.xml"/>
+        <import resource="../service/processor.xml"/>
+        <import resource="../service/twig.xml"/>
+        <import resource="../service/controller.xml"/>
+    </imports>
+
+    <services>
+        <service id="hatslogic.critical_assets.services.config_service" class="HatslogicPageOptimisation\Service\ConfigService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+        </service>
+
+        <service id="hatslogic.critical_assets.service.critical_css_generation_service"
+                 class="HatslogicPageOptimisation\Service\CriticalCssGenerationService"
+                 public="true">
+            <argument type="service" id="sales_channel.repository" />
+            <argument type="service" id="cms_page.repository" />
+            <argument type="service" id="product.repository" />
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\CachedSalesChannelContextFactory" />
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlPlaceholderHandlerInterface" />
+            <argument type="service" id="hatslogic.critical_assets.services.config_service" />
+            <argument type="service" id="Shopware\Storefront\Theme\AbstractThemePathBuilder"/>
+            <argument type="service" id="HatslogicPageOptimisation\Service\NodeFinder" />
+        </service>
+        <service id="HatslogicPageOptimisation\Service\NodeFinder" />
+        <service id="HatslogicPageOptimisation\Service\ConvertImagesToWebpService">
+            <argument type="service" id="HatslogicPageOptimisation\Helper\DirAndFileHelper" />
+            <argument type="service" id="image.compress.logger"/>
+        </service>
+        <service id="image.compress.logger" class="Monolog\Logger">
+            <argument type="string">image-compress-interface</argument>
+            <argument type="collection">
+                <argument type="service" id="image.compress.rotatingHandler"/>
+            </argument>
+        </service>
+
+		<service id="image.compress.rotatingHandler" class="Monolog\Handler\RotatingFileHandler">
+            <argument type="string">%kernel.logs_dir%/image-compress-%kernel.environment%.log</argument>
+        </service>
+        <service id="HatslogicPageOptimisation\Helper\DirAndFileHelper">
+            <argument type="service" id="image.compress.logger"/>
+        </service>
+
+        <service id="HatslogicPageOptimisation\Listener\ResponseListener">
+            <argument>%kernel.environment%</argument>
+            <argument type="service" id="HatslogicPageOptimisation\Service\MinifyService"/>
+            <argument type="service" id="HatslogicPageOptimisation\Service\PreloadLinkService"/>
+            <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+        </service>
+
+        <service id="HatslogicPageOptimisation\Service\MinifyService">
+            <argument type="service" id="cache.object"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="HatslogicPageOptimisation\Service\PreloadLinkService">
+            <argument type="service" id="hatslogic.critical_assets.services.config_service" />
+        </service>
+
+    </services>
+</container>

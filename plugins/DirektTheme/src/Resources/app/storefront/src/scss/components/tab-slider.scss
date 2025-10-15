@@ -38,7 +38,7 @@
         }
     }
     .product-detail-tab-navigation-list{
-        margin-bottom: rem(60);
+        margin-bottom: rem(24);
         @include media-breakpoint-down(lg){
             margin-bottom: rem(40);
             justify-content: center;
@@ -60,7 +60,7 @@
         }
     }
     .product-image-wrapper{
-        min-height: rem(360);
+        min-height: rem(300);
         @include media-breakpoint-down(md){
             min-height: rem(300);
         }
@@ -83,6 +83,12 @@
     }
     .product-slider-container{
         margin-bottom: rem(24);
+    }
+    .product-slider-item{
+        min-width: rem(350);
+        @include media-breakpoint-down(md){
+            min-width: unset;
+        }
     }
     .tns-nav{
         display: none;

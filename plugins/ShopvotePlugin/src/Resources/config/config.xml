@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Allgemeine Einstellungen</title>
+        <input-field type="int">
+            <name>shopId</name>
+            <label>Shop ID:</label>
+            <placeholder>12345</placeholder>
+            <helpText>Die ShopID finden Sie im Händleraccount von SHOPVOTE.</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>API Konfiguration</title>
+        <input-field type="text">
+            <name>apiKey</name>
+            <label>API Key:</label>
+            <helpText>Den API Key finden Sie im Händleraccount von SHOPVOTE</helpText>
+        </input-field>
+        <input-field type="text">
+            <name>apiKeySecret</name>
+            <label>API Key Secret:</label>
+            <helpText>Den API Key Secret finden Sie im Händleraccount von SHOPVOTE</helpText>
+        </input-field>
+        <component name="api-test-button">
+            <name>apiTest</name>
+            <label>API Verbindung testen</label>
+        </component>
+    </card>
+    <card>
+        <title>Import von Bewertungen</title>
+        <input-field type="checkbox">
+            <name>importReviews</name>
+            <defaultValue>0</defaultValue>
+            <label>Produktbewertungen importieren?</label>
+            <helpText>Wenn aktiv, werden verfügbare Produktbewertungen von SHOPVOTE importiert</helpText>
+        </input-field>
+        <input-field type="int">
+            <name>headlineLength</name>
+            <defaultValue>30</defaultValue>
+            <label>Länge der Review-Titel</label>
+            <helpText>Kürzt den Review Text auf die angegebene Länge und setzt diesen als Titel</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Widget Einstellungen</title>
+        <input-field type="checkbox">
+            <name>shopvoteShowBadge</name>
+            <defaultValue>0</defaultValue>
+            <label>Bewertungsgrafik im Shop anzeigen?</label>
+            <helpText>Wenn aktiv, wird die Grafik im Shop angezeigt. Ermöglicht aktivieren/deaktivieren je Verkaufskanal.</helpText>
+        </input-field>
+        <input-field type="textarea">
+            <name>graficsCode</name>
+            <label>Grafik-Code:</label>
+            <helpText>Zur Integration der RatingStars setzen Sie bitte
+                hier eines der Snippets "AllVotes", "Schwebendes Badge",
+                "VoteBadge klein" oder "VoteBadge groß" aus dem
+                SHOPVOTE Account ein</helpText>
+        </input-field>
+    </card>
+</config>

@@ -108,9 +108,12 @@ class ACDCHandler extends AbstractPaymentMethodHandler implements AsynchronousPa
 
             return new RedirectResponse($action ?? $transaction->getReturnUrl());
         } catch (PaymentException $e) {
+            if ($e->getParameter('orderTransactionId') === null && method_exists($e, 'setOrderTransactionId')) {
+                $e->setOrderTransactionId($transactionId);
+            }
             throw $e;
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), ['error' => $e]);
 
             throw PaymentException::asyncProcessInterrupted($transactionId, $e->getMessage());
         }
@@ -133,7 +136,7 @@ class ACDCHandler extends AbstractPaymentMethodHandler implements AsynchronousPa
 
             $this->transactionDataService->setResourceId($paypalOrder, $transactionId, $salesChannelContext->getContext());
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), ['error' => $e]);
 
             throw PaymentException::asyncProcessInterrupted($transactionId, $e->getMessage());
         }
@@ -188,7 +191,7 @@ class ACDCHandler extends AbstractPaymentMethodHandler implements AsynchronousPa
                 PartnerAttributionId::PAYPAL_PPCP
             );
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), ['error' => $e]);
 
             throw PaymentException::recurringInterrupted($transactionId, $e->getMessage());
         }

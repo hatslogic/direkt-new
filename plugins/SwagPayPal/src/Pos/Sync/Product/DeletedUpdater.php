@@ -29,7 +29,7 @@ class DeletedUpdater
     public function __construct(
         ProductResource $productResource,
         LoggerInterface $logger,
-        UuidConverter $uuidConverter
+        UuidConverter $uuidConverter,
     ) {
         $this->productResource = $productResource;
         $this->logger = $logger;
@@ -62,8 +62,8 @@ class DeletedUpdater
         try {
             $this->productResource->deleteProducts($productContext->getPosSalesChannel(), $productUuids);
             $this->logger->info('Deleted products at Zettle: {productIds}', ['productIds' => \implode(', ', \array_keys($deletions))]);
-        } catch (PosApiException $posApiException) {
-            $this->logger->error('Product deletion error: ' . $posApiException);
+        } catch (PosApiException $e) {
+            $this->logger->error('Product deletion error: ' . $e->getMessage(), ['error' => $e]);
         }
 
         foreach ($deletions as $deletion) {

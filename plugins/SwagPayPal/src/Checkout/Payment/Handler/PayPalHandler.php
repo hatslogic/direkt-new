@@ -42,7 +42,7 @@ class PayPalHandler
         private readonly OrderPatchService $orderPatchService,
         private readonly TransactionDataService $transactionDataService,
         private readonly VaultTokenService $vaultTokenService,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -52,7 +52,7 @@ class PayPalHandler
     public function handlePayPalOrder(
         SyncPaymentTransactionStruct $transaction,
         RequestDataBag $requestDataBag,
-        SalesChannelContext $salesChannelContext
+        SalesChannelContext $salesChannelContext,
     ): RedirectResponse {
         $this->logger->debug('Started');
 
@@ -75,11 +75,8 @@ class PayPalHandler
             );
         } catch (PayPalApiException $e) {
             if ($e->getStatusCode() !== Response::HTTP_UNPROCESSABLE_ENTITY
-                || ($e->getIssue() !== PayPalApiException::ERROR_CODE_DUPLICATE_INVOICE_ID)) {
-                throw PaymentException::asyncProcessInterrupted(
-                    $transaction->getOrderTransaction()->getId(),
-                    \sprintf('An error occurred during the communication with PayPal%s%s', \PHP_EOL, $e->getMessage())
-                );
+                || !$e->is(PayPalApiException::ISSUE_DUPLICATE_INVOICE_ID)) {
+                throw $e;
             }
 
             $this->logger->warning('Duplicate order number detected. Retrying payment without order number.');
@@ -126,7 +123,7 @@ class PayPalHandler
     public function handlePreparedOrder(
         AsyncPaymentTransactionStruct $transaction,
         RequestDataBag $dataBag,
-        SalesChannelContext $salesChannelContext
+        SalesChannelContext $salesChannelContext,
     ): RedirectResponse {
         $this->logger->debug('Started');
         $paypalOrderId = $dataBag->get(AbstractPaymentMethodHandler::PAYPAL_PAYMENT_ORDER_ID_INPUT_NAME);
@@ -163,7 +160,7 @@ class PayPalHandler
         string $paypalOrderId,
         string $salesChannelId,
         SalesChannelContext $context,
-        string $partnerAttributionId
+        string $partnerAttributionId,
     ): void {
         $this->logger->debug('Started');
 

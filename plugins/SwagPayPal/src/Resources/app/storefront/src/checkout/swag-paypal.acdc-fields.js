@@ -1,11 +1,13 @@
 import DomAccess from 'src/helper/dom-access.helper';
 import FormSerializeUtil from 'src/utility/form/form-serialize.util';
-import PageLoadingIndicatorUtil from 'src/utility/loading-indicator/page-loading-indicator.util';
 import ButtonLoadingIndicator from 'src/utility/loading-indicator/button-loading-indicator.util';
 import SwagPaypalAbstractStandalone from './swag-paypal.abstract-standalone';
 import SwagPayPalScriptLoading from '../swag-paypal.script-loading';
 
 export default class SwagPaypalAcdcFields extends SwagPaypalAbstractStandalone {
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     static scriptLoading = new SwagPayPalScriptLoading();
 
     static options = {
@@ -54,6 +56,8 @@ export default class SwagPaypalAcdcFields extends SwagPaypalAbstractStandalone {
         cardNameFieldSelector: '#swag-paypal-acdc-form-cardholder',
 
         /**
+         * @deprecated tag:v10.0.0 - Will be removed without replacement
+         *
          * how much px the scrolling should be offset
          */
         scrollOffset: 15,
@@ -124,7 +128,7 @@ export default class SwagPaypalAcdcFields extends SwagPaypalAbstractStandalone {
             onApprove: this.onApprove.bind(this),
 
             style: this.options.cardFieldStyleConfig,
-        }
+        };
     }
 
     renderIndividualFields(cardFields) {
@@ -168,7 +172,10 @@ export default class SwagPaypalAcdcFields extends SwagPaypalAbstractStandalone {
         this.confirmOrderForm.addEventListener('submit', this.onFieldSubmit.bind(this, cardFields));
 
         // remove history listener, it messes up errors
-        window.PluginManager.getPluginInstanceFromElement(this.confirmOrderForm, 'FormAddHistory').options.entries = [];
+        const formAddHistoryPlugin = window.PluginManager.getPluginInstanceFromElement(this.confirmOrderForm, 'FormAddHistory');
+        if (formAddHistoryPlugin) {
+            formAddHistoryPlugin.options.entries = [];
+        }
     }
 
     onFieldSubmit(cardFields, event) {
@@ -202,25 +209,26 @@ export default class SwagPaypalAcdcFields extends SwagPaypalAbstractStandalone {
             const firstInvalidFieldKey = Object.keys(state.fields).find((key) => !state.fields[key].isValid);
             this.fields[firstInvalidFieldKey]?.focus();
 
+            const field = DomAccess.querySelector(this.cardFieldForm, this.options[firstInvalidFieldKey + 'Selector']);
+
+            /**
+             * @deprecated tag:v10.0.0 - will be removed and replaced by `field.scrollIntoView(..)`
+             */
             window.scrollTo({
-                top: this.getScrollOffset(DomAccess.querySelector(this.cardFieldForm, this.options[firstInvalidFieldKey + 'Selector'])),
+                top: this.getScrollOffset(field),
                 behavior: 'smooth',
             });
+
+            // field.scrollIntoView({
+            //     behavior: 'smooth',
+            //     block: 'center',
+            // });
         });
     }
 
-    onApprove(data) {
-        PageLoadingIndicatorUtil.create();
-
-        const input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', 'paypalOrderId');
-        input.setAttribute('value', data.orderID ?? data.orderId);
-
-        this.confirmOrderForm.appendChild(input);
-        this.confirmOrderForm.submit();
-    }
-
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     getScrollOffset(target) {
         const rect = target.getBoundingClientRect();
         const elementScrollOffset = rect.top + window.scrollY;

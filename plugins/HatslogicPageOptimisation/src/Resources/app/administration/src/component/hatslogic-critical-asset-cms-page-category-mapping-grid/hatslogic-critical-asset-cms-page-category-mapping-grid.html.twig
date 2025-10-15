@@ -1,0 +1,97 @@
+{% block hatslogic_critical_assets_cms_page_category_mapping %}
+    <sw-container type="row" class="sw-field hatslogic-critical-asset-cms-page-category-mapping-grid">
+        <div class="sw-field__label">
+            <label>{{ $tc('hatslogic-critical-assets.mappingGrid.title') }}</label>
+        </div>
+
+        <div class="sw-field__label">
+            <label>{{ $tc('hatslogic-critical-assets.mappingGrid.intro') }}</label>
+        </div>
+
+        {% block hatslogic_critical_assets_cms_page_category_mapping %}
+            <sw-data-grid
+                :dataSource="rows"
+                :columns="columns"
+                :fullPage="false"
+                :showSettings="false"
+                :showSelection="editable"
+                :showActions="false"
+                :isLoading="isLoading"
+                :allowColumnEdit="false"
+                :compactMode="false"
+                identifier="hatslogic-critical-asset-cms-page-category-mapping-grid"
+                class="hatslogic-critical-asset-cms-page-category-mapping-grid__data-grid"
+                @selection-change="onSelectionChanged"
+                :isRecordEditable="(item) => true">
+
+                {% block hatslogic_critical_assets_cms_page_category_mapping_grid_columns %}
+
+                    {% block hatslogic_critical_assets_cms_page_category_mapping_grid_columns_cms_page %}
+                        <template #column-cmsPageId="{item}">
+
+                            {% block hatslogic_critical_assets_cms_page_category_mapping_grid_columns_cms_page_field %}
+                                <sw-entity-single-select
+                                    entity="cms_page"
+                                    labelProperty="name"
+                                    :value="item.cmsPageId ? item.cmsPageId : ''"
+                                    :context="context"
+                                    :criteria="cmsPageCriteria"
+                                    @update:value="(value) => onCmsPageSelected(item, value)">
+                                </sw-entity-single-select>
+                            {% endblock %}
+                        </template>
+                    {% endblock %}
+
+                    {% block hatslogic_critical_assets_cms_page_category_mapping_grid_columns_category %}
+
+                        <template #column-categoryId="{item}">
+                            {% block hatslogic_critical_assets_cms_page_category_mapping_grid_columns_category_field %}
+
+                                <sw-entity-single-select
+                                    entity="category"
+                                    labelProperty="name"
+                                    :value="item.categoryId ? item.categoryId : ''"
+                                    :context="context"
+                                    :criteria="categoryCriteria(item.cmsPageId)"
+                                    @update:value="(value) => onCategorySelected(item, value)">
+                                </sw-entity-single-select>
+                            {% endblock %}
+                        </template>
+                    {% endblock %}
+
+                    {% block hatslogic_critical_assets_cms_page_category_mapping_bulk_actions %}
+                        <template #bulk>
+                            {% block hatslogic_critical_assets_cms_page_category_mapping_bulk_actions_delete %}
+                                <a class="link link-danger" @click="onDeleteSelectedItems">
+                                    {{ $tc('global.default.delete') }}
+                                </a>
+                            {% endblock %}
+                        </template>
+                    {% endblock %}
+                {% endblock %}
+            </sw-data-grid>
+        {% endblock %}
+
+        {% block hatslogic_critical_assets_cms_page_category_mapping_actions %}
+            <sw-container
+                class="hatslogic-critical-asset-cms-page-category-mapping-grid__actions-container"
+                columns="1fr auto"
+                v-show="editable">
+                {% block hatslogic_critical_assets_cms_page_category_mapping_create_actions %}
+                    <div align="right">
+                        {% block hatslogic_critical_assets_cms_page_category_mapping_add_product %}
+                            <sw-button
+                                class="hatslogic-critical-asset-cms-page-category-mapping-grid__actions-container-add-row-btn"
+                                variant="ghost"
+                                size="small"
+                                @click="onAddNewRow">
+                                {{ $tc('hatslogic-critical-assets.mappingGrid.buttonAddRow') }}
+                            </sw-button>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </sw-container>
+        {% endblock %}
+
+    </sw-container>
+{% endblock %}

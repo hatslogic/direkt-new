@@ -15,37 +15,41 @@ export default class SwagPaypalApplePay extends SwagPaypalAbstractStandalone {
         brandName: undefined,
 
         /**
+         * @type string
+         */
+        displayName: undefined,
+
+        /**
          * @type array
          */
         billingAddress: undefined,
-    }
+    };
 
     async render(paypal) {
         if (!window.ApplePaySession?.supportsVersion(4) || !window.ApplePaySession?.canMakePayments()) {
-            this.handleError(this.BROWSER_UNSUPPORTED, true, 'Browser does not support Apple Pay');
-            return;
+            return void this.handleError(this.BROWSER_UNSUPPORTED, true, 'Browser does not support Apple Pay');
         }
 
-        this.renderButton(paypal).catch(this.onFatalError.bind(this));
+        await this.renderButton(paypal);
     }
 
     async renderButton(paypal) {
         const config = await paypal.Applepay().config();
 
-        const button = document.createElement('apple-pay-button')
-        button.setAttribute('buttonStyle', 'black')
-        button.setAttribute('type', 'buy')
+        if (!config.isEligible) {
+            return void this.handleError(this.NOT_ELIGIBLE, true, 'Funding for Apple Pay is not eligible');
+        }
+
+        const button = document.createElement('apple-pay-button');
+        button.setAttribute('buttonStyle', 'black');
+        button.setAttribute('type', 'buy');
         button.style.width = '100%';
         button.addEventListener('click',() => {
             if (this.confirmOrderForm.checkValidity()){
                 this.handleApplePayButtonSubmit(config, paypal)
                     .catch(this.onError.bind(this));
             }
-        })
-
-        if (!config.isEligible) {
-            return void this.handleError(this.NOT_ELIGIBLE, true, 'Funding for Apple Pay is not eligible');
-        }
+        });
 
         this.el.appendChild(button);
     }
@@ -84,7 +88,7 @@ export default class SwagPaypalApplePay extends SwagPaypalAbstractStandalone {
         try {
             const { merchantSession } = await paypal.Applepay().validateMerchant({
                 validationUrl: event.validationURL,
-                displayName: this.options.brandName,
+                displayName: this.options.displayName,
             });
 
             session.completeMerchantValidation(merchantSession);
@@ -96,7 +100,7 @@ export default class SwagPaypalApplePay extends SwagPaypalAbstractStandalone {
 
     async handlePaymentAuthorized(session, paypal, event) {
         try {
-            const orderId = await this.createOrder('applepay')
+            const orderId = await this.createOrder('applepay');
 
             await paypal.Applepay().confirmOrder({
                 orderId,

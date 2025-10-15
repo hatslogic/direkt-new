@@ -1,0 +1,388 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "form": {
+                "periodRequestFormElement": {
+                    "label": "Anfrageformular"
+                }
+            }
+        },
+        "elements": {
+            "periodRequestFormElement": {
+                "label": "Anfrageformular",
+                "sendLabel": "Senden"
+            },
+            "componentPeriodRequestForm": {
+                "label": {
+                    "salutation": "Anrede",
+                    "firstname": "Vorname",
+                    "lastname": "Nachname",
+                    "street": "Straße und Hausnummer",
+                    "zipcode": "Postleitzahl",
+                    "city": "Ort",
+                    "country": "Land",
+                    "email": "E-Mail-Adresse",
+                    "phone": "Telefonnummer",
+                    "comment": "Kommentar",
+                    "date": "Zeitraum",
+                    "freeInput": "Anzahl Erwachsene (ab 13 Jahren)",
+                    "freeInput2": "Anzahl Kinder (2 bis 12 Jahre)",
+                    "freeInput3": "Anzahl Kleinkinder (unter 2 Jahre)",
+                    "freeInput4": "Anzahl Haustiere",
+                    "freeInput5": "Anzahl der Schlafzimmer",
+                    "freeInput6": "Anzahl der Betten",
+                    "freeInput7": "Anzahl der Badezimmer",
+                    "freeInput8": "Unterkunftsstandard",
+                    "freeInput9": "Unterkunftsart",
+                    "freeInput10": "Verpflegung",
+                    "privacy": "Datenschutz *",
+                    "requiredFields": "Die mit einem Stern (*) markierten Felder sind Pflichtfelder.",
+                    "send": "Absenden"
+                },
+                "placeholder": {
+                    "salutation": "Anrede auswählen ...",
+                    "firstname": "Vorname eingeben ...",
+                    "lastname": "Nachname eingeben ...",
+                    "street": "Straße und Hausnummer eingeben ...",
+                    "zipcode": "Postleitzahl eingeben ...",
+                    "city": "Ort eingeben ...",
+                    "country": "Land auswählen ...",
+                    "email": "E-Mail-Adresse eingeben ...",
+                    "phone": "Telefonnummer eingeben ...",
+                    "comment": "Kommentar eingeben ...",
+                    "date": "Zeitraum über die Datumswahl auswählen ...",
+                    "freeInput": "Anzahl Erwachsene (ab 13 Jahren) auswählen ...",
+                    "freeInput2": "Anzahl Kinder (2 bis 12 Jahre) auswählen ...",
+                    "freeInput3": "Anzahl Kleinkinder (unter 2 Jahre) auswählen ...",
+                    "freeInput4": "Anzahl Haustiere auswählen ...",
+                    "freeInput5": "Anzahl der Schlafzimmer auswählen ...",
+                    "freeInput6": "Anzahl der Betten auswählen ...",
+                    "freeInput7": "Anzahl der Badezimmer auswählen ...",
+                    "freeInput8": "Unterkunftsstandard auswählen ...",
+                    "freeInput9": "Unterkunftsart auswählen ...",
+                    "freeInput10": "Verpflegung auswählen ...",
+                    "freeInputText": "Anzahl Erwachsene (ab 13 Jahren) eingeben ...",
+                    "freeInput2Text": "Anzahl Kinder (2 bis 12 Jahre) eingeben ...",
+                    "freeInput3Text": "Anzahl Kleinkinder (unter 2 Jahre) eingeben ...",
+                    "freeInput4Text": "Anzahl Haustiere eingeben ...",
+                    "freeInput5Text": "Anzahl der Schlafzimmer eingeben ...",
+                    "freeInput6Text": "Anzahl der Betten eingeben ...",
+                    "freeInput7Text": "Anzahl der Badezimmer eingeben ...",
+                    "freeInput8Text": "Unterkunftsstandard eingeben ...",
+                    "freeInput9Text": "Unterkunftsart eingeben ...",
+                    "freeInput10Text": "Verpflegung eingeben ...",
+                    "privacy": "Ich habe die Datenschutzbestimmungen zur Kenntnis genommen und die AGB gelesen und bin mit ihnen einverstanden.",
+                    "privacyWithoutTermsOfService": "Ich habe die Datenschutzbestimmungen zur Kenntnis genommen und erkenne diese an."
+                }
+            },
+            "configPeriodRequestForm": {
+                "tab": {
+                    "content": "Formularaufbau",
+                    "freeinputs": "Freie Eingaben für das Formular",
+                    "settings": {
+                        "mail": "Versand der Daten per E-Mail",
+                        "savedata": "Speichern der Daten"
+                    },
+                    "contenttab" : {
+                        "periodRequestFormTitle": {
+                            "label": "Titel",
+                            "placeholder": "Anfrageformular"
+                        },
+                        "periodRequestFormText": {
+                            "label": "Text"
+                        },
+                        "salutationTitle": "Anrede",
+                        "showSalutation": "anzeigen",
+                        "salutationIsRequired": "ist Pflichtfeld",
+                        "salutation": {
+                            "label": "verfügbare Anreden (mit Komma getrennt)",
+                            "placeholder": "Herr,Frau,Keine Angabe"
+                        },
+                        "firstnameTitle": "Vorname",
+                        "showFirstname": "anzeigen",
+                        "firstnameIsRequired": "ist Pflichtfeld",
+                        "lastnameTitle": "Nachname",
+                        "showLastname": "anzeigen",
+                        "lastnameIsRequired": "ist Pflichtfeld",
+                        "streetTitle": "Straße und Hausnummer",
+                        "showStreet": "anzeigen",
+                        "streetIsRequired": "ist Pflichtfeld",
+                        "zipcodeTitle": "Postleitzahl",
+                        "showZipcode": "anzeigen",
+                        "zipcodeIsRequired": "ist Pflichtfeld",
+                        "cityTitle": "Ort",
+                        "showCity": "anzeigen",
+                        "cityIsRequired": "ist Pflichtfeld",
+                        "countryTitle": "Land",
+                        "showCountry": "anzeigen",
+                        "countryIsRequired": "ist Pflichtfeld",
+                        "country": {
+                            "label": "verfügbare Länder (mit Komma getrennt)",
+                            "placeholder": "Deutschland,Österreich,Schweiz"
+                        },
+                        "emailTitle": "E-Mail-Adresse",
+                        "showEmail": "anzeigen",
+                        "emailIsRequired": "ist Pflichtfeld",
+                        "phoneTitle": "Telefonnummer",
+                        "showPhone": "anzeigen",
+                        "phoneIsRequired": "ist Pflichtfeld",
+                        "commentTitle": "Kommentarfeld",
+                        "showComment": "anzeigen",
+                        "commentIsRequired": "ist Pflichtfeld",
+                        "showCommentAboveForm": "oberhalb des Formulars anzeigen",
+                        "dateTitle": "Datums- oder Zeitraumfeld",
+                        "showDate": "anzeigen",
+                        "dateIsRequired": "ist Pflichtfeld",
+                        "showDateAboveForm": "oberhalb des Formulars anzeigen",
+                        "showPeriodSelection": "Zeitraumauswahl anzeigen",
+                        "showSelectFieldForMonth": "Auswahlfeld für den Monat im einmonatigen Kalender anzeigen",
+                        "showCalendarPermanentlyOpen": "Kalender dauerhaft geöffnet anzeigen",
+                        "alignCalendarCentrally": "dauerhaft geöffneten Kalender mittig ausrichten",
+                        "showTwoMonthsSideBySide": "2 Monate im Kalender nebeneinander anzeigen",
+                        "labelDate": {
+                            "label": "Beschriftung des Feldes",
+                            "placeholder": "Zeitraum"
+                        },
+                        "startdate": {
+                            "label": "Startdatum des Feldes",
+                            "placeholder": "+2 days"
+                        },
+                        "enddate": {
+                            "label": "Enddatum des Feldes",
+                            "placeholder": ""
+                        },
+                        "disableddates": {
+                            "label": "Ausgeschlossene Daten im Feld",
+                            "placeholder": "\"01.04.2021\",\"01.05.2021\""
+                        },
+                        "determineAvailableDatesFromRequests": "verfügbare, auswählbare Daten auch aus den Anfragen ermitteln",
+                        "privacyNoticeTitle": "Datenschutzbestimmung",
+                        "showPrivacyNotice": "anzeigen",
+                        "privacyNoticeIsRequired": "ist Pflichtfeld",
+                        "privacyNoticeWithoutTermsOfService": "ohne AGB",
+                        "useOwnSnippetForPrivacyNoticeText": "eigenen Textbaustein für den Text verwenden",
+                        "requiredFieldsInfoTitle": "Pflichtfeldinformation",
+                        "showRequiredFieldsInfo": "anzeigen",
+                        "submitButton": {
+                            "label": "Text der Absenden-Schaltfläche",
+                            "placeholder": "Absenden"
+                        },
+                        "setOriginOfRequestManually": {
+                            "title": "die Herkunft der Anfrage basierend auf dem Formular manuell festlegen",
+                            "label": "ja"
+                        },
+                        "originValue": {
+                            "label": "Herkunft (beispielsweise Produkt, Kategorie oder Landingpage)",
+                            "placeholder": "Produkt"
+                        },
+                        "originNameValue": {
+                            "label": "Herkunftswert (beispielsweise der Name des Produkts, der Kategorie oder Landingpage)",
+                            "placeholder": "Haus am See | SWDEMO10000"
+                        },
+                        "originIdValue": {
+                            "label": "individuelle ID der Herkunft",
+                            "placeholder": "b1cd5a42c3004b21bd691fde048b55d0"
+                        }
+                    },
+                    "freeinputstab" : {
+                        "freeInputsGeneralSettingsTitle": "Allgemeine Einstellungen",
+                        "showFreeInputAboveForm": "alle freien Eingaben oberhalb des Formulars anzeigen",
+                        "freeInputsSideBySide": {
+                            "label": "Anzahl an nebeneinander platzierten freien Eingaben",
+                            "value1Label": "1",
+                            "value2Label": "2",
+                            "value3Label": "3"
+                        },
+                        "defaultSelectPlaceholder": {
+                            "label": "Gemeinsamer Platzhaltertext für alle Auswahlfelder",
+                            "placeholder": "Auswählen ..."
+                        },
+                        "freeInputTitle": "Freie Eingabe 1",
+                        "showFreeInput": "anzeigen",
+                        "freeInputIsRequired": "ist Pflichtfeld",
+                        "labelFreeInput": {
+                            "label": "Beschriftung der freien Eingabe 1",
+                            "placeholder": "Anzahl Erwachsene (ab 13 Jahren)"
+                        },
+                        "freeInputType": {
+                            "label": "Typ der freien Eingabe 1",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 1 (mit Komma getrennt)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle2": "Freie Eingabe 2",
+                        "showFreeInput2": "anzeigen",
+                        "freeInput2IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput2": {
+                            "label": "Beschriftung der freien Eingabe 2",
+                            "placeholder": "Anzahl Kinder (2 bis 12 Jahre)"
+                        },
+                        "freeInput2Type": {
+                            "label": "Typ der freien Eingabe 2",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput2": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 2 (mit Komma getrennt)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle3": "Freie Eingabe 3",
+                        "showFreeInput3": "anzeigen",
+                        "freeInput3IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput3": {
+                            "label": "Beschriftung der freien Eingabe 3",
+                            "placeholder": "Anzahl Kleinkinder (unter 2 Jahre)"
+                        },
+                        "freeInput3Type": {
+                            "label": "Typ der freien Eingabe 3",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput3": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 3 (mit Komma getrennt)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle4": "Freie Eingabe 4",
+                        "showFreeInput4": "anzeigen",
+                        "freeInput4IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput4": {
+                            "label": "Beschriftung der freien Eingabe 4",
+                            "placeholder": "Anzahl Haustiere"
+                        },
+                        "freeInput4Type": {
+                            "label": "Typ der freien Eingabe 4",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput4": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 4 (mit Komma getrennt)",
+                            "placeholder": "0,1,2,3,4"
+                        },
+                        "freeInputTitle5": "Freie Eingabe 5",
+                        "showFreeInput5": "anzeigen",
+                        "freeInput5IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput5": {
+                            "label": "Beschriftung der freien Eingabe 5",
+                            "placeholder": "Anzahl der Schlafzimmer"
+                        },
+                        "freeInput5Type": {
+                            "label": "Typ der freien Eingabe 5",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput5": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 5 (mit Komma getrennt)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle6": "Freie Eingabe 6",
+                        "showFreeInput6": "anzeigen",
+                        "freeInput6IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput6": {
+                            "label": "Beschriftung der freien Eingabe 6",
+                            "placeholder": "Anzahl der Betten"
+                        },
+                        "freeInput6Type": {
+                            "label": "Typ der freien Eingabe 6",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput6": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 6 (mit Komma getrennt)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle7": "Freie Eingabe 7",
+                        "showFreeInput7": "anzeigen",
+                        "freeInput7IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput7": {
+                            "label": "Beschriftung der freien Eingabe 7",
+                            "placeholder": "Anzahl der Badezimmer"
+                        },
+                        "freeInput7Type": {
+                            "label": "Typ der freien Eingabe 7",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput7": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 7 (mit Komma getrennt)",
+                            "placeholder": "1,2,3,4"
+                        },
+                        "freeInputTitle8": "Freie Eingabe 8",
+                        "showFreeInput8": "anzeigen",
+                        "freeInput8IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput8": {
+                            "label": "Beschriftung der freien Eingabe 8",
+                            "placeholder": "Unterkunftsstandard"
+                        },
+                        "freeInput8Type": {
+                            "label": "Typ der freien Eingabe 8",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput8": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 8 (mit Komma getrennt)",
+                            "placeholder": "1,2,3,4,5"
+                        },
+                        "freeInputTitle9": "Freie Eingabe 9",
+                        "showFreeInput9": "anzeigen",
+                        "freeInput9IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput9": {
+                            "label": "Beschriftung der freien Eingabe 9",
+                            "placeholder": "Unterkunftsart"
+                        },
+                        "freeInput9Type": {
+                            "label": "Typ der freien Eingabe 9",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput9": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 9 (mit Komma getrennt)",
+                            "placeholder": "Hotel,Ferienunterkunft,Apartment,Privates Ferienhaus,Pension,Residenz"
+                        },
+                        "freeInputTitle10": "Freie Eingabe 10",
+                        "showFreeInput10": "anzeigen",
+                        "freeInput10IsRequired": "ist Pflichtfeld",
+                        "labelFreeInput10": {
+                            "label": "Beschriftung der freien Eingabe 10",
+                            "placeholder": "Verpflegung"
+                        },
+                        "freeInput10Type": {
+                            "label": "Typ der freien Eingabe 10",
+                            "selectLabel": "Auswahlfeld",
+                            "inputLabel": "Eingabefeld",
+                            "textareaLabel": "mehrzeiliges Eingabefeld"
+                        },
+                        "freeInput10": {
+                            "label": "Werte für das Auswahlfeld der freien Eingabe 10 (mit Komma getrennt)",
+                            "placeholder": "Frühstück inbegriffen,Mittag inbegriffen,Abendessen inbegriffen,All-Inclusive"
+                        }
+                    },
+                    "settingstab" : {
+                        "periodRequestFormSendMail": "Versand der Daten per E-Mail an einen oder mehrere Empfänger",
+                        "periodRequestFormMailReceiverName": {
+                            "label": "Empfänger-Namen (mit Komma getrennt)",
+                            "placeholder": "Max Mustermann,Maria Musterfrau"
+                        },
+                        "periodRequestFormMailReceiverAdresses": {
+                            "label": "Empfänger-Adressen (mit Komma getrennt und ohne Leerzeichen)",
+                            "placeholder": "{'max@mustermann.de,maria@musterfrau.de'}"
+                        },
+                        "periodRequestFormSendMailToRequester": "Versand der Daten per E-Mail an den Anfragenden",
+                        "periodRequestFormSaveData": "Daten im Administrationsmodul speichern"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Package
+          script:
+            - apt-get update
+            - apt-get install -y rsync
+            - filename=$(basename -- $(find src/ -maxdepth 1 -type f -name "*.php" | head -n 1))
+            - basename="${filename%.*}"
+            - mkdir -p dist/$basename
+            - rsync -r * dist/$basename/ --exclude .git --exclude bitbucket-pipelines.yml --exclude dist
+            - (cd dist ; zip -r $basename.zip $basename)
+            - if [ -z "$BITBUCKET_USERNAME" ] || [ -z "$BITBUCKET_APP_PASSWORD" ] || [ -z "$BITBUCKET_REPO_OWNER" ] || [ -z "$BITBUCKET_REPO_SLUG" ]; then echo "Skipping Downloads"; else curl -X POST "https://${BITBUCKET_USERNAME}:${BITBUCKET_APP_PASSWORD}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"dist/$basename.zip"; fi
+          artifacts:
+            - dist/NimbitsTracking.zip

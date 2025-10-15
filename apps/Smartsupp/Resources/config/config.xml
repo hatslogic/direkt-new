@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+	<card>
+		<title>General settings</title>
+		<title lang="de-DE">Allgemeine Einstellungen</title>
+		<input-field>
+			<name>chatKey</name>
+			<label>Smartsupp key</label>
+			<label lang="de-DE">Smartsupp-Key Code</label>
+			<helpText>To get the Smartsupp key, log into your Smartsupp account and go to Settings > Chat box > Chat code</helpText>
+			<helpText lang="de-DE">Um Ihren Smartsupp-Schlüssel zu erhalten, melden Sie sich bei Ihrem Smartsupp-Konto an und gehen Sie zu Einstellungen > Chat-Box > Live-Chat-Code</helpText>
+		</input-field>
+	</card>
+	<card>
+		<title>Advanced settings</title>
+		<title lang="de-DE">Erweiterte Einstellungen</title>
+		<input-field type="textarea">
+			<name>widgetConfig</name>
+			<label>Custom Configuration</label>
+			<label lang="de-DE">Benutzerdefinierte Konfiguration</label>
+			<helpText>Modify configurable parts of chat box and its behavior by adding simple one line codes. More at https://docs.smartsupp.com/chat-box/configuration/</helpText>
+			<helpText lang="de-DE">Ändern Sie konfigurierbare Teile der Chatbox und ihr Verhalten, indem Sie einfache einzeilige Codes hinzufügen. Mehr unter https://docs.smartsupp.com/chat-box/configuration/</helpText>
+		</input-field>
+		<input-field type="textarea">
+			<name>widgetApi</name>
+			<label>Custom Javascript API</label>
+			<label lang="de-DE">Benutzerdefinierte Javascript-API</label>
+			<helpText>See more at https://docs.smartsupp.com/chat-box/javascript-api/methods/</helpText>
+			<helpText lang="de-DE">Weitere Informationen finden Sie unter https://docs.smartsupp.com/chat-box/javascript-api/methods/</helpText>
+		</input-field>
+	</card>
+</config>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>AcrisTagManagerAppCS</name>
+        <label>Google Tag Manager App</label>
+        <label lang="de-DE">Google Tag Manager App</label>
+        <description>Google Tag Manager integration (compatible with ACRIS EU Cookie Policy Pro)</description>
+        <description lang="de-DE">Google Tag Manager Integration (kompatibel mit ACRIS EU Cookie Richtlinien Pro)</description>
+        <author>ACRIS E-Commerce GmbH</author>
+        <copyright>(c) by ACRIS E-Commerce GmbH</copyright>
+        <version>3.5.8</version>
+        <compatibility><![CDATA[>=6.6.0.0 <6.7.0.0]]></compatibility>
+        <icon>Resources/config/plugin.png</icon>
+        <license>proprietary</license>
+    </meta>
+    <permissions>
+        <read>product</read>
+    </permissions>
+    <cookies>
+        <group>
+            <snippet-name>acrisTagManagerApp.acrisTagManagerCookieGroupName</snippet-name>
+            <entries>
+                <cookie>
+                    <cookie>acris-tag-manager</cookie>
+                    <snippet-name>acrisTagManagerApp.acrisTagManagerCookieName</snippet-name>
+                    <value>1</value>
+                    <expiration>30</expiration>
+                </cookie>
+            </entries>
+        </group>
+        <group>
+            <snippet-name>acrisTagManagerApp.acrisTagManagerGoogleAnalyticsCookieGroupName</snippet-name>
+            <entries>
+                <cookie>
+                    <cookie>acris-tag-manager-google-analytics-enabled</cookie>
+                    <snippet-name>acrisTagManagerApp.acrisTagManagerGoogleAnalyticsCookieName</snippet-name>
+                    <value>1</value>
+                    <expiration>30</expiration>
+                </cookie>
+            </entries>
+        </group>
+        <group>
+            <snippet-name>acrisTagManagerApp.acrisTagManagerGoogleAdsCookieGroupName</snippet-name>
+            <entries>
+                <cookie>
+                    <cookie>acris-tag-manager-google-ads-enabled</cookie>
+                    <snippet-name>acrisTagManagerApp.acrisTagManagerGoogleAdsCookieName</snippet-name>
+                    <value>1</value>
+                    <expiration>30</expiration>
+                </cookie>
+            </entries>
+        </group>
+    </cookies>
+</manifest>

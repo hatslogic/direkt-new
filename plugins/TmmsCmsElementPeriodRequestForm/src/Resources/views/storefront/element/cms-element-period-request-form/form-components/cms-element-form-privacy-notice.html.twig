@@ -1,0 +1,53 @@
+{% set identifierTemplate = 'form-privacy-opt-in-%s' %}
+
+{% if prevUrl is not defined %}
+    {% set prevUrl = '' %}
+{% endif %}
+
+{% if requiresTermsOfService is not defined %}
+    {% set requiresTermsOfService = true %}
+{% endif %}
+
+{% if requiresTermsOfService == true %}
+    {% set snippetName = "general.privacyNoticeText" %}
+{% else %}
+    {% set snippetName = "contact.privacyNoticeText" %}
+{% endif %}
+
+{% if customSnippet %}
+    {% set snippetName = "tmms.periodRequestForm.privacyNoticeText" %}
+{% endif %}
+
+<div class="privacy-notice-headline">
+    {{ "general.privacyTitle"|trans|sw_sanitize }}{% if privacyNoticeIsRequired %} {{- 'general.required'|trans -}}{% endif %}
+</div>
+<div class="form-text privacy-notice{% if privacyNoticeIsRequired %} form-check{% endif %}">
+    {% if privacyNoticeIsRequired %}
+        <input name="privacy"
+               type="checkbox"
+               class="form-check-input"
+               id="{{ identifierTemplate|format(_key) }}"
+               required>
+    {% endif %}
+
+    <label{% if privacyNoticeIsRequired %} for="{{ identifierTemplate|format(_key) }}"{% endif %} class="form-check-label">
+        {% if requiresTermsOfService == true %}
+            {% if customSnippet %}
+                {{ snippetName|trans({
+                    '%privacyUrl%': path('frontend.cms.page', { id: config('core.basicInformation.privacyPage') }),
+                    '%prevUrl%': prevUrl,
+                })|raw }}
+            {% else %}
+                {{ snippetName|trans({
+                    '%privacyUrl%': path('frontend.cms.page',{ id: config('core.basicInformation.privacyPage') }),
+                    '%tosUrl%': path('frontend.cms.page',{ id: config('core.basicInformation.tosPage') })
+                })|raw }}
+            {% endif %}
+        {% else %}
+            {{ snippetName|trans({
+                '%privacyUrl%': path('frontend.cms.page', { id: config('core.basicInformation.privacyPage') }),
+                '%prevUrl%': prevUrl,
+            })|raw }}
+        {% endif %}
+    </label>
+</div>

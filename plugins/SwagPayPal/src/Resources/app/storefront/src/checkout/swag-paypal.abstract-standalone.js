@@ -4,90 +4,17 @@ import HttpClient from 'src/service/http-client.service';
 import PageLoadingIndicatorUtil from 'src/utility/loading-indicator/page-loading-indicator.util';
 import SwagPaypalAbstractButtons from '../swag-paypal.abstract-buttons';
 import SwagPayPalScriptLoading from '../swag-paypal.script-loading';
+import ElementLoadingIndicatorUtil from 'src/utility/loading-indicator/element-loading-indicator.util';
 
 export default class SwagPaypalAbstractStandalone extends SwagPaypalAbstractButtons {
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     static scriptLoading = new SwagPayPalScriptLoading();
     static product = 'spb';
 
     static options = {
         ...super.options,
-
-        /**
-         * This option holds the client id specified in the settings
-         *
-         * @type string
-         */
-        clientId: '',
-
-        /**
-         * This option holds the merchant id specified in the settings
-         *
-         * @type string
-         */
-        merchantPayerId: '',
-
-        /**
-         * This option holds the client token required for field rendering
-         *
-         * @type string
-         */
-        clientToken: '',
-
-        /**
-         * This options specifies the currency of the PayPal button
-         *
-         * @type string
-         */
-        currency: 'EUR',
-
-        /**
-         * This options defines the payment intent
-         *
-         * @type string
-         */
-        intent: 'capture',
-
-        /**
-         * This option toggles the PayNow/Login text at PayPal
-         *
-         * @type boolean
-         */
-        commit: true,
-
-        /**
-         * This option specifies the language of the PayPal button
-         *
-         * @type string
-         */
-        languageIso: 'en_GB',
-
-        /**
-         * This option specifies the PayPal button color
-         *
-         * @type string|null
-         */
-        buttonColor: null,
-
-        /**
-         * This option specifies the PayPal button shape
-         *
-         * @type string
-         */
-        buttonShape: 'rect',
-
-        /**
-         * This option specifies the PayPal button size
-         *
-         * @type string
-         */
-        buttonSize: 'small',
-
-        /**
-         * URL to create a new PayPal order
-         *
-         * @type string
-         */
-        createOrderUrl: '',
 
         /**
          * Is set, if the plugin is used on the order edit page
@@ -151,14 +78,22 @@ export default class SwagPaypalAbstractStandalone extends SwagPaypalAbstractButt
             DomAccess.querySelector(this.confirmOrderForm, this.options.confirmOrderButtonSelector).disabled = 'disabled';
 
             return;
+        } else {
+            ElementLoadingIndicatorUtil.create(this.el);
         }
 
         DomAccess.querySelector(this.confirmOrderForm, this.options.confirmOrderButtonSelector).classList.add('d-none');
 
         this._client = new HttpClient();
 
-        this.createScript((paypal) => {
-            this.render(paypal);
+        this.createScript(async (paypal) => {
+            // catch sync and async errors - `.catch()` or similar aren't able to do so
+            try {
+                await this.render(paypal);
+            } catch (error) {
+                this.handleError(this.SCRIPT_ERROR, true, error);
+            }
+            ElementLoadingIndicatorUtil.remove(this.el);
         });
     }
 
@@ -256,6 +191,11 @@ export default class SwagPaypalAbstractStandalone extends SwagPaypalAbstractButt
      * @param {String} data.orderID PayPal order id
      */
     onApprove(data) {
+        const existingInput = this.confirmOrderForm.querySelector('[name="paypalOrderId"]');
+        if (existingInput) {
+            return;
+        }
+
         PageLoadingIndicatorUtil.create();
 
         const input = document.createElement('input');
@@ -264,7 +204,7 @@ export default class SwagPaypalAbstractStandalone extends SwagPaypalAbstractButt
         input.setAttribute('value', data.orderID ?? data.orderId);
 
         this.confirmOrderForm.appendChild(input);
-        DomAccess.querySelector(this.confirmOrderForm, this.options.confirmOrderButtonSelector).click();
+        this.confirmOrderForm.submit();
     }
 
     /**

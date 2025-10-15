@@ -1,5 +1,6 @@
 {% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
 
+
 {% block page_checkout_cart_shipping_costs_form_group_country %}
     {% if not context.customer %}
         <div class="form-group">
@@ -62,9 +63,48 @@
     </div>
 {% endblock %}
 
-{% block page_checkout_container %}
+{% block page_checkout_cart_shipping_costs_form_group %}
+    <div class="collapse" id="collapseShippingCost">
+        {{block('page_checkout_cart_shipping_costs_form_group_country')}}
+        {{block('page_checkout_cart_shipping_costs_form_group_payment_method')}}
+        {{block('page_checkout_cart_shipping_costs_form_group_shipping_method')}}
+
+        <input type="hidden" name="redirectTo" value="frontend.checkout.cart.page">
+    </div>
+{% endblock %}
+
+{% block page_checkout_cart_add_product_and_shipping %}
+    <div class="row">
+    {# <div class="col-md-12">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: 'info',
+            content: 'checkout.cartNote'|trans|sw_sanitize
+        } %}
+    </div> #}
+        <div class="col-md-9 col-lg-9">
+            <div class="row">
+                {% block page_checkout_cart_add_product %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {{block('page_checkout_cart_shipping_costs')}}
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3">
+            <div class="m-2 justify-content-center">
+                <div class="d-flex flex-column align-items-center">
+                    <a href="/product-enquiry?type=cart" class="btn btn-primary btn-lg begin-checkout-btn w-100" title="{{ 'checkout.requestQuote'|trans|striptags }}">
+                        {{ 'checkout.requestQuote'|trans|sw_sanitize }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# {% block page_checkout_container %}
     {{ parent() }}
-    <div class="m-2justify-content-center">
+    <div class="m-2 justify-content-center">
         {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
             type: 'info',
             content: 'checkout.cartNote'|trans|sw_sanitize
@@ -75,4 +115,4 @@
             </a>
         </div>
     </div>
-{% endblock %}
+{% endblock %} #}

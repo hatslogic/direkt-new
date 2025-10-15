@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_meta %}
+
+    {% block acris_tag_manager_app_data %}
+        {% if config('AcrisTagManagerAppCS.config.enableEcommerceTracking') %}
+            {% if page is defined %}
+                {% set data = page.getExtension('acrisTagManagerAppData') %}
+                {% if data is not empty %}
+                    <script data-acris-tag-manager-app-data="{{ data.event }}"
+                            type="application/json">
+                        {{- data.data|json_encode|raw -}}
+                    </script>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+    {{ parent() }}
+{% endblock %}

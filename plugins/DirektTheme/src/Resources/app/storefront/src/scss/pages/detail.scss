@@ -7,3 +7,16 @@
         margin-bottom: rem(8);
     }
 }
+
+.mb-seal{
+    .product-image.is-standard{
+        object-fit: scale-down;
+    }
+    .dk-recently-viewed{
+        .product-image.is-standard{
+            object-fit: scale-down;
+        }
+    }
+    .dk-detail{
+    }
+}

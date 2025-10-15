@@ -54,6 +54,7 @@
     .product-box.box-image .product-image-wrapper{
         min-height: unset;
         margin-bottom: rem(20);
+        margin-bottom: rem(4);
         @include desktop-md() {
             height: rem(250);
         }
@@ -63,6 +64,10 @@
     }
     .product-info{
         padding: 0;
+        padding-top: rem(16);
+        @include media-breakpoint-down(md){
+            padding-top: rem(0);
+        }
     }
     .btn {
         display: none;

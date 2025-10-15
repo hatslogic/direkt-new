@@ -4,7 +4,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: rem(8) rem(16);
+    padding: rem(10) rem(16) rem(8);
     text-align: center;
     text-transform: uppercase;
     font-weight: 500;
@@ -30,6 +30,11 @@
     &.btn-light{
         margin-top: rem(8);
     }
+    &-secondary{
+        .icon-checkmark{
+            color: $white-color;
+        }
+    }
 }
 .scroll-up-button .btn-primary{
     border-radius: 50%;
@@ -41,6 +46,11 @@
         .icon{
             color: $primary-color;
         }
+    }
+}
+.scroll-up-button{
+    &.is-visible{
+        bottom: rem(90) !important;
     }
 }
 a{

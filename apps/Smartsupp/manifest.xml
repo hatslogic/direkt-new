@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+	<meta>
+		<name>Smartsupp</name>
+		<label>Smartsupp Chat</label>
+		<label lang="de-DE">Smartsupp Chat</label>
+		<description>Smart live chat that can rapidly boost your business</description>
+		<description lang="de-DE">Steigern Sie Ihr Geschäft mit Smart Live-Chat</description>
+		<author>Smartsupp.com, s.r.o.</author>
+		<copyright>(c) by Smartsupp.com, s.r.o.</copyright>
+		<version>2.0.0</version>
+		<icon>Resources/config/plugin.png</icon>
+		<license>MIT</license>
+	</meta>
+	<setup>
+		<registrationUrl>http://inactive-customer-app.test/app/lifecycle/register</registrationUrl>
+		<secret>TestSecretCode</secret>
+	</setup>
+	<allowed-hosts>
+		<host>inactive-customer-app.test</host>
+	</allowed-hosts>
+	<permissions>
+		<read>product</read>
+		<read>order</read>
+		<read>customer</read>
+		<read>addresses</read>
+		<read>state_machine</read>
+		<read>state_machine_state</read>
+	</permissions>
+	<webhooks>
+		<webhook name="app-installed" event="app.installed" url="https://inactive-customer-app.test/shopware/webhook"/>
+		<webhook name="app-updated" event="app.updated" url="https://inactive-customer-app.test/shopware/webhook"/>
+		<webhook name="app-deleted" event="app.deleted" url="https://inactive-customer-app.test/shopware/webhook"/>
+		<webhook name="app-activated" event="app.activated" url="https://inactive-customer-app.test/shopware/webhook"/>
+		<webhook name="app-deactivated" event="app.deactivated" url="https://inactive-customer-app.test/shopware/webhook"/>
+	</webhooks>
+	<cookies>
+		<group>
+			<snippet-name>smartsupp_chat.cookies_group.name</snippet-name>
+			<snippet-description>smartsupp_chat.cookies_group.description</snippet-description>
+			<entries>
+				<cookie>
+					<cookie>smartsupp-functional</cookie>
+					<snippet-name>smartsupp_chat.cookies_functional.name</snippet-name>
+					<value>1</value>
+					<expiration>60</expiration>
+				</cookie>
+				<cookie>
+					<cookie>smartsupp-analytical</cookie>
+					<snippet-name>smartsupp_chat.cookies_analytical.name</snippet-name>
+					<value>1</value>
+					<expiration>60</expiration>
+				</cookie>
+				<cookie>
+					<cookie>smartsupp-marketing</cookie>
+					<snippet-name>smartsupp_chat.cookies_marketing.name</snippet-name>
+					<value>1</value>
+					<expiration>60</expiration>
+				</cookie>
+			</entries>
+		</group>
+	</cookies>
+</manifest>

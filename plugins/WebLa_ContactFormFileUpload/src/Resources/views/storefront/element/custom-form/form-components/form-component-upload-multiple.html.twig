@@ -1,0 +1,5 @@
+{% block swag_cms_extensions_form_component_upload %}
+  <div class="col-md-{{ field.width }}">
+    {% sw_include '@WebLa_ContactFormFileUpload/storefront/component/upload-field-cms.html.twig' with { multiple: true, field: field } %}
+  </div>
+{% endblock %}

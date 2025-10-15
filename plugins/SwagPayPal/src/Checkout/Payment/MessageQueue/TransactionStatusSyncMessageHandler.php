@@ -92,6 +92,12 @@ class TransactionStatusSyncMessageHandler
                 };
             }
         } catch (StateMachineException|PayPalApiException $e) {
+            if ($e instanceof PayPalApiException && $e->is(PayPalApiException::ISSUE_INVALID_RESOURCE_ID)) {
+                $this->orderTransactionStateHandler->fail($message->getTransactionId(), $context);
+
+                return;
+            }
+
             $this->logger->log(
                 $e instanceof StateMachineException ? Level::Error : Level::Warning,
                 \sprintf(

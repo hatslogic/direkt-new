@@ -50,7 +50,7 @@ class StockSubscriber implements EventSubscriberInterface
     public function __construct(
         EntityRepository $orderLineItemRepository,
         MessageBusInterface $messageBus,
-        EntityRepository $salesChannelRepository
+        EntityRepository $salesChannelRepository,
     ) {
         $this->orderLineItemRepository = $orderLineItemRepository;
         $this->messageBus = $messageBus;
@@ -191,7 +191,7 @@ class StockSubscriber implements EventSubscriberInterface
         $message = new InventoryUpdateMessage();
         $message->setIds($productIds);
         $envelope = new Envelope($message, [
-            new DelayStamp(self::DELAY),
+            new DelayStamp(self::DELAY), // @phpstan-ignore-line shopware.noDelayStamp
         ]);
         $this->messageBus->dispatch($envelope);
     }

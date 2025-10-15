@@ -64,5 +64,8 @@
         @include media-breakpoint-down(md){
             padding: rem(16);
         }
-   }
+    }
+    .line-item-quantity-label{
+        margin-bottom: 0;
+    }
 }

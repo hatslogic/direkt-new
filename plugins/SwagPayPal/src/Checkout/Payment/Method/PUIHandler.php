@@ -72,7 +72,7 @@ class PUIHandler extends AbstractPaymentMethodHandler implements SynchronousPaym
         PUICustomerDataService $puiCustomerDataService,
         RequestStack $requestStack,
         TranslatorInterface $translator,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->settingsValidationService = $settingsValidationService;
         $this->orderTransactionStateHandler = $orderTransactionStateHandler;
@@ -128,9 +128,12 @@ class PUIHandler extends AbstractPaymentMethodHandler implements SynchronousPaym
                 $salesChannelContext
             );
         } catch (PaymentException $e) {
+            if ($e->getParameter('orderTransactionId') === null && method_exists($e, 'setOrderTransactionId')) {
+                $e->setOrderTransactionId($transactionId);
+            }
             throw $e;
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), ['error' => $e]);
 
             throw PaymentException::syncProcessInterrupted($transactionId, $e->getMessage());
         }

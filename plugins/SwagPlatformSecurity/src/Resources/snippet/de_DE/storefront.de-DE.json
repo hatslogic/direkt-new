@@ -1,0 +1,5 @@
+{
+    "error": {
+        "VIOLATION::PASSWORD_IS_TOO_LONG": "Das gewählte Passwort ist zu lang."
+    }
+}

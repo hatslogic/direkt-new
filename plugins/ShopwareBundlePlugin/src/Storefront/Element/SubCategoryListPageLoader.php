@@ -14,6 +14,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use ShopwareBundlePlugin\Storefront\Element\SubCategoryListPage;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 
 class SubCategoryListPageLoader
 {
@@ -37,7 +38,7 @@ class SubCategoryListPageLoader
 
         $categoryIds = $dataFetch ? $config->get('category')->getValue() : [$categoryId];
         $criteria = new Criteria();
-
+        
         if($dataFetch) {
             $criteria->addFilter(new EqualsAnyFilter('id', $categoryIds));
         } else {
@@ -47,11 +48,31 @@ class SubCategoryListPageLoader
         $criteria->addAssociation('media');
         $criteria->addAssociation('customFields');
         $criteria->addFilter(new EqualsFilter('active', true));
-        $category = $this->categoryRepository->search($criteria, $salesChannelContext->getContext())->getEntities();
+        $categories = $this->categoryRepository->search($criteria, $salesChannelContext->getContext())->getEntities();
+        
 
         $page = SubCategoryListPage::createFrom($this->genericLoader->load($request, $salesChannelContext));
         $page->setNavigationId($categoryId);
-        $page->setSubCategory(StorefrontSearchResult::createFrom($category));
+        if($dataFetch) {
+            // Reorder categories based on $categoryIds
+            $categoriesById = [];
+            foreach ($categories as $category) {
+                $categoriesById[$category->getId()] = $category;
+            }
+    
+            $orderedCategories = new EntityCollection([]);
+            foreach ($categoryIds as $id) {
+                if (isset($categoriesById[$id])) {
+                    $orderedCategories->add($categoriesById[$id]);
+                }
+            }
+            
+            $page->setSubCategory(StorefrontSearchResult::createFrom($orderedCategories));
+        } else {
+
+            $page->setSubCategory(StorefrontSearchResult::createFrom($categories));
+        }
+        
 
         return $page;
     }

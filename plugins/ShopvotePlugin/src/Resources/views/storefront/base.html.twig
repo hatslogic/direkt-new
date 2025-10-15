@@ -1,0 +1,10 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body %}
+    {{ parent() }}
+
+	{% if page.extensions.BadgeExtension['BadgeStatus'] == true %}
+		{{ page.extensions.BadgeExtension['GraficsCode'] | raw }}
+	{% endif %}
+
+{% endblock %}

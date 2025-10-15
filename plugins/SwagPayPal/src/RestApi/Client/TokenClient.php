@@ -19,7 +19,7 @@ class TokenClient extends AbstractClient implements TokenClientInterface
 {
     public function __construct(
         OAuthCredentials $credentials,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $client = new Client([
             'base_uri' => $credentials->getUrl(),
@@ -27,6 +27,7 @@ class TokenClient extends AbstractClient implements TokenClientInterface
                 'PayPal-Partner-Attribution-Id' => PartnerAttributionId::PAYPAL_PPCP,
                 'Authorization' => (string) $credentials,
             ],
+            'timeout' => 30,
         ]);
 
         parent::__construct($client, $logger);

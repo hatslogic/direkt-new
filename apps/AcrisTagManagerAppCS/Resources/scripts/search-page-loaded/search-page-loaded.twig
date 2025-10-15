@@ -1,0 +1,56 @@
+{# @var services \Shopware\Core\Framework\Script\ServiceStubs #}
+{% set configValue = services.config.app('priceNetDataLayer') %}
+{# @var salesChannelContext \Shopware\Core\System\SalesChannel\SalesChannelContext #}
+{% set salesChannelContext = hook.salesChannelContext %}
+{# @var page \Shopware\Storefront\Page\Search\SearchPage #}
+{% set page = hook.page %}
+{# @var products \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity[] #}
+{% set products = page.listing.elements %}
+
+{% set formattedProducts = [] %}
+{% for product in products %}
+    {% set calculatedPrice = product.calculatedPrice %}
+    {% set basePrice = calculatedPrice.unitPrice %}
+    {% if configValue == true and salesChannelContext and salesChannelContext.taxState == 'gross' and product.tax and product.tax.taxRate %}
+        {% set basePrice = (basePrice / (1 + (product.tax.taxRate / 100)))|round(2) %}
+    {% endif %}
+    {# Build price tiers for the product #}
+    {% set priceTiers = [] %}
+    {% if product.calculatedPrices and product.calculatedPrices|length > 0 %}
+        {% for price in product.calculatedPrices %}
+            {% set tierPrice = price.unitPrice %}
+            {% if configValue == true and salesChannelContext and salesChannelContext.taxState == 'gross' and product.tax and product.tax.taxRate %}
+                {% set tierPrice = (tierPrice / (1 + (product.tax.taxRate / 100)))|round(2) %}
+            {% endif %}
+            {% set priceTiers = priceTiers|merge([{
+                quantityEnd: (price.quantity is not null ? price.quantity|intval : null),
+                price: tierPrice
+            }]) %}
+        {% endfor %}
+    {% endif %}
+
+    {% set formattedProducts = formattedProducts|merge([{
+        id: product.id,
+        number: product.productNumber,
+        name: product.translated.name|default(product.name),
+        price: basePrice,
+        priceTiers: priceTiers,
+        quantity: product.purchaseSteps|default(1),
+        currency: salesChannelContext.currency.isoCode
+    }]) %}
+{% endfor %}
+
+{% if formattedProducts|length > 0 %}
+    {% do page.addArrayExtension('acrisTagManagerAppData', {
+        event: 'search-page-loaded',
+        data: {
+            context: {
+                currency: salesChannelContext.currency.isoCode,
+            },
+            productListing: {
+                currency: salesChannelContext.currency.isoCode,
+                products: formattedProducts
+            }
+        }
+    }) %}
+{% endif %}

@@ -5,6 +5,35 @@
         <div class="container">
             {% block layout_header_top_bar_inner %}
                 {{ parent() }}
+                <div class="d-flex gap-3 justify-content-between">
+                    {% block layout_header_top_bar_features %}
+                        <ul class="d-flex align-items-center dk-topbar-features">
+                            <li class="d-flex align-items-center">
+                                <span class="icon icon-shipment"></span>
+                                <span>{{ 'header.topBarShipping'|trans }}</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <span class="icon icon-responsible"></span>
+                                <span>{{ 'header.topBarPhone'|trans }}</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <span class="icon icon-badge"></span>
+                                <span>{{ 'header.topBarQuality'|trans }}</span>
+                            </li>
+                        </ul>
+                    {% endblock %}
+                    {% block layout_header_top_bar_contact %}
+                        <div class="dropdown-center dk-topbar-contact">
+                            <button class="btn btn-link dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="icon icon-support-icon"></span>
+                                {{ 'header.topBarDropdown'|trans }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>{{ 'header.topBarContact'|trans|raw }}</li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                </div>
             {% endblock %}
         </div>
     </div>

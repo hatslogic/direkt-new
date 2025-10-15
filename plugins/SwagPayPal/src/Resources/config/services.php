@@ -17,7 +17,9 @@ return static function (ContainerBuilder $container): void {
     $loader->load('checkout.xml');
     $loader->load('client.xml');
     $loader->load('dal.xml');
+    $loader->load('dev_ops.xml');
     $loader->load('dispute.xml');
+    $loader->load('document.xml');
     $loader->load('express_checkout.xml');
     $loader->load('installment.xml');
     $loader->load('orders_api.xml');

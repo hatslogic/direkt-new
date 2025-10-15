@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="SwagPlatformSecurity.knownIssues" type="collection">
+            <parameter>Swag\Security\Fixes\NEXT23915\SecurityFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT34608\LogoutSecurityFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT37140\SecurityFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT37398\FeatureCallSilentTokenFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT37397\AggregationInjectionFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT37399\ContextFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT37527\SalesChannelVisibilityFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT39918\RegisterPasswordLengthFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT40390\RecoveryPasswordExposesCustomerFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT40208\CustomersCanAccessOthersDocumentsFix</parameter>
+            <parameter>Swag\Security\Fixes\NEXT40474\CustomerNewsletterMassSignupAbuseFix</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <service id="Swag\Security\Components\State">
+            <argument>%SwagPlatformSecurity.availableFixes%</argument>
+            <argument>%SwagPlatformSecurity.activeFixes%</argument>
+        </service>
+
+        <service id="Swag\Security\Api\SecurityController" public="true">
+            <argument type="service" id="Swag\Security\Components\State"/>
+            <argument>%kernel.cache_dir%</argument>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheIdLoader"/>
+        </service>
+
+        <service id="Swag\Security\Api\ConfigController" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="user.repository" />
+        </service>
+
+        <service id="Swag\Security\Subscriber\AdminSecurityFixesProvider" public="true">
+            <argument type="service" id="Swag\Security\Components\State"/>
+
+            <tag name="kernel.event_listener"/>
+        </service>
+
+        <service id="Swag\Security\Subscriber\TwigStateProvider" public="true">
+            <argument type="service" id="Swag\Security\Components\State"/>
+
+            <tag name="kernel.event_listener"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT23915\SecurityFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT34608\LogoutSecurityFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT37140\SecurityFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT37398\FeatureCallSilentTokenFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT37397\AggregationInjectionFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT37399\ContextFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT37527\SalesChannelVisibilityFix" public="true">
+            <tag name="swag.security.fix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT39918\RegisterPasswordLengthFix" public="true">
+            <tag name="swag.security.fix" ticket="Swag\Security\Fixes\NEXT39918\RegisterPasswordLengthFix"/>
+            <tag name="kernel.event_listener" event="framework.validation.customer.create" method="onBuildValidation"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT34608\FixLogoutRoute" decorates="Shopware\Core\Checkout\Customer\SalesChannel\LogoutRoute">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister"/>
+            <tag name="swag.security.fix" ticket="Swag\Security\Fixes\NEXT34608\LogoutSecurityFix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT40390\FixSendPasswordRecoveryMailRoute" decorates="Shopware\Core\Checkout\Customer\SalesChannel\SendPasswordRecoveryMailRoute">
+            <argument type="service" id=".inner"/>
+            <tag name="swag.security.fix" ticket="Swag\Security\Fixes\NEXT40390\RecoveryPasswordExposesCustomerFix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT40208\FixDocumentRoute" decorates="Shopware\Core\Checkout\Document\SalesChannel\DocumentRoute">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="document.repository" />
+            <tag name="swag.security.fix" ticket="Swag\Security\Fixes\NEXT40208\CustomersCanAccessOthersDocumentsFix"/>
+        </service>
+
+        <service id="Swag\Security\Fixes\NEXT40474\FixNewsletterSubscribeRoute" decorates="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="customer.repository" />
+            <argument type="service" id="newsletter_recipient.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="shopware.rate_limiter" />
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <argument type="service" id="Shopware\Core\System\SalesChannel\StoreApiCustomFieldMapper"/>
+            <tag name="swag.security.fix" ticket="Swag\Security\Fixes\NEXT40474\CustomerNewsletterMassSignupAbuseFix"/>
+        </service>
+    </services>
+</container>

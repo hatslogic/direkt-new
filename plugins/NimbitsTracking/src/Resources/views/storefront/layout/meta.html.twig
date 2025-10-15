@@ -1,0 +1,21 @@
+{% sw_extends '@parent/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_javascript_tracking %}
+    {{ parent() }}
+
+    {% block nb_tracking_ga4_script %}
+
+        {% set nb_tacking_ga4_id = page.footer.extensions.nimbitsTracking.ga4id %}
+        {% set nb_tacking_cookie_name = page.footer.extensions.nimbitsTracking.cookieName %}
+
+        <script>
+            window.nbGA4TrackingId = "{{ nb_tacking_ga4_id }}";
+            window.nbGA4CookieName = "{{ nb_tacking_cookie_name }}";
+            window.nbGA4TrackingUrl = "https://www.googletagmanager.com/gtag/js?id={{ nb_tacking_ga4_id }}"
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            //gtag('js', new Date());
+            //gtag('config', '{{ nb_tacking_ga4_id }}');
+        </script>
+    {% endblock %}
+{% endblock %}

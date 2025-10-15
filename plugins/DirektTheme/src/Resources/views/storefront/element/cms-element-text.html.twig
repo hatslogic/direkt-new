@@ -4,8 +4,11 @@
     {% if config.verticalAlign.value %}
         <div class="cms-element-alignment{% if config.verticalAlign.value == "center" %} align-self-center{% elseif config.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
     {% endif %}
-    {% if page.cmsPage.type == 'product_list' and page.metaInformation.metaTitle is defined %}
-        <h1>{{ page.metaInformation.metaTitle }}</h1>
+    {% if (page.cmsPage.type == 'product_list' or page.cmsPage.type == 'landingpage') and 'dk-non-listing-contact' not in block.cssClass %}
+        <h1>{{ page.header.navigation.active.translated.name }}</h1>
+        {% if page.header.navigation.active.customFields.custom_category_sub_headings_field is not empty %}
+            <h2>{{ page.header.navigation.active.customFields.custom_category_sub_headings_field }}</h2>
+        {% endif %}
     {% endif %}
         {% block element_text_inner %}
             {% set content = element.data.content %}
@@ -13,6 +16,16 @@
             {% set cleaned_content = content|replace({' style=""': ' ', ' style=" ': ' ', ' style="': ' '}) %}
             {{ cleaned_content|raw }}
         {% endblock %}
+
+    {% if page.cmsPage.type == 'product_list' or page.cmsPage.type == 'landingpage' %}
+        <div class="d-flex justify-content-center dk-desc-readmore-outer">
+            <button class="btn btn-link dk-description-readmore" 
+                    data-show-more="{{ 'ellipsis.expandLabel'|trans|sw_sanitize }}"
+                    data-show-less="{{ 'ellipsis.shrinkLabel'|trans|sw_sanitize }}">
+                {{ 'ellipsis.expandLabel'|trans|sw_sanitize }}
+            </button>
+        </div>
+    {% endif %}
 
     {% if config.verticalAlign.value %}
         </div>

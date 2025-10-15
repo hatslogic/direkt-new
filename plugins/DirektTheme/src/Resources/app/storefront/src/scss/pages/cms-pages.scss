@@ -42,6 +42,13 @@
             text-align: left;
         }
     }
+    .product-name{
+        &.active{
+            font-weight: 600;
+            color: $primary-button-color;
+            pointer-events: none;
+        }
+    }
     .card{
         background-color: transparent;
     }
@@ -57,12 +64,14 @@
         h2{
             margin-bottom: rem(24);
             font-size: rem(22);
+            text-transform: capitalize;
             @include media-breakpoint-down(lg){
                 margin-top: 0;
             }
         }
         h3{
             margin-top: rem(24);
+            text-transform: capitalize;
         }
         p{
             margin-bottom: rem(16);

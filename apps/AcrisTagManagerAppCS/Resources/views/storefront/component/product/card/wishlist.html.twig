@@ -1,0 +1,6 @@
+{% sw_extends '@Storefront/storefront/component/product/card/wishlist.html.twig' %}
+
+{% block component_product_wishlist_icon %}
+    <span class="wishlist-product-number" style="display: none;">{{ product.productNumber }}</span>
+    {{ parent() }}
+{% endblock %}

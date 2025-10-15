@@ -1,0 +1,50 @@
+.sw-field--title-container {
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.sw-field--flex-container {
+    display: flex;
+}
+
+.sw-field--flex-container,
+.sw-field--distance-container {
+    .width-50 {
+        margin-top: 0;
+        width: 50%;
+
+        &.margin-top-20 {
+            margin-top: -20px;
+        }
+    }
+
+    .no-margin-top {
+        margin-top: 0;
+    }
+
+    .no-margin-top-bottom {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .margin-right-15 {
+        margin-right: 15px;
+    }
+
+    .margin-left-15 {
+        margin-left: 15px;
+    }
+}
+
+.sw-field--switch-container {
+    .sw-field--switch {
+        margin-top: -20px;
+    }
+}
+
+.sw-field--switch-container-first-element {
+    .sw-field--switch {
+        margin-top: -10px;
+        margin-bottom: 15px;
+    }
+}

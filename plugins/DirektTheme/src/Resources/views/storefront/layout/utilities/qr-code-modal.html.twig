@@ -1,0 +1,6 @@
+{% sw_extends '@Storefront/storefront/utilities/qr-code-modal.html.twig' %}
+
+{% block spatial_ar_qr_code_modal_show_qr_header %}
+    <p class="modal-title text-center w-100">{{ 'spatial.scanQrCode'|trans|striptags }}</p>
+    <button type="button" class="btn-close close m-1" data-bs-dismiss="modal" aria-label="Close"></button>
+{% endblock %}

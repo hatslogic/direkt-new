@@ -112,7 +112,6 @@ class ContactFormSubscriber implements EventSubscriberInterface
         ]));
 
         return;
-        // dd($page);
     }
 
     private function getProductById(string $productId, Context $context): ?ProductEntity

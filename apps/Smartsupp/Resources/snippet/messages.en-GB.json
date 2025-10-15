@@ -1,0 +1,17 @@
+{
+  "smartsupp_chat": {
+    "cookies_group": {
+      "name": "Smartsupp Chat",
+      "description": "You can read everything about Smartsupp cookies here: <a target=\"_blank\" href=\"https://www.smartsupp.com/help/privacy/\" rel=\"noopener\">smartsupp.com/help/privacy</a>"
+    },
+    "cookies_functional": {
+      "name": "Functional cookies"
+    },
+    "cookies_analytical": {
+      "name": "Analytical cookies"
+    },
+    "cookies_marketing": {
+      "name": "Marketing cookies"
+    }
+  }
+}

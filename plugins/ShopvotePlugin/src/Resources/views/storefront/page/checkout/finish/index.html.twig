@@ -1,0 +1,41 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
+
+{% block base_body %}
+    {{ parent() }}
+
+    <div id="srt-customer-data" style="display:none;">
+        <span id="srt-customer-email">{{ page.extensions.TransferStruct.customerMail }}</span>
+        <span id="srt-customer-reference">{{ page.extensions.TransferStruct.orderNumber }}</span>
+    </div>
+
+    <div id="SHOPVOTECheckoutProducts" style="display: none;" translate="no">
+
+	{% for product in page.extensions.TransferStruct.entities %}
+        {% set label = product.translated.name %}
+        <span class="SVCheckoutProductItem">
+            {% for lineItem in page.order.lineItems.elements  %}
+                {% if lineItem.productId == product._uniqueIdentifier %}
+                    {% set label = lineItem.label %}
+                {% endif %}
+            {% endfor %}
+            <span class="sv-i-product-url">{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}</span>
+            <span class="sv-i-product-image-url">{{ product.extensions.cover.url }}</span>
+            <span class="sv-i-product-name">{{ label }}</span>
+            <span class="sv-i-product-sku">{{ product.productNumber }}</span>
+            <span class="sv-i-product-gtin">{{ product.ean }}</span>
+            <span class="sv-i-product-brand">{{ product.manufacturer.translated.name|escape }}</span>
+        </span>
+        {% endfor %}
+    </div>
+
+
+    <script src="https://feedback.shopvote.de/srt-v4.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", (event) => {
+            var myToken = '{{ page.extensions.TransferStruct.apiKey }}';
+            var mySrc = ('https:' === document.location.protocol ? 'https' : 'http');
+            loadSRT(myToken, mySrc);
+        });
+    </script>
+
+{% endblock %}

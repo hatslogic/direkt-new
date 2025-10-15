@@ -94,3 +94,12 @@ select.form-select {
 .form-check-input:focus{
     box-shadow: none;
 }
+
+textarea{
+    &.form-control{
+        min-height: rem(70);
+        @include media-breakpoint-down(md){
+            min-height: rem(125);
+        }
+    }
+}

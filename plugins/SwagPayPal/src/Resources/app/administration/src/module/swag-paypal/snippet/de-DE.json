@@ -22,6 +22,12 @@
         "tooltip": "Gehen Sie zu den <a class=\"swag-paypal-go-to-settings-link\" href=\"#/swag/paypal/index\">Einstellungen der PayPal-Erweiterung →</a> und aktivieren Sie PayPal Commerce Platform, um diese Zahlungsmethode zu aktivieren."
     },
     "swag-paypal": {
+        "errors": {
+            "UNKNOWN": "Ein unbekannter Fehler ist aufgetreten",
+            "SWAG_PAYPAL__API_INVALID_CREDENTIALS": "Die API-Zugangsdaten sind ungültig",
+            "SWAG_PAYPAL__API_NOT_AVAILABLE": "Die PayPal-Services sind derzeit nicht verfügbar. Bitte versuchen Sie es später errneut.",
+            "SWAG_PAYPAL__INVALID_API_CREDENTIALS": "Die API-Zugangsdaten sind ungültig"
+        },
         "header": "PayPal",
         "saleschannelCard": {
             "button": {
@@ -42,11 +48,11 @@
           "cardTitle": "Webhook",
           "buttonRefresh": "Webhook aktualisieren",
           "refreshFailed": {
-            "title": "Aktualisierung ist fehlgeschlagen",
+            "title": "Aktualisierung des Webhooks ist fehlgeschlagen",
             "errorUnknown": "Unbekannter Fehler"
           },
           "status": {
-            "unknown": "Laden...",
+            "unknown": "Laden ...",
             "missing": "Fehlend",
             "invalid": "Registriert, aber mit abweichender Domain",
             "valid": "Gültig"
@@ -97,6 +103,7 @@
                 "paymentMethodText": "Zahlungsmöglichkeiten",
                 "showCredentials": "Zeige API-Zugangsdaten",
                 "appImageAlt": "PayPal",
+                "ratePayLabel": "von Ratepay",
                 "editDetail": "Details bearbeiten",
                 "startOnboardingButtonLabel": "Onboarding starten",
                 "availabilityToolTip": {
@@ -104,7 +111,6 @@
                     "blikapmhandler": "BLIK ist für die folgenden Länder verfügbar: Polen",
                     "boletobancarioapmhandler": "Boleto Bancário ist für die folgenden Länder verfügbar: Brasilien",
                     "epsapmhandler": "eps ist für die folgenden Länder verfügbar: Österreich",
-                    "giropayapmhandler": "Giropay ist für die folgenden Länder verfügbar: Deutschland",
                     "idealapmhandler": "iDEAL ist für die folgenden Länder verfügbar: Niederlande",
                     "multibancoapmhandler": "Multibanco ist für die folgenden Länder verfügbar: Portugal",
                     "mybankapmhandler": "MyBank ist für die folgenden Länder verfügbar: Italien",
@@ -155,7 +161,7 @@
                 },
                 "merchantPayerId": {
                     "label": "PayPal-Händler-ID",
-                    "tooltipText": "Die PayPal-Händler-ID, die dem PayPal-Konto zugeordnet ist (siehe Geschäftsangaben in den PayPal Kontoeinstellungen)."
+                    "tooltipText": "Die PayPal-Händler-ID, die dem PayPal-Konto zugeordnet ist (siehe Geschäftsangaben in den PayPal-Kontoeinstellungen)."
                 },
                 "clientIdSandbox": {
                     "label": "Sandbox-Client-ID",
@@ -167,7 +173,7 @@
                 },
                 "merchantPayerIdSandbox": {
                     "label": "Sandbox-PayPal-Händler-ID",
-                    "tooltipText": "Die PayPal-Händler-ID, die dem Sandbox-PayPal-Konto zugeordnet ist (siehe Geschäftsangaben in den PayPal Kontoeinstellungen)."
+                    "tooltipText": "Die PayPal-Händler-ID, die dem Sandbox-PayPal-Konto zugeordnet ist (siehe Geschäftsangaben in den PayPal-Kontoeinstellungen)."
                 },
                 "sandbox": {
                     "label": "Sandbox aktivieren",
@@ -176,7 +182,7 @@
                 "button": {
                     "title": "Hole API-Zugangsdaten",
                     "titleSandbox": "Hole Sandbox-API-Zugangsdaten",
-                    "messageFetchedError": " Bitte versuche es erneut oder gebe die Zugangsdaten manuell ein."
+                    "messageFetchedError": "Bitte versuche es erneut oder gebe die Zugangsdaten manuell ein."
                 }
             },
             "behavior": {
@@ -244,6 +250,7 @@
             "express": {
                 "cardTitle": "Express Checkout Shortcut",
                 "cardSubtitle": "Express Checkouts erhöhen die Konversionsrate in Deinem Shop und stellen für Dich als Händler kein finanzielles Risiko dar, daher sollten sie immer aktiv sein.",
+                "alertMessage": "Double Opt-In für Gast-Bestellungen ist in einem Deiner Verkaufskanäle aktiviert. Diese Funktion ist nicht mit dem PayPal Express Checkout Shortcut kompatibel. Kunden, die sich über den Express Checkout Shortcut anmelden, erhalten keine Double-Opt-In-Verifizierungs-E-Mails.",
                 "ecsDetailEnabled": {
                     "label": "'Direkt zu PayPal' auf Detailseite",
                     "helpText": "Wenn diese Option aktiv ist, wird der Express Checkout Button auf jeder Produktdetailseite angezeigt."
@@ -277,8 +284,9 @@
                 "ecsButtonShape": {
                     "label": "Buttonform",
                     "options": {
+                        "sharp": "Rechteckig mit spitzen Ecken",
                         "pill": "Rund",
-                        "rect": "Eckig"
+                        "rect": "Rechteckig mit abgerundeten Ecken"
                     }
                 },
                 "ecsSubmitCart": {
@@ -393,7 +401,7 @@
             },
             "messageSaveSuccess": "Die PayPal-Einstellungen wurden gespeichert.",
             "messageTestSuccess": "Die API-Zugangsdaten wurden validiert.",
-            "messageTestError": "Die API-Zugangsdaten konnten nicht validiert werden.",
+            "messageTestError": "Die API-Zugangsdaten konnten nicht validiert werden",
             "messageWebhookCreated": "Der Webhook wurde registriert.",
             "messageWebhookUpdated": "Der Webhook wurde aktualisiert.",
             "messageWebhookError": "Der Webhook konnte nicht gespeichert werden. Folgende Fehler sind aufgetreten:"

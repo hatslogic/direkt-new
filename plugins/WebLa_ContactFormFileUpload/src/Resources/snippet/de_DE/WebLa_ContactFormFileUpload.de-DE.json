@@ -1,0 +1,8 @@
+{
+    "form": {
+        "contactFormAttachment": "Dateianhang",
+        "invalidExtension": "Dateityp .%ext% wird leider nicht unterstützt. Bitte andere Datei wählen.",
+        "tooBig": "Die Dateien sind zu groß, bitte nur Dateien bis %maxSize% MB hochladen.",
+        "orDrag": "oder hierher ziehen"
+    }
+}

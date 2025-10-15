@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Shopvote\ShopvotePlugin\Components\CustomerDummyService">
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="payment_method.repository"/>
+            <argument type="service" id="salutation.repository"/>
+            <argument type="service" id="sales_channel.repository" />
+            <argument type="service" id="customer_group.repository"/>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\ShopvotePlugin">
+            <call method="setCustomerDummyService">
+                <argument type="service" id="Shopvote\ShopvotePlugin\Components\CustomerDummyService"/>
+            </call>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Commands\ImportCommand">
+            <call method="setImportModel">
+                <argument type="service" id="Shopvote\ShopvotePlugin\Model\ImportModel"/>
+            </call>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Components\ImportService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product_review.repository"/>
+            <argument type="service" id="sales_channel.repository"/>
+            <argument type="service" id="shopvote_reviews.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Plugin\PluginService" />
+            <call method="setCustomerDummyService">
+                <argument type="service" id="Shopvote\ShopvotePlugin\Components\CustomerDummyService"/>
+            </call>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Model\ImportModel">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <call method="setImportService">
+                <argument type="service" id="Shopvote\ShopvotePlugin\Components\ImportService"/>
+            </call>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Core\Content\Review\ReviewDefinition">
+            <tag name="shopware.entity.definition" entity="shopvote_reviews"/>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Subscriber\CheckoutSubscriber">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\ScheduledTask\ImportTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\ScheduledTask\ImportTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <tag name="messenger.message_handler"/>
+            <call method="setImportModel">
+                <argument type="service" id="Shopvote\ShopvotePlugin\Model\ImportModel"/>
+            </call>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Extension\ReviewsExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopvote\ShopvotePlugin\Subscriber\ReviewSubscriber">
+            <argument type="service" id="shopvote_reviews.repository" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+		<service id="Shopvote\ShopvotePlugin\Subscriber\BadgeSubscriber">
+			<argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

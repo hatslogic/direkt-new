@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>General Settings</title>
+        <title lang="de-DE">Allgemeine Einstellungen</title>
+
+        <input-field type="bool">
+            <name>ignoreConfirmedStatusOfRequests</name>
+            <label>Ignore the confirmed status of the requests</label>
+            <label lang="de-DE">Freigabestatus der Anfragen ignorieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>ignoreOriginOfRequests</name>
+            <label>Ignore the origin of the requests</label>
+            <label lang="de-DE">Herkunft der Anfragen ignorieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>dateFieldDateFormat</name>
+            <label>date format of the calendar</label>
+            <label lang="de-DE">Datumsformat des Kalenders</label>
+            <options>
+                <option>
+                    <id>d.m.Y</id>
+                    <name>d.m.Y (01.01.2021)</name>
+                    <name lang="de-DE">d.m.Y (01.01.2021)</name>
+                </option>
+                <option>
+                    <id>Y-m-d</id>
+                    <name>Y-m-d (2021-01-01)</name>
+                    <name lang="de-DE">Y-m-d (2021-01-01)</name>
+                </option>
+            </options>
+            <defaultValue>d.m.Y</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>dateFieldShowWeeksNumbers</name>
+            <label>Show weeks numbers in the calendar</label>
+            <label lang="de-DE">Kalenderwochen im Kalender anzeigen</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>dateFieldHighlightInColor</name>
+            <label>Highlight the date field in color</label>
+            <label lang="de-DE">Datumsfeld farblich hervorheben</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <component name="sw-snippet-field">
+            <name>snippetTextDataProtection</name>
+            <label>data protection text if an own snippet is used</label>
+            <label lang="de-DE">Text der Datenschutzbestimmung, wenn ein eigener Textbaustein verwendet wird</label>
+            <snippet>tmms.periodRequestForm.privacyNoticeText</snippet>
+            <helpText>click on the globe to edit the translations</helpText>
+            <helpText lang="de-DE">Klicke auf den Globus, um die Übersetzung zu bearbeiten</helpText>
+        </component>
+    </card>
+</config>

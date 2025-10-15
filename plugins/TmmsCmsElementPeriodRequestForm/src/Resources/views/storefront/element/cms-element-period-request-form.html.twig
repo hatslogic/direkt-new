@@ -1,0 +1,932 @@
+{% block cms_element_period_request_form %}
+    {% set elementId = element.id %}
+    {% set formPrefix = 'period-request-form-' ~ elementId %}
+
+    <div class="cms-element-{{ element.type }}">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body" id="period-request-form-card-body-{{ elementId }}">
+
+                        {% block cms_element_period_request_form_wrapper %}
+                            {% set action = 'frontend.periodrequestform.save' %}
+
+                            {% block cms_element_period_request_form_title %}
+                                {% if element.config.periodRequestFormTitle.value %}
+                                    <div class="card-title mb-4">
+                                        {{ element.config.periodRequestFormTitle.value }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block cms_element_period_request_form_text %}
+                                {% if element.config.periodRequestFormText.value %}
+                                    <div class="form-text form-text-{{ elementId }} mt-0 mb-3">
+                                        {{ element.config.periodRequestFormText.value|raw }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block cms_element_period_request_form_content %}
+                                {% set formAjaxSubmitOptions = {
+                                    replaceSelectors: ["#period-request-form-card-body-#{elementId}"]
+                                } %}
+
+                                <form action="{{ path(action) }}"
+                                      method="post"
+                                      data-form-ajax-submit="true"
+                                      {% if feature('ACCESSIBILITY_TWEAKS') %}data-form-handler="true"{% endif %}
+                                      {% if not feature('ACCESSIBILITY_TWEAKS') %}data-form-validation="true"{% endif %}
+                                      data-form-ajax-submit-options="{{ formAjaxSubmitOptions|json_encode }}"
+                                      data-form-element-id="{{ elementId }}"
+                                      data-input-max-length="{{ "tmms.periodRequestForm.inputMaxLength"|trans }}"
+                                      data-textarea-max-length="{{ "tmms.periodRequestForm.textareaMaxLength"|trans }}"
+                                      data-save-period-request-form="true"
+                                      class="period-request-form needs-validation"
+                                      id="period-request-form-{{ elementId }}">
+                                    <div class="form-content">
+                                        {% if element.config.showDateAboveForm.value == true %}
+                                            {% if element.config.showDate.value == true %}
+                                                <div class="row g-2">
+                                                    {% block cms_element_period_request_form_date_before %}
+                                                        {% set dateIsRequired = false %}
+
+                                                        {% if element.config.dateIsRequired.value == true %}
+                                                            {% set dateIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-date.html.twig'
+                                                            with {
+                                                                id: formPrefix ~ '-form-datefield',
+                                                                required: dateIsRequired,
+                                                                fieldName: 'date',
+                                                                additionalClass: 'col-12',
+                                                                violationPath: '/date',
+                                                                validationRules: dateIsRequired ? 'required'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {% if element.config.showFreeInputAboveForm.value == true %}
+                                            <div class="row g-2">
+                                                {% block cms_element_period_request_form_freeinput_before %}
+                                                    {% for i in 1..10 %}
+                                                        {% set showFreeInput = false %}
+
+                                                        {% if ( i == 1) %}
+                                                            {% if element.config.showFreeInput.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput.value %}
+                                                                {% set freeInputType = element.config.freeInputType.value %}
+                                                                {% set freeInputValue = element.config.freeInput.value %}
+
+                                                                {% if element.config.freeInputIsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 2) %}
+                                                            {% if element.config.showFreeInput2.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput2' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput2.value %}
+                                                                {% set freeInputType = element.config.freeInput2Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput2.value %}
+
+                                                                {% if element.config.freeInput2IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 3) %}
+                                                            {% if element.config.showFreeInput3.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput3' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput3.value %}
+                                                                {% set freeInputType = element.config.freeInput3Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput3.value %}
+
+                                                                {% if element.config.freeInput3IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 4) %}
+                                                            {% if element.config.showFreeInput4.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput4' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput4.value %}
+                                                                {% set freeInputType = element.config.freeInput4Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput4.value %}
+
+                                                                {% if element.config.freeInput4IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 5) %}
+                                                            {% if element.config.showFreeInput5.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput5' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput5.value %}
+                                                                {% set freeInputType = element.config.freeInput5Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput5.value %}
+
+                                                                {% if element.config.freeInput5IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 6) %}
+                                                            {% if element.config.showFreeInput6.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput6' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput6.value %}
+                                                                {% set freeInputType = element.config.freeInput6Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput6.value %}
+
+                                                                {% if element.config.freeInput6IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 7) %}
+                                                            {% if element.config.showFreeInput7.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput7' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput7.value %}
+                                                                {% set freeInputType = element.config.freeInput7Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput7.value %}
+
+                                                                {% if element.config.freeInput7IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 8) %}
+                                                            {% if element.config.showFreeInput8.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput8' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput8.value %}
+                                                                {% set freeInputType = element.config.freeInput8Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput8.value %}
+
+                                                                {% if element.config.freeInput8IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 9) %}
+                                                            {% if element.config.showFreeInput9.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput9' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput9.value %}
+                                                                {% set freeInputType = element.config.freeInput9Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput9.value %}
+
+                                                                {% if element.config.freeInput9IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 10) %}
+                                                            {% if element.config.showFreeInput10.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput10' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput10.value %}
+                                                                {% set freeInputType = element.config.freeInput10Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput10.value %}
+
+                                                                {% if element.config.freeInput10IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+
+                                                        {% if showFreeInput %}
+                                                            {% set freeInputLabelSnippet = 'tmms.periodRequestForm.freeinput.label' %}
+                                                            {% set freeInputLabelSnippetTrans = 'tmms.periodRequestForm.freeinput.label'|trans({"%labelFreeInput%": freeInputLabel}) %}
+                                                            {% set freeInputPlaceholderSnippet = 'tmms.periodRequestForm.freeinput.placeholder' %}
+
+                                                            {% if element.config.freeInputsSideBySide.value == "3" %}
+                                                                {% set additionalCssClass = "col-md-4" %}
+                                                            {% elseif element.config.freeInputsSideBySide.value == "2" %}
+                                                                {% set additionalCssClass = "col-md-6" %}
+                                                            {% elseif element.config.freeInputsSideBySide.value == "1" %}
+                                                                {% set additionalCssClass = "col-12" %}
+                                                            {% endif %}
+
+                                                            {% if freeInputType == "select" %}
+                                                                {% set defaultSelectPlaceholder = element.config.defaultSelectPlaceholder.value %}
+
+                                                                {% if defaultSelectPlaceholder %}
+                                                                    {% set freeInputPlaceholderSnippetTrans = defaultSelectPlaceholder %}
+                                                                {% else %}
+                                                                    {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionSelect'|trans %}
+                                                                    {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+                                                                {% endif %}
+
+                                                                {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-custom-select.html.twig'
+                                                                    with {
+                                                                        id: formPrefix ~ '-form-' ~ freeInputFieldName,
+                                                                        required: freeInputIsRequired,
+                                                                        fieldName: freeInputFieldName,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippet,
+                                                                        placeholder: freeInputPlaceholderSnippet,
+                                                                        violationPath: '/' ~ freeInputFieldName,
+                                                                        validationRules: freeInputIsRequired ? 'required'
+                                                                    }
+                                                                %}
+                                                            {% elseif freeInputType == "input" %}
+                                                                {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionInput'|trans %}
+                                                                {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                                    with {
+                                                                        fieldName: freeInputFieldName,
+                                                                        required: freeInputIsRequired,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippetTrans,
+                                                                        placeholder: freeInputPlaceholderSnippetTrans
+                                                                    }
+                                                                %}
+                                                            {% elseif freeInputType == "textarea" %}
+                                                                {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionInput'|trans %}
+                                                                {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-textarea.html.twig'
+                                                                    with {
+                                                                        rows: 'tmms.periodRequestForm.textareaNumberRows'|trans,
+                                                                        required: freeInputIsRequired,
+                                                                        fieldName: freeInputFieldName,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippetTrans,
+                                                                        placeholder: freeInputPlaceholderSnippetTrans
+                                                                    }
+                                                                %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endblock %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if element.config.showCommentAboveForm.value == true %}
+                                            {% if element.config.showComment.value == true %}
+                                                <div class="row g-2">
+                                                    {% block cms_element_period_request_form_comment_before %}
+                                                        {% set commentIsRequired = false %}
+
+                                                        {% if element.config.commentIsRequired.value == true %}
+                                                            {% set commentIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-textarea.html.twig'
+                                                            with {
+                                                                rows: 'tmms.periodRequestForm.textareaNumberRows'|trans,
+                                                                required: commentIsRequired,
+                                                                fieldName: 'comment',
+                                                                additionalClass: 'col-12',
+                                                                label: 'tmms.periodRequestForm.comment.label',
+                                                                placeholder: 'tmms.periodRequestForm.comment.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {% if element.config.showSalutation.value == true or element.config.showFirstname.value == true or element.config.showLastname.value == true %}
+                                            {% if element.config.showSalutation.value == true and element.config.showFirstname.value == true and element.config.showLastname.value == true %}
+                                                {% set additionalCssClass = "col-md-4" %}
+                                            {% elseif (element.config.showSalutation.value == true and element.config.showFirstname.value == true and element.config.showLastname.value == false) or (element.config.showSalutation.value == true and element.config.showFirstname.value == false and element.config.showLastname.value == true) or (element.config.showSalutation.value == false and element.config.showFirstname.value == true and element.config.showLastname.value == true) %}
+                                                {% set additionalCssClass = "col-md-6" %}
+                                            {% elseif (element.config.showSalutation.value == true and element.config.showFirstname.value == false and element.config.showLastname.value == false) or (element.config.showSalutation.value == false and element.config.showFirstname.value == true and element.config.showLastname.value == false) or (element.config.showSalutation.value == false and element.config.showFirstname.value == false and element.config.showLastname.value == true) %}
+                                                {% set additionalCssClass = "col-12" %}
+                                            {% endif %}
+
+                                            <div class="row g-2">
+                                                {% if element.config.showSalutation.value == true %}
+                                                    {% block cms_element_period_request_form_select_salutation %}
+                                                        {% set salutationIsRequired = false %}
+
+                                                        {% if element.config.salutationIsRequired.value == true %}
+                                                            {% set salutationIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-custom-select.html.twig'
+                                                            with {
+                                                                id: formPrefix ~ '-form-salutationId',
+                                                                required: salutationIsRequired,
+                                                                fieldName: 'salutationId',
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.salutation.label',
+                                                                placeholder: 'tmms.periodRequestForm.salutation.placeholder',
+                                                                violationPath: '/salutationId',
+                                                                validationRules: salutationIsRequired ? 'required'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                {% if element.config.showFirstname.value == true %}
+                                                    {% block cms_element_period_request_form_firstname %}
+                                                        {% set firstnameIsRequired = false %}
+
+                                                        {% if element.config.firstnameIsRequired.value == true %}
+                                                            {% set firstnameIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'firstName',
+                                                                required: firstnameIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.firstname.label',
+                                                                placeholder: 'tmms.periodRequestForm.firstname.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                {% if element.config.showLastname.value == true %}
+                                                    {% block cms_element_period_request_form_lastname %}
+                                                        {% set lastnameIsRequired = false %}
+
+                                                        {% if element.config.lastnameIsRequired.value == true %}
+                                                            {% set lastnameIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'lastName',
+                                                                required: lastnameIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.lastname.label',
+                                                                placeholder: 'tmms.periodRequestForm.lastname.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if element.config.showStreet.value == true or element.config.showZipcode.value == true or element.config.showCity.value == true %}
+                                            {% if element.config.showStreet.value == true and element.config.showZipcode.value == true and element.config.showCity.value == true %}
+                                                {% set additionalCssClass = "col-md-4" %}
+                                            {% elseif (element.config.showStreet.value == true and element.config.showZipcode.value == true and element.config.showCity.value == false) or (element.config.showStreet.value == true and element.config.showZipcode.value == false and element.config.showCity.value == true) or (element.config.showStreet.value == false and element.config.showZipcode.value == true and element.config.showCity.value == true) %}
+                                                {% set additionalCssClass = "col-md-6" %}
+                                            {% elseif (element.config.showStreet.value == true and element.config.showZipcode.value == false and element.config.showCity.value == false) or (element.config.showStreet.value == false and element.config.showZipcode.value == true and element.config.showCity.value == false) or (element.config.showStreet.value == false and element.config.showZipcode.value == false and element.config.showCity.value == true) %}
+                                                {% set additionalCssClass = "col-12" %}
+                                            {% endif %}
+
+                                            <div class="row g-2">
+                                                {% if element.config.showStreet.value == true %}
+                                                    {% block cms_element_period_request_form_street %}
+                                                        {% set streetIsRequired = false %}
+
+                                                        {% if element.config.streetIsRequired.value == true %}
+                                                            {% set streetIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'street',
+                                                                required: streetIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.street.label',
+                                                                placeholder: 'tmms.periodRequestForm.street.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                {% if element.config.showZipcode.value == true %}
+                                                    {% block cms_element_period_request_form_zipcode %}
+                                                        {% set zipcodeIsRequired = false %}
+
+                                                        {% if element.config.zipcodeIsRequired.value == true %}
+                                                            {% set zipcodeIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'zipcode',
+                                                                required: zipcodeIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.zipcode.label',
+                                                                placeholder: 'tmms.periodRequestForm.zipcode.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                {% if element.config.showCity.value == true %}
+                                                    {% block cms_element_period_request_form_city %}
+                                                        {% set cityIsRequired = false %}
+
+                                                        {% if element.config.cityIsRequired.value == true %}
+                                                            {% set cityIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'city',
+                                                                required: cityIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.city.label',
+                                                                placeholder: 'tmms.periodRequestForm.city.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if element.config.showCountry.value == true %}
+                                            <div class="row g-2">
+                                                {% block cms_element_period_request_form_country %}
+                                                    {% set countryIsRequired = false %}
+
+                                                    {% if element.config.countryIsRequired.value == true %}
+                                                        {% set countryIsRequired = true %}
+                                                    {% endif %}
+
+                                                    {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-custom-select.html.twig'
+                                                        with {
+                                                            id: formPrefix ~ '-form-country',
+                                                            required: countryIsRequired,
+                                                            fieldName: 'country',
+                                                            additionalClass: 'col-12',
+                                                            label: 'tmms.periodRequestForm.country.label',
+                                                            placeholder: 'tmms.periodRequestForm.country.placeholder',
+                                                            violationPath: '/country',
+                                                            validationRules: countryIsRequired ? 'required'
+                                                        }
+                                                    %}
+                                                {% endblock %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if element.config.showEmail.value == true or element.config.showPhone.value == true %}
+                                            {% if element.config.showEmail.value == true and element.config.showPhone.value == true %}
+                                                {% set additionalCssClass = "col-md-6" %}
+                                            {% elseif (element.config.showEmail.value == true and element.config.showPhone.value == false) or (element.config.showEmail.value == false and element.config.showPhone.value == true) %}
+                                                {% set additionalCssClass = "col-12" %}
+                                            {% endif %}
+
+                                            <div class="row g-2">
+
+                                                {% if element.config.showEmail.value == true %}
+                                                    {% block cms_element_period_request_form_email %}
+                                                        {% set emailIsRequired = false %}
+
+                                                        {% if element.config.emailIsRequired.value == true %}
+                                                            {% set emailIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'email',
+                                                                type: 'email',
+                                                                required: emailIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.email.label',
+                                                                placeholder: 'tmms.periodRequestForm.email.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                {% if element.config.showPhone.value == true %}
+                                                    {% block cms_element_period_request_form_phome %}
+                                                        {% set phoneIsRequired = false %}
+
+                                                        {% if element.config.phoneIsRequired.value == true %}
+                                                            {% set phoneIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                            with {
+                                                                fieldName: 'phone',
+                                                                required: phoneIsRequired,
+                                                                additionalClass: additionalCssClass,
+                                                                label: 'tmms.periodRequestForm.phone.label',
+                                                                placeholder: 'tmms.periodRequestForm.phone.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if element.config.showCommentAboveForm.value == false %}
+                                            {% if element.config.showComment.value == true %}
+                                                <div class="row g-2">
+                                                    {% block cms_element_period_request_form_comment_after %}
+                                                        {% set commentIsRequired = false %}
+
+                                                        {% if element.config.commentIsRequired.value == true %}
+                                                            {% set commentIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-textarea.html.twig'
+                                                            with {
+                                                                rows: 'tmms.periodRequestForm.textareaNumberRows'|trans,
+                                                                required: commentIsRequired,
+                                                                fieldName: 'comment',
+                                                                additionalClass: 'col-12',
+                                                                label: 'tmms.periodRequestForm.comment.label',
+                                                                placeholder: 'tmms.periodRequestForm.comment.placeholder'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {% if element.config.showDateAboveForm.value == false %}
+                                            {% if element.config.showDate.value == true %}
+                                                <div class="row g-2">
+                                                    {% block cms_element_period_request_form_date_after %}
+                                                        {% set dateIsRequired = false %}
+
+                                                        {% if element.config.dateIsRequired.value == true %}
+                                                            {% set dateIsRequired = true %}
+                                                        {% endif %}
+
+                                                        {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-date.html.twig'
+                                                            with {
+                                                                id: formPrefix ~ '-form-datefield',
+                                                                required: dateIsRequired,
+                                                                fieldName: 'date',
+                                                                additionalClass: 'col-12',
+                                                                violationPath: '/date',
+                                                                validationRules: dateIsRequired ? 'required'
+                                                            }
+                                                        %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {% if element.config.showFreeInputAboveForm.value == false %}
+                                            <div class="row g-2">
+                                                {% block cms_element_period_request_form_freeinput_after %}
+                                                    {% for i in 1..10 %}
+                                                        {% set showFreeInput = false %}
+
+                                                        {% if ( i == 1) %}
+                                                            {% if element.config.showFreeInput.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput.value %}
+                                                                {% set freeInputType = element.config.freeInputType.value %}
+                                                                {% set freeInputValue = element.config.freeInput.value %}
+
+                                                                {% if element.config.freeInputIsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 2) %}
+                                                            {% if element.config.showFreeInput2.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput2' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput2.value %}
+                                                                {% set freeInputType = element.config.freeInput2Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput2.value %}
+
+                                                                {% if element.config.freeInput2IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 3) %}
+                                                            {% if element.config.showFreeInput3.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput3' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput3.value %}
+                                                                {% set freeInputType = element.config.freeInput3Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput3.value %}
+
+                                                                {% if element.config.freeInput3IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 4) %}
+                                                            {% if element.config.showFreeInput4.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput4' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput4.value %}
+                                                                {% set freeInputType = element.config.freeInput4Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput4.value %}
+
+                                                                {% if element.config.freeInput4IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 5) %}
+                                                            {% if element.config.showFreeInput5.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput5' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput5.value %}
+                                                                {% set freeInputType = element.config.freeInput5Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput5.value %}
+
+                                                                {% if element.config.freeInput5IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 6) %}
+                                                            {% if element.config.showFreeInput6.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput6' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput6.value %}
+                                                                {% set freeInputType = element.config.freeInput6Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput6.value %}
+
+                                                                {% if element.config.freeInput6IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 7) %}
+                                                            {% if element.config.showFreeInput7.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput7' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput7.value %}
+                                                                {% set freeInputType = element.config.freeInput7Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput7.value %}
+
+                                                                {% if element.config.freeInput7IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 8) %}
+                                                            {% if element.config.showFreeInput8.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput8' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput8.value %}
+                                                                {% set freeInputType = element.config.freeInput8Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput8.value %}
+
+                                                                {% if element.config.freeInput8IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 9) %}
+                                                            {% if element.config.showFreeInput9.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput9' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput9.value %}
+                                                                {% set freeInputType = element.config.freeInput9Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput9.value %}
+
+                                                                {% if element.config.freeInput9IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% elseif ( i == 10) %}
+                                                            {% if element.config.showFreeInput10.value == true %}
+                                                                {% set showFreeInput = true %}
+                                                                {% set freeInputIsRequired = false %}
+                                                                {% set freeInputFieldName = 'freeInput10' %}
+                                                                {% set freeInputLabel = element.config.labelFreeInput10.value %}
+                                                                {% set freeInputType = element.config.freeInput10Type.value %}
+                                                                {% set freeInputValue = element.config.freeInput10.value %}
+
+                                                                {% if element.config.freeInput10IsRequired.value == true %}
+                                                                    {% set freeInputIsRequired = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+
+                                                        {% if showFreeInput %}
+                                                            {% set freeInputLabelSnippet = 'tmms.periodRequestForm.freeinput.label' %}
+                                                            {% set freeInputLabelSnippetTrans = 'tmms.periodRequestForm.freeinput.label'|trans({"%labelFreeInput%": freeInputLabel}) %}
+                                                            {% set freeInputPlaceholderSnippet = 'tmms.periodRequestForm.freeinput.placeholder' %}
+
+                                                            {% if element.config.freeInputsSideBySide.value == "3" %}
+                                                                {% set additionalCssClass = "col-md-4" %}
+                                                            {% elseif element.config.freeInputsSideBySide.value == "2" %}
+                                                                {% set additionalCssClass = "col-md-6" %}
+                                                            {% elseif element.config.freeInputsSideBySide.value == "1" %}
+                                                                {% set additionalCssClass = "col-12" %}
+                                                            {% endif %}
+
+                                                            {% if freeInputType == "select" %}
+                                                                {% set defaultSelectPlaceholder = element.config.defaultSelectPlaceholder.value %}
+
+                                                                {% if defaultSelectPlaceholder %}
+                                                                    {% set freeInputPlaceholderSnippetTrans = defaultSelectPlaceholder %}
+                                                                {% else %}
+                                                                    {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionSelect'|trans %}
+                                                                    {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+                                                                {% endif %}
+
+                                                                {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-custom-select.html.twig'
+                                                                    with {
+                                                                        id: formPrefix ~ '-form-' ~ freeInputFieldName,
+                                                                        required: freeInputIsRequired,
+                                                                        fieldName: freeInputFieldName,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippet,
+                                                                        placeholder: freeInputPlaceholderSnippet,
+                                                                        violationPath: '/' ~ freeInputFieldName,
+                                                                        validationRules: freeInputIsRequired ? 'required'
+                                                                    }
+                                                                %}
+                                                            {% elseif freeInputType == "input" %}
+                                                                {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionInput'|trans %}
+                                                                {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                                    with {
+                                                                        fieldName: freeInputFieldName,
+                                                                        required: freeInputIsRequired,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippetTrans,
+                                                                        placeholder: freeInputPlaceholderSnippetTrans
+                                                                    }
+                                                                %}
+                                                            {% elseif freeInputType == "textarea" %}
+                                                                {% set freeInputPlaceholderSnippetTransAction = 'tmms.periodRequestForm.freeinput.placeholderActionInput'|trans %}
+                                                                {% set freeInputPlaceholderSnippetTrans = 'tmms.periodRequestForm.freeinput.placeholder'|trans({"%labelFreeInput%": freeInputLabel, "%labelFreeInputAction%": freeInputPlaceholderSnippetTransAction}) %}
+
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-textarea.html.twig'
+                                                                    with {
+                                                                        rows: 'tmms.periodRequestForm.textareaNumberRows'|trans,
+                                                                        required: freeInputIsRequired,
+                                                                        fieldName: freeInputFieldName,
+                                                                        additionalClass: additionalCssClass,
+                                                                        label: freeInputLabelSnippetTrans,
+                                                                        placeholder: freeInputPlaceholderSnippetTrans
+                                                                    }
+                                                                %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endblock %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% block cms_element_period_request_form_content_captcha %}
+                                            {% sw_include '@Storefront/storefront/component/captcha/base.html.twig' with {
+                                                'additionalClass' : 'col-md-12'
+                                            } %}
+                                        {% endblock %}
+
+                                        {% block cms_element_period_request_form_content_privacy %}
+                                            {% set privacyNoticeIsRequired = element.config.privacyNoticeIsRequired.value %}
+                                            {% set customSnippet = element.config.useOwnSnippetForPrivacyNoticeText.value %}
+
+                                            {% if element.config.showPrivacyNotice.value == true %}
+                                                {% if element.config.showRequiredFieldsInfo.value == false %}<div class="mb-2">{% endif %}
+                                                    {% if customSnippet %}
+                                                        {% if privacyNoticeIsRequired %}
+                                                            {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-privacy-notice.html.twig' with {
+                                                                customSnippet: customSnippet,
+                                                                prevUrl: app.request.isXmlHttpRequest() ? path('frontend.cms.page', { id: config('core.basicInformation.contactPage') }) : '',
+                                                                privacyNoticeIsRequired: privacyNoticeIsRequired,
+                                                                requiresTermsOfService: false
+                                                            } %}
+                                                        {% else %}
+                                                            {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-privacy-notice.html.twig' with {
+                                                                customSnippet: customSnippet,
+                                                                prevUrl: app.request.isXmlHttpRequest() ? path('frontend.cms.page', { id: config('core.basicInformation.contactPage') }) : '',
+                                                                privacyNoticeIsRequired: false,
+                                                                requiresTermsOfService: false
+                                                            } %}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% if element.config.privacyNoticeWithoutTermsOfService.value == true %}
+                                                            {% if privacyNoticeIsRequired %}
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-privacy.html.twig' with {
+                                                                    requiresTermsOfService: false,
+                                                                    prevUrl: app.request.isXmlHttpRequest() ? path('frontend.cms.page', { id: config('core.basicInformation.contactPage') }) : '',
+                                                                } %}
+                                                            {% else %}
+                                                                {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-privacy-notice.html.twig' with {
+                                                                    customSnippet: customSnippet,
+                                                                    privacyNoticeIsRequired: false,
+                                                                    requiresTermsOfService: false
+                                                                } %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% if privacyNoticeIsRequired %}
+                                                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-privacy.html.twig' with {
+                                                                    requiresTermsOfService: true
+                                                                } %}
+                                                            {% else %}
+                                                                {% sw_include '@TmmsCmsElementPeriodRequestForm/storefront/element/cms-element-period-request-form/form-components/cms-element-form-privacy-notice.html.twig' with {
+                                                                    customSnippet: customSnippet,
+                                                                    privacyNoticeIsRequired: false,
+                                                                    requiresTermsOfService: true
+                                                                } %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% if element.config.showRequiredFieldsInfo.value == false %}</div>{% endif %}
+                                            {% endif %}
+                                        {% endblock %}
+
+                                        {% block cms_element_period_request_form_content_required_fields_info %}
+                                            {% if element.config.showPrivacyNotice.value == false %}<div class="required-fields-info mt-2">{% endif %}
+                                                {% if element.config.showRequiredFieldsInfo.value == true %}
+                                                    {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-info-required.html.twig' %}
+                                                {% endif %}
+                                            {% if element.config.showPrivacyNotice.value == false %}</div>{% endif %}
+                                        {% endblock %}
+
+                                        {% block cms_element_period_request_form_content_submit %}
+                                            <button type="submit" class="btn btn-primary float-end">
+                                                {% if element.config.submitButton.value %}
+                                                    {{ 'tmms.periodRequestForm.submitPlaceholderLabel' |trans({"%labelSubmit%": element.config.submitButton.value}) }}
+                                                {% else %}
+                                                    {{ 'tmms.periodRequestForm.submitLabel' |trans }}
+                                                {% endif %}
+                                            </button>
+                                        {% endblock %}
+                                    </div>
+
+                                    {% block cms_element_period_request_form_content_hidden_fields %}
+                                        <div class="form-hidden-fields">
+
+                                            {% if element.config.setOriginOfRequestManually.value == false %}
+                                                {% if controllerName|lower == "product" %}
+                                                    {% if page.product %}
+                                                        {% block cms_element_period_request_form_content_hidden_fields_origin_product %}
+                                                            <input type="hidden" name="origin" value="{{ "tmms.periodRequestForm.origin.productLabel"|trans }}"/>
+                                                            <input type="hidden" name="originId" value="{{ page.product.id }}"/>
+                                                            <input type="hidden" name="originName" value="{{ page.product.translated.name }}{% if page.product.variation %} - {% for variation in page.product.variation %}{{ variation.group }}: {{ variation.option }}{% if page.product.variation|last != variation %}{{ " | " }}{% endif %}{% endfor %}{% endif %}{{ " | " }}{{ page.product.productNumber}}"/>
+                                                        {% endblock %}
+                                                    {% endif %}
+                                                {% elseif controllerName|lower == "navigation" %}
+                                                    {% block cms_element_period_request_form_content_hidden_fields_origin_navigation %}
+                                                        <input type="hidden" name="origin" value="{{ "tmms.periodRequestForm.origin.navigationLabel"|trans }}"/>
+                                                        {% if page.header.navigation.active.id  %}
+                                                            <input type="hidden" name="originId" value="{{ page.header.navigation.active.id }}"/>
+                                                        {% endif %}
+                                                        {% if page.header.navigation.active.name  %}
+                                                            <input type="hidden" name="originName" value="{{ page.header.navigation.active.name }}"/>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                {% elseif controllerName|lower == "landingpage" %}
+                                                    {% block cms_element_period_request_form_content_hidden_fields_origin_landingpage %}
+                                                        <input type="hidden" name="origin" value="{{ "tmms.periodRequestForm.origin.landingpageLabel"|trans }}"/>
+                                                        {% if page.navigationId  %}
+                                                            <input type="hidden" name="originId" value="{{ page.navigationId }}"/>
+                                                        {% endif %}
+                                                        {% if page.metaInformation.metaTitle %}
+                                                            <input type="hidden" name="originName" value="{{ page.metaInformation.metaTitle }}"/>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                {% endif %}
+                                            {% endif %}
+
+                                            {% set labelDate = element.config.labelDate.value %}
+
+                                            <input type="hidden" name="labelDate" value="{% if labelDate %}{{ 'tmms.periodRequestForm.date.dateLabel'|trans({"%labelDate%": labelDate}) }}{% else %}{{ "tmms.periodRequestForm.date.emptyDateLabel"|trans }}{% endif %}"/>
+                                            {% if element.config.showFreeInput.value == true %}<input type="hidden" name="freeInputLabel" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput2.value == true %}<input type="hidden" name="freeInput2Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput2.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput3.value == true %}<input type="hidden" name="freeInput3Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput3.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput4.value == true %}<input type="hidden" name="freeInput4Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput4.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput5.value == true %}<input type="hidden" name="freeInput5Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput5.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput6.value == true %}<input type="hidden" name="freeInput6Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput6.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput7.value == true %}<input type="hidden" name="freeInput7Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput7.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput8.value == true %}<input type="hidden" name="freeInput8Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput8.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput9.value == true %}<input type="hidden" name="freeInput9Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput9.value}) }}"/>{% endif %}
+                                            {% if element.config.showFreeInput10.value == true %}<input type="hidden" name="freeInput10Label" value="{{ "tmms.periodRequestForm.freeinput.label"|trans({"%labelFreeInput%": element.config.labelFreeInput10.value}) }}"/>{% endif %}
+
+                                            {% if elementId %}
+                                                <input type="hidden" name="formElementId" value="{{ elementId }}"/>
+                                            {% endif %}
+
+                                            <input type="submit" class="submit--hidden d-none"/>
+                                        </div>
+                                    {% endblock %}
+
+                                </form>
+                            {% endblock %}
+
+                        {% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

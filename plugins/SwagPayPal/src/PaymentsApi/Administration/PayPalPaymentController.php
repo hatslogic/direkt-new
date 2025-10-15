@@ -34,18 +34,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['api']])]
 class PayPalPaymentController extends AbstractController
 {
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_CURRENCY = 'currency';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_REFUND_AMOUNT = 'refundAmount';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_REFUND_INVOICE_NUMBER = 'refundInvoiceNumber';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_CAPTURE_AMOUNT = 'captureAmount';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_CAPTURE_IS_FINAL = 'captureIsFinal';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_DESCRIPTION = 'description';
+    /**
+     * @deprecated tag:v10.0.0 - will be removed without replacement
+     */
     public const REQUEST_PARAMETER_REASON = 'reason';
 
     /**
@@ -59,12 +80,12 @@ class PayPalPaymentController extends AbstractController
         private readonly CaptureResource $captureResource,
         private readonly PaymentStatusUtil $paymentStatusUtil,
         private readonly EntityRepository $orderRepository,
-        private readonly PriceFormatter $priceFormatter
+        private readonly PriceFormatter $priceFormatter,
     ) {
     }
 
     #[OA\Get(
-        path: '/api/paypal/payment-details/{orderId}/{paymentId}',
+        path: '/paypal/payment-details/{orderId}/{paymentId}',
         operationId: 'paymentDetails',
         description: 'Loads the Payment details of the given PayPal ID',
         tags: ['Admin API', 'PayPal'],
@@ -107,7 +128,7 @@ class PayPalPaymentController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/paypal/resource-details/{resourceType}/{resourceId}/{orderId}',
+        path: '/paypal/resource-details/{resourceType}/{resourceId}/{orderId}',
         operationId: 'resourceDetails',
         description: 'Loads the PayPal resource details of the given resource ID',
         tags: ['Admin API', 'PayPal'],
@@ -175,9 +196,11 @@ class PayPalPaymentController extends AbstractController
 
     /**
      * @throws RequiredParameterInvalidException
+     *
+     * @deprecated tag:v10.0.0 - will be removed without replacement
      */
     #[OA\Post(
-        path: '/api/_action/paypal/refund-payment/{resourceType}/{resourceId}/{orderId}',
+        path: '/_action/paypal/refund-payment/{resourceType}/{resourceId}/{orderId}',
         operationId: 'paypalRefundPayment',
         tags: ['Admin Api', 'PayPal'],
         parameters: [
@@ -215,7 +238,7 @@ class PayPalPaymentController extends AbstractController
         Context $context,
         string $resourceType,
         string $resourceId,
-        string $orderId
+        string $orderId,
     ): JsonResponse {
         $refund = $this->createRefund($request);
         $salesChannelId = $this->getSalesChannelIdByOrderId($orderId, $context);
@@ -249,9 +272,11 @@ class PayPalPaymentController extends AbstractController
 
     /**
      * @throws RequiredParameterInvalidException
+     *
+     * @deprecated tag:v10.0.0 - will be removed without replacement
      */
     #[OA\Post(
-        path: '/api/_action/paypal/capture-payment/{resourceType}/{resourceId}/{orderId}',
+        path: '/_action/paypal/capture-payment/{resourceType}/{resourceId}/{orderId}',
         operationId: 'paypalCapturePayment',
         tags: ['Admin Api', 'PayPal'],
         parameters: [
@@ -289,7 +314,7 @@ class PayPalPaymentController extends AbstractController
         Context $context,
         string $resourceType,
         string $resourceId,
-        string $orderId
+        string $orderId,
     ): JsonResponse {
         $capture = $this->createCapture($request);
 
@@ -318,9 +343,11 @@ class PayPalPaymentController extends AbstractController
 
     /**
      * @throws RequiredParameterInvalidException
+     *
+     * @deprecated tag:v10.0.0 - will be removed without replacement
      */
     #[OA\Post(
-        path: '/api/_action/paypal/void-payment/{resourceType}/{resourceId}/{orderId}',
+        path: '/_action/paypal/void-payment/{resourceType}/{resourceId}/{orderId}',
         operationId: 'paypalVoidPayment',
         tags: ['Admin Api', 'PayPal'],
         parameters: [
@@ -357,7 +384,7 @@ class PayPalPaymentController extends AbstractController
         Context $context,
         string $resourceType,
         string $resourceId,
-        string $orderId
+        string $orderId,
     ): JsonResponse {
         switch ($resourceType) {
             case RelatedResource::AUTHORIZE:

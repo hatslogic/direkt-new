@@ -1,0 +1,80 @@
+<div class="form-group {{ additionalClass }}">
+    {% set feedbackId = "#{id}-feedback" %}
+    {% set areaDescribedBy = "#{feedbackId}" %}
+
+    <label
+        class="form-label"
+        for="{{ id }}">
+        {% if fieldName == "freeInput" or fieldName == "freeInput2" or fieldName == "freeInput3" or fieldName == "freeInput4" or fieldName == "freeInput5" or fieldName == "freeInput6" or fieldName == "freeInput7" or fieldName == "freeInput8" or fieldName == "freeInput9" or fieldName == "freeInput10" %}
+            {{ freeInputLabelSnippetTrans }}
+            {% if required %}{% if feature('ACCESSIBILITY_TWEAKS') %} <span class="form-required-label" aria-hidden="true">{{ 'general.required'|trans|sw_sanitize }}</span>{% else %} {{ "general.required"|trans }}{% endif %}{% endif %}
+        {% else %}
+            {{- label|trans -}}{% if required %}{% if feature('ACCESSIBILITY_TWEAKS') %} <span class="form-required-label" aria-hidden="true">{{ 'general.required'|trans|sw_sanitize }}</span>{% else %} {{ "general.required"|trans }}{% endif %}{% endif %}
+        {% endif %}
+    </label>
+
+    <select
+        class="form-select {{ fieldName }}-select"
+        id="{{ id }}"
+        name="{{ fieldName }}"
+        {% if feature('ACCESSIBILITY_TWEAKS') %}aria-describedby="{{ areaDescribedBy }}"{% endif %}
+        {% if autocomplete is not empty %}autocomplete="{{ autocomplete }}"{% endif %}
+        {% if feature('ACCESSIBILITY_TWEAKS') %}
+            {% if validationRules is not empty %}data-validation="{{ validationRules }}"{% endif %}
+            {% if 'required' in validationRules %}aria-required="true"{% endif %}
+        {% endif %}
+        {% if not feature('ACCESSIBILITY_TWEAKS') %}
+            {% if required %}required="required"{% endif %}
+        {% endif %}
+        >
+        <option disabled="disabled" selected="selected" value="">
+            {% if fieldName == "freeInput" or fieldName == "freeInput2" or fieldName == "freeInput3" or fieldName == "freeInput4" or fieldName == "freeInput5" or fieldName == "freeInput6" or fieldName == "freeInput7" or fieldName == "freeInput8" or fieldName == "freeInput9" or fieldName == "freeInput10" %}
+                {{ freeInputPlaceholderSnippetTrans }}
+            {% else %}
+                {{ placeholder|trans }}
+            {% endif %}
+        </option>
+
+        {% if fieldName == "freeInput" or fieldName == "freeInput2" or fieldName == "freeInput3" or fieldName == "freeInput4" or fieldName == "freeInput5" or fieldName == "freeInput6" or fieldName == "freeInput7" or fieldName == "freeInput8" or fieldName == "freeInput9" or fieldName == "freeInput10" %}
+            {% if freeInputValue %}
+                {% set freeInputValues = freeInputValue|split(',') %}
+
+                {% for freeInputVal in freeInputValues %}
+                    <option value="{{ freeInputVal }}">
+                        {{ freeInputVal }}
+                    </option>
+                {% endfor %}
+            {% endif %}
+        {% elseif fieldName == "salutationId" %}
+            {% if element.config.salutation.value %}
+                {% set salutationValues = element.config.salutation.value|split(',') %}
+
+                {% for salutationValue in salutationValues %}
+                    <option value="{{ salutationValue }}">
+                        {{ salutationValue }}
+                    </option>
+                {% endfor %}
+            {% endif %}
+        {% elseif fieldName == "country" %}
+            {% if element.config.country.value %}
+                {% set countryValues = element.config.country.value|split(',') %}
+
+                {% for countryValue in countryValues %}
+                    <option value="{{ countryValue }}">
+                        {{ countryValue }}
+                    </option>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </select>
+
+    {% if feature('ACCESSIBILITY_TWEAKS') %}
+        <div
+            id="{{ feedbackId }}"
+            class="form-field-feedback">
+            {% if violationPath is not empty and formViolations.getViolations(violationPath) is not empty %}
+                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

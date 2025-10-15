@@ -2,8 +2,18 @@
         "privacyTitle": "Privatsphäre",
         "privacyNoticeText": "Mit der Auswahl von Weiter bestätigen Sie, dass Sie unsere <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzinformationen gelesen haben \">Datenschutzinformationen</a> und akzeptierte unsere <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\" Allgemeine Geschäftsbedingungen\">Allgemeine Geschäftsbedingungen</a>."
     },
+    "header":{
+        "topBarShipping": "Schneller Versand",
+        "topBarPhone": "Telefonischer Kontakt",
+        "topBarQuality": "Spitzen Qualität",
+        "topBarDropdown": "Service/Hilfe",
+        "topBarContact": "<a class='dropdown-item' href='/kontakt/'>Kontakt</a>",
+        "mbseal": {
+            "supportInfo": "<strong>Fragen zu Ihrer Bestellung?</strong><br /><strong><a href=\"tel:+4920131974470\">+49 201 31974470</a></strong> <small>Täglich 7:30 bis 22:00 Uhr</small>"
+        }
+    },
     "checkout":{
-        "emptyCart": "Einkaufswagen.",
+        "cartHeader": "Einkaufswagen.",
         "continueShopping": "MEINE TASCHE",
         "emptyCart": "Ihre Tasche ist leer <br> Worauf warten Sie noch?",
         "requestQuote": "Angebot anfordern",
@@ -30,7 +40,8 @@
         "description": "Beschreibung des Produkts",
         "product-detail": {
             "link": "Fragen zum Artikel?",
-            "article": "Weitere Artikel von Kunststoffe Direkt"
+            "article": "Weitere Artikel von Kunststoffe Direkt",
+	    "mbsealArticle": "Weitere Artikel von MB-Seal"
         },
         "comment" : "Ich habe folgende Fragen zum Artikel",
         "cartText": "Bitte senden Sie mir einen Angebot für die folgenden Artikel"
@@ -48,6 +59,9 @@
         },
         "serviceHotlineHeadline": "Service-Hotline",
         "serviceHotline": "Unterstützung und Beratung unter: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00",
+        "mbseal":{
+            "serviceHotline": "Unterstützung und Beratung unter: <a href=\"tel:+4920131974470\">+49 201 31974470</a> Mon-Fri, 09:00 - 17:00"
+        },
         "paymentheading":"Bezahlung",
         "shipmentheading":"Schneller Versand",
         "securityheading":"Sicherheit",
@@ -66,7 +80,15 @@
             "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
             "facebook":"<a href='https://www.facebook.com/kunststoffedirekt' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
             "twitter":"<a href='https://x.com' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
-            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+            "linkedin":"<a href='https://x.com' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-linkedin-icon'></span></a>",
+            "mail":"<a href='mailto:info@kunststoffedirekt.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>",
+            "mbseal":{
+                "instagram":"<a href='https://www.instagram.com/kunststoffedirekt_/' target='_blank' aria-label='Visit Kunststoffedirekts Instagram'><span class='icon icon-insta-icon'></span></a>",
+                "facebook":"<a href='https://www.facebook.com/mbseal/' target='_blank' aria-label='Visit Kunststoffedirekts facebook'><span class='icon icon-facebook-icon'></span></a>",
+                "twitter":"<a href='https://twitter.com/MBSeal2016' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-x-icon'></span></a>",
+                "linkedin":"<a href='https://www.linkedin.com/' target='_blank' aria-label='twitter' aria-label='Visit Kunststoffedirekts twitter'><span class='icon icon-linkedin-icon'></span></a>",
+                "mail":"<a href='mailto:info@mbseal.de' aria-label='Visit Kunststoffedirekts mail'><span class='icon icon-mail'></span></a>"
+            }
         }
     },
     "newsletter":{
@@ -116,5 +138,15 @@
     "ellipsis": {
         "expandLabel": "Mehr anzeigen",
         "shrinkLabel": "Weniger anzeigen"
+    },
+    "contact" : {
+        "streetAddressLabel" : "Straße und Hausnummer",
+        "streetAddressPlaceholder" : "Straße und Hausnummer eingeben ...",
+        "cityLabel" : "Ort",
+        "cityPlaceholder" : "Ort eingeben ...",
+        "zipCodeLabel" : "Postleitzahl",
+        "zipCodePlaceholder" : "Postleitzahl eingeben ...",
+        "companyNameLabel" : "Unternehmen",
+        "companyNamePlaceholder" : "Unternehmen eingeben ..."
     }
 }

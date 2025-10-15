@@ -1,0 +1,13 @@
+<div class="card-body" id="period-request-form-card-body-{{ periodRequestFormData['id'] }}">
+    {% if savePeriodRequestFormSuccess == 1 %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: 'success',
+            content: 'tmms.periodRequestForm.confirmationText'|trans({"%id%": periodRequestFormData['id'], "%salutation%": periodRequestFormData['salutation'], "%firstname%": periodRequestFormData['firstname'], "%lastname%": periodRequestFormData['lastname'], "%street%": periodRequestFormData['street'], "%zipcode%": periodRequestFormData['zipcode'], "%city%": periodRequestFormData['city'], "%country%": periodRequestFormData['country'], "%email%": periodRequestFormData['email'], "%phone%": periodRequestFormData['phone'], "%comment%": periodRequestFormData['comment'], "%date%": periodRequestFormData['date'], "%labelDate%": periodRequestFormData['labelDate'], "%freeInputLabel%": periodRequestFormData['freeInputLabel'], "%freeInput%": periodRequestFormData['freeInput'], "%freeInput2Label%": periodRequestFormData['freeInput2Label'], "%freeInput2%": periodRequestFormData['freeInput2'], "%freeInput3Label%": periodRequestFormData['freeInput3Label'], "%freeInput3%": periodRequestFormData['freeInput3'], "%freeInput4Label%": periodRequestFormData['freeInput4Label'], "%freeInput4%": periodRequestFormData['freeInput4'], "%freeInput5Label%": periodRequestFormData['freeInput5Label'], "%freeInput5%": periodRequestFormData['freeInput5'], "%freeInput6Label%": periodRequestFormData['freeInput6Label'], "%freeInput6%": periodRequestFormData['freeInput6'], "%freeInput7Label%": periodRequestFormData['freeInput7Label'], "%freeInput7%": periodRequestFormData['freeInput7'], "%freeInput8Label%": periodRequestFormData['freeInput8Label'], "%freeInput8%": periodRequestFormData['freeInput8'], "%freeInput9Label%": periodRequestFormData['freeInput9Label'], "%freeInput9%": periodRequestFormData['freeInput9'], "%freeInput10Label%": periodRequestFormData['freeInput10Label'], "%freeInput10%": periodRequestFormData['freeInput10'], "%origin%": periodRequestFormData['origin'], "%originId%": periodRequestFormData['originId'], "%originName%": periodRequestFormData['originName']})|raw
+        } %}
+    {% else %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: 'danger',
+            content: 'tmms.periodRequestForm.errorText'|trans|sw_sanitize
+        } %}
+    {% endif %}
+</div>

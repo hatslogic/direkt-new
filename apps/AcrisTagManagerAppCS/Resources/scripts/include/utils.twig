@@ -1,0 +1,10 @@
+{# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+{% macro toArray(object) %}
+    {% set array = [] %}
+
+    {% for value in object %}
+        {% set array = array|merge([value]) %}
+    {% endfor %}
+
+    {% return array %}
+{% endmacro %}

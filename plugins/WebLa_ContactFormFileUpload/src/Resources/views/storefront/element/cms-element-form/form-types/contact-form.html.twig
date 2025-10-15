@@ -1,0 +1,10 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form/form-types/contact-form.html.twig' %}
+
+{% block cms_form_contact_required_fields_info %}
+  <div class="file-upload-wrapper">
+    {% block cms_form_contact_file %}
+      {% sw_include '@WebLa_ContactFormFileUpload/storefront/component/upload-field-default.html.twig' with { multiple: config('WebLa_ContactFormFileUpload.config.uploadType') == 'single' ? false : true } %}
+    {% endblock %}
+  </div>
+  {{ parent() }}
+{% endblock %}

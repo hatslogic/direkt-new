@@ -1,0 +1,62 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% set smartsupp_plugin_version = '2.0.0' %}
+{% set smartsupp_loader_url = 'https://www.smartsuppchat.com/loader.js' %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+	<!-- Start of LiveChat (www.smartsupp.com) code -->
+	{%- if config('Smartsupp.config.chatKey') ~%}
+		<script>SMARTSUPP_AUTOCREATE = false;</script>
+		<script src="{{ smartsupp_loader_url }}"></script>
+
+		<script id="smartsupp-bootstrap">
+			var _smartsupp = _smartsupp || {};
+			_smartsupp.offsetY = 10;
+			_smartsupp.offsetX = 10;
+			_smartsupp.consentModeEnabled = true;
+			{% if config('Smartsupp.config.widgetConfig') %}
+				{{- config('Smartsupp.config.widgetConfig') | raw -}}
+			{% endif ~%}
+			_smartsupp.key = '{{ config('Smartsupp.config.chatKey') }}';
+			_smartsupp.sitePlatform = 'shopware';
+			_smartsupp.pluginVersion = '{{ smartsupp_plugin_version }}';
+
+			smartsupp.create('default', _smartsupp, smartsupp._);
+		</script>
+
+		<script id="smartsupp-api">
+			{% if context.customer is defined -%}
+				{%- if context.customer.email -%}
+					smartsupp('email', '{{ context.customer.email }}');
+				{% endif %}
+				{%- if context.customer.firstName or context.customer.lastName -%}
+					smartsupp('name', '{{ context.customer.firstName }} {{ context.customer.lastName }}');
+				{% endif %}
+				{%- if context.customer.activeBillingAddress and context.customer.activeBillingAddress.phoneNumber -%}
+					smartsupp('phone', '{{ context.customer.activeBillingAddress.phoneNumber }}');
+				{% endif %}
+			{% endif %}
+
+			smartsupp('variables', {
+				shopware_eshop_id: '{{ config('core.app.shopId') | first }}',
+				shopware_customer_id: {% if context.customer is defined %}'{{ context.customer.id }}'{% else %}null{% endif %},
+			});
+		</script>
+
+		<template data-smartsupp-plugin></template>
+
+		{% if config('Smartsupp.config.widgetApi') -%}
+		<script id="smartsupp-api-custom">
+			{{ config('Smartsupp.config.widgetApi') | raw }}
+		</script>
+		{%- endif ~%}
+	{%- else ~%}
+		<script id="smartsupp-bootstrap">
+			console.log('App "Smartsupp" don\'t have configured chatKey')
+		</script>
+	{%- endif ~%}
+	<!-- End of LiveChat (www.smartsupp.com) code -->
+
+{% endblock %}

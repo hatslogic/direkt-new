@@ -72,7 +72,7 @@ class ExpressCustomerService
         EntityRepository $customerRepository,
         AccountService $accountService,
         SystemConfigService $systemConfigService,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->registerRoute = $registerRoute;
         $this->countryRepository = $countryRepository;
@@ -101,7 +101,7 @@ class ExpressCustomerService
     private function findExistingCustomer(Order $paypalOrder, SalesChannelContext $salesChannelContext): ?string
     {
         $paypal = $paypalOrder->getPaymentSource()?->getPaypal();
-        if (!$paypal) {
+        if (!$paypal || !$paypal->isset('accountId')) {
             return null;
         }
 
@@ -166,7 +166,7 @@ class ExpressCustomerService
             'lastName' => $paypal->getName()->getSurname(),
             'billingAddress' => $this->getAddressData($paypalOrder, $salesChannelContext->getContext(), $salutationId),
             'acceptedDataProtection' => true,
-            self::EXPRESS_PAYER_ID => $paypal->getAccountId(),
+            self::EXPRESS_PAYER_ID => $paypal->isset('accountId') ? $paypal->getAccountId() : null,
         ]);
 
         return $data;

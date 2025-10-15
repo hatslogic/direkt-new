@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Contact form - File upload Configuration</title>
+        <title lang="de-DE">Kontaktformular - Datei-Upload Konfiguration</title>
+        <input-field type="text">
+            <name>allowedExts</name>
+            <label>Allowed file extensions</label>
+            <label lang="de-DE">Erlaubte Dateierweiterungen</label>
+            <helpText>All allowed file extensions as comma separated list</helpText>
+            <helpText lang="de-DE">Alle erlaubte Dateierweiterungen als kommaseparierte Liste</helpText>
+            <copyable>true</copyable>
+            <defaultValue>gif,png,jpg,jpeg,pdf</defaultValue>
+        </input-field>
+        <input-field type="int">
+            <name>filesize</name>
+            <label>Max. filesize in MB (sum if multi-upload enabled)</label>
+            <label lang="de-DE">Maximale Dateigröße in MB (Summe bei aktiviertem Multi-Upload)</label>
+            <defaultValue>20</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>uploadType</name>
+            <label>Upload type</label>
+            <label lang="de-DE">Upload-Typ</label>
+            <helpText>This applies only if the user chooses to use the input field directly, via drag and drop it is always multiple</helpText>
+            <helpText lang="de-DE">Dies gilt nur, wenn der Benutzer das Eingabefeld direkt verwendet, per Drag + Drop ist es immer mehrfach</helpText>
+            <options>
+                <option>
+                    <id>single</id>
+                    <name>Single file Upload</name>
+                    <name lang="de-DE">Einzelner Datei-Upload</name>
+                </option>
+                <option>
+                    <id>multiple</id>
+                    <name>Multi-File Upload</name>
+                    <name lang="de-DE">Upload mehrerer Dateien</name>
+                </option>
+            </options>
+            <defaultValue>multiple</defaultValue>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>mediaFolderId</name>
+            <entity>media_folder</entity>
+            <label>Choose the folder where the uploaded files should be safed</label>
+            <label lang="de-DE">Wählen Sie den Ordner, in dem die hochgeladenen Dateien gespeichert werden sollen</label>
+        </component>
+    </card>
+</config>

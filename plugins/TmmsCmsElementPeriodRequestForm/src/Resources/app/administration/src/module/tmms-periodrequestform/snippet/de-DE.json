@@ -1,0 +1,74 @@
+{
+    "periodrequestform": {
+        "list": {
+            "textPeriodrequestformOverview": "Anfragen",
+            "textPeriodrequestformDescription": "Verwaltung von Anfragen",
+            "columnCreatedAt": "Eingegangen am",
+            "columnSalutation": "Anrede",
+            "columnFirstname": "Vorname",
+            "columnLastname": "Nachname",
+            "columnEmail": "E-Mail-Adresse",
+            "columnPhone": "Telefonnummer",
+            "columnDate": "Datum oder Zeitraum",
+            "columnOriginname": "Herkunftswert",
+            "columnComment": "Kommentar",
+            "columnConfirmed": "Freigegeben",
+            "columnAnswered": "Beantwortet",
+            "listEmpty": "Keine Anfragen gefunden",
+            "titleSidebarItemRefresh": "Aktualisieren",
+            "addButtonText": "Anfrage hinzufügen"
+        },
+        "detail": {
+            "salutationLabel": "Anrede",
+            "firstnameLabel": "Vorname",
+            "lastnameLabel": "Nachname",
+            "streetLabel": "Straße und Hausnummer",
+            "zipcodeLabel": "Postleitzahl",
+            "cityLabel": "Ort",
+            "countryLabel": "Land",
+            "emailLabel": "E-Mail-Adresse",
+            "phoneLabel": "Telefonnummer",
+            "commentLabel": "Kommentar",
+            "dateLabel": "Datum oder Zeitraum",
+            "dateInfoLabel": "Ein Zeitraum muss in der Form \"dd.mm.YYYY bis dd.mm.YYYY\" (deutsch) oder \"YYYY-mm-dd to YYYY-mm-dd\" (anderssprachig) eingegeben werden.",
+            "freeinputlabelLabel": "Beschriftung der freien Eingabe 1",
+            "freeinputLabel": "Freie Eingabe 1",
+            "freeinput2labelLabel": "Beschriftung der freien Eingabe 2",
+            "freeinput2Label": "Freie Eingabe 2",
+            "freeinput3labelLabel": "Beschriftung der freien Eingabe 3",
+            "freeinput3Label": "Freie Eingabe 3",
+            "freeinput4labelLabel": "Beschriftung der freien Eingabe 4",
+            "freeinput4Label": "Freie Eingabe 4",
+            "freeinput5labelLabel": "Beschriftung der freien Eingabe 5",
+            "freeinput5Label": "Freie Eingabe 5",
+            "freeinput6labelLabel": "Beschriftung der freien Eingabe 6",
+            "freeinput6Label": "Freie Eingabe 6",
+            "freeinput7labelLabel": "Beschriftung der freien Eingabe 7",
+            "freeinput7Label": "Freie Eingabe 7",
+            "freeinput8labelLabel": "Beschriftung der freien Eingabe 8",
+            "freeinput8Label": "Freie Eingabe 8",
+            "freeinput9labelLabel": "Beschriftung der freien Eingabe 9",
+            "freeinput9Label": "Freie Eingabe 9",
+            "freeinput10labelLabel": "Beschriftung der freien Eingabe 10",
+            "freeinput10Label": "Freie Eingabe 10",
+            "originLabel": "Herkunft",
+            "originInfoLabel": "Die Herkunft ist entweder \"Produkt\", \"Kategorie\" oder \"Landingpage\" oder ist komplett individuell.",
+            "originnameLabel": "Herkunftswert",
+            "originidLabel": "ID der Herkunft",
+            "originidInfoLabel": "Die ID der Herkunft befindet sich im Browser zwischen <wert> (category/index/, category/landingPage/ oder product/detail/) und base ( https://www.shopurl.de/admin#/sw/<wert>/25a7b467079c49968930df010681bd9b/base ) oder ist komplett individuell.",
+            "confirmedLabel": "Freigegeben",
+            "answeredLabel": "Beantwortet",
+            "cancelButtonText": "Abbrechen",
+            "saveButtonText": "Speichern",
+            "errorTitle": "Fehler beim Speichern der Anfrage",
+            "periodrequestformHeadline": "Anfragen"
+        }
+    },
+    "sw-privileges": {
+        "permissions": {
+            "periodrequestform": {
+                "label": "Anfragen"
+            }
+        }
+    }
+}

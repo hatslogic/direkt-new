@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/layout/header/header-minimal.html.twig' %}
+
+{% block layout_header_minimal_contact %}
+    <div class="col-md-4 header-minimal-contact">
+    {# url change as per sales channel id #}
+    {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+    {# direkt #}
+    {% if salesChannelId == '019074f16e0172079638d5b52531ca0c' %}
+        {{ 'header.supportInfo'|trans|sw_sanitize }}
+    {# mbseal #}
+    {% elseif salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+        {{ 'header.mbseal.supportInfo'|trans|sw_sanitize }}
+    {% endif %}
+    </div>
+{% endblock %}

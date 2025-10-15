@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>IdowaproMinimumOrderValue</name>
+        <label>Minimum order value for the cart</label>
+        <label lang="de-DE">Mindestbestellwert für den Warenkorb</label>
+        <description>Set a minimum order value easily and centrally in the administration interface. Automatic conversion to different currencies. Also available for the SW6 cloud version.</description>
+        <description lang="de-DE">Mindestbestellwert einfach und zentral in der Administrationsoberfläche festlegen. Automatische Umrechnung in verschiedene Währungen. Auch für die SW6 Cloudversion verfügbar.</description>
+        <author><![CDATA[idowapro Agentur GmbH & Co. KG]]></author>
+        <copyright><![CDATA[(c) by idowapro Agentur GmbH & Co. KG]]></copyright>
+        <version>1.0.4</version>
+        <icon>Resources/config/plugin.png</icon>
+        <license>proprietary</license>
+    </meta>
+</manifest>

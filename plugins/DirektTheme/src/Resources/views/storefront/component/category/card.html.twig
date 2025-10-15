@@ -1,0 +1,53 @@
+{% sw_extends '@ShopwareBundlePlugin/storefront/component/category/card.html.twig' %}
+
+{% block component_category_box_image_link_inner %}
+    {% if cover.url %}
+        {% set attributes = {
+        'class': 'product-image is-'~displayMode,
+        'alt': (cover.translated.alt ?: name),
+        'title': (cover.translated.title ?: name),
+        'loading': 'lazy',
+        'width': 945,
+        'height': 536
+    } %}
+
+        {% if displayMode == 'cover' or displayMode == 'contain' %}
+            {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+        {% endif %}
+
+        {% block component_category_box_image_thumbnail %}
+            {% sw_thumbnails 'product-image-thumbnails' with {
+            media: cover
+        } %}
+        {% endblock %}
+    {% else %}
+        {% block component_category_box_image_placeholder %}
+            <div class="product-image-placeholder">
+                {% sw_icon 'placeholder' style {
+                'size': 'fluid'
+            } %}
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
+{% block component_category_box_info %}
+    <div class="product-info">
+
+        {% block component_category_box_name %}
+            <a href="{{ category_url(category) }}" class="product-name {% if page.metaInformation.metaTitle == name %}active{% endif %}" title="{{ name }}" aria-label="View details for {{ name }}">
+                {{ name }}
+            </a>
+            {% if element.config.showDescription.value %}
+                <div class="category-description">
+                    {{ category.translated.description|striptags|raw }}
+                </div>
+            {% endif %}
+
+            <a href="{{ category_url(category) }}" class="btn btn-primary" title="{{ viewMore }}">
+                {{ 'button.viewMore'|trans|sw_sanitize }}
+            </a>
+        {% endblock %}
+
+    </div>
+{% endblock %}

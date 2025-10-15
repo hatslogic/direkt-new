@@ -1,0 +1,72 @@
+{
+    "tmms": {
+        "periodRequestForm": {
+            "salutation": {
+                "label": "salutation",
+                "placeholder": "select salutation ..."
+            },
+            "firstname": {
+                "label": "first name",
+                "placeholder": "enter first name ..."
+            },
+            "lastname": {
+                "label": "last name",
+                "placeholder": "enter last name ..."
+            },
+            "street": {
+                "label": "street address",
+                "placeholder": "enter street address ..."
+            },
+            "zipcode": {
+                "label": "postal code",
+                "placeholder": "enter postal code ..."
+            },
+            "city": {
+                "label": "city",
+                "placeholder": "enter city ..."
+            },
+            "country": {
+                "label": "country",
+                "placeholder": "select country ..."
+            },
+            "email": {
+                "label": "email address",
+                "placeholder": "enter email address ..."
+            },
+            "phone": {
+                "label": "phone number",
+                "placeholder": "enter phone number ..."
+            },
+            "comment": {
+                "label": "comment",
+                "placeholder": "enter comment ..."
+            },
+            "date": {
+                "emptyDateLabel": "period",
+                "dateLabel": "%labelDate%",
+                "datePlaceholder": "select the %labelDate% using the date selection ...",
+                "dateFormat": "Y-m-d",
+                "showWeeksNumbers": "%showweeksnumbers%"
+            },
+            "freeinput": {
+                "label": "%labelFreeInput%",
+                "placeholder": "%labelFreeInputAction% %labelFreeInput% ...",
+                "placeholderActionInput": "enter",
+                "placeholderActionSelect": "select"
+            },
+            "origin": {
+                "productLabel": "product",
+                "navigationLabel": "category",
+                "landingpageLabel": "landingpage"
+            },
+            "privacyNoticeText": "By selecting continue you confirm that you have read and agree to our <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" data-prev-url=\"%prevUrl%\" href=\"%privacyUrl%\" title=\"data protection information\">data protection information</a>.",
+            "submitPlaceholderLabel": "%labelSubmit%",
+            "submitLabel": "Send",
+            "inputMaxLength": "255",
+            "textareaMaxLength": "1000",
+            "textareaNumberRows": "5",
+            "confirmationText": "Thank you for your request. We have received your request and will contact you as soon as possible.",
+            "errorText": "An error occurred. Please make sure you filled in all fields correctly."
+        }
+    }
+}

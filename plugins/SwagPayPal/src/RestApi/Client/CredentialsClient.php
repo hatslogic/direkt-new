@@ -17,9 +17,12 @@ class CredentialsClient extends AbstractClient
 {
     public function __construct(
         string $url,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
-        $client = new Client(['base_uri' => $url]);
+        $client = new Client([
+            'base_uri' => $url,
+            'timeout' => 30,
+        ]);
 
         parent::__construct($client, $logger);
     }

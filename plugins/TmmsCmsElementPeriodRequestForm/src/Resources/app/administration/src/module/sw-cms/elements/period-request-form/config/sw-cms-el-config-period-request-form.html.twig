@@ -1,0 +1,1416 @@
+{% block sw_cms_element_period_request_form_config %}
+    <div class="sw-cms-el-config-period-request-form">
+        {% block sw_cms_element_period_request_form_config_tabs %}
+            <sw-tabs
+                position-identifier="sw-cms-element-config-period-request-form"
+                class="sw-cms-el-config-period-request-form__tabs"
+                default-item="content"
+            >
+                <template #default="{ active }">
+                    {% block sw_cms_el_config_period_request_form_tab_content %}
+                        <sw-tabs-item
+                            :title="$tc('sw-cms.elements.configPeriodRequestForm.tab.content')"
+                            name="content"
+                            :active-tab="active"
+                        >
+                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.content') }}
+                        </sw-tabs-item>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_tab_freeinputs %}
+                        <sw-tabs-item
+                            :title="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputs')"
+                            name="freeinputs"
+                            :active-tab="active"
+                        >
+                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputs') }}
+                        </sw-tabs-item>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_tab_setting_mail %}
+                        <sw-tabs-item
+                            :title="$tc('sw-cms.elements.configPeriodRequestForm.tab.settings.mail')"
+                            name="settingsmail"
+                            :active-tab="active"
+                        >
+                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.settings.mail') }}
+                        </sw-tabs-item>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_tab_settingssavedata %}
+                        <sw-tabs-item
+                            :title="$tc('sw-cms.elements.configPeriodRequestForm.tab.settings.savedata')"
+                            name="settingssavedata"
+                            :active-tab="active"
+                        >
+                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.settings.savedata') }}
+                        </sw-tabs-item>
+                    {% endblock %}
+
+                </template>
+
+                <template
+                    #content="{ active }"
+                >
+
+                    {% block sw_cms_el_config_period_request_form_content %}
+                        <sw-container
+                            v-if="active === 'content'"
+                            class="sw-cms-el-config-period-request-form__tab-content"
+                        >
+                            {% block sw_cms_el_config_period_request_form_content_periodrequestformtitle %}
+                                <sw-text-field
+                                    v-model:value="element.config.periodRequestFormTitle.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.periodRequestFormTitle.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.periodRequestFormTitle.placeholder')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_content_periodrequestformtext %}
+                                <sw-cms-mapping-field
+                                    v-model:config="element.config.periodRequestFormText"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.periodRequestFormText.label')"
+                                    value-types="string"
+                                >
+                                    <sw-text-editor
+                                        :value="element.config.periodRequestFormText.value"
+                                        :allow-inline-data-mapping="true"
+                                        sanitize-input
+                                        sanitize-field-name="app_cms_block.template"
+                                        @update:value="onInput"
+                                        @blur="onBlur"
+                                    />
+
+                                    <template #preview="{ demoValue }">
+                                        <div class="sw-cms-el-config-period-request-form__mapping-preview">
+                                            <div v-html="$sanitize(demoValue)"></div>
+                                        </div>
+                                    </template>
+                                </sw-cms-mapping-field>
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.salutationTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showsalutation %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showSalutation.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showSalutation')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_salutationisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.salutationIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.salutationIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_content_salutation %}
+                                <sw-text-field
+                                    v-model:value="element.config.salutation.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.salutation.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.salutation.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.firstnameTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showfirstname %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFirstname.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showFirstname')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_firstnameisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.firstnameIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.firstnameIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.lastnameTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showlastname %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showLastname.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showLastname')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_lastnameisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.lastnameIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.lastnameIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.streetTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showstreet %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showStreet.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showStreet')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_streetisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.streetIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.streetIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.zipcodeTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showzipcode %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showZipcode.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showZipcode')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_zipcodeisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.zipcodeIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.zipcodeIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.cityTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showcity %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showCity.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showCity')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_cityisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.cityIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.cityIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.countryTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showcountry %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showCountry.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showCountry')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_countryisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.countryIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.countryIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_content_country %}
+                                <sw-textarea-field
+                                    v-model:value="element.config.country.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.country.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.country.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.emailTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showemail %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showEmail.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showEmail')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_emailisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.emailIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.emailIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.phoneTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showphone %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showPhone.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showPhone')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_phoneisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.phoneIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.phoneIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.commentTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showcomment %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showComment.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showComment')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_commentisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.commentIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.commentIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--switch-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showcommentaboveform %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showCommentAboveForm.value"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showCommentAboveForm')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.dateTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showdate %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showDate.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showDate')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_dateisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.dateIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.dateIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showdateaboveform %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showDateAboveForm.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showDateAboveForm')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_showperiodselection %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showPeriodSelection.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showPeriodSelection')"
+                                    />
+                                {% endblock %}
+
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showselectfieldformonth %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showSelectFieldForMonth.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showSelectFieldForMonth')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_showcalendarpermanentlyopen %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showCalendarPermanentlyOpen.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showCalendarPermanentlyOpen')"
+                                    />
+                                {% endblock %}
+
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_aligncalendarcentrally %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.alignCalendarCentrally.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.alignCalendarCentrally')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_showtwomonthssidebyside %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showTwoMonthsSideBySide.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showTwoMonthsSideBySide')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_labeldate %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelDate.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.labelDate.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.labelDate.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_startdate %}
+                                    <sw-text-field
+                                        v-model:value="element.config.startdate.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.startdate.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.startdate.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_enddate %}
+                                    <sw-text-field
+                                        v-model:value="element.config.enddate.value"
+                                        class="width-50 margin-left-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.enddate.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.enddate.placeholder')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_content_disableddates %}
+                                <sw-textarea-field
+                                    v-model:value="element.config.disableddates.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.disableddates.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.disableddates.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--switch-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_determineavailabledatesfromrequests %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.determineAvailableDatesFromRequests.value"
+                                        class="width-50 margin-top-20"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.determineAvailableDatesFromRequests')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.privacyNoticeTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showprivacynotice %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showPrivacyNotice.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showPrivacyNotice')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_privacynoticeisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.privacyNoticeIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.privacyNoticeIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_privacynoticewithouttermsofservice %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.privacyNoticeWithoutTermsOfService.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.privacyNoticeWithoutTermsOfService')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_content_useownsnippetforprivacynoticetext %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.useOwnSnippetForPrivacyNoticeText.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.useOwnSnippetForPrivacyNoticeText')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.requiredFieldsInfoTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_showrequiredfieldsinfo %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showRequiredFieldsInfo.value"
+                                        class="no-margin-top"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.showRequiredFieldsInfo')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_content_submitButton %}
+                                <sw-text-field
+                                    v-model:value="element.config.submitButton.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.submitButton.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.submitButton.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.setOriginOfRequestManually.title') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_content_setoriginofrequestmanually %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.setOriginOfRequestManually.value"
+                                        class="no-margin-top"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.setOriginOfRequestManually.label')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_content_originvalue %}
+                                <sw-text-field
+                                    v-model:value="element.config.originValue.value"
+                                    class="width-50 margin-left-15"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originValue.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originValue.placeholder')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_content_originnamevalue %}
+                                <sw-text-field
+                                    v-model:value="element.config.originNameValue.value"
+                                    class="width-50 margin-left-15"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originNameValue.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originNameValue.placeholder')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_content_originidvalue %}
+                                <sw-text-field
+                                    v-model:value="element.config.originIdValue.value"
+                                    class="width-50 margin-left-15"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originIdValue.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.contenttab.originIdValue.placeholder')"
+                                />
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_freeinputs %}
+                        <sw-container
+                            v-if="active === 'freeinputs'"
+                            class="sw-cms-el-config-period-request-form__tab-freeinputs"
+                        >
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsGeneralSettingsTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--distance-container"
+                            >
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinputaboveform %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInputAboveForm.value"
+                                        class="no-margin-top-bottom "
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInputAboveForm')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinputssidebyside %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInputsSideBySide.value"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsSideBySide.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsSideBySide.label')"
+                                    >
+                                        <option value="1">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsSideBySide.value1Label') }}
+                                        </option>
+                                        <option value="2">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsSideBySide.value2Label') }}
+                                        </option>
+                                        <option value="3">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputsSideBySide.value3Label') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_defaultselectplaceholder %}
+                                    <sw-text-field
+                                        v-model:value="element.config.defaultSelectPlaceholder.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.defaultSelectPlaceholder.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.defaultSelectPlaceholder.placeholder')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinputisrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInputIsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputIsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinputtype %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInputType.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputType.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputType.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputType.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputType.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputType.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle2') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput2 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput2.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput2')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput2isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput2IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput2 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput2.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput2.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput2.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput2type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput2Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput2 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput2.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput2.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle3') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput3 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput3.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput3')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput3isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput3IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput3 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput3.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput3.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput3.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput3type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput3Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput3 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput3.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput3.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle4') }}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput4 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput4.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput4')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput4isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput4IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput4 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput4.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput4.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput4.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput4type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput4Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput4 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput4.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput4.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle5') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput5 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput5.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput5')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput5isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput5IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput5 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput5.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput5.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput5.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput5type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput5Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput5 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput5.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput5.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle6') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput6 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput6.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput6')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput6isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput6IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput6 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput6.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput6.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput6.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput6type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput6Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput6 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput6.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput6.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle7') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput7 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput7.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput7')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput7isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput7IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput7 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput7.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput7.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput7.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput7type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput7Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput7 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput7.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput7.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle8') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput8 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput8.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput8')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput8isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput8IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput8 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput8.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput8.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput8.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput8type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput8Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput8 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput8.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput8.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle9') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput9 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput9.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput9')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput9isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput9IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput9 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput9.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput9.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput9.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput9type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput9Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput9 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput9.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput9.placeholder')"
+                                />
+                            {% endblock %}
+
+                            <div
+                                    class="sw-field--title-container"
+                            >
+                                {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInputTitle10') }}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_showfreeinput10 %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.showFreeInput10.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.showFreeInput10')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput10isrequired %}
+                                    <sw-switch-field
+                                        v-model:value="element.config.freeInput10IsRequired.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10IsRequired')"
+                                    />
+                                {% endblock %}
+                            </div>
+
+                            <div
+                                    class="sw-field--flex-container"
+                            >
+                                {% block sw_cms_el_config_period_request_form_freeinputs_labelfreeinput10 %}
+                                    <sw-text-field
+                                        v-model:value="element.config.labelFreeInput10.value"
+                                        class="width-50 margin-right-15"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput10.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.labelFreeInput10.placeholder')"
+                                    />
+                                {% endblock %}
+
+                                {% block sw_cms_el_config_period_request_form_freeinputs_freeinput10type %}
+                                    <sw-select-field
+                                        v-model:value="element.config.freeInput10Type.value"
+                                        class="width-50"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10Type.label')"
+                                        :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10Type.label')"
+                                    >
+                                        <option value="select">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10Type.selectLabel') }}
+                                        </option>
+                                        <option value="input">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10Type.inputLabel') }}
+                                        </option>
+                                        <option value="textarea">
+                                            {{ $tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10Type.textareaLabel') }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </div>
+
+                            {% block sw_cms_el_config_period_request_form_freeinputs_freeinput10 %}
+                                <sw-text-field
+                                    v-model:value="element.config.freeInput10.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.freeinputstab.freeInput10.placeholder')"
+                                />
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_settingsmail %}
+                        <sw-container
+                            v-if="active === 'settingsmail'"
+                            class="sw-cms-el-config-period-request-form__tab-settingsmail"
+                        >
+                            {% block sw_cms_el_config_period_request_form_settingsmail_periodrequestformsendmail %}
+                                <div
+                                    class="sw-field--switch-container-first-element"
+                                >
+                                    <sw-switch-field
+                                        v-model:value="element.config.periodRequestFormSendMail.value"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormSendMail')"
+                                    />
+                                </div>
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_settingsmail_periodrequestformmailreceivername %}
+                                <sw-text-field
+                                    v-model:value="element.config.periodRequestFormMailReceiverName.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormMailReceiverName.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormMailReceiverName.placeholder')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_settingsmail_periodrequestformmailreceiver %}
+                                <sw-text-field
+                                    v-model:value="element.config.periodRequestFormMailReceiver.value"
+                                    :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormMailReceiverAdresses.label')"
+                                    :placeholder="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormMailReceiverAdresses.placeholder')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_el_config_period_request_form_settingsmail_periodrequestformsendmailtorequester %}
+                                <div
+                                    class="sw-field--switch-container-first-element"
+                                >
+                                    <sw-switch-field
+                                        v-model:value="element.config.periodRequestFormSendMailToRequester.value"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormSendMailToRequester')"
+                                    />
+                                </div>
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
+
+                    {% block sw_cms_el_config_period_request_form_settingssavedata %}
+                        <sw-container
+                            v-if="active === 'settingssavedata'"
+                            class="sw-cms-el-config-period-request-form__tab-settingssavedata"
+                        >
+                            {% block sw_cms_el_config_period_request_form_settingssavedata_periodrequestformsavedata %}
+                                <div
+                                    class="sw-field--switch-container-first-element"
+                                >
+                                    <sw-switch-field
+                                        v-model:value="element.config.periodRequestFormSaveData.value"
+                                        :label="$tc('sw-cms.elements.configPeriodRequestForm.tab.settingstab.periodRequestFormSaveData')"
+                                    />
+                                </div>
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
+                </template>
+            </sw-tabs>
+        {% endblock %}
+    </div>
+{% endblock %}

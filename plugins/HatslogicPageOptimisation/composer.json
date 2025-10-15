@@ -1,0 +1,28 @@
+{
+    "name": "hatslogic-page-optimisation/hatslogic-page-optimisation",
+    "description": "hatslogic-page-optimisation/hatslogic-page-optimisation",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.12",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0",
+        "mrclay/jsmin-php": "^2.4"
+    },
+    "extra": {
+        "shopware-plugin-class": "HatslogicPageOptimisation\\HatslogicPageOptimisation",
+        "label": {
+            "de-DE": "Hatslogic-Seitenoptimierung",
+            "en-GB": "Hatslogic Page Optimisation"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "HatslogicPageOptimisation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HatslogicPageOptimisation\\Tests\\": "tests/"
+        }
+    }
+}

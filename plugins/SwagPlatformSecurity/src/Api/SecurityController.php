@@ -1,0 +1,58 @@
+<?php declare(strict_types=1);
+
+namespace Swag\Security\Api;
+
+use Shopware\Core\Framework\Adapter\Cache\CacheIdLoader;
+use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\Log\Package;
+use Shopware\Core\Framework\Plugin;
+use Shopware\Core\Framework\Uuid\Uuid;
+use Swag\Security\Components\State;
+use Swag\Security\SwagPlatformSecurity;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+#[Route(defaults: ['_routeScope' => ['api']])]
+#[Package('framework')]
+class SecurityController
+{
+    public function __construct(
+        private readonly State $state,
+        private readonly string $cacheDir,
+        private readonly CacheIdLoader $cacheIdLoader
+    ) {
+    }
+
+    #[Route(path: '/api/_action/swag-security/available-fixes')]
+    public function getFixes(): JsonResponse
+    {
+        return new JsonResponse([
+            'availableFixes' => array_map(static fn ($fix) => $fix::getTicket(), $this->state->getAvailableFixes()),
+            'activeFixes' => array_map(static fn ($fix) => $fix::getTicket(), $this->state->getActiveFixes()),
+        ]);
+    }
+
+    #[Route(path: '/api/_action/swag-security/clear-container-cache')]
+    public function clearContainerCache(): Response
+    {
+        $finder = (new Finder())->in($this->cacheDir)->name('*Container*')->depth(0);
+        $containerCaches = [];
+
+        foreach ($finder->getIterator() as $containerPaths) {
+            $containerCaches[] = $containerPaths->getRealPath();
+        }
+
+        (new Filesystem())->remove($containerCaches);
+
+        $this->cacheIdLoader->write(Uuid::randomHex());
+
+        return new Response('', Response::HTTP_NO_CONTENT);
+    }
+}

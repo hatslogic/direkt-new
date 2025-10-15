@@ -1,0 +1,74 @@
+{
+    "periodrequestform": {
+        "list": {
+            "textPeriodrequestformOverview": "Requests",
+            "textPeriodrequestformDescription": "Manage requests here",
+            "columnCreatedAt": "Received on",
+            "columnSalutation": "Salutation",
+            "columnFirstname": "First name",
+            "columnLastname": "Last name",
+            "columnEmail": "Email address",
+            "columnPhone": "Phone number",
+            "columnDate": "Date or period",
+            "columnOriginname": "Origin value",
+            "columnComment": "Comment",
+            "columnConfirmed": "Confirmed",
+            "columnAnswered": "Answered",
+            "listEmpty": "No requests found",
+            "titleSidebarItemRefresh": "Refresh",
+            "addButtonText": "Add request"
+        },
+        "detail": {
+            "salutationLabel": "Salutation",
+            "firstnameLabel": "First name",
+            "lastnameLabel": "Last name",
+            "streetLabel": "Street address",
+            "zipcodeLabel": "Postal code",
+            "cityLabel": "City",
+            "countryLabel": "Country",
+            "emailLabel": "Email address",
+            "phoneLabel": "Phone number",
+            "commentLabel": "Comment",
+            "dateLabel": "Date or period",
+            "dateInfoLabel": "A period must be entered in the form \"dd.mm.YYYY to dd.mm.YYYY\" (German) or \"YYYY-mm-dd to YYYY-mm-dd\" (in another languages).",
+            "freeinputlabelLabel": "label of the first free input",
+            "freeinputLabel": "first free input",
+            "freeinput2labelLabel": "label of the second free input",
+            "freeinput2Label": "second free input",
+            "freeinput3labelLabel": "label of the third free input",
+            "freeinput3Label": "third free input",
+            "freeinput4labelLabel": "label of the fourth free input",
+            "freeinput4Label": "fourth free input",
+            "freeinput5labelLabel": "label of the fifth free input",
+            "freeinput5Label": "fifth free input",
+            "freeinput6labelLabel": "label of the sixth free input",
+            "freeinput6Label": "sixth free input",
+            "freeinput7labelLabel": "label of the seventh free input",
+            "freeinput7Label": "seventh free input",
+            "freeinput8labelLabel": "label of the eighth free input",
+            "freeinput8Label": "eighth free input",
+            "freeinput9labelLabel": "label of the ninth free input",
+            "freeinput9Label": "ninth free input",
+            "freeinput10labelLabel": "label of the tenth free input",
+            "freeinput10Label": "tenth free input",
+            "originLabel": "Origin",
+            "originInfoLabel": "The origin is either \"product\", \"category\" or \"landingpage\" or is completely individual.",
+            "originnameLabel": "Origin value",
+            "originidLabel": "Origin id",
+            "originidInfoLabel": "the origin id is located in the browser between <wert> (category/index/, category/landingPage/ or product/detail/) and base ( https://www.shopurl.de/admin#/sw/<wert>/25a7b467079c49968930df010681bd9b/base ) or is completely individual.",
+            "confirmedLabel": "Confirmed",
+            "answeredLabel": "Answered",
+            "cancelButtonText": "Cancel",
+            "saveButtonText": "Save",
+            "errorTitle": "Error when saving the request",
+            "periodrequestformHeadline": "requests"
+        }
+    },
+    "sw-privileges": {
+        "permissions": {
+            "periodrequestform": {
+                "label": "requests"
+            }
+        }
+    }
+}

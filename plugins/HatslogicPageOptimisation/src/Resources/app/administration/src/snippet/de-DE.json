@@ -1,0 +1,17 @@
+{
+    "hatslogic-critical-assets": {
+        "criticalCssGeneration": {
+            "startedTitle": "Generierung von kritische CSS gestartet...",
+            "startedMessage": "Bitte lassen Sie dieses Fenster geöffnet, bis der Vorgang abgeschlossen ist.",
+            "successMessage": "Kritische CSS erfolgreich generiert",
+            "buttonLabel": "Kritische CSS generieren"
+        },
+        "mappingGrid": {
+            "title": "Category - Layout mapping",
+            "intro": "Verwenden Sie die folgende Tabelle, um dem kritische CSS-Generator mitzuteilen, welche Kategorie als perfekte Beispielseite für bestimmte CMS-Layouts verwendet werden soll. Dies ist nützlich, wenn der \"above the fold\"-Inhalt für jede Kategorie, die das gleiche CMS-Layout verwendet, stark variiert, was zu fehlenden Stilen führt.",
+            "cmsPageLabel": "Template",
+            "categoryLabel": "Category",
+            "buttonAddRow": "Zeile hinzufügen"
+        }
+    }
+}

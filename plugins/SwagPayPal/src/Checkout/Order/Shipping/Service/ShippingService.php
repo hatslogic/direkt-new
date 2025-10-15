@@ -16,12 +16,16 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Core\Framework\Log\Package;
+use Swag\PayPal\Checkout\Order\Shipping\MessageQueue\ShippingInformationMessageHandler;
 use Swag\PayPal\RestApi\V1\Api\Shipping;
 use Swag\PayPal\RestApi\V1\Api\Shipping\Tracker;
 use Swag\PayPal\RestApi\V1\Api\Shipping\TrackerCollection;
 use Swag\PayPal\RestApi\V1\Resource\ShippingResource;
 use Swag\PayPal\SwagPayPal;
 
+/**
+ * @deprecated tag:v10.0.0 - Will be removed without replacement. {@see ShippingInformationMessageHandler}
+ */
 #[Package('checkout')]
 class ShippingService
 {
@@ -43,7 +47,7 @@ class ShippingService
         EntityRepository $salesChannelRepository,
         EntityRepository $orderTransactionRepository,
         EntityRepository $shippingMethodRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->shippingResource = $shippingResource;
         $this->salesChannelRepository = $salesChannelRepository;
@@ -88,7 +92,7 @@ class ShippingService
         string $transactionId,
         string $orderDeliveryId,
         string $carrier,
-        string $salesChannelId
+        string $salesChannelId,
     ): void {
         if (!$addedTrackingCodes) {
             return;
@@ -117,7 +121,7 @@ class ShippingService
         string $transactionId,
         string $orderDeliveryId,
         string $carrier,
-        string $salesChannelId
+        string $salesChannelId,
     ): void {
         if (!$removedTrackingCodes) {
             return;

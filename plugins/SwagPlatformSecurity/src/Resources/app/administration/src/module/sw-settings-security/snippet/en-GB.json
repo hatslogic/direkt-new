@@ -1,0 +1,64 @@
+{
+    "sw-settings-security": {
+        "modal": {
+            "labelConfirmWithPassword": "Password",
+            "placeholderConfirmWithPassword": "Confirm with password",
+            "enterPassword": "Enter your password ...",
+            "labelButtonCancel": "Cancel",
+            "labelButtonConfirm": "Save"
+        },
+        "notification": {
+            "title": "Security Plugin",
+            "message": "Please update the security plugin to the latest version",
+            "passwordErrorTitle": "Incorrect Password",
+            "passwordErrorMessage": "The submitted password is incorrect. Please try again."
+        },
+        "general": {
+            "cardTitle": "Available fixes",
+            "textHeadline": "Security Plugin",
+            "mainMenuItemGeneral": "Security Plugin",
+            "description": "Fixes known issues in older Shopware versions",
+            "buttonSave": "Save",
+            "noFixes": "Your system is protected against all known vulnerabilities.",
+            "alert": "Caution, these are important security fixes for your shop! Deactivating one or more of these will make your shop vulnerable to these security gaps. Be sure what you are doing when deactivating any of the options and consider doing so only temporarily."
+        },
+        "fixes": {
+            "NEXT-23915": {
+                "label": "NEXT-23915 - Fix order deletion on quick order edit cancellation",
+                "tooltip": ""
+            },
+            "NEXT-34608": {
+                "label": "NEXT-34608 - Fixes the logout function in store-api not working correctly",
+                "tooltip": ""
+            },
+            "NEXT-37140": {
+                "label": "NEXT-34609 - Fixes limit search term length",
+                "tooltip": ""
+            },
+            "NEXT-37399": {
+                "label": "NEXT-37399 - Fixes a SSTI RCE using context objects in Twig",
+                "tooltip": ""
+            },
+            "NEXT-37398": {
+                "label": "NEXT-37398 - Fixes a SSTI RCE in sw_silent_feature_call Twig function",
+                "tooltip": ""
+            },
+            "NEXT-37397": {
+                "label": "NEXT-37397 - Fixes an SQL injection in aggregations in the API",
+                "tooltip": ""
+            },
+            "NEXT-37527": {
+                "label": "NEXT-37527 - Fixes a access control issue in the store-api with many to many associations",
+                "tooltip": ""
+            },
+            "NEXT-40208": {
+                "label": "NEXT-40208 - Fixes customers being able to access other customers' documents if they guess the deeplink code",
+                "tooltip": ""
+            },
+            "NEXT-40474": {
+                "label": "NEXT-37527 - Fixes that customers can subscribe any email address to newsletter without using double opt-in",
+                "tooltip": ""
+            }
+        }
+    }
+}

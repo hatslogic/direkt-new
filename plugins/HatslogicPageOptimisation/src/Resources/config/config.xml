@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/shopware/platform/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Critical CSS Configuration</title>
+        <title lang="de-DE">Kritische CSS-Konfiguration</title>
+
+        <input-field type="int">
+            <name>viewportWidth</name>
+            <label>Width for critical viewport</label>
+            <label lang="de-DE">Breite des Browserfensters</label>
+            <helpText>Determines the width of the browser window used to generate the critical CSS</helpText>
+            <helpText lang="de-DE">Bestimmt die Breite des Browser-Fensters, das für die Generierung des kritischen CSS verwendet wird</helpText>
+            <defaultValue>1300</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>viewportHeight</name>
+            <label>Height for critical viewport</label>
+            <label lang="de-DE">Höhe des Browserfensters</label>
+            <helpText>Determines the width of the browser window used to generate the critical CSS</helpText>
+            <helpText lang="de-DE">Bestimmt die Höhe des Browser-Fensters, das für die Generierung des kritischen CSS verwendet wird</helpText>
+            <defaultValue>1000</defaultValue>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>forceInclude</name>
+            <label>CSS patterns to always include (Warning: technical knowledge required)</label>
+            <label lang="de-DE">CSS-Muster, die immer enthalten sein sollten (Achtung: technische Kenntnisse erforderlich)</label>
+            <helpText>Comma separated list of css selectors to keep in critical css, even if not appearing in critical viewport. Strings or regex (f.e. .keepMeEvenIfNotSeenInDom,/^\.button/)</helpText>
+            <helpText lang="de-DE">Durch Kommata getrennte Liste von CSS-Selektoren, die im kritischen CSS beibehalten werden sollen, auch wenn sie nicht im kritischen Viewport erscheinen. Strings oder Regex (z. B. .keepMeEvenIfNotSeenInDom,/^\.button/)</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>forceExclude</name>
+            <label>CSS patterns to always exclude (Warning: technical knowledge required)</label>
+            <label lang="de-DE">CSS-Muster, die immer auszuschließen sind (Achtung: technische Kenntnisse erforderlich)</label>
+            <helpText>Comma separated list of css selectors to remove in critical css, even if appearing in critical viewport. Strings or regex (f.e. .doNotKeepMeEvenIfNotSeenInDom,/^\.button/)</helpText>
+            <helpText lang="de-DE">Durch Kommata getrennte Liste von CSS-Selektoren, die im kritischen CSS entfernt werden sollen, auch wenn sie im kritischen Viewport erscheinen. Strings oder Regex (z. B. .doNotKeepMeEvenIfNotSeenInDom,/^\.button/)</helpText>
+        </input-field>
+
+        <input-field type="int">
+            <name>generationTimeout</name>
+            <label>Generation timeout</label>
+            <label lang="de-DE">Zeitüberschreitung bei der Erzeugung</label>
+            <helpText>In milliseconds, abort critical CSS generation after this time</helpText>
+            <helpText lang="de-DE">In Millisekunden, Abbruch der Erzeugung kritischer CSS nach dieser Zeit</helpText>
+            <defaultValue>40000</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>renderWaitTime</name>
+            <label>Waiting time before start critical CSS extraction</label>
+            <label lang="de-DE">Wartezeit vor Beginn der kritischen CSS-Extraktion</label>
+            <helpText>In milliseconds, wait time after page load before critical css extraction starts</helpText>
+            <helpText lang="de-DE">Wartezeit in Millisekunden nach dem Laden der Seite, bevor die kritische CSS-Extraktion beginnt</helpText>
+            <defaultValue>100</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>keepLargerMediaQueries</name>
+            <label>Keep larger media queries</label>
+            <label lang="de-DE">Größere Medienabfragen beibehalten</label>
+            <helpText>Keep media queries even for width/height values larger than critical viewport.</helpText>
+            <helpText lang="de-DE">Behalten Sie Medienabfragen auch für Breiten-/Höhenwerte bei, die größer sind als der kritische Viewport.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableJSRequests</name>
+            <label>Enable JS requests (NOT RECOMMENDED)</label>
+            <label lang="de-DE">Aktivieren Sie JS-Anfragen (NICHT EMPFOHLEN)</label>
+            <helpText>Activate to load and execute Javascript, can result in unforeseen complications.</helpText>
+            <helpText lang="de-DE">Aktivieren, um Javascript zu laden und auszuführen, kann zu unvorhergesehenen Komplikationen führen.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>additionalCriticalCss</name>
+            <label>CSS to append to critical CSS on every page.</label>
+            <label lang="de-DE">CSS zum Anhängen an kritische CSS auf jeder Seite.</label>
+            <helpText>CSS entered here will be appended to all generated critical CSS "AS IS". No minifying will be applied.</helpText>
+           
+            <helpText lang="de-DE">Das hier eingegebene CSS wird an alle generierten kritischen CSS "AS IS" angehängt. Es wird kein Mining durchgeführt.</helpText>
+        </input-field>
+
+        <!-- <component name="hatslogic-critical-asset-cms-page-category-mapping-grid">
+            <name>cmsPageCategoryMapping</name>
+        </component> -->
+        
+        <input-field type="bool">
+            <name>EnableCriticalCss</name>
+            <label>Enable Critical Css</label>
+            <helpText>If this option is enabled, the critical CSS will be displayed on each page.</helpText>
+            <helpText>Wenn diese Option aktiviert ist, wird das kritische CSS auf jeder Seite angezeigt.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>nodePath</name>
+            <label>Node Path</label>
+            <helpText>If the Node.js version is unknown after clicking the Critical CSS button, set the correct Node.js path here (run 'which node' command in the terminal to get the Node.js path)</helpText>
+            <helpText lang="de-DE">Wenn die Node.js-Version nach dem Klicken auf die Schaltfläche „Kritisches CSS“ unbekannt ist, legen Sie hier den korrekten Node.js-Pfad fest (führen Sie den Befehl „which node“ im Terminal aus, um den Node.js-Pfad zu erhalten).</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>npmPath</name>
+            <label>NPM Path</label>
+            <helpText>If the NPM version is unknown after clicking on Critical CSS Button, set the correct NPM path here (run 'which npm' command in terminal for get the npm path).</helpText>
+            <helpText lang="de-DE">Wenn die NPM-Version nach dem Klicken auf die Schaltfläche „Critical CSS“ unbekannt ist, legen Sie hier den korrekten NPM-Pfad fest (führen Sie den Befehl „which npm“ im Terminal aus, um den npm-Pfad abzurufen).</helpText>
+        </input-field>
+        <!-- <input-field type="bool">
+            <name>EnableCriticalCssScheduleTask</name>
+            <label>Enable Critical Css Schedule Task</label>
+            <helpText>If this option is enabled, the critical CSS will be generate using schedule task.</helpText>
+            <helpText lang="de-DE">Wenn diese Option aktiviert ist, wird das kritische CSS mithilfe der Zeitplanaufgabe generiert.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>SetCriticalCssScheduleTaskTime</name>
+            <label>Schedule Task Time</label>
+            <label lang="de-DE">Planen Sie die Aufgabenzeit</label>
+             <helpText>If this scheduled task option is enabled, you can set the scheduled task time here. By default, it is set to run daily.</helpText>
+             <helpText lang="de-DE">Wenn diese Option für geplante Aufgaben aktiviert ist, können Sie hier die geplante Aufgabenzeit festlegen. Standardmäßig ist die tägliche Ausführung eingestellt.</helpText>
+            <options>
+                <option>
+                    <id>86400</id>
+                    <name>Daily</name>
+                    <name lang="de-DE">Täglich</name>
+                </option>
+                <option>
+                    <id>604800</id>
+                    <name>Weekly</name>
+                    <name lang="de-DE">Wöchentlich</name>
+                </option>
+                <option>
+                    <id>2592000</id>
+                    <name>Monthly</name>
+                    <name lang="de-DE">Monatlich</name>
+                </option>
+            </options>
+        </input-field> -->
+        <component name="hatslogic-critical-assets-generation-btn">
+            <name>generateCriticalAssets</name>
+        </component>
+    </card>
+
+    <card>
+        <title>Image Conversion to WebP</title>
+        <title lang="de-DE">Bildkonvertierung in WebP</title>
+        <input-field type="bool">
+            <name>EnableImageConversion</name>
+            <label>Enable Webp Image Conversion</label>
+            <label lang="de-DE">Aktivieren Sie die Webp-Bildkonvertierung</label>
+            <helpText>If this option is enabled, the webp images loaded in frontend.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <component name="hatslogic-image-convert-into-webp-btn">
+            <name>convertImageToWebp</name>
+        </component>
+    </card>
+
+    <card>
+        <title>Optimize Google Tag</title>
+        <title lang="nl-NL">Optimize Google Tag</title>
+        <title lang="de-DE">Optimize Google Tag</title>
+        <input-field type="bool">
+            <name>EnableGTMOptimization</name>
+            <label>Enable GTM Optimization</label>
+            <helpText>If this option is used, it allows checking the impact of GTM optimization both before and after it is generated.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="textarea">
+            <name>GoogleTagScriptBeforeBody</name>
+            <label>Google Tag Script Before Body</label>
+        </input-field>
+         <input-field type="textarea">
+            <name>GoogleTagScriptAfterBody</name>
+            <label>Google Tag Script After Body</label>
+        </input-field>
+        <component name="hatslogic-gtm-script-optimization-btn">
+            <name>OptimizeGTMTag</name>
+        </component>
+    </card>
+
+    <card>
+        <title>Prefetch Module</title>
+        <title lang="nl-NL">Prefetch Module</title>
+        <title lang="de-DE">Prefetch Module</title>
+        <input-field type="bool">
+            <name>EnablePrefetchCode</name>
+            <label>Enable Prefetch Code</label>
+            <helpText>If this option is used, it allows to lead all prefetch code and add fetch priority for images.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+         <!-- <input-field type="textarea">
+            <name>PrefetchStyleCode</name>
+            <label>Prefetch Code</label>
+        </input-field> -->
+        <input-field type="bool">
+            <name>EnablePrelinkCode</name>
+            <label>Enable Prelink Code</label>
+            <helpText>If this option is used, it allows to lead all prefetch code and add fetch priority for images.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+         <input-field type="textarea">
+            <name>PreloadLinks</name>
+            <label>Resource links for preloading</label>
+            <helpText>Specify the URLs of the linked resources.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Typography</title>
+        <title lang="de-DE">Typography</title>
+        <input-field type="bool">
+            <name>EnableTypography</name>
+            <label>Enable Typography</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+         <input-field type="textarea">
+            <name>TypegraphyCode</name>
+            <label>Typegraphy Code</label>
+        </input-field>
+       
+    </card>
+
+     <card>
+        <title>HTML Minify</title>
+        <input-field type="bool">
+            <name>addCompressionHeader</name>
+            <defaultValue>1</defaultValue>
+            <label>Add CompressionHeader to requests</label>
+            <label lang="de-DE">Kompressionsheader bei den Anfragen hinzufügen</label>
+        </input-field>
+    </card>
+    
+</config>

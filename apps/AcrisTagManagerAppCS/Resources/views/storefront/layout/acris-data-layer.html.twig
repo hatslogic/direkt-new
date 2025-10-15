@@ -1,0 +1,179 @@
+{% block layout_head_acris_data_layer %}
+    dataLayer.push({event: null, ecommerce: null, google_tag_params: null});
+    dataLayer.push({
+    {% block layout_head_acris_data_layer_event %}
+        {% if controllerName is same as("Navigation") and controllerAction is same as("home") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.mainEventName') }}',
+        {% elseif controllerName is same as("Navigation") and controllerAction is same as("index") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.categoryEventName') }}',
+        {% elseif controllerName is same as("Product") and controllerAction is same as("index") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.detailEventName') }}',
+        {% elseif controllerName is same as("Checkout") and controllerAction is same as("cartPage") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.checkoutCartEventName') }}',
+        {% elseif controllerName is same as("Checkout") and controllerAction is same as("confirmPage") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.checkoutConfirmEventName') }}',
+        {% elseif controllerName is same as("Checkout") and controllerAction is same as("finishPage") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.checkoutFinishEventName') }}',
+        {% elseif controllerName is same as("Search") and controllerAction is same as("search") %}
+            'event': '{{ config('AcrisTagManagerAppCS.config.searchEventName') }}',
+        {% endif %}
+    {% endblock %}
+    {% block layout_head_acris_data_layer_ecommerce %}
+        'ecommerce': {
+            'currencyCode': '{{ context.currency.isoCode }}',
+            {% if controllerName is same as("Checkout") and controllerAction is same as("cartPage") %}
+                'checkout': {
+                    'actionField': {
+                        'step': '1',
+                        'coupon': '{% set promotions = '' %}{% for lineItem in page.cart.lineItems.elements|filter(lineItem => lineItem.type == 'promotion') -%}{% set promotions = promotions ~ lineItem.payload.code %}{% if not loop.last %}{% set promotions = promotions ~ ',' %}{% endif %}{% endfor %}{{ promotions }}'
+                    },
+                    'products': [{% for lineItem in page.cart.lineItems %}{
+                        'name': '{{ lineItem.label }}',
+                        'id': '{{ lineItem.payload.productNumber }}',
+                        'price': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% for tax in lineItem.price.taxRules %}{% if context.context.taxState == 'gross' and tax.taxRate and tax.taxRate != 0 %}{% set lineItemNetto = lineItem.price.unitPrice / (100 + tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ lineItem.price.unitPrice }}{% endif %}{% endfor %}{% else %}{{ lineItem.price.unitPrice }}{% endif %}',
+                        'brand': '',
+                        'category': '',
+                        'variant': '',
+                        'quantity': {{ lineItem.quantity }}
+                    },{% endfor %}]
+                },
+            {% endif %}
+            {% if controllerName is same as("Checkout") and controllerAction is same as("confirmPage") %}
+                'checkout': {
+                    'actionField': {
+                        'step': '3',
+                        'option': '{{ context.paymentMethod.shortName }}',
+                        'coupon': '{% set promotions = '' %}{% for lineItem in page.cart.lineItems.elements|filter(lineItem => lineItem.type == 'promotion') -%}{% set promotions = promotions ~ lineItem.payload.code %}{% if not loop.last %}{% set promotions = promotions ~ ',' %}{% endif %}{% endfor %}{{ promotions }}'
+                    },
+                    'products': [{% for lineItem in page.cart.lineItems %}{
+                        'name': '{{ lineItem.label }}',
+                        'id': '{{ lineItem.payload.productNumber }}',
+                        'price': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% for tax in lineItem.price.taxRules %}{% if context.context.taxState == 'gross' and tax.taxRate and tax.taxRate != 0 %}{% set lineItemNetto = lineItem.price.unitPrice / (100 + tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ lineItem.price.unitPrice }}{% endif %}{% endfor %}{% else %}{{ lineItem.price.unitPrice }}{% endif %}',
+                        'brand': '',
+                        'category': '',
+                        'variant': '',
+                        'quantity': {{ lineItem.quantity }}
+                    },{% endfor %}]
+                },
+            {% endif %}
+            {% if controllerName is same as("Checkout") and controllerAction is same as("finishPage") %}
+                'purchase': {
+                    'actionField': {
+                        'id': '{{ page.order.orderNumber }}',
+                        'affiliation': '{{ shopware.config.core.basicInformation.shopName }}',
+                        'revenue': '{{ page.order.price.totalPrice }}',
+                        'tax':'{% set totalTax = 0 %}{% for taxItem in page.order.price.calculatedTaxes %}{% set totalTax = totalTax + taxItem.tax %}{% endfor %}{{ totalTax }}',
+                        'shipping': '{% set totalDelivery = 0 %}{% for delivery in page.order.deliveries %}{% set totalDelivery = totalDelivery + delivery.shippingCosts.totalPrice %}{% endfor %}{{ totalDelivery }}',
+                        'coupon': '{% set promotions = '' %}{% for lineItem in page.order.lineItems.filterByType('promotion') %}{% set promotions = promotions ~ lineItem.payload.code %}{% if not loop.last %}{% set promotions = promotions ~ ',' %}{% endif %}{% endfor %}{{ promotions }}',
+                        'option': '{% set paymentMethod = '' %}{% for transaction in page.order.transactions %}{% set paymentMethod = transaction.paymentMethod.shortName %}{% endfor %}{{ paymentMethod }}'
+                    },
+                    'products': [{% for lineItem in page.order.nestedLineItems %}{
+                        'name': '{{ lineItem.label }}',
+                        'id': '{{ lineItem.payload.productNumber }}',
+                        'price': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% for tax in lineItem.price.taxRules %}{% if context.context.taxState == 'gross' and tax.taxRate and tax.taxRate != 0 %}{% set lineItemNetto = lineItem.price.unitPrice / (100 + tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ lineItem.price.unitPrice }}{% endif %}{% endfor %}{% else %}{{ lineItem.price.unitPrice }}{% endif %}',
+                        'brand': '',
+                        'category': '',
+                        'variant': '',
+                        'quantity': {{ lineItem.quantity }}
+                    },{% endfor %}]
+                },
+            {% endif %}
+            {% if controllerName is same as("Navigation") and controllerAction is same as("index") or
+                controllerName is same as("Navigation") and controllerAction is same as("home") %}
+                'impressions': [{% for product in page.cmsPage.sections.blocks.filterBySectionPosition('main').slots.getSlot('content').data.listing %}{
+                    'name': '{{ product.translated.name }}',
+                    'id': '{{ product.productNumber }}',
+                    'price': '{% if product.priceRange %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedListingPrice.to.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedListingPrice.to.unitPrice }}{% endif %}{% else %}{{ product.calculatedListingPrice.to.unitPrice }}{% endif %}{% elseif product.calculatedPrices|length == 1 %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedPrices.first.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{{ product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedPrice.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedPrice.unitPrice }}{% endif %}{% else %}{{ product.calculatedPrice.unitPrice }}{% endif %}{% endif %}',
+                    'brand': '',
+                    'category': '{% if product.seoCategory and product.seoCategory.translated.name is not empty %}{{ product.seoCategory.translated.name }}{% endif %}',
+                    'variant': '',
+                    {% if controllerAction is same as("home") %}'list': 'Home',{% elseif controllerAction is same as("index") %}'list': 'Category',{% endif %}
+                    'position': '{{ cmsPage.sections.blocks.filterBySectionPosition('main').slots.getSlot('content').data.listing.criteria.offset + loop.index }}'
+                },{% endfor %}],
+            {% endif %}
+            {% if controllerName is same as("Search") and controllerAction is same as("search") %}
+                'impressions': [{% for product in page.listing.elements %}{
+                    'name': '{{ product.translated.name }}',
+                    'id': '{{ product.productNumber }}',
+                    'price': '{% if product.priceRange %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedListingPrice.to.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedListingPrice.to.unitPrice }}{% endif %}{% else %}{{ product.calculatedListingPrice.to.unitPrice }}{% endif %}{% elseif product.calculatedPrices|length == 1 %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedPrices.first.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{{ product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if product.tax.taxRate and product.tax.taxRate != 0 %}{% set lineItemNetto = product.calculatedPrice.unitPrice / (100 + product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ product.calculatedPrice.unitPrice }}{% endif %}{% else %}{{ product.calculatedPrice.unitPrice }}{% endif %}{% endif %}',
+                    'brand': '',
+                    'category': '{% if product.seoCategory and product.seoCategory.translated.name is not empty %}{{ product.seoCategory.translated.name }}{% endif %}',
+                    'variant': '',
+                    'list': 'Search',
+                    'position': '{{ loop.index }}'
+                },{% endfor %}],
+                'siteSearchTerm': '{{ page.searchTerm }}',
+                'siteSearchResults': '{{ page.searchResult.total }}',
+            {% endif %}
+            {% if controllerName is same as("Product") and controllerAction is same as("index") %}
+                'detail': {
+                    'actionField': {
+                        'list': ''
+                    },
+                    'products': [{
+                        'name': '{{ page.product.translated.name }}',
+                        'id': '{{ page.product.productNumber }}',
+                        'price': '{% if page.product.priceRange %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if page.product.tax.taxRate and page.product.tax.taxRate != 0 %}{% set lineItemNetto = page.product.calculatedListingPrice.to.unitPrice / (100 + page.product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ page.product.calculatedListingPrice.to.unitPrice }}{% endif %}{% else %}{{ page.product.calculatedListingPrice.to.unitPrice }}{% endif %}{% elseif page.product.calculatedPrices|length == 1 %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if page.product.tax.taxRate and page.product.tax.taxRate != 0 %}{% set lineItemNetto = page.product.calculatedPrices.first.unitPrice / (100 + page.product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ page.product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{{ page.product.calculatedPrices.first.unitPrice }}{% endif %}{% else %}{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% if page.product.tax.taxRate and page.product.tax.taxRate != 0 %}{% set lineItemNetto = page.product.calculatedPrice.unitPrice / (100 + page.product.tax.taxRate) * 100 %}{{ lineItemNetto|round(2) }}{% else %}{{ page.product.calculatedPrice.unitPrice }}{% endif %}{% else %}{{ page.product.calculatedPrice.unitPrice }}{% endif %}{% endif %}',
+                        'brand': '{{ page.product.manufacturer.translated.name }}',
+                        'category': '{% if page.product.seoCategory and page.product.seoCategory.translated.name is not empty %}{{ page.product.seoCategory.translated.name }}{% endif %}',
+                        'variant': ''
+                    }]
+                },
+            {% endif %}
+        },
+    {% endblock %}
+    {% block layout_head_acris_data_layer_user_data %}
+        {% if config('AcrisTagManagerAppCS.config.enableEnhancedConversionTracking') and context.customer is defined %}
+            'user_data': {
+                'email': '{{ context.customer.email|json_encode|raw }}',
+                'phone_number': '{{ context.customer.defaultBillingAddress.phoneNumber|json_encode|raw }}',
+                'address': {
+                    'first_name': '{{ context.customer.defaultBillingAddress.firstName|json_encode|raw }}',
+                    'last_name': '{{ context.customer.defaultBillingAddress.lastName|json_encode|raw }}',
+                    'street': '{{ context.customer.defaultBillingAddress.street|json_encode|raw }}',
+                    'city': '{{ context.customer.defaultBillingAddress.city|json_encode|raw }}',
+                    'postal_code': '{{ context.customer.defaultBillingAddress.zipcode|json_encode|raw }}',
+                    'country': '{{ context.customer.defaultBillingAddress.country.name|json_encode|raw }}'
+                },
+                'customer_type': '{% if context.customer.guest %}guest{% else %}{% if context.customer.lastLogin == null %}new{% else %}current{% endif %}{% endif %}'
+            },
+        {% endif %}
+    {% endblock %}
+    {% block layout_head_acris_data_layer_google_tag_params %}
+        {% if controllerName is same as("Navigation") and controllerAction is same as("home") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'homepage',
+                'ecomm_prodid': '[{% for product in page.cmsPage.sections.blocks.filterBySectionPosition('main').slots.getSlot('content').data.listing %}"{{ product.productNumber }}"{% if loop.last != true %},{% endif %}{% endfor %}]'
+            }
+        {% elseif controllerName is same as("Navigation") and controllerAction is same as("index") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'category',
+                'ecomm_prodid': '[{% for product in page.cmsPage.sections.blocks.filterBySectionPosition('main').slots.getSlot('content').data.listing %}"{{ product.productNumber }}"{% if loop.last != true %},{% endif %}{% endfor %}]',
+                'ecomm_category': ''
+            }
+        {% elseif controllerName is same as("Product") and controllerAction is same as("index") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'product',
+                'ecomm_prodid': '{{ page.product.productNumber }}'
+            }
+        {% elseif controllerName is same as("Checkout") and controllerAction is same as("cartPage") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'cart',
+                'ecomm_prodid': '[{% for lineItem in page.cart.lineItems %}"{{ lineItem.payload.productNumber }}"{% if loop.last != true %},{% endif %}{% endfor %}]',
+                'ecomm_totalvalue': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{{ page.cart.price.netPrice }}{% else %}{{ page.cart.price.positionPrice }}{% endif %}'
+            }
+        {% elseif controllerName is same as("Checkout") and controllerAction is same as("finishPage") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'purchase',
+                'ecomm_totalvalue': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{{ page.order.price.netPrice }}{% else %}{{ page.order.price.totalPrice }}{% endif %}',
+                'ecomm_revenue': '{% if config('AcrisTagManagerAppCS.config.priceNetDataLayer') %}{% for taxItem in page.order.shippingCosts.calculatedTaxes %}{% set lineItemsNetto = page.order.price.netPrice - (page.order.shippingTotal - taxItem.tax) %}{{ lineItemsNetto|round(2) }}{% endfor %}{% else %}{% set lineItemsBrutto = page.order.price.totalPrice - page.order.shippingTotal %}{{ lineItemsBrutto|round(2) }}{% endif %}'
+            }
+        {% elseif controllerName is same as("Search") and controllerAction is same as("search") %}
+            'google_tag_params': {
+                'ecomm_pagetype': 'searchresults',
+                'ecomm_prodid': '[{% for product in page.searchResult %}"{{ product.productNumber }}"{% if loop.last != true %},{% endif %}{% endfor %}]'
+            }
+        {% endif %}
+    {% endblock %}
+    });
+{% endblock %}

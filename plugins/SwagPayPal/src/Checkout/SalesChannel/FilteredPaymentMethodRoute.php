@@ -26,7 +26,7 @@ use Swag\PayPal\Util\Lifecycle\Method\PaymentMethodDataRegistry;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Package('checkout')]
 #[Route(defaults: ['_routeScope' => ['store-api']])]
@@ -62,7 +62,7 @@ class FilteredPaymentMethodRoute extends AbstractPaymentMethodRoute
         ExcludedProductValidator $excludedProductValidator,
         RequestStack $requestStack,
         AvailabilityService $availabilityService,
-        EntityRepository $orderRepository
+        EntityRepository $orderRepository,
     ) {
         $this->decorated = $decorated;
         $this->methodDataRegistry = $methodDataRegistry;

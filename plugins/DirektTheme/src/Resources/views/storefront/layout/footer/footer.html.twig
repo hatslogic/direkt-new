@@ -48,18 +48,18 @@
                                 {% if theme_config('sw-logo-desktop-en') %}
                                     <img src="{{ theme_config('sw-logo-desktop-en')|sw_encode_url }}"
                                          alt="{{ 'header.logoLink'|trans|striptags }}"
-                                         class="img-fluid header-logo-main-img" width="175" height="106">
+                                         class="img-fluid header-logo-main-img" width="175" height="106" loading="lazy">
                                 {% endif %}
                         {% elseif language == 'de-DE' %}
                             {% if theme_config('sw-logo-desktop-de') %}
                                 <img src="{{ theme_config('sw-logo-desktop-de')|sw_encode_url }}"
                                         alt="{{ 'header.logoLink'|trans|striptags }}"
-                                        class="img-fluid header-logo-main-img" width="175" height="106">
+                                        class="img-fluid header-logo-main-img" width="175" height="106" loading="lazy">
                             {% endif %}
                         {% else %}
                                 <img src="{{ theme_config('sw-logo-desktop')|sw_encode_url }}"
                                         alt="{{ 'header.logoLink'|trans|striptags }}"
-                                        class="img-fluid header-logo-main-img" width="175" height="106">
+                                        class="img-fluid header-logo-main-img" width="175" height="106" loading="lazy">
                         {% endif %}
                     </div>
                 </div>
@@ -99,9 +99,19 @@
                                  class="footer-column-content collapse js-footer-column-content footer-contact"
                                  aria-labelledby="collapseFooterHotlineTitle">
                                 <div class="footer-column-content-inner">
+                                {# url change as per sales channel id #}
+                                {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
+                                {# direkt #}
+                                {% if salesChannelId == '019074f16e0172079638d5b52531ca0c' %}
                                     <p class="footer-contact-hotline">
                                         {{ 'footer.serviceHotline'|trans|sw_sanitize }}
                                     </p>
+                                {# mbseal #}
+                                {% elseif salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
+                                    <p class="footer-contact-hotline">
+                                        {{ 'footer.mbseal.serviceHotline'|trans|sw_sanitize }}
+                                    </p>
+                                {% endif %}
                                 </div>
                                 <div class="footer-contact-form d-none">
                                     {{ 'footer.serviceContactText'|trans({
@@ -206,8 +216,8 @@
                                                 class: 'img-fluid footer-logo-image',
                                                 alt: (paymentMethod.media.translated.alt ?: paymentMethod.translated.name),
                                                 title: (paymentMethod.media.translated.title ?: paymentMethod.translated.name),
-                                                width: '54px',
-                                                height: '35px',
+                                                width: '54',
+                                                height: '35',
                                                 loading: 'lazy'
                                             }
                                         } %}

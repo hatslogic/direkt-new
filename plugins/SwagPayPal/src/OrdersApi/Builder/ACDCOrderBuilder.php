@@ -45,7 +45,7 @@ class ACDCOrderBuilder extends AbstractOrderBuilder
         SyncPaymentTransactionStruct $paymentTransaction,
         SalesChannelContext $salesChannelContext,
         RequestDataBag $requestDataBag,
-        PaymentSource $paymentSource
+        PaymentSource $paymentSource,
     ): void {
         $card = new Card();
         $card->setExperienceContext($this->createExperienceContext($salesChannelContext, $paymentTransaction));
@@ -56,7 +56,7 @@ class ACDCOrderBuilder extends AbstractOrderBuilder
 
         $paymentSource->setCard($card);
 
-        if ($token = $this->vaultTokenService->getAvailableToken($paymentTransaction, $salesChannelContext->getContext())) {
+        if (!$requestDataBag->getBoolean(self::PRELIMINARY_ATTRIBUTE) && $token = $this->vaultTokenService->getAvailableToken($paymentTransaction, $salesChannelContext->getContext())) {
             $card->setVaultId($token->getToken());
             $storedCredential = new StoredCredential();
 

@@ -5,12 +5,19 @@
         <div class="w-100 cms-image-container is-{{ element.translated.config.displayMode.value }}"
             {% if element.translated.config.minHeight.value and element.translated.config.displayMode.value == "cover" %}"{% endif %}>
             {% block element_image_media %}
+                {% set width = 825 %}
+                {% set height = 825 %}
                 {% set attributes = {
                     'class': 'cms-image',
-                    'alt': (element.data.media.translated.alt ?: ''),
+                    'alt': (element.data.media.translated.alt ?: 'contact bg'),
                     'title': (element.data.media.translated.title ?: ''),
-                    'loading': 'lazy'
+                    'width': width,
+                    'height': height,
+                    'loading': 'eager'
                 } %}
+                {# {% if cmsPage.type != 'product_list' %}
+                    {% set attributes = attributes|merge({'loading': 'lazy'}) %}
+                {% endif %} #}
 
                 {% if element.translated.config.displayMode.value == 'cover' or element.translated.config.displayMode.value == 'contain' %}
                     {% set attributes = attributes|merge({ 'data-object-fit': element.translated.config.displayMode.value }) %}

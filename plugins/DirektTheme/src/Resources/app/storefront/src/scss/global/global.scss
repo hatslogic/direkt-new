@@ -1,5 +1,9 @@
 body{
     padding-top: var(--header-height);
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 html,
@@ -20,6 +24,12 @@ body {
     }
 }
 
+p{
+    &:empty{
+        line-height: 0;
+        margin-bottom: 0;
+    }
+}
 .container,
 .cms-section .boxed {
     max-width: rem(1730);
@@ -47,6 +57,10 @@ body {
     @include mobile-lg() {
         max-width: rem(767);// 767
     }
+}
+
+.container-main{
+    padding: rem(20) 0 0;
 }
 
 .spinner-border, .loader{

@@ -1,7 +1,7 @@
 {% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
 
 {% block layout_head_stylesheet %}
-    {{ parent() }}
+    {# {{ parent() }} #}
     {% set salesChannelId = app.request.attributes.get('sw-sales-channel-id') %}
     {% set isHomePage = (app.request.attributes.get('_route') == 'frontend.home.page') %}
     {% set isMbsealHomePage = salesChannelId == '019074f16e1771ee89fd1ceb4d54fa6d' %}
@@ -202,7 +202,7 @@
         url('/bundles/direkttheme/assets/icons/icomoon.svg?22jv2d#icomoon') format('svg');
         font-weight: normal;
         font-style: normal;
-        font-display: block;
+        font-display: swap;
     }
 
     </style>
@@ -245,43 +245,15 @@
     {% endif %}
 
     {% if isHMRMode %}
-        {# CSS will be loaded from the JS automatically #}
+    {# CSS will be loaded from JS automatically #}
     {% else %}
+
+        {# Load remaining theme CSS asynchronously #}
         {% set assets = theme_config('assets.css') %}
         {% for file in assets %}
-            {% if hasCriticalCss %}
-
-            <script async>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Function to load stylesheet asynchronously
-                    function loadStylesheet(url) {
-                        fetch(url)
-                            .then(response => {
-                                if (response.ok) {
-                                    return response.text();
-                                }
-                                throw new Error('Network response was not ok.');
-                            })
-                            .then(css => {
-                                const style = document.createElement('style');
-                                style.type = 'text/css';
-                                style.appendChild(document.createTextNode(css));
-                                document.head.appendChild(style);
-                            })
-                            .catch(error => {
-                                console.error('There has been a problem with your fetch operation:', error);
-                            });
-                    }
-
-                    // Call the function with the URL of your stylesheet
-                    loadStylesheet('{{ asset(file, 'theme') }}');
-                });
-            </script>
-            <noscript><link rel="stylesheet" href="{{ asset(file, 'theme') }}"></noscript>
-            {% else %}
             <link href="{{ asset(file, 'theme') }}" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
             <noscript><link rel="stylesheet" href="{{ asset(file, 'theme') }}"></noscript>
-            {% endif %}
         {% endfor %}
     {% endif %}
+
 {% endblock %}

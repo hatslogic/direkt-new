@@ -83,8 +83,7 @@
         {% set attributes = {
         'class': 'cms-image w-100 h-auto',
         'alt': (element.data.mediaDesktop.translated.alt ?: ''),
-        'title': (element.data.mediaDesktop.translated.title ?: ''),
-        'fetchpriority': 'high'
+        'title': (element.data.mediaDesktop.translated.title ?: '')
     } %}
         {% set desktopBackgroundMedia = element.data.backgroundDesktop %}
         {% set tabletBackgroundMedia = element.data.backgroundTablet %}
@@ -117,7 +116,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    <img src="{{ desktopBackgroundMedia|sw_encode_media_url }}" {% for key, value in attributes %} {% if value != '' %} {{ key }}="{{ value }}" {% endif %} {% endfor %} width="{{ (desktopBackgroundMedia.metaData.width / 2) | round }}" height="{{ (desktopBackgroundMedia.metaData.height / 2) | round }}" {% if lazyload == true %} loading="lazy" {% endif %} alt="hero-banner"/>
+                    <img src="{{ desktopBackgroundMedia|sw_encode_media_url }}" {% for key, value in attributes %} {% if value != '' %} {{ key }}="{{ value }}" {% endif %} {% endfor %} width="{{ (desktopBackgroundMedia.metaData.width / 2) | round }}" height="{{ (desktopBackgroundMedia.metaData.height / 2) | round }}" {% if lazyload == true %} loading="lazy" {% else %} fetchpriority="high" {% endif %} alt="hero-banner"/>
                 </picture>
             </div>
         {% else %}

@@ -74,7 +74,7 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
-                            <img src="{{ desktopMedia|sw_encode_media_url }}" {% for key, value in attributes %} {% if value != '' %} {{ key }}="{{ value }}" {% endif %} {% endfor %} width="{{ (desktopMedia.metaData.width / 2) | round }}" height="{{ (desktopMedia.metaData.height / 2) | round }}" {% if lazyload == true %} loading="lazy" {% endif %} alt="hero-banner"/>
+                            <img src="{{ desktopMedia|sw_encode_media_url }}" {% for key, value in attributes %} {% if value != '' %} {{ key }}="{{ value }}" {% endif %} {% endfor %} width="{{ (desktopMedia.metaData.width / 2) | round }}" height="{{ (desktopMedia.metaData.height / 2) | round }}" {% if lazyload == true %} loading="lazy" {% else %} fetchpriority="high" {% endif %} alt="hero-banner"/>
                         </picture>
                     {% endif %}
                 {% endblock %}
